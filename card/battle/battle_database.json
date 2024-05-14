@@ -1,0 +1,512 @@
+[
+  {
+	"nice_name": "Caway",
+	"texture_path": "res://card/battle/image/01_Caway.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 1000,
+	"effect": "",
+	"description": "A warrior from Universe 4 and a member of Team Universe 4. She can be considered very beautiful, having a slender, curvy figure and delicate features. Her outfit can be compared to that of a traditional elven princess",
+	"big_image": "res://card/battle/image/742x1122/01_Caway.png"
+  },
+  {
+	"nice_name": "Kakunsa",
+	"texture_path": "res://card/battle/image/02_Kakunsa.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 1200,
+	"effect": "",
+	"description": "A warrior from Universe 2 and a member of the Kamikaze Fireballs. She appears to be very easy going. Her poses involve her winking, and she made the V sign with her fingers when her universe was introduced.",
+	"big_image": "res://card/battle/image/742x1122/02_Kakunsa.png"
+  },
+  {
+	"nice_name": "Brianne de Chateau",
+	"texture_path": "res://card/battle/image/03_Brianne de Chateau.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 1300,
+	"effect": "",
+	"description": "Also called Ribrianne, is a warrior from Universe 2 and the leader of the Kamikaze Fireballs. Brianne is an individual who believes in the absolute power and strength of love, like Heles. She sees love and happiness as the most important emotion",
+	"big_image": "res://card/battle/image/742x1122/03_Brianne de Chateau.png"
+  },
+  {
+	"nice_name": "Towa the Demon Goddess",
+	"texture_path": "res://card/battle/image/04_Towa the Demon Goddess.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 1500,
+	"effect": "Buff hắc ki cho toàn đội - tăng 300 điểm sm cho mỗi lá trên sân (tồn tại trong 2 lượt)",
+	"description": "A beautiful female demon from the Demon Realm and sister of the demon king Dabura. Towa thinks she is superior to every other being, calling them simple pests in her plan.",
+	"big_image": "res://card/battle/image/742x1122/04_Towa the Demon Goddess.png"
+  },
+  {
+	"nice_name": "Caulifla Super Saiyan 2",
+	"texture_path": "res://card/battle/image/05_Caulifla Super Saiyan 2.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 1800,
+	"effect": "[ Zenkai ]",
+	"description": "A Saiyan from Universe 6 and the leader of a gang of Saiyan criminals. Despite her tomboyish attitude, Caulifla cares about others, especially her protégée, Kale, whom she treats like a younger sister.",
+	"big_image": "res://card/battle/image/742x1122/05_Caulifla Super Saiyan 2.png"
+  },
+  {
+	"nice_name": "Kale Legendary Super Saiyan",
+	"texture_path": "res://card/battle/image/06_Kale Legendary Super Saiyan.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 2000,
+	"effect": "[ Zenkai ]",
+	"description": "The latest Legendary Saiyan of Universe 6. Unlike most Saiyans who are violent, assertive, or at least strong-willed, Kale is a very meek and timid individual",
+	"big_image": "res://card/battle/image/742x1122/06_Kale Legendary Super Saiyan.png"
+  },
+  {
+	"nice_name": "Sonic Warrior Dyspo",
+	"texture_path": "res://card/battle/image/07_Sonic Warrior Dyspo.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 2100,
+	"effect": "",
+	"description": "The Blitz Captain of the prestigious Pride Troopers of Universe 11. An arrogant warrior with a strong sense of justice, Dyspo earned his title of Sonic Warrior through his incredible combat strength and remarkable speed.",
+	"big_image": "res://card/battle/image/742x1122/07_Sonic Warrior Dyspo.png"
+  },
+  {
+	"nice_name": "Vegeta Super Saiyan God",
+	"texture_path": "res://card/battle/image/08_Vegeta Super Saiyan God.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 2300,
+	"effect": "[ Zenkai ]",
+	"description": "The 'Super Saiyan God' is the legend among legends of the warrior race, the Saiyans. The power of six good-hearted Saiyans must be infused for one of them to achieve this legendary form.",
+	"big_image": "res://card/battle/image/742x1122/08_Vegeta Super Saiyan God.png"
+  },
+  {
+	"nice_name": "Lagss of the Glass Tribe",
+	"texture_path": "res://card/battle/image/09_Lagss of the Glass Tribe.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 2500,
+	"effect": "Đóng băng 1 lá có điểm sm từ 150% sm của lagss trở xuống ở trên sân - lá bị đóng băng sẽ vô hiệu trong lượt đó",
+	"description": "Lagss is a loyal member of the Core Area Warriors and very loyal to Heart. As a member of the Glass Tribe, Lagss has the innate ability to manipulate and control glass for various purposes.",
+	"big_image": "res://card/battle/image/742x1122/09_Lagss of the Glass Tribe.png"
+  },
+  {
+	"nice_name": "Ikari Broly",
+	"texture_path": "res://card/battle/image/10_Ikari Broly.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 2800,
+	"effect": "[ Zenkai ]",
+	"description": "Wrathful is an enraged state used by Broly. According to Paragus, it is a utilization of the Great Ape form's power, physical strength, and durability in humanoid form",
+	"big_image": "res://card/battle/image/742x1122/10_Ikari Broly.png"
+  },
+  {
+	"nice_name": "Mystic Gohan",
+	"texture_path": "res://card/battle/image/11_Mystic Gohan.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 2900,
+	"effect": "[ Zenkai ]",
+	"description": "Also called Ultimate Gohan, is a transformation of Son Gohan after Elder Kaiōshin unlocked his potential. Despite appearing to be in his normal state, Gohan is able to achieve a power beyond even Super Saiyan 3",
+	"big_image": "res://card/battle/image/742x1122/11_Mystic Gohan.png"
+  },
+  {
+	"nice_name": "Android 17",
+	"texture_path": "res://card/battle/image/12_Android 17.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 3000,
+	"effect": "Tồn tại vô hạn lượt",
+	"description": "The younger twin brother of Android 18 and Dr. Gero's seventeenth android creation. As noted by his sister, Android 17 is somewhat similar to Goku, showing a childlike attitude at times",
+	"big_image": "res://card/battle/image/742x1122/12_Android 17.png"
+  },
+  {
+	"nice_name": "Gamma 2",
+	"texture_path": "res://card/battle/image/13_Gamma 2.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 3100,
+	"effect": "Tồn tại 4 lượt",
+	"description": "Gamma 2 is a Red Ribbon Army Android created by Dr. Hedo, along with Gamma 1. Despite his original purpose, he was designed by Hedo to appear and act much like a superhero",
+	"big_image": "res://card/battle/image/742x1122/13_Gamma 2.png"
+  },
+  {
+	"nice_name": "Vidro of the Glass Tribe",
+	"texture_path": "res://card/battle/image/14_Vidro of the Glass Tribe.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 3100,
+	"effect": "",
+	"description": "Mostly known as the Female Warrior in Black, is a surviving member of the Glass Tribe whose planet of origin was destroyed by the Space Pirates. She is one of several \"Warriors in Black\" serve the former Supreme Kai of Time, Aeos.",
+	"big_image": "res://card/battle/image/742x1122/14_Vidro of the Glass Tribe.png"
+  },
+  {
+	"nice_name": "Trunks Super Saiyan Rage",
+	"texture_path": "res://card/battle/image/15_Trunks Super Saiyan Rage.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 3300,
+	"effect": "[ Zenkai ]",
+	"description": "An anime-only transformation unique to Future Trunks, its name is reflective of the intense anger he felt before assuming the transformation. All anime material simply refers to Future Trunks as Super Trunks in this form.",
+	"big_image": "res://card/battle/image/742x1122/15_Trunks Super Saiyan Rage.png"
+  },
+  {
+	"nice_name": "Golden Frieza",
+	"texture_path": "res://card/battle/image/16_Golden Frieza.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 3500,
+	"effect": "",
+	"description": "Golden Frieza is a result of Frieza achieving a new transformation known as \"Golden Form\" or \"Golden Frieza.\" However, it consumes a considerable amount of energy, and Frieza's stamina drains rapidly while using it",
+	"big_image": "res://card/battle/image/742x1122/16_Golden Frieza.png"
+  },
+  {
+	"nice_name": "Hit the Infallible",
+	"texture_path": "res://card/battle/image/17_Hit the Infallible.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 3600,
+	"effect": "Bỏ qua 1 lượt tham gia trận đấu - sử dụng khi chuản bị lật các lá bài lên",
+	"description": "Hit is an assassin from Universe 6. One of Hit's most notable abilities is his Time-Skip technique. With this technique, Hit can momentarily skip time by a fraction of a second",
+	"big_image": "res://card/battle/image/742x1122/17_Hit the Infallible.png"
+  },
+  {
+	"nice_name": "Goku Black SSJ Rose",
+	"texture_path": "res://card/battle/image/18_Goku Black SSJ Rose.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 3700,
+	"effect": "[ Zenkai ]",
+	"description": "Goku Black is an alternate incarnation of Zamasu after switching body with Goku. Black mastered Goku's power and was able to unlock the ability to transform into Super Saiyan Rosé. Because he was a god, Black's hair was pink rather than blue",
+	"big_image": "res://card/battle/image/742x1122/18_Goku Black SSJ Rose.png"
+  },
+  {
+	"nice_name": "Grand Kaioshin",
+	"texture_path": "res://card/battle/image/19_Grand Kaioshin.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 3900,
+	"effect": "Miễn mọi hiệu ứng xấu",
+	"description": "The Grand Supreme Kai is the highest of all Supreme Kais and ruled over the entire Universe 7. He still exists through Good Buu and briefly acted through him thanks to being awakened to help stop Moro.",
+	"big_image": "res://card/battle/image/742x1122/19_Grand Kaioshin.png"
+  },
+  {
+	"nice_name": "Toppo the Destroyer",
+	"texture_path": "res://card/battle/image/20_Toppo the Destroyer.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 4000,
+	"effect": "Có thể sử dụng để Hakai 1 lá bài trên tay, lá dó chết nếu yếu hơn Toppo và ngược lại",
+	"description": "Toppo is the leader of the heroic team, the Pride Troopers, guardians of peace within Universe 11. He is also a Destroyer-in-training to become the next God of Destruction. Top is a humble and respectful fighter who strongly believes in justice",
+	"big_image": "res://card/battle/image/742x1122/20_Toppo the Destroyer.png"
+  },
+  {
+	"nice_name": "Cumber The Evil Saiyan",
+	"texture_path": "res://card/battle/image/21_Cumber The Evil Saiyan.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 4300,
+	"effect": "[ Zenkai ] Ki tà ác: Biến 1 lá yếu hơn thành đồng minh của mình, lá bài này bị giảm 50% điểm sm (tồn tại trong 1 lượt)",
+	"description": "Cumber, the Evil Saiyan is an ancient Saiyan interred by Fu on the Prison Planet. He has a tendency to demand battle with strong opponents no matter the scenario, even when on the losing end of a fight he's already in",
+	"big_image": "res://card/battle/image/742x1122/21_Cumber The Evil Saiyan.png"
+  },
+  {
+	"nice_name": "Goku Perfected SSJ Blue",
+	"texture_path": "res://card/battle/image/22_Goku Perfected SSJ Blue.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 4400,
+	"effect": "[ Zenkai ] Có thể sử dụng để Hakai 1 lá bài trên tay, lá dó chết nếu yếu hơn Goku và ngược lại",
+	"description": "Goku developed the technique of containing his radiating aura inside his body and uses it to bolster his power. With this method, Goku had achieved mastery over the form, allowing him to realize the full potential of Super Saiyan Blue",
+	"big_image": "res://card/battle/image/742x1122/22_Goku Perfected SSJ Blue.png"
+  },
+  {
+	"nice_name": "Kefla Legendary SSJ2",
+	"texture_path": "res://card/battle/image/23_Kefla Legendary SSJ2.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 4400,
+	"effect": "[ Zenkai ]",
+	"description": "Kefla is the Potara Fusion of Kale and Caulifla. Despite her immense confidence in her power, Kefla does seem to retain some of Caulifla's respect towards Goku. Outright calling him a \"worthy opponent\",",
+	"big_image": "res://card/battle/image/742x1122/23_Kefla Legendary SSJ2.png"
+  },
+  {
+	"nice_name": "Vegeta SSJ Blue Evolution",
+	"texture_path": "res://card/battle/image/24_Vegeta SSJ Blue Evolution.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 4500,
+	"effect": "[ Zenkai ]",
+	"description": "An extremely powerful transformation and an empowered variant of Super Saiyan Blue first achieved by Vegeta during the Tournament of Power. It is an advanced state with the power that goes beyond the limits of Super Saiyan Blue.",
+	"big_image": "res://card/battle/image/742x1122/24_Vegeta SSJ Blue Evolution.png"
+  },
+  {
+	"nice_name": "Orange Picolo",
+	"texture_path": "res://card/battle/image/25_Orange Picolo.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 4500,
+	"effect": "",
+	"description": "Orange Piccolo is a transformation that is an evolved form of the Power Awakening state used by Piccolo. The form gives Piccolo power on par with Goku and the others",
+	"big_image": "res://card/battle/image/742x1122/25_Orange Picolo.png"
+  },
+  {
+	"nice_name": "Fused Zamasu",
+	"texture_path": "res://card/battle/image/26_Fused Zamasu.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 4700,
+	"effect": "[ Zenkai ]",
+	"description": "The Potara fusion born between Goku Black and Future Zamasu. His tendency to hover high over the battlefield to \"look down\" on everyone both figuratively and literally, and his use of \"divine\" terms  to name his special techniques.",
+	"big_image": "res://card/battle/image/742x1122/26_Fused Zamasu.png"
+  },
+  {
+	"nice_name": "Anilaza The Four-Fold Union",
+	"texture_path": "res://card/battle/image/27_Anilaza The Four-Fold Union.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 4800,
+	"effect": "",
+	"description": "Agnilasa is the result of the fusion between several members of Team Universe 3. Despite never speaking and seeming to be a berserker at times, Agnilasa shows a surprising ability to adapt to the strategies of opponents",
+	"big_image": "res://card/battle/image/742x1122/27_Anilaza The Four-Fold Union.png"
+  },
+  {
+	"nice_name": "Cumber Super Saiyan 3",
+	"texture_path": "res://card/battle/image/28_Cumber Super Saiyan 3.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 5000,
+	"effect": "[ Zenkai ]",
+	"description": "With appearance of Xeno Goku and Xeno Vegeta, both who were in Super Saiyan 4. Finding this an actual challenge, Cumber transformed into Super Saiyan 3",
+	"big_image": "res://card/battle/image/742x1122/28_Cumber Super Saiyan 3.png"
+  },
+  {
+	"nice_name": "Golden Metal Cooler",
+	"texture_path": "res://card/battle/image/29_Golden Metal Cooler.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 5100,
+	"effect": "",
+	"description": "​​Meta-Coolers are mass-produced cyborg clones of Cooler created by the Big Gete Star. Cooler transforms into Golden Cooler during his confrontation with Goku Prison in Planet Saga",
+	"big_image": "res://card/battle/image/742x1122/29_Golden Metal Cooler.png"
+  },
+  {
+	"nice_name": "Modified Reborn Janemba",
+	"texture_path": "res://card/battle/image/30_Modified Reborn Janemba.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 5200,
+	"effect": "",
+	"description": "Birthed by the overloaded Soul Cleansing Machine in Other World. With the data from Super Saiyan 4 Xeno Goku and Xeno Vegeta,Dr. W awakened Janemba in a new Modified state",
+	"big_image": "res://card/battle/image/742x1122/30_Modified Reborn Janemba.png"
+  },
+  {
+	"nice_name": "SSJ 4 Limit Breaker Goku",
+	"texture_path": "res://card/battle/image/31_SSJ 4 Limit Breaker Goku.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 5300,
+	"effect": "[ Zenkai ]",
+	"description": "Super Full Power Saiyan 4 Limit Breaker (\"Ultra Full Power Saiyan 4 Limit Breaker\") is an advancement of the Super Full Power Saiyan 4 state.",
+	"big_image": "res://card/battle/image/742x1122/31_SSJ 4 Limit Breaker Goku.png"
+  },
+  {
+	"nice_name": "Masked Saiyan SSJ Rose 3",
+	"texture_path": "res://card/battle/image/32_Masked Saiyan SSJ Rose 3.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 5500,
+	"effect": "[ Zenkai ] Khi tồn tại trong vũ trụ giả do cây vũ trụ tạo ra,  Black Goku có thể hấp thụ sức mạnh của vũ trụ và tăng 2000 điểm sm",
+	"description": "Super Saiyan Rosé 3 is a form achieved by the Crimson-Masked Saiyan. This form serves as Super Saiyan Rosé's divine equivalent to the Super Saiyan 3 transformation and a direct successor to his special Super Saiyan Rosé 2 transformation.",
+	"big_image": "res://card/battle/image/742x1122/32_Masked Saiyan SSJ Rose 3.png"
+  },
+  {
+	"nice_name": "Supreme Kai of Time Aeos",
+	"texture_path": "res://card/battle/image/33_Supreme Kai of Time Aeos.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 5600,
+	"effect": "Đóng băng thời gian: Chọn 1 lá bất kỳ trên tay đối phương và lật lên -lá đó bị dừng hoạt động đến khi người chơi không còn lá nào hoặc aeos bị chết (Không có tác dụng với các lá thực thể siêu phàm)",
+	"description": "Aeos is the former Supreme Kai of Time and the leader of the Warriors in Black. She created the Super Space-Time Tournament as a twisted way to decide history, but there maybe good intentions behind Aeos's schemes",
+	"big_image": "res://card/battle/image/742x1122/33_Supreme Kai of Time Aeos.png"
+  },
+  {
+	"nice_name": "Vegeta Dark Aura",
+	"texture_path": "res://card/battle/image/34_Vegeta Dark Aura.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 5800,
+	"effect": "[ Zenkai ] Miễn nhiễm với Ki tà ác của Cumber",
+	"description": "During the New Space-Time War Saga, Vegeta is affected by the Evil Aura once more, but after a moment of self-reflection, Vegeta overcomes it and controls the dark energy for himself, pushing his power to an astounding level",
+	"big_image": "res://card/battle/image/742x1122/34_Vegeta Dark Aura.png"
+  },
+  {
+	"nice_name": "Cell Max",
+	"texture_path": "res://card/battle/image/35_Cell Max.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 6200,
+	"effect": "",
+	"description": "Cell Max is a Bio-Android and an improved variation of Cell created by Dr. Hedo for the revived Red Ribbon Army. Because he was prematurely activated, his intelligence was incompleted",
+	"big_image": "res://card/battle/image/742x1122/35_Cell Max.png"
+  },
+  {
+	"nice_name": "Broly Legendary Super Saiyan",
+	"texture_path": "res://card/battle/image/36_Broly Legendary Super Saiyan.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 6200,
+	"effect": "[ Zenkai ]",
+	"description": "The Legendary Super Saiyan transformation. It is the full-power version of his Super Broly state, which combines the Great Monkey Transformation with the traditional Super Saiyan form, resulting in a being of inconceivable power",
+	"big_image": "res://card/battle/image/742x1122/36_Broly Legendary Super Saiyan.png"
+  },
+  {
+	"nice_name": "Jiren The Gray",
+	"texture_path": "res://card/battle/image/37_Jiren The Gray.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 6300,
+	"effect": "",
+	"description": "The most powerful member of the Pride Troopers. An extraordinary powerful being, Jiren is considered to be one of the strongest mortals in all of the multiverse, outclassing even his Universe's God of Destruction",
+	"big_image": "res://card/battle/image/742x1122/37_Jiren The Gray.png"
+  },
+  {
+	"nice_name": "Planet-Eater Moro",
+	"texture_path": "res://card/battle/image/38_Planet-Eater Moro.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 6400,
+	"effect": "Copy được 1 kỹ năng của các lá đang có mặt trên sân hoặc bất kỳ hiệu ứng nào xuất hiện trong lúc moro có trên sân",
+	"description": "Moro is a powerful wizard who threatened Universe 7 about ten million years ago. Ultimately, the Grand Supreme Kai uses up his god power and successfully seals away Moro's magic where he is then imprisoned by the Galactic Police",
+	"big_image": "res://card/battle/image/742x1122/38_Planet-Eater Moro.png"
+  },
+  {
+	"nice_name": "Bounty Hunter Granolah",
+	"texture_path": "res://card/battle/image/39_Bounty Hunter Granolah.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 6600,
+	"effect": "Chọn 1 lá bài úp của mỗi bên và tấn công lá đó, nếu điếm sức mạnh bé hơn Granolah thì lá đó sẽ chết và ngược lại. ",
+	"description": "Granolah is the sole survivor of the Cerealian race that was annihilated by the Saiyan Army and a bounty hunter, formerly employed by the Heeters.",
+	"big_image": "res://card/battle/image/742x1122/39_Bounty Hunter Granolah.png"
+  },
+  {
+	"nice_name": "Heart Ultimate Form",
+	"texture_path": "res://card/battle/image/40_Heart Ultimate Form.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 7000,
+	"effect": "Gravity: Chỉ định 1 lá bài của đối phương úp xuống (lá này bằng 50% sm heart trở xuống) -Khi áp dụng kỹ năng này lên lá lagss của team mình thì tạo thành khối pha lê trọng lực có sức mạnh là 5000 điểm",
+	"description": "Known as the God Hater, he seeks to liberate mortals from the stranglehold of the divine pantheon, especially Zeno. He is also the leader of the Core Area Warriors",
+	"big_image": "res://card/battle/image/742x1122/40_Heart Ultimate Form.png"
+  },
+  {
+	"nice_name": "Beast Gohan",
+	"texture_path": "res://card/battle/image/41_Beast Gohan.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 7200,
+	"effect": "[ Zenkai ] Khi người chơi đã trải qua 1 loạt các sự kiện rất ức chế thì lá bài này tăng 500 điểm sm (Phải chứng minh dc)",
+	"description": "Gohan Beast is an evolved form of Gohan's Ultimate state, stemming from Gohan's continued awakenings since he was a child, and is currently his strongest transformation",
+	"big_image": "res://card/battle/image/742x1122/41_Beast Gohan.png"
+  },
+  {
+	"nice_name": "Ultra Ego Vegeta",
+	"texture_path": "res://card/battle/image/42_Ultra Ego Vegeta.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 7300,
+	"effect": "[ Zenkai ] Ultra Ego: Sau mỗi trận chiến,lá bài này tăng thêm 300 điểm sm",
+	"description": "Ultra Ego is a powerful divine transformation used by Vegeta. This state is attained by one who has received a proper God of Destruction training and has gained the ability to use the powers of one",
+	"big_image": "res://card/battle/image/742x1122/42_Ultra Ego Vegeta.png"
+  },
+  {
+	"nice_name": "Goku Ultra Instinct",
+	"texture_path": "res://card/battle/image/43_Goku Ultra Instinct.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 7400,
+	"effect": "[ Zenkai ]  Khi bị đối thủ vượt qua bởi điểm số sức mạnh của đối thủ, thay vì phải chết, lá bài này có thể thực hiện \"kỹ năng né tránh\" và quay về trên tay đối phương. Sau đó lá bài này chỉ còn 1 lượt",
+	"description": "Ultra Instinct is an ultimate technique that separates the consciousness from the body, allowing it to move and fight independent thoughts and emotions. It is an extraordinarily difficult technique to master, even for the Hakaishin.",
+	"big_image": "res://card/battle/image/742x1122/43_Goku Ultra Instinct.png"
+  },
+  {
+	"nice_name": "Dark King Fu",
+	"texture_path": "res://card/battle/image/44_Dark King Fu.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 8000,
+	"effect": "",
+	"description": "Fu is the artificial son of the demon Towa and her other creation Mira. While mistakenly believed to be evil, he prefers warping timelines to help others instead of causing meaningless destruction through his alterations",
+	"big_image": "res://card/battle/image/742x1122/44_Dark King Fu.png"
+  },
+  {
+	"nice_name": "SSJ4 Limit Breaker Broly",
+	"texture_path": "res://card/battle/image/45_SSJ4 Limit Breaker Broly.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 8200,
+	"effect": "[ Zenkai ]",
+	"description": "Broly can attain this state through sheer power alone with it being strongly implied that he gained the form was the result of several bouts of Saiyan Power from past defeat",
+	"big_image": "res://card/battle/image/742x1122/45_SSJ4 Limit Breaker Broly.png"
+  },
+  {
+	"nice_name": "Gogeta SSJ4 Limit Breaker",
+	"texture_path": "res://card/battle/image/46_Gogeta SSJ4 Limit Breaker.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 8500,
+	"effect": "[ Zenkai ]",
+	"description": "Gogeta with this form was able to surpass Fu's Time Freeze before Fu accelerates time to defuse him sooner than expected. Unique to Xeno Gogeta, the hair lengthens further and takes on an appearance close to that of Super Saiyan 3",
+	"big_image": "res://card/battle/image/742x1122/46_Gogeta SSJ4 Limit Breaker.png"
+  },
+  {
+	"nice_name": "Vegito Super Saiyan Blue",
+	"texture_path": "res://card/battle/image/47_Vegito Super Saiyan Blue.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 8500,
+	"effect": "[ Zenkai ] Kaioken x 20: Nâng sức mạnh tức thời của Vegito lên mức 11000 điểm sm. Tuy nhiên, hiệp sau chỉ còn lại 7000 điểm",
+	"description": "The resulting fusion between Goku and Vegeta by the use of the Potara Earrings. Vegito wields tremendous power, and like his Fusion Dance counterpart Gogeta, he is regarded as one of the mightiest warriors",
+	"big_image": "res://card/battle/image/742x1122/47_Vegito Super Saiyan Blue.png"
+  },
+  {
+	"nice_name": "Gogeta SSGSS",
+	"texture_path": "res://card/battle/image/48_Gogeta SSGSS.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 8500,
+	"effect": "[ Zenkai ] Blue evolved:  Đưa sức mạnh của gogeta vượt qua trạng thái blue thông thường với 11000 điểm sm. Tuy nhiên, hiệp sau chỉ còn lại 7000 điểm",
+	"description": "Gogeta is the Metamoran fusion of Goku and Vegeta when they perform the Fusion Dance properly. Gogeta is an incredibly deadly warrior, and like his Potara counterpart Vegito",
+	"big_image": "res://card/battle/image/742x1122/48_Gogeta SSGSS.png"
+  },
+  {
+	"nice_name": "Goku Super Saiyan 5",
+	"texture_path": "res://card/battle/image/49_Goku Super Saiyan 5.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 9000,
+	"effect": "[ Zenkai ]",
+	"description": "The Mythical Transformation of Son Goku that transcend reality and history.",
+	"big_image": "res://card/battle/image/742x1122/49_Goku Super Saiyan 5.png"
+  },
+  {
+	"nice_name": "Black Frieza",
+	"texture_path": "res://card/battle/image/50_Black Frieza.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 10000,
+	"effect": "",
+	"description": "Frieza explains he was able to achieve the Black Frieza state when he discovered a Hyperbolic Time Chamber on a planet he conquered and trained within it for 10 years' worth of time, adding that it took plenty of toil to do so",
+	"big_image": "res://card/battle/image/742x1122/50_Black Frieza.png"
+  },
+  {
+	"nice_name": "Ultra Instict Yamcha",
+	"texture_path": "res://card/battle/image/51_Ultra Instict Yamcha.png",
+	"backface_texture_path": "res://card/battle/image/back.png",
+	"resource_script_path": "res://card/battle/battle_data.gd",
+	"power": 30000,
+	"effect": "Không tính vào tổng sức mạnh, vẫn tính sức mạnh đối với những hiệu ứng Hakai hay tương tự",
+	"description": "A former desert bandit, Yamcha was once an enemy of Goku, but quickly reformed and became a friend and ally. This is what happened when he used 0.001% of his true power",
+	"big_image": "res://card/battle/image/742x1122/51_Ultra Instict Yamcha.png"
+  }
+]

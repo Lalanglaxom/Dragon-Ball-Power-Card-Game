@@ -1,0 +1,232 @@
+[gd_scene load_steps=12 format=3 uid="uid://ca0r5037d1r36"]
+
+[ext_resource type="Script" path="res://scenes/game_controller.gd" id="1_2w3ie"]
+[ext_resource type="Texture2D" uid="uid://bpjxsk1mxfl77" path="res://assets/1x1_#ffffffff.png" id="1_7cnjc"]
+[ext_resource type="Script" path="res://addons/simple_card_pile_ui/card_pile_ui.gd" id="2_0rnba"]
+[ext_resource type="PackedScene" uid="uid://bfa11717e7smk" path="res://scenes/card_ui.tscn" id="3_pya54"]
+[ext_resource type="Script" path="res://addons/simple_card_pile_ui/card_dropzone.gd" id="5_eker0"]
+[ext_resource type="Curve" uid="uid://cilxr3u0kmg7y" path="res://card/hand_rotation_curve.tres" id="5_mkqdw"]
+[ext_resource type="Texture2D" uid="uid://bud17mwgkqh2t" path="res://environment/capsule_corps.jpg" id="5_pmlb6"]
+[ext_resource type="Texture2D" uid="uid://4msuyvdhk0yc" path="res://environment/battle_area.png" id="6_3rt33"]
+[ext_resource type="Curve" uid="uid://cj8wyoiq7cx6r" path="res://card/hand_vertical_curve.tres" id="6_gis8k"]
+[ext_resource type="Texture2D" uid="uid://e3ofwn0lncir" path="res://environment/effect_area.png" id="7_f7xdu"]
+[ext_resource type="Texture2D" uid="uid://jmgabsudjwyb" path="res://environment/rip_area.png" id="8_txsle"]
+
+[node name="Game" type="Node"]
+script = ExtResource("1_2w3ie")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_top = -267.0
+offset_right = 1148.0
+offset_bottom = 881.0
+texture = ExtResource("5_pmlb6")
+expand_mode = 1
+
+[node name="BackgroundDark" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 0.635294)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_7cnjc")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+scale = Vector2(0.7, 0.7)
+transform = Transform2D(0.7, 0, 0, 0.7, 0, 0)
+
+[node name="BattleZone1" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("card_pile_ui")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 571.429
+offset_top = 652.286
+offset_right = 731.429
+offset_bottom = 892.286
+script = ExtResource("5_eker0")
+card_pile_ui = NodePath("../CardPileUI")
+stack_display_gap = 4
+max_stack_display = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/BattleZone1"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_3rt33")
+
+[node name="BattleZone2" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("card_pile_ui")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 745.714
+offset_top = 652.286
+offset_right = 905.714
+offset_bottom = 892.286
+script = ExtResource("5_eker0")
+card_pile_ui = NodePath("../CardPileUI")
+stack_display_gap = 4
+max_stack_display = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/BattleZone2"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_3rt33")
+
+[node name="BattleZone3" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("card_pile_ui")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 922.857
+offset_top = 652.286
+offset_right = 1082.86
+offset_bottom = 892.286
+script = ExtResource("5_eker0")
+card_pile_ui = NodePath("../CardPileUI")
+stack_display_gap = 4
+max_stack_display = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/BattleZone3"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_3rt33")
+
+[node name="BattleZone4" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("card_pile_ui")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 571.429
+offset_top = 132.857
+offset_right = 731.429
+offset_bottom = 372.857
+script = ExtResource("5_eker0")
+card_pile_ui = NodePath("../CardPileUI")
+stack_display_gap = 4
+max_stack_display = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/BattleZone4"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_3rt33")
+
+[node name="BattleZone5" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("card_pile_ui")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 745.714
+offset_top = 132.857
+offset_right = 905.714
+offset_bottom = 372.857
+script = ExtResource("5_eker0")
+card_pile_ui = NodePath("../CardPileUI")
+stack_display_gap = 4
+max_stack_display = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/BattleZone5"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_3rt33")
+
+[node name="BattleZone6" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("card_pile_ui")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 922.857
+offset_top = 132.857
+offset_right = 1082.86
+offset_bottom = 372.857
+script = ExtResource("5_eker0")
+card_pile_ui = NodePath("../CardPileUI")
+stack_display_gap = 4
+max_stack_display = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/BattleZone6"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_3rt33")
+
+[node name="EffectZone" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("card_pile_ui")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 168.286
+offset_top = 16.8572
+offset_right = 328.286
+offset_bottom = 256.857
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_eker0")
+card_pile_ui = NodePath("../CardPileUI")
+stack_display_gap = 4
+max_stack_display = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/EffectZone"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("7_f7xdu")
+
+[node name="RipZone1" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("card_pile_ui")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1437.14
+offset_top = 650.0
+offset_right = 1597.14
+offset_bottom = 890.0
+script = ExtResource("5_eker0")
+card_pile_ui = NodePath("../CardPileUI")
+stack_display_gap = 4
+max_stack_display = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/RipZone1"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("8_txsle")
+
+[node name="RipZone2" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("card_pile_ui")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1437.14
+offset_top = 135.714
+offset_right = 1597.14
+offset_bottom = 375.714
+script = ExtResource("5_eker0")
+card_pile_ui = NodePath("../CardPileUI")
+stack_display_gap = 4
+max_stack_display = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/RipZone2"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("8_txsle")
+
+[node name="CardPileUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("2_0rnba")
+json_card_database_path = "res://card/battle/battle_database.json"
+json_card_collection_path = "res://card/battle/battle_collection.json"
+extended_card_ui = ExtResource("3_pya54")
+draw_pile_position = Vector2(20, 800)
+hand_pile_position = Vector2(800, 950)
+discard_pile_position = Vector2(1250, 700)
+stack_display_gap = 4
+max_stack_display = 1
+card_return_speed = 0.3
+max_hand_size = 18
+max_hand_spread = 1200
+hand_rotation_curve = ExtResource("5_mkqdw")
+hand_vertical_curve = ExtResource("6_gis8k")
+
+[node name="Info" type="TextureRect" parent="CanvasLayer"]
+offset_left = 28.5714
+offset_top = 34.2857
+offset_right = 775.571
+offset_bottom = 1156.29
+scale = Vector2(0.65, 0.65)
+
+[connection signal="card_hovered" from="CanvasLayer/CardPileUI" to="." method="_on_card_hovered"]
+[connection signal="card_unhovered" from="CanvasLayer/CardPileUI" to="." method="_on_card_unhovered"]
