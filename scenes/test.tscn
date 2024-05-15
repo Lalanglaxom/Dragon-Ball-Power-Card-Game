@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6u4e7fn65va"]
+[gd_scene load_steps=9 format=3 uid="uid://b6u4e7fn65va"]
 
 [ext_resource type="Script" path="res://scenes/test.gd" id="1_jju1l"]
 [ext_resource type="Texture2D" uid="uid://cnmiqaw5753v2" path="res://card/battle/image/742x1122/back.png" id="2_k8aqf"]
 [ext_resource type="Shader" path="res://card/properties/fake_3d.gdshader" id="3_vpino"]
 [ext_resource type="Texture2D" uid="uid://ttkdfx1obklj" path="res://card/battle/image/742x1122/06_Kale Legendary Super Saiyan.png" id="4_7c50y"]
+[ext_resource type="Script" path="res://addons/simple_card_pile_ui/card_dropzone.gd" id="5_4v1w8"]
+[ext_resource type="Texture2D" uid="uid://4msuyvdhk0yc" path="res://environment/battle_area.png" id="6_576rl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0xxkf"]
 shader = ExtResource("3_vpino")
@@ -56,3 +58,103 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.475, 0.475)
 texture = ExtResource("4_7c50y")
+
+[node name="BattleZone1" type="Control" parent="." node_paths=PackedStringArray("card_pile_ui")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 817.0
+offset_right = 977.0
+offset_bottom = 240.0
+script = ExtResource("5_4v1w8")
+card_pile_ui = NodePath("")
+stack_display_gap = 4
+max_stack_display = 1
+
+[node name="TextureRect" type="TextureRect" parent="BattleZone1"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_576rl")
+
+[node name="BattleZone2" type="Control" parent="." node_paths=PackedStringArray("card_pile_ui")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 821.0
+offset_right = 821.0
+offset_bottom = 1076.0
+script = ExtResource("5_4v1w8")
+card_pile_ui = NodePath("")
+stack_display_gap = 4
+max_stack_display = 1
+
+[node name="TextureRect" type="TextureRect" parent="BattleZone2"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_576rl")
+
+[node name="BattleZone3" type="Control" parent="." node_paths=PackedStringArray("card_pile_ui")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 825.0
+offset_right = 825.0
+offset_bottom = 1076.0
+script = ExtResource("5_4v1w8")
+card_pile_ui = NodePath("")
+stack_display_gap = 4
+max_stack_display = 1
+
+[node name="TextureRect" type="TextureRect" parent="BattleZone3"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_576rl")
+
+[node name="BattleZone4" type="Control" parent="." node_paths=PackedStringArray("card_pile_ui")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1643.0
+script = ExtResource("5_4v1w8")
+card_pile_ui = NodePath("")
+stack_display_gap = 4
+max_stack_display = 1
+
+[node name="TextureRect" type="TextureRect" parent="BattleZone4"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_576rl")
+
+[node name="BattleZone5" type="Control" parent="." node_paths=PackedStringArray("card_pile_ui")]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 4.0
+offset_right = 1643.0
+offset_bottom = 4.0
+script = ExtResource("5_4v1w8")
+card_pile_ui = NodePath("")
+stack_display_gap = 4
+max_stack_display = 1
+
+[node name="TextureRect" type="TextureRect" parent="BattleZone5"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_576rl")
+
+[node name="BattleZone6" type="Control" parent="." node_paths=PackedStringArray("card_pile_ui")]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 8.0
+offset_right = 1643.0
+offset_bottom = 8.0
+script = ExtResource("5_4v1w8")
+card_pile_ui = NodePath("")
+stack_display_gap = 4
+max_stack_display = 1
+
+[node name="TextureRect" type="TextureRect" parent="BattleZone6"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_576rl")

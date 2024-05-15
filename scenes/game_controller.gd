@@ -1,6 +1,11 @@
 extends Node
 
 @onready var info = $CanvasLayer/Info
+@onready var card_pile_ui = $CardPileUI
+
+#func _ready():
+	#card_pile_ui.draw(10)
+
 
 func _on_card_unhovered(card):
 	info.texture = null

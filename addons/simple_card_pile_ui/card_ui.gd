@@ -5,6 +5,7 @@ class_name CardUI extends Control
 signal card_hovered(card: CardUI)
 signal card_unhovered(card: CardUI)
 signal card_clicked(card: CardUI)
+signal card_unclicked(card: CardUI)
 signal card_dropped(card: CardUI)
 
 
@@ -120,7 +121,7 @@ func _on_gui_input(event):
 			var parent = get_parent()
 			if parent is CardPileUI and parent.is_card_ui_in_hand(self):
 				parent.call_deferred("reset_target_positions")
-			
+				emit_signal("card_unclicked", self)
 		#else:
 			## event release
 			#if is_clicked:
@@ -162,9 +163,9 @@ func _process(_delta):
 var last_child_count = 0
 
 func _get_configuration_warnings():
-	if get_child_count() != 2:
-		return [ "This node must have 2 TextureRect as children, one named `Frontface` and one named `Backface`." ]
+	if get_child_count() != 3:
+		return [ "This node must have 3 TextureRect as children, one named `Frontface` and one named `Backface` and one named `ChosenBox`" ]
 	for child in get_children():
-		if not child is TextureRect or (child.name != "Frontface" and child.name != "Backface"):
-			return [ "This node must have 2 TextureRect as children, one named `Frontface` and one named `Backface`." ]
+		if not child is TextureRect or (child.name != "Frontface" and child.name != "Backface" and child.name != "ChosenBox"):
+			return [ "This node must have 3 TextureRect as children, one named `Frontface` and one named `Backface` and one named `ChosenBox`." ]
 	return []
