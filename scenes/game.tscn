@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ca0r5037d1r36"]
+[gd_scene load_steps=11 format=3 uid="uid://ca0r5037d1r36"]
 
 [ext_resource type="Script" path="res://scenes/game_controller.gd" id="1_2w3ie"]
 [ext_resource type="Texture2D" uid="uid://bpjxsk1mxfl77" path="res://assets/1x1_#ffffffff.png" id="1_7cnjc"]
@@ -8,7 +8,6 @@
 [ext_resource type="Curve" uid="uid://cilxr3u0kmg7y" path="res://card/hand_rotation_curve.tres" id="5_mkqdw"]
 [ext_resource type="Texture2D" uid="uid://bud17mwgkqh2t" path="res://environment/capsule_corps.jpg" id="5_pmlb6"]
 [ext_resource type="Texture2D" uid="uid://4msuyvdhk0yc" path="res://environment/battle_area.png" id="6_3rt33"]
-[ext_resource type="Curve" uid="uid://cj8wyoiq7cx6r" path="res://card/hand_vertical_curve.tres" id="6_gis8k"]
 [ext_resource type="Texture2D" uid="uid://e3ofwn0lncir" path="res://environment/effect_area.png" id="7_f7xdu"]
 [ext_resource type="Texture2D" uid="uid://jmgabsudjwyb" path="res://environment/rip_area.png" id="8_txsle"]
 
@@ -38,10 +37,10 @@ transform = Transform2D(0.7, 0, 0, 0.7, 0, 0)
 [node name="BattleZone1" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("card_pile_ui")]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 571.429
-offset_top = 652.286
-offset_right = 731.429
-offset_bottom = 892.286
+offset_left = 508.571
+offset_top = 599.429
+offset_right = 668.571
+offset_bottom = 839.429
 script = ExtResource("5_eker0")
 card_pile_ui = NodePath("../CardPileUI")
 stack_display_gap = 4
@@ -56,10 +55,10 @@ texture = ExtResource("6_3rt33")
 [node name="BattleZone2" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("card_pile_ui")]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 745.714
-offset_top = 652.286
-offset_right = 905.714
-offset_bottom = 892.286
+offset_left = 682.856
+offset_top = 599.429
+offset_right = 842.856
+offset_bottom = 839.429
 script = ExtResource("5_eker0")
 card_pile_ui = NodePath("../CardPileUI")
 stack_display_gap = 4
@@ -74,10 +73,10 @@ texture = ExtResource("6_3rt33")
 [node name="BattleZone3" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("card_pile_ui")]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 922.857
-offset_top = 652.286
-offset_right = 1082.86
-offset_bottom = 892.286
+offset_left = 859.999
+offset_top = 599.429
+offset_right = 1020.0
+offset_bottom = 839.429
 script = ExtResource("5_eker0")
 card_pile_ui = NodePath("../CardPileUI")
 stack_display_gap = 4
@@ -92,10 +91,10 @@ texture = ExtResource("6_3rt33")
 [node name="BattleZone4" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("card_pile_ui")]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 571.429
-offset_top = 132.857
-offset_right = 731.429
-offset_bottom = 372.857
+offset_left = 508.571
+offset_top = 80.0
+offset_right = 668.571
+offset_bottom = 320.0
 script = ExtResource("5_eker0")
 card_pile_ui = NodePath("../CardPileUI")
 stack_display_gap = 4
@@ -110,10 +109,10 @@ texture = ExtResource("6_3rt33")
 [node name="BattleZone5" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("card_pile_ui")]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 745.714
-offset_top = 132.857
-offset_right = 905.714
-offset_bottom = 372.857
+offset_left = 682.856
+offset_top = 80.0
+offset_right = 842.856
+offset_bottom = 320.0
 script = ExtResource("5_eker0")
 card_pile_ui = NodePath("../CardPileUI")
 stack_display_gap = 4
@@ -128,10 +127,10 @@ texture = ExtResource("6_3rt33")
 [node name="BattleZone6" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("card_pile_ui")]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 922.857
-offset_top = 132.857
-offset_right = 1082.86
-offset_bottom = 372.857
+offset_left = 859.999
+offset_top = 80.0
+offset_right = 1020.0
+offset_bottom = 320.0
 script = ExtResource("5_eker0")
 card_pile_ui = NodePath("../CardPileUI")
 stack_display_gap = 4
@@ -150,10 +149,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 168.286
-offset_top = 16.8572
-offset_right = 328.286
-offset_bottom = 256.857
+offset_left = 105.428
+offset_top = -35.9998
+offset_right = 265.428
+offset_bottom = 204.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("5_eker0")
@@ -170,10 +169,10 @@ texture = ExtResource("7_f7xdu")
 [node name="RipZone1" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("card_pile_ui")]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 1437.14
-offset_top = 650.0
-offset_right = 1597.14
-offset_bottom = 890.0
+offset_left = 1374.28
+offset_top = 597.143
+offset_right = 1534.28
+offset_bottom = 837.143
 script = ExtResource("5_eker0")
 card_pile_ui = NodePath("../CardPileUI")
 stack_display_gap = 4
@@ -188,10 +187,10 @@ texture = ExtResource("8_txsle")
 [node name="RipZone2" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("card_pile_ui")]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 1437.14
-offset_top = 135.714
-offset_right = 1597.14
-offset_bottom = 375.714
+offset_left = 1374.28
+offset_top = 82.857
+offset_right = 1534.28
+offset_bottom = 322.857
 script = ExtResource("5_eker0")
 card_pile_ui = NodePath("../CardPileUI")
 stack_display_gap = 4
@@ -218,15 +217,16 @@ max_stack_display = 1
 card_return_speed = 0.3
 max_hand_size = 18
 max_hand_spread = 1200
+drag_when_clicked = false
 hand_rotation_curve = ExtResource("5_mkqdw")
-hand_vertical_curve = ExtResource("6_gis8k")
 
 [node name="Info" type="TextureRect" parent="CanvasLayer"]
-offset_left = 28.5714
-offset_top = 34.2857
-offset_right = 775.571
-offset_bottom = 1156.29
+offset_left = 31.4286
+offset_top = 28.5714
+offset_right = 778.428
+offset_bottom = 1150.58
 scale = Vector2(0.65, 0.65)
 
+[connection signal="card_clicked" from="CanvasLayer/CardPileUI" to="." method="_on_hand_card_clicked"]
 [connection signal="card_hovered" from="CanvasLayer/CardPileUI" to="." method="_on_card_hovered"]
 [connection signal="card_unhovered" from="CanvasLayer/CardPileUI" to="." method="_on_card_unhovered"]

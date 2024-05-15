@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://b6u4e7fn65va"]
+
+[ext_resource type="Script" path="res://scenes/test.gd" id="1_jju1l"]
+[ext_resource type="Texture2D" uid="uid://cnmiqaw5753v2" path="res://card/battle/image/742x1122/back.png" id="2_k8aqf"]
+[ext_resource type="Shader" path="res://card/properties/fake_3d.gdshader" id="3_vpino"]
+[ext_resource type="Texture2D" uid="uid://ttkdfx1obklj" path="res://card/battle/image/742x1122/06_Kale Legendary Super Saiyan.png" id="4_7c50y"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0xxkf"]
+shader = ExtResource("3_vpino")
+shader_parameter/fov = 50.0
+shader_parameter/cull_back = true
+shader_parameter/y_rot = 0.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r1f22"]
+shader = ExtResource("3_vpino")
+shader_parameter/fov = 50.0
+shader_parameter/cull_back = true
+shader_parameter/y_rot = 0.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.0
+
+[node name="Test" type="Node"]
+script = ExtResource("1_jju1l")
+rotation_speed = 1.0
+
+[node name="Backface" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_0xxkf")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -181.5
+offset_top = -258.5
+offset_right = 532.5
+offset_bottom = 830.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.475, 0.475)
+texture = ExtResource("2_k8aqf")
+
+[node name="Frontface" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_r1f22")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -198.0
+offset_top = -275.0
+offset_right = 549.0
+offset_bottom = 847.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.475, 0.475)
+texture = ExtResource("4_7c50y")

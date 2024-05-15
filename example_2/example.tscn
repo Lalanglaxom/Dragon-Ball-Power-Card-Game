@@ -169,6 +169,9 @@ drag_when_clicked = false
 hand_rotation_curve = ExtResource("11_0pyd0")
 hand_vertical_curve = ExtResource("12_1jkbe")
 
+[node name="TargetingLine2D" type="Line2D" parent="."]
+position = Vector2(0, -44)
+
 [node name="PanelContainer" type="PanelContainer" parent="."]
 visible = false
 z_index = 4000
@@ -181,6 +184,9 @@ offset_bottom = 44.0
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ft1ui")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer"]
+layout_mode = 2
 
 [node name="Panel" type="Panel" parent="PanelContainer"]
 layout_mode = 2

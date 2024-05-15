@@ -10,7 +10,7 @@ extends Node2D
 @onready var targeting_line_2d = $TargetingLine2D
 
 
-# seems like these 3 properties would make more sense as a singleton in a real game?
+# seems like these 3 properties would make more sense in as a singleton in a real game?
 var starting_mana := 4
 var current_hovered_card : CardUI
 

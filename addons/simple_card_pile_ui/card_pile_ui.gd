@@ -270,22 +270,24 @@ func _set_draw_pile_target_positions(instantly_move = false):
 func _set_hand_pile_target_positions():
 	for i in _hand_pile.size():
 		var card_ui = _hand_pile[i]
-		card_ui.move_to_front()
-		var hand_ratio = 0.5
-		if _hand_pile.size() > 1:
-			hand_ratio = float(i) / float(_hand_pile.size() - 1)
-		var target_pos = hand_pile_position
-		var card_spacing = max_hand_spread / (_hand_pile.size() + 1)
-		target_pos.x += (i + 1) * card_spacing - max_hand_spread / 2.0
-		if hand_vertical_curve:
-			target_pos.y -= hand_vertical_curve.sample(hand_ratio)
-		if hand_rotation_curve:
-			card_ui.rotation = deg_to_rad(hand_rotation_curve.sample(hand_ratio))
-		if hand_face_up:
-			card_ui.set_direction(Vector2.UP)
-		else:
-			card_ui.set_direction(Vector2.DOWN)
-		card_ui.target_position = target_pos
+		if !card_ui.is_clicked:
+			card_ui.move_to_front()
+			var hand_ratio = 0.5
+			if _hand_pile.size() > 1:
+				hand_ratio = float(i) / float(_hand_pile.size() - 1)
+			var target_pos = hand_pile_position
+			var card_spacing = max_hand_spread / (_hand_pile.size() + 1)
+			target_pos.x += (i + 1) * card_spacing - max_hand_spread / 2.0
+			if hand_vertical_curve:
+				target_pos.y -= hand_vertical_curve.sample(hand_ratio)
+			if hand_rotation_curve:
+				card_ui.rotation = deg_to_rad(hand_rotation_curve.sample(hand_ratio))
+			if hand_face_up:
+				card_ui.set_direction(Vector2.UP)
+			else:
+				card_ui.set_direction(Vector2.DOWN)
+			card_ui.target_position = target_pos
+			
 	while _hand_pile.size() > max_hand_size:
 		set_card_pile(_hand_pile[_hand_pile.size() - 1], Piles.discard_pile)
 	_reset_hand_pile_z_index()
@@ -335,12 +337,13 @@ func reset_card_ui_z_index():
 func _reset_hand_pile_z_index():
 	for i in _hand_pile.size():
 		var card_ui = _hand_pile[i]
-		card_ui.z_index = 1000 + i
-		card_ui.move_to_front()
-		if card_ui.mouse_is_hovering:
-			card_ui.z_index = 2000 + i
-		if card_ui.is_clicked:
-			card_ui.z_index = 3000 + i
+		if card_ui.is_clicked == false:	
+			card_ui.z_index = 1000 + i
+			card_ui.move_to_front()
+			if card_ui.mouse_is_hovering:
+				card_ui.z_index = 2000 + i
+			if card_ui.is_clicked:
+				card_ui.z_index = 3000 + i
 
 
 func is_card_ui_in_hand(card_ui):

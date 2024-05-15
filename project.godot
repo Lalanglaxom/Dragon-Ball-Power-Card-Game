@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Bai Suc Manh"
-config/description="Enter an interesting project description here!"
+config/name="Dragon Ball Power Card Game"
+config/description="Bộ bài sức mạnh Dragon Ball"
 run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.2")
 config/icon="res://icon.png"
@@ -19,7 +19,6 @@ config/icon="res://icon.png"
 [display]
 
 window/size/viewport_height=752
-window/stretch/aspect="expand"
 
 [editor_plugins]
 
@@ -31,3 +30,8 @@ folder_colors={
 "res://card/": "yellow",
 "res://environment/": "green"
 }
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+anti_aliasing/quality/msaa_2d=3

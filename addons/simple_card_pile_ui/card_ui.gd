@@ -64,11 +64,11 @@ func _card_can_be_interacted_with():
 	if parent is CardPileUI:
 		# check for cards in hand
 		if parent.is_card_ui_in_hand(self):
-			valid = parent.is_hand_enabled() and not parent.is_any_card_ui_clicked()
+			valid = parent.is_hand_enabled() and not is_clicked #and not parent.is_any_card_ui_clicked()
 		# check for cards in dropzone
 		var dropzone = parent.get_card_dropzone(self)
 		if dropzone:
-			valid = dropzone.get_top_card() == self and not parent.is_any_card_ui_clicked()
+			valid = dropzone.get_top_card() == self #not parent.is_any_card_ui_clicked()
 	return valid
 			
 
@@ -96,36 +96,50 @@ func _on_mouse_exited():
 	
 func _on_gui_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		if event.pressed:
+		var y_add_amount = 100
+				
+		if event.pressed and is_clicked == false:
 			var parent = get_parent()
-			
 			if _card_can_be_interacted_with():
 				is_clicked = true
 				rotation = 0
+				target_position.y -= y_add_amount
+				mouse_is_hovering = true
 				parent.reset_card_ui_z_index()
+				self.z_index = 0
 				emit_signal("card_clicked", self)
-			
+				
 			if parent is CardPileUI and parent.get_card_pile_size(CardPileUI.Piles.draw_pile) > 0 and parent.is_hand_enabled() and parent.get_cards_in_pile(CardPileUI.Piles.draw_pile).find(self) != -1 and not parent.is_any_card_ui_clicked() and parent.click_draw_pile_to_draw:
 				parent.draw(1)
-		else:
-			#event released
-			if is_clicked:
-				is_clicked = false
-				mouse_is_hovering = false
-				rotation = 0
-				var parent = get_parent()
-				if parent is CardPileUI and parent.is_card_ui_in_hand(self):
-					parent.call_deferred("reset_target_positions")
-				var all_dropzones := []
-				get_dropzones(get_tree().get_root(), "CardDropzone", all_dropzones)
-				for dropzone in all_dropzones:
-					if dropzone.get_global_rect().has_point(get_global_mouse_position()):
-						if dropzone.can_drop_card(self):
-							dropzone.card_ui_dropped(self)
-							break
-				emit_signal("card_dropped", self)
-				emit_signal("card_unhovered", self)
+			return
+		
+		if event.pressed and is_clicked == true:
+			is_clicked = false
+			mouse_is_hovering = false
+			target_position.y += y_add_amount
+			var parent = get_parent()
+			if parent is CardPileUI and parent.is_card_ui_in_hand(self):
+				parent.call_deferred("reset_target_positions")
 			
+		#else:
+			## event release
+			#if is_clicked:
+				#is_clicked = false
+				#mouse_is_hovering = false
+				#rotation = 0
+				#var parent = get_parent()
+				#if parent is CardPileUI and parent.is_card_ui_in_hand(self):
+					#parent.call_deferred("reset_target_positions")
+				#var all_dropzones := []
+				#get_dropzones(get_tree().get_root(), "CardDropzone", all_dropzones)
+				#for dropzone in all_dropzones:
+					#if dropzone.get_global_rect().has_point(get_global_mouse_position()):
+						#if dropzone.can_drop_card(self):
+							#dropzone.card_ui_dropped(self)
+							#break
+				#emit_signal("card_dropped", self)
+				#emit_signal("card_unhovered", self)
+
 
 func get_dropzones(node: Node, className : String, result : Array) -> void:
 	if node is CardDropzone:
@@ -137,7 +151,7 @@ func _process(_delta):
 	if is_clicked and drag_when_clicked:
 		target_position = get_global_mouse_position() - custom_minimum_size * 0.5
 	if is_clicked:
-		position = target_position
+		position = target_position #target_position 
 	elif position != target_position:
 		position = lerp(position, target_position, return_speed)
 		
