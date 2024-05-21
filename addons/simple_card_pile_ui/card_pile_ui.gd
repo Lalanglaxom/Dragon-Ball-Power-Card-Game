@@ -8,6 +8,7 @@ signal card_added_to_dropzone(dropzone : CardDropzone, card: CardUI)
 signal card_hovered(card: CardUI)
 signal card_unhovered(card: CardUI)
 signal card_clicked(card: CardUI)
+signal card_unclicked(card:CardUI)
 signal card_dropped(card: CardUI)
 signal card_removed_from_game(card: CardUI)
 
@@ -337,13 +338,13 @@ func reset_card_ui_z_index():
 func _reset_hand_pile_z_index():
 	for i in _hand_pile.size():
 		var card_ui = _hand_pile[i]
-		if card_ui.is_clicked == false:	
-			card_ui.z_index = 1000 + i
-			card_ui.move_to_front()
-			if card_ui.mouse_is_hovering:
-				card_ui.z_index = 2000 + i
-			if card_ui.is_clicked:
-				card_ui.z_index = 3000 + i
+		# if card_ui.is_clicked == false:	
+		card_ui.z_index = 1000 + i
+		card_ui.move_to_front()
+		if card_ui.mouse_is_hovering:
+			card_ui.z_index = 2000 + i
+		#if card_ui.is_clicked:
+			#card_ui.z_index = 3000 + i
 
 
 func is_card_ui_in_hand(card_ui):
@@ -398,6 +399,7 @@ func _create_card_ui(json_data : Dictionary):
 	card_ui.connect("card_hovered", func(c_ui): emit_signal("card_hovered", c_ui))
 	card_ui.connect("card_unhovered", func(c_ui): emit_signal("card_unhovered", c_ui))
 	card_ui.connect("card_clicked", func(c_ui): emit_signal("card_clicked", c_ui))
+	card_ui.connect("card_unclicked", func(c_ui): emit_signal("card_unclicked", c_ui))
 	card_ui.connect("card_dropped", func(c_ui): emit_signal("card_dropped", c_ui))
 	add_child(card_ui)
 	return card_ui

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bghw0qfhun1dr" path="res://card/battle/image/back.png" id="3_74ysd"]
 [ext_resource type="Texture2D" uid="uid://cscvvpa7t5mvu" path="res://card/battle/image/09_Lagss of the Glass Tribe.png" id="4_sqn2k"]
 [ext_resource type="Shader" path="res://card/properties/fake_3d.gdshader" id="4_yf6x1"]
-[ext_resource type="Texture2D" uid="uid://cwkcp80ivmib6" path="res://card/properties/chosen_box_02.png" id="6_4nrw4"]
+[ext_resource type="Texture2D" uid="uid://bph1hgkaw1s61" path="res://card/properties/chosen_box_03.png" id="6_kymc2"]
 
 [sub_resource type="Resource" id="Resource_ao327"]
 script = ExtResource("2_0e1ni")
@@ -56,5 +56,5 @@ offset_left = -6.0
 offset_top = -32.0
 offset_right = 164.0
 offset_bottom = 246.0
-texture = ExtResource("6_4nrw4")
+texture = ExtResource("6_kymc2")
 expand_mode = 1

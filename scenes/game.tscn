@@ -47,7 +47,7 @@ offset_bottom = 204.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("5_eker0")
-card_pile_ui = NodePath("../CardPileUI")
+card_pile_ui = NodePath("../FullPile")
 stack_display_gap = 4
 max_stack_display = 1
 
@@ -65,7 +65,7 @@ offset_top = 597.143
 offset_right = 1534.28
 offset_bottom = 837.143
 script = ExtResource("5_eker0")
-card_pile_ui = NodePath("../CardPileUI")
+card_pile_ui = NodePath("../FullPile")
 stack_display_gap = 4
 max_stack_display = 1
 
@@ -83,7 +83,7 @@ offset_top = 82.857
 offset_right = 1534.28
 offset_bottom = 322.857
 script = ExtResource("5_eker0")
-card_pile_ui = NodePath("../CardPileUI")
+card_pile_ui = NodePath("../FullPile")
 stack_display_gap = 4
 max_stack_display = 1
 
@@ -100,15 +100,15 @@ offset_right = 778.428
 offset_bottom = 1150.58
 scale = Vector2(0.65, 0.65)
 
-[node name="CardPileUI" type="Control" parent="CanvasLayer"]
+[node name="FullPile" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("2_0rnba")
 json_card_database_path = "res://card/battle/battle_database.json"
 json_card_collection_path = "res://card/battle/battle_collection.json"
 extended_card_ui = ExtResource("3_pya54")
-draw_pile_position = Vector2(20, 1200)
-hand_pile_position = Vector2(800, 1200)
+draw_pile_position = Vector2(20, 800)
+hand_pile_position = Vector2(800, 950)
 discard_pile_position = Vector2(1250, 700)
 stack_display_gap = 4
 max_stack_display = 1
@@ -118,6 +118,7 @@ max_hand_spread = 1200
 drag_when_clicked = false
 hand_rotation_curve = ExtResource("5_mkqdw")
 
-[connection signal="card_clicked" from="CanvasLayer/CardPileUI" to="." method="_on_hand_card_clicked"]
-[connection signal="card_hovered" from="CanvasLayer/CardPileUI" to="." method="_on_card_hovered"]
-[connection signal="card_unhovered" from="CanvasLayer/CardPileUI" to="." method="_on_card_unhovered"]
+[connection signal="card_clicked" from="CanvasLayer/FullPile" to="." method="_on_hand_card_clicked"]
+[connection signal="card_hovered" from="CanvasLayer/FullPile" to="." method="_on_card_hovered"]
+[connection signal="card_unclicked" from="CanvasLayer/FullPile" to="." method="_on_card_unclicked"]
+[connection signal="card_unhovered" from="CanvasLayer/FullPile" to="." method="_on_card_unhovered"]

@@ -28,133 +28,169 @@ script = ExtResource("1_jju1l")
 rotation_speed = 1.0
 
 [node name="Backface" type="TextureRect" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_0xxkf")
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -181.5
-offset_top = -258.5
-offset_right = 532.5
-offset_bottom = 830.5
+offset_left = -65.0
+offset_top = -616.0
+offset_right = 682.0
+offset_bottom = 506.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.475, 0.475)
 texture = ExtResource("2_k8aqf")
 
 [node name="Frontface" type="TextureRect" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_r1f22")
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -198.0
-offset_top = -275.0
-offset_right = 549.0
-offset_bottom = 847.0
+offset_left = -596.0
+offset_top = -694.0
+offset_right = 151.0
+offset_bottom = 428.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.475, 0.475)
 texture = ExtResource("4_7c50y")
 
-[node name="BattleZone1" type="Control" parent="." node_paths=PackedStringArray("card_pile_ui")]
-layout_mode = 3
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_576rl")
+
+[node name="BattleZone1" type="Control" parent="CenterContainer/VBoxContainer/HBoxContainer/TextureRect"]
+layout_mode = 2
 anchors_preset = 0
-offset_left = 817.0
-offset_right = 977.0
+offset_right = 160.0
 offset_bottom = 240.0
 script = ExtResource("5_4v1w8")
-card_pile_ui = NodePath("")
 stack_display_gap = 4
 max_stack_display = 1
 
-[node name="TextureRect" type="TextureRect" parent="BattleZone1"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
 texture = ExtResource("6_576rl")
 
-[node name="BattleZone2" type="Control" parent="." node_paths=PackedStringArray("card_pile_ui")]
-layout_mode = 3
+[node name="BattleZone2" type="Control" parent="CenterContainer/VBoxContainer/HBoxContainer/TextureRect2"]
+layout_mode = 2
 anchors_preset = 0
-offset_left = 821.0
-offset_right = 821.0
-offset_bottom = 1076.0
+offset_right = 160.0
+offset_bottom = 240.0
 script = ExtResource("5_4v1w8")
-card_pile_ui = NodePath("")
 stack_display_gap = 4
 max_stack_display = 1
 
-[node name="TextureRect" type="TextureRect" parent="BattleZone2"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="TextureRect3" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
 texture = ExtResource("6_576rl")
 
-[node name="BattleZone3" type="Control" parent="." node_paths=PackedStringArray("card_pile_ui")]
-layout_mode = 3
+[node name="BattleZone3" type="Control" parent="CenterContainer/VBoxContainer/HBoxContainer/TextureRect3"]
+layout_mode = 2
 anchors_preset = 0
-offset_left = 825.0
-offset_right = 825.0
-offset_bottom = 1076.0
+offset_right = 160.0
+offset_bottom = 240.0
 script = ExtResource("5_4v1w8")
-card_pile_ui = NodePath("")
 stack_display_gap = 4
 max_stack_display = 1
 
-[node name="TextureRect" type="TextureRect" parent="BattleZone3"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="HBoxContainer3" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
 texture = ExtResource("6_576rl")
 
-[node name="BattleZone4" type="Control" parent="." node_paths=PackedStringArray("card_pile_ui")]
-layout_mode = 3
+[node name="BattleZone1" type="Control" parent="CenterContainer/VBoxContainer/HBoxContainer3/TextureRect"]
+layout_mode = 2
 anchors_preset = 0
-offset_right = 1643.0
+offset_right = 160.0
+offset_bottom = 240.0
 script = ExtResource("5_4v1w8")
-card_pile_ui = NodePath("")
 stack_display_gap = 4
 max_stack_display = 1
 
-[node name="TextureRect" type="TextureRect" parent="BattleZone4"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
 texture = ExtResource("6_576rl")
 
-[node name="BattleZone5" type="Control" parent="." node_paths=PackedStringArray("card_pile_ui")]
-layout_mode = 3
+[node name="BattleZone2" type="Control" parent="CenterContainer/VBoxContainer/HBoxContainer3/TextureRect2"]
+layout_mode = 2
 anchors_preset = 0
-offset_top = 4.0
-offset_right = 1643.0
-offset_bottom = 4.0
+offset_right = 160.0
+offset_bottom = 240.0
 script = ExtResource("5_4v1w8")
-card_pile_ui = NodePath("")
 stack_display_gap = 4
 max_stack_display = 1
 
-[node name="TextureRect" type="TextureRect" parent="BattleZone5"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="TextureRect3" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
 texture = ExtResource("6_576rl")
 
-[node name="BattleZone6" type="Control" parent="." node_paths=PackedStringArray("card_pile_ui")]
-layout_mode = 3
+[node name="BattleZone3" type="Control" parent="CenterContainer/VBoxContainer/HBoxContainer3/TextureRect3"]
+layout_mode = 2
 anchors_preset = 0
-offset_top = 8.0
-offset_right = 1643.0
-offset_bottom = 8.0
+offset_right = 160.0
+offset_bottom = 240.0
 script = ExtResource("5_4v1w8")
-card_pile_ui = NodePath("")
 stack_display_gap = 4
 max_stack_display = 1
 
-[node name="TextureRect" type="TextureRect" parent="BattleZone6"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
 texture = ExtResource("6_576rl")
+
+[node name="BattleZone4" type="Control" parent="CenterContainer/VBoxContainer/HBoxContainer2/TextureRect"]
+layout_mode = 2
+anchors_preset = 0
+offset_right = 160.0
+offset_bottom = 240.0
+script = ExtResource("5_4v1w8")
+stack_display_gap = 4
+max_stack_display = 1
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("6_576rl")
+
+[node name="BattleZone5" type="Control" parent="CenterContainer/VBoxContainer/HBoxContainer2/TextureRect2"]
+layout_mode = 2
+anchors_preset = 0
+offset_right = 160.0
+offset_bottom = 240.0
+script = ExtResource("5_4v1w8")
+stack_display_gap = 4
+max_stack_display = 1
+
+[node name="TextureRect3" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("6_576rl")
+
+[node name="BattleZone6" type="Control" parent="CenterContainer/VBoxContainer/HBoxContainer2/TextureRect3"]
+layout_mode = 2
+anchors_preset = 0
+offset_right = 160.0
+offset_bottom = 240.0
+script = ExtResource("5_4v1w8")
+stack_display_gap = 4
+max_stack_display = 1
