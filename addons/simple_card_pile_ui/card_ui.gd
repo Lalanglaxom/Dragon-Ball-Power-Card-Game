@@ -12,13 +12,22 @@ signal card_dropped(card: CardUI)
 @onready var frontface = $Frontface
 @onready var backface = $Backface
 
-
 @export var card_data : CardUIData
 
+enum States{
+	on_hand,
+	on_battle,
+	on_effect,
+	on_environment,
+	in_grave
+}
+
+var current_state = States.on_hand
 
 var frontface_texture : String
 var backface_texture : String
 var is_clicked := false
+var can_be_chosen := true
 var mouse_is_hovering := false
 var target_position := Vector2.ZERO
 var return_speed := 0.2
@@ -50,13 +59,15 @@ func _ready():
 	connect("mouse_entered", _on_mouse_enter)
 	connect("mouse_exited", _on_mouse_exited)
 	connect("gui_input", _on_gui_input)
+	
 	if frontface_texture:
 		frontface.texture = load(frontface_texture)
 		backface.texture = load(backface_texture)
 		custom_minimum_size = frontface.texture.get_size()
 		pivot_offset = frontface.texture.get_size() / 2
 		mouse_filter = Control.MOUSE_FILTER_PASS
-
+	
+	set_states()
 
 
 func _card_can_be_interacted_with():
@@ -81,12 +92,13 @@ func _on_mouse_enter():
 		target_position.y -= hover_distance
 		var parent = get_parent()
 		parent.reset_card_ui_z_index()
-		emit_signal("card_hovered", self)
+	emit_signal("card_hovered", self)
 
 
 func _on_mouse_exited():
 	if is_clicked:
 		return
+		
 	if mouse_is_hovering:
 		mouse_is_hovering = false
 		target_position.y += hover_distance
@@ -98,8 +110,10 @@ func _on_mouse_exited():
 func _on_gui_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		var y_add_amount = 100
-				
-		if event.pressed and GameController.number_is_chosen <= 2 and is_clicked == false:
+		if !can_be_chosen:
+			return
+			
+		if event.pressed and GameController.p1_number_is_chosen <= 2 and is_clicked == false:
 			var parent = get_parent()
 			if _card_can_be_interacted_with():
 				is_clicked = true
@@ -120,25 +134,7 @@ func _on_gui_input(event):
 			if parent is CardPileUI and parent.is_card_ui_in_hand(self):
 				parent.call_deferred("reset_target_positions")
 				emit_signal("card_unclicked", self)
-		#else:
-			## event release
-			#if is_clicked:
-				#is_clicked = false
-				#mouse_is_hovering = false
-				#rotation = 0
-				#var parent = get_parent()
-				#if parent is CardPileUI and parent.is_card_ui_in_hand(self):
-					#parent.call_deferred("reset_target_positions")
-				#var all_dropzones := []
-				#get_dropzones(get_tree().get_root(), "CardDropzone", all_dropzones)
-				#for dropzone in all_dropzones:
-					#if dropzone.get_global_rect().has_point(get_global_mouse_position()):
-						#if dropzone.can_drop_card(self):
-							#dropzone.card_ui_dropped(self)
-							#break
-				#emit_signal("card_dropped", self)
-				#emit_signal("card_unhovered", self)
-
+				
 
 func get_dropzones(node: Node, className : String, result : Array) -> void:
 	if node is CardDropzone:
@@ -146,6 +142,36 @@ func get_dropzones(node: Node, className : String, result : Array) -> void:
 	for child in node.get_children():
 		get_dropzones(child, className, result)
 
+
+func set_properties():
+	match current_state:
+		States.on_battle:
+			is_clicked = false
+			can_be_chosen = false
+
+# Set Card States
+func set_states():
+	var parent = get_parent()
+	var dropzone = parent.get_card_dropzone(self)
+	
+	if parent is CardPileUI and parent.is_card_ui_in_hand(self):
+		current_state = States.on_hand
+
+	if dropzone:
+		match dropzone.zone:
+			dropzone.Zone.battle:
+				current_state = States.on_battle
+			dropzone.Zone.effect:
+				current_state = States.on_effect
+			dropzone.Zone.environment:
+				current_state = States.on_environment
+			dropzone.Zone.rip:
+				current_state = States.in_grave
+			_:
+				current_state = null
+	
+	set_properties()
+	
 func _process(_delta):
 	if is_clicked and drag_when_clicked:
 		target_position = get_global_mouse_position() - custom_minimum_size * 0.5

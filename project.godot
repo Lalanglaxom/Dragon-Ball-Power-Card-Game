@@ -16,6 +16,10 @@ run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.2")
 config/icon="res://icon.png"
 
+[autoload]
+
+GlobalSignal="*res://scenes/global_signal.gd"
+
 [display]
 
 window/size/viewport_height=752

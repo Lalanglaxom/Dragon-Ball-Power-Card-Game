@@ -343,8 +343,7 @@ func _reset_hand_pile_z_index():
 		card_ui.move_to_front()
 		if card_ui.mouse_is_hovering:
 			card_ui.z_index = 2000 + i
-		#if card_ui.is_clicked:
-			#card_ui.z_index = 3000 + i
+
 
 
 func is_card_ui_in_hand(card_ui):

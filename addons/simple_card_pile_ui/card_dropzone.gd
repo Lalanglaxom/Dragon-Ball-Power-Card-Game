@@ -8,6 +8,15 @@ class_name CardDropzone extends Control
 @export var held_card_direction := true
 @export var layout : CardPileUI.PilesCardLayouts = CardPileUI.PilesCardLayouts.up
 
+enum Zone {
+	battle,
+	rip,
+	effect,
+	environment
+}
+
+@export var zone := Zone.battle
+
 var _held_cards := []
 
 func card_ui_dropped(card_ui : CardUI):
@@ -73,7 +82,7 @@ func _update_target_positions():
 		else:
 			card_ui.set_direction(Vector2.DOWN)
 		if card_ui.is_clicked:
-			card_ui.z_index = 3000 + i 
+			card_ui.z_index = 0 + i 
 		else:
 			card_ui.z_index = i
 		card_ui.move_to_front() # must also do this to account for INVISIBLE INTERACTION ORDER
