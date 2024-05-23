@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ca0r5037d1r36"]
+[gd_scene load_steps=13 format=3 uid="uid://ca0r5037d1r36"]
 
 [ext_resource type="Script" path="res://scenes/game_controller.gd" id="1_2w3ie"]
 [ext_resource type="Texture2D" uid="uid://bpjxsk1mxfl77" path="res://assets/1x1_#ffffffff.png" id="1_7cnjc"]
@@ -13,6 +13,9 @@
 
 [sub_resource type="SystemFont" id="SystemFont_p8b0w"]
 font_names = PackedStringArray("Impact")
+
+[sub_resource type="SystemFont" id="SystemFont_uu5a6"]
+font_names = PackedStringArray("Bahnschrift")
 
 [node name="Game" type="Node"]
 script = ExtResource("1_2w3ie")
@@ -117,7 +120,9 @@ texture = ExtResource("9_08iel")
 layout_mode = 2
 texture = ExtResource("9_08iel")
 
-[node name="BattleZone4" type="Control" parent="CanvasLayer"]
+[node name="BattleZoneCollection" type="Node" parent="CanvasLayer"]
+
+[node name="BattleZone4" type="Control" parent="CanvasLayer/BattleZoneCollection"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 537.143
@@ -128,7 +133,7 @@ script = ExtResource("5_eker0")
 stack_display_gap = 4
 max_stack_display = 1
 
-[node name="BattleZone5" type="Control" parent="CanvasLayer"]
+[node name="BattleZone5" type="Control" parent="CanvasLayer/BattleZoneCollection"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 537.143
@@ -139,7 +144,7 @@ script = ExtResource("5_eker0")
 stack_display_gap = 4
 max_stack_display = 1
 
-[node name="BattleZone6" type="Control" parent="CanvasLayer"]
+[node name="BattleZone6" type="Control" parent="CanvasLayer/BattleZoneCollection"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 537.143
@@ -150,7 +155,7 @@ script = ExtResource("5_eker0")
 stack_display_gap = 4
 max_stack_display = 1
 
-[node name="BattleZone1" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("card_pile_ui")]
+[node name="BattleZone1" type="Control" parent="CanvasLayer/BattleZoneCollection" node_paths=PackedStringArray("card_pile_ui")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 615.143
@@ -158,11 +163,12 @@ offset_top = 617.143
 offset_right = 775.143
 offset_bottom = 857.143
 script = ExtResource("5_eker0")
-card_pile_ui = NodePath("../FullPile")
+card_pile_ui = NodePath("../../FullPile")
 stack_display_gap = 4
 max_stack_display = 1
+card_ui_face_up = false
 
-[node name="BattleZone2" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("card_pile_ui")]
+[node name="BattleZone2" type="Control" parent="CanvasLayer/BattleZoneCollection" node_paths=PackedStringArray("card_pile_ui")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 795.143
@@ -170,11 +176,12 @@ offset_top = 617.143
 offset_right = 955.143
 offset_bottom = 857.143
 script = ExtResource("5_eker0")
-card_pile_ui = NodePath("../FullPile")
+card_pile_ui = NodePath("../../FullPile")
 stack_display_gap = 4
 max_stack_display = 1
+card_ui_face_up = false
 
-[node name="BattleZone3" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("card_pile_ui")]
+[node name="BattleZone3" type="Control" parent="CanvasLayer/BattleZoneCollection" node_paths=PackedStringArray("card_pile_ui")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 975.143
@@ -182,11 +189,14 @@ offset_top = 617.143
 offset_right = 1135.14
 offset_bottom = 857.143
 script = ExtResource("5_eker0")
-card_pile_ui = NodePath("../FullPile")
+card_pile_ui = NodePath("../../FullPile")
 stack_display_gap = 4
 max_stack_display = 1
+card_ui_face_up = false
 
-[node name="RipZone1" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("card_pile_ui")]
+[node name="RipZoneCollection" type="Node" parent="CanvasLayer"]
+
+[node name="RipZone1" type="Control" parent="CanvasLayer/RipZoneCollection" node_paths=PackedStringArray("card_pile_ui")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 1371.0
@@ -194,17 +204,17 @@ offset_top = 624.0
 offset_right = 1531.0
 offset_bottom = 864.0
 script = ExtResource("5_eker0")
-card_pile_ui = NodePath("../FullPile")
+card_pile_ui = NodePath("../../FullPile")
 stack_display_gap = 4
 max_stack_display = 1
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/RipZone1"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/RipZoneCollection/RipZone1"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("8_txsle")
 
-[node name="RipZone2" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("card_pile_ui")]
+[node name="RipZone2" type="Control" parent="CanvasLayer/RipZoneCollection" node_paths=PackedStringArray("card_pile_ui")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 1371.0
@@ -212,11 +222,11 @@ offset_top = 82.0
 offset_right = 1531.0
 offset_bottom = 322.0
 script = ExtResource("5_eker0")
-card_pile_ui = NodePath("../FullPile")
+card_pile_ui = NodePath("../../FullPile")
 stack_display_gap = 4
 max_stack_display = 1
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/RipZone2"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/RipZoneCollection/RipZone2"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -248,17 +258,40 @@ max_hand_spread = 1200
 drag_when_clicked = false
 hand_rotation_curve = ExtResource("5_mkqdw")
 
-[node name="Ready Button" type="Button" parent="CanvasLayer"]
-offset_left = 1270.0
-offset_top = 442.857
-offset_right = 1426.0
-offset_bottom = 519.857
+[node name="ButtonControl" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 8.57143
+offset_top = -50.0
+offset_right = 48.5714
+offset_bottom = -10.0
+
+[node name="Ready Button" type="Button" parent="CanvasLayer/ButtonControl"]
+offset_left = 1261.43
+offset_top = 492.857
+offset_right = 1417.43
+offset_bottom = 569.857
 theme_override_fonts/font = SubResource("SystemFont_p8b0w")
 theme_override_font_sizes/font_size = 50
 text = "Ready"
 
-[connection signal="card_clicked" from="CanvasLayer/FullPile" to="." method="_on_hand_card_clicked"]
+[node name="CardOnBattle" type="VBoxContainer" parent="CanvasLayer/ButtonControl"]
+layout_mode = 0
+offset_left = 834.286
+offset_top = 741.429
+offset_right = 902.286
+offset_bottom = 833.429
+
+[node name="Flip" type="Button" parent="CanvasLayer/ButtonControl/CardOnBattle"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_uu5a6")
+theme_override_font_sizes/font_size = 35
+text = "Flip"
+
+[connection signal="battle_card_clicked" from="CanvasLayer/FullPile" to="." method="_on_battle_card_clicked"]
 [connection signal="card_hovered" from="CanvasLayer/FullPile" to="." method="_on_card_hovered"]
-[connection signal="card_unclicked" from="CanvasLayer/FullPile" to="." method="_on_card_unclicked"]
 [connection signal="card_unhovered" from="CanvasLayer/FullPile" to="." method="_on_card_unhovered"]
-[connection signal="button_up" from="CanvasLayer/Ready Button" to="." method="_on_ready_button_up"]
+[connection signal="hand_card_clicked" from="CanvasLayer/FullPile" to="." method="_on_hand_card_clicked"]
+[connection signal="hand_card_unclicked" from="CanvasLayer/FullPile" to="." method="_on_hand_card_unclicked"]
+[connection signal="button_up" from="CanvasLayer/ButtonControl/Ready Button" to="." method="_on_ready_button_up"]
+[connection signal="button_up" from="CanvasLayer/ButtonControl/CardOnBattle/Flip" to="." method="_on_flip_button_up"]

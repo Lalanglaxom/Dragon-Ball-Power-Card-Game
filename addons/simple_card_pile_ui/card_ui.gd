@@ -4,8 +4,11 @@ class_name CardUI extends Control
 
 signal card_hovered(card: CardUI)
 signal card_unhovered(card: CardUI)
-signal card_clicked(card: CardUI)
-signal card_unclicked(card: CardUI)
+
+signal hand_card_clicked(card: CardUI)
+signal hand_card_unclicked(card: CardUI)
+signal battle_card_clicked(card:CardUI)
+
 signal card_dropped(card: CardUI)
 
 
@@ -21,7 +24,6 @@ enum States{
 	on_environment,
 	in_grave
 }
-
 var current_state = States.on_hand
 
 var frontface_texture : String
@@ -34,14 +36,31 @@ var return_speed := 0.2
 var hover_distance := 10
 var drag_when_clicked := true
 
+## Flip related variables
+var rotation_speed = 1.0  # Adjust this for desired oscillation speed (radians per second)
+var time_offset = 0.0  # Optional: Add initial phase shift (radians)
+var duration = 0.5
+var flipable = false;
+var back_y_rot = 0
+var front_y_rot = 0
+var is_face_up = true
+
 func get_class(): return "CardUI"
 func is_class(name): return name == "CardUI"
 
 
 func set_direction(card_is_facing : Vector2):
-	backface.visible = card_is_facing == Vector2.DOWN
-	frontface.visible = card_is_facing == Vector2.UP
-
+	if card_is_facing == Vector2.DOWN:
+		is_face_up = false
+		frontface.visible = false
+		backface.visible = true
+		
+	elif card_is_facing == Vector2.UP:
+		is_face_up = true
+		frontface.visible = true
+		backface.visible = false
+		
+	
 func set_disabled(val : bool):
 	if val:
 		mouse_is_hovering = false
@@ -66,6 +85,12 @@ func _ready():
 		custom_minimum_size = frontface.texture.get_size()
 		pivot_offset = frontface.texture.get_size() / 2
 		mouse_filter = Control.MOUSE_FILTER_PASS
+		
+		# set shader material fake 3d
+		frontface.material = frontface.material.duplicate()
+		backface.material = backface.material.duplicate()
+		backface.material.set_shader_parameter("y_rot", 0)
+		frontface.material.set_shader_parameter("y_rot", 0)
 	
 	set_states()
 
@@ -76,11 +101,11 @@ func _card_can_be_interacted_with():
 	if parent is CardPileUI:
 		# check for cards in hand
 		if parent.is_card_ui_in_hand(self):
-			valid = parent.is_hand_enabled() and not is_clicked #and not parent.is_any_card_ui_clicked()
+			valid = parent.is_hand_enabled() and not is_clicked 
 		# check for cards in dropzone
 		var dropzone = parent.get_card_dropzone(self)
 		if dropzone:
-			valid = dropzone.get_top_card() == self #not parent.is_any_card_ui_clicked()
+			valid = dropzone.get_top_card() == self
 	return valid
 			
 
@@ -110,31 +135,35 @@ func _on_mouse_exited():
 func _on_gui_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		var y_add_amount = 100
-		if !can_be_chosen:
-			return
-			
-		if event.pressed and GameController.p1_number_is_chosen <= 2 and is_clicked == false:
-			var parent = get_parent()
-			if _card_can_be_interacted_with():
-				is_clicked = true
-				rotation = 0
-				target_position.y -= y_add_amount
-				mouse_is_hovering = false
-				parent.reset_card_ui_z_index()
-				emit_signal("card_clicked", self)
-				
-			if parent is CardPileUI and parent.get_card_pile_size(CardPileUI.Piles.draw_pile) > 0 and parent.is_hand_enabled() and parent.get_cards_in_pile(CardPileUI.Piles.draw_pile).find(self) != -1 and not parent.is_any_card_ui_clicked() and parent.click_draw_pile_to_draw:
-				parent.draw(1)
-			return
 		
-		if event.pressed and is_clicked == true:
-			is_clicked = false
-			target_position.y += y_add_amount
-			var parent = get_parent()
-			if parent is CardPileUI and parent.is_card_ui_in_hand(self):
-				parent.call_deferred("reset_target_positions")
-				emit_signal("card_unclicked", self)
+		if current_state == States.on_hand:
+			if event.pressed and GameController.p1_number_is_chosen <= 2 and is_clicked == false:
+				var parent = get_parent()
+				if _card_can_be_interacted_with():
+					is_clicked = true
+					rotation = 0
+					target_position.y -= y_add_amount
+					mouse_is_hovering = false
+					parent.reset_card_ui_z_index()
+					emit_signal("hand_card_clicked", self)
+					
+				if parent is CardPileUI and parent.get_card_pile_size(CardPileUI.Piles.draw_pile) > 0 \
+				and parent.is_hand_enabled() and parent.get_cards_in_pile(CardPileUI.Piles.draw_pile).find(self) != -1 \
+				and not parent.is_any_card_ui_clicked() and parent.click_draw_pile_to_draw:
+					parent.draw(1)
+				return
+			
+			if event.pressed and is_clicked == true:
+				is_clicked = false
+				target_position.y += y_add_amount
+				var parent = get_parent()
+				if parent is CardPileUI and parent.is_card_ui_in_hand(self):
+					parent.call_deferred("reset_target_positions")
+					emit_signal("hand_card_unclicked", self)
 				
+		if current_state == States.on_battle:
+			if event.pressed:
+				emit_signal("battle_card_clicked", self)
 
 func get_dropzones(node: Node, className : String, result : Array) -> void:
 	if node is CardDropzone:
@@ -144,10 +173,17 @@ func get_dropzones(node: Node, className : String, result : Array) -> void:
 
 
 func set_properties():
-	match current_state:
-		States.on_battle:
-			is_clicked = false
-			can_be_chosen = false
+	if current_state != States.on_hand:
+		is_clicked = false
+		can_be_chosen = false
+		
+	if current_state == States.on_battle:
+		#is_face_up = false
+		pass
+
+	if current_state == States.in_grave:
+		is_face_up = true
+
 
 # Set Card States
 func set_states():
@@ -169,17 +205,63 @@ func set_states():
 				current_state = States.in_grave
 			_:
 				current_state = null
-	
 	set_properties()
 	
-func _process(_delta):
-	if is_clicked and drag_when_clicked:
-		target_position = get_global_mouse_position() - custom_minimum_size * 0.5
-	if is_clicked:
-		position = target_position #target_position 
-	elif position != target_position:
-		position = lerp(position, target_position, return_speed)
+
+func flip(delta):
+	if is_face_up:
+		backface.visible = true
+		if front_y_rot < 180:
+			time_offset += delta * rotation_speed
+			
+			front_y_rot = lerp(0,180, time_offset/duration)
+			back_y_rot = front_y_rot - 180
+
+			if front_y_rot > 180:
+				front_y_rot = 180
+			
+			backface.material.set_shader_parameter("y_rot", back_y_rot)
+			frontface.material.set_shader_parameter("y_rot", front_y_rot)
+		else:
+			backface.material.set_shader_parameter("y_rot", 0)
+			frontface.material.set_shader_parameter("y_rot", 0)
+			time_offset = 0
+			set_direction(Vector2.DOWN)
+			flipable = false
+			return
 		
+	else:
+		frontface.visible = true
+		if back_y_rot < 180:
+			time_offset += delta * rotation_speed
+			back_y_rot = lerp(0,180, time_offset/duration)
+			front_y_rot = back_y_rot - 180
+			if back_y_rot > 180:
+				back_y_rot = 180
+				front_y_rot = 0
+			
+			backface.material.set_shader_parameter("y_rot", back_y_rot)
+			frontface.material.set_shader_parameter("y_rot", front_y_rot)
+		else:
+			backface.material.set_shader_parameter("y_rot", 0)
+			frontface.material.set_shader_parameter("y_rot", 0)
+			set_direction(Vector2.UP)
+			time_offset = 0
+			flipable = false
+			return
+
+func _process(_delta):
+	#if is_clicked and drag_when_clicked:
+		#target_position = get_global_mouse_position() - custom_minimum_size * 0.5
+	#if is_clicked:
+		#position = target_position #target_position 
+	
+	if position != target_position:
+		position = lerp(position, target_position, return_speed)
+	
+	if flipable:
+		flip(_delta)
+
 	if Engine.is_editor_hint() and last_child_count != get_child_count():
 		update_configuration_warnings()
 		last_child_count = get_child_count()

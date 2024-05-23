@@ -19,17 +19,21 @@ var p3_cards_is_choosing = []
 
 ## Card Zone Control
 # Player Zone
-@onready var battle_zone_1 = $CanvasLayer/BattleZone1
-@onready var battle_zone_2 = $CanvasLayer/BattleZone2
-@onready var battle_zone_3 = $CanvasLayer/BattleZone3
+@onready var battle_zone_1 = $CanvasLayer/BattleZoneCollection/BattleZone1
+@onready var battle_zone_2 = $CanvasLayer/BattleZoneCollection/BattleZone2
+@onready var battle_zone_3 = $CanvasLayer/BattleZoneCollection/BattleZone3
 
-@onready var card_dropzone = $CanvasLayer/PlacingCardZone/BattleZone2/CardDropzone
+
+## Card On Battle Control
+@onready var card_on_battle_box = $CanvasLayer/ButtonControl/CardOnBattle
+var current_battle_card : CardUI
 
 
 
 
 func _ready():
 	full_pile.draw(18)
+	card_on_battle_box.hide()
 
 func _on_card_unhovered(card):
 	info.texture = null
@@ -45,12 +49,17 @@ func _on_hand_card_clicked(card):
 	if p1_number_is_chosen <= 3:
 		set_chosen_box()
 
-func _on_card_unclicked(card):
+	if card.current_state == card.States.on_battle:
+		print(card.card_data.nice_name)
+	
+	
+func _on_hand_card_unclicked(card):
 	p1_number_is_chosen -= 1
 	card.get_node('ChosenBox').hide()
 	p1_cards_is_choosing.erase(card)
 	set_chosen_box()
-	
+
+
 func set_chosen_box():
 	for i in range(p1_cards_is_choosing.size()):
 		var child = p1_cards_is_choosing[i].get_node('ChosenBox')  # Get the chosen box node
@@ -88,4 +97,19 @@ func _on_ready_button_up():
 		p1_cards_is_choosing.clear()
 		p1_number_is_chosen = 0
 		#GlobalSignal.emit_signal("ready_button_pressed", self)
+
+
+func _on_battle_card_clicked(card):
+	current_battle_card = card
+
+	card_on_battle_box.show()
+	card_on_battle_box.position = card.position
+	card_on_battle_box.position.y += card.size.y/2
+	card_on_battle_box.position.x += card.size.x/4
+
+
+func _on_flip_button_up():
+	if current_battle_card:
+		current_battle_card.flipable = true
+	card_on_battle_box.hide()
 	

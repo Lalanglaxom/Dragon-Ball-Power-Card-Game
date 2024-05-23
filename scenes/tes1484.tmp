@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scenes/test.gd" id="1_jju1l"]
 [ext_resource type="Texture2D" uid="uid://cnmiqaw5753v2" path="res://card/battle/image/742x1122/back.png" id="2_k8aqf"]
-[ext_resource type="Texture2D" uid="uid://txvt0dqg12c7" path="res://card/battle/image/742x1122/33_Supreme Kai of Time Aeos.png" id="3_her7p"]
 [ext_resource type="Shader" path="res://card/properties/fake_3d.gdshader" id="3_vpino"]
+[ext_resource type="Texture2D" uid="uid://5tvwlfibbxv8" path="res://card/battle/image/742x1122/43_Goku Ultra Instinct.png" id="4_i8dit"]
 [ext_resource type="Script" path="res://addons/simple_card_pile_ui/card_dropzone.gd" id="5_4v1w8"]
 [ext_resource type="Texture2D" uid="uid://4msuyvdhk0yc" path="res://environment/battle_area.png" id="6_576rl"]
 
@@ -56,7 +56,7 @@ offset_bottom = 791.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.53, 0.53)
-texture = ExtResource("3_her7p")
+texture = ExtResource("4_i8dit")
 
 [node name="Control" type="Control" parent="."]
 visible = false

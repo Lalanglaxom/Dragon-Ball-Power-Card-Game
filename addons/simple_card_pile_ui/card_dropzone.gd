@@ -46,8 +46,11 @@ func get_held_cards():
 	return _held_cards.duplicate() # duplicate to allow the user to mess with the array without messing with this one!!!
 
 func add_card(card_ui):
+	if card_ui_face_up:
+		card_ui.set_direction(Vector2.UP)
+	else:
+		card_ui.set_direction(Vector2.DOWN)
 	_held_cards.push_back(card_ui)
-	#_update_target_positions()
 	
 func remove_card(card_ui):
 	_held_cards = _held_cards.filter(func(c): return c != card_ui)
@@ -77,14 +80,8 @@ func _update_target_positions():
 				target_pos.x -= i * stack_display_gap
 			else:
 				target_pos.x -= stack_display_gap * max_stack_display
-		if card_ui_face_up:
-			card_ui.set_direction(Vector2.UP)
-		else:
-			card_ui.set_direction(Vector2.DOWN)
-		if card_ui.is_clicked:
-			card_ui.z_index = 0 + i 
-		else:
-			card_ui.z_index = i
+
+		card_ui.z_index = i
 		card_ui.move_to_front() # must also do this to account for INVISIBLE INTERACTION ORDER
 		card_ui.target_position = target_pos
 

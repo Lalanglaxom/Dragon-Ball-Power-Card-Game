@@ -7,8 +7,9 @@ signal card_removed_from_dropzone(dropzone : CardDropzone, card: CardUI)
 signal card_added_to_dropzone(dropzone : CardDropzone, card: CardUI)
 signal card_hovered(card: CardUI)
 signal card_unhovered(card: CardUI)
-signal card_clicked(card: CardUI)
-signal card_unclicked(card:CardUI)
+signal hand_card_clicked(card: CardUI)
+signal hand_card_unclicked(card:CardUI)
+signal battle_card_clicked(card: CardUI)
 signal card_dropped(card: CardUI)
 signal card_removed_from_game(card: CardUI)
 
@@ -390,15 +391,16 @@ func _create_card_ui(json_data : Dictionary):
 	card_ui.return_speed = card_return_speed
 	card_ui.hover_distance = card_ui_hover_distance
 	card_ui.drag_when_clicked = drag_when_clicked
-
+	
 	card_ui.card_data = ResourceLoader.load(json_data.resource_script_path).new()
 	for key in json_data.keys():
 		if key != "texture_path" and key != "backface_texture_path" and key != "resource_script_path":
 			card_ui.card_data[key] = json_data[key]
 	card_ui.connect("card_hovered", func(c_ui): emit_signal("card_hovered", c_ui))
 	card_ui.connect("card_unhovered", func(c_ui): emit_signal("card_unhovered", c_ui))
-	card_ui.connect("card_clicked", func(c_ui): emit_signal("card_clicked", c_ui))
-	card_ui.connect("card_unclicked", func(c_ui): emit_signal("card_unclicked", c_ui))
+	card_ui.connect("hand_card_clicked", func(c_ui): emit_signal("hand_card_clicked", c_ui))
+	card_ui.connect("hand_card_unclicked", func(c_ui): emit_signal("hand_card_unclicked", c_ui))
+	card_ui.connect("battle_card_clicked", func(c_ui): emit_signal("battle_card_clicked", c_ui))
 	card_ui.connect("card_dropped", func(c_ui): emit_signal("card_dropped", c_ui))
 	add_child(card_ui)
 	return card_ui
