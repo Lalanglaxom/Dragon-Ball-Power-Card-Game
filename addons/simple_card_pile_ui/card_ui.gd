@@ -217,7 +217,7 @@ func flip(delta):
 		if front_y_rot < 180:
 			time_offset += delta * rotation_speed
 			
-			front_y_rot = lerp(0,180, time_offset/duration)
+			front_y_rot = lerpf(0,180, time_offset/duration)
 			back_y_rot = front_y_rot - 180
 
 			if front_y_rot > 180:
@@ -238,7 +238,7 @@ func flip(delta):
 		frontface.visible = true
 		if back_y_rot < 180:
 			time_offset += delta * rotation_speed
-			back_y_rot = lerp(0,180, time_offset/duration)
+			back_y_rot = lerpf(0,180, time_offset/duration)
 			front_y_rot = back_y_rot - 180
 			if back_y_rot > 180:
 				back_y_rot = 180

@@ -387,7 +387,6 @@ text = "Shinobu"
 horizontal_alignment = 1
 
 [node name="Player2" type="VBoxContainer" parent="CanvasLayer"]
-visible = false
 offset_left = 1135.71
 offset_top = 88.5714
 offset_right = 1318.71

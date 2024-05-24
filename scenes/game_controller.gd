@@ -34,13 +34,16 @@ var current_battle_card : CardUI
 @export var p1_power_label: Array[Control]
 var p1_base_power = [0,0,0]
 var p1_curent_power = [0,0,0]
+
+# lerp power variables
+var p1_combine_value: float = 0
 var p1_current_combine_power: float = 0
 var p1_combine_power : float = 0
 
 ## General
 # lerp text 
 var time = 0
-var duration = 1
+var duration = 1.5
 
 func _ready():
 	full_pile.draw(18)
@@ -165,11 +168,15 @@ func battle_power_process(delta):
 
 		# combine power logic
 		if p1_combine_power < p1_current_combine_power:
-			time += delta
-			p1_combine_power = lerp(p1_combine_power,p1_current_combine_power, time/duration)
-			p1_combine_power_label.text = str(round(p1_combine_power))
+			time += delta/duration
+			p1_combine_value = lerpf(p1_combine_power,p1_current_combine_power, time)
+			p1_combine_power_label.text = str(round(p1_combine_value))
+			if time >= 1:	
+				p1_combine_power = p1_current_combine_power
+				p1_combine_power_label.text = str(round(p1_combine_power))
 		else:
 			time = 0
+			p1_combine_value = 0
 
 func _on_card_flipped_up(card_ui):
 	for i in range(p1_cards_is_choosing.size()):
