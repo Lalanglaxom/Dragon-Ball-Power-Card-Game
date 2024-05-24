@@ -10,6 +10,8 @@ signal card_unhovered(card: CardUI)
 signal hand_card_clicked(card: CardUI)
 signal hand_card_unclicked(card:CardUI)
 signal battle_card_clicked(card: CardUI)
+signal card_flipped_up(card_ui: CardUI)
+signal card_flipped_down(card_ui: CardUI)
 signal card_dropped(card: CardUI)
 signal card_removed_from_game(card: CardUI)
 
@@ -401,6 +403,8 @@ func _create_card_ui(json_data : Dictionary):
 	card_ui.connect("hand_card_clicked", func(c_ui): emit_signal("hand_card_clicked", c_ui))
 	card_ui.connect("hand_card_unclicked", func(c_ui): emit_signal("hand_card_unclicked", c_ui))
 	card_ui.connect("battle_card_clicked", func(c_ui): emit_signal("battle_card_clicked", c_ui))
+	card_ui.connect("card_flipped_up", func(c_ui): emit_signal("card_flipped_up", c_ui))	
+	card_ui.connect("card_flipped_down", func(c_ui): emit_signal("card_flipped_down", c_ui))	
 	card_ui.connect("card_dropped", func(c_ui): emit_signal("card_dropped", c_ui))
 	add_child(card_ui)
 	return card_ui

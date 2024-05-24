@@ -7,7 +7,10 @@ signal card_unhovered(card: CardUI)
 
 signal hand_card_clicked(card: CardUI)
 signal hand_card_unclicked(card: CardUI)
+
 signal battle_card_clicked(card:CardUI)
+signal card_flipped_down(card:CardUI)
+signal card_flipped_up(card:CardUI)
 
 signal card_dropped(card: CardUI)
 
@@ -228,6 +231,7 @@ func flip(delta):
 			time_offset = 0
 			set_direction(Vector2.DOWN)
 			flipable = false
+			card_flipped_down.emit(self)
 			return
 		
 	else:
@@ -248,6 +252,7 @@ func flip(delta):
 			set_direction(Vector2.UP)
 			time_offset = 0
 			flipable = false
+			card_flipped_up.emit(self)
 			return
 
 func _process(_delta):

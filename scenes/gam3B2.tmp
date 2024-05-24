@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ca0r5037d1r36"]
+[gd_scene load_steps=13 format=3 uid="uid://ca0r5037d1r36"]
 
 [ext_resource type="Script" path="res://scenes/game_controller.gd" id="1_2w3ie"]
 [ext_resource type="Texture2D" uid="uid://bpjxsk1mxfl77" path="res://assets/1x1_#ffffffff.png" id="1_7cnjc"]
@@ -10,8 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://e3ofwn0lncir" path="res://environment/effect_area.png" id="6_0qheb"]
 [ext_resource type="Texture2D" uid="uid://jmgabsudjwyb" path="res://environment/rip_area.png" id="8_txsle"]
 [ext_resource type="Texture2D" uid="uid://4msuyvdhk0yc" path="res://environment/battle_area.png" id="9_08iel"]
-[ext_resource type="Texture2D" uid="uid://5m7mkjyr24ye" path="res://ui/shinobu.png" id="11_8wg8n"]
-[ext_resource type="Texture2D" uid="uid://cxwmbpdumvj13" path="res://ui/kanao_black.png" id="12_ftves"]
 
 [sub_resource type="SystemFont" id="SystemFont_p8b0w"]
 font_names = PackedStringArray("Impact")
@@ -19,9 +17,9 @@ font_names = PackedStringArray("Impact")
 [sub_resource type="SystemFont" id="SystemFont_uu5a6"]
 font_names = PackedStringArray("Bahnschrift")
 
-[node name="Game" type="Node" node_paths=PackedStringArray("p1_power_label")]
+[node name="Game" type="Node"]
 script = ExtResource("1_2w3ie")
-p1_power_label = [NodePath("CanvasLayer/BattleZoneCollection/BattleZone1/Power1"), NodePath("CanvasLayer/BattleZoneCollection/BattleZone2/Power2"), NodePath("CanvasLayer/BattleZoneCollection/BattleZone3/Power3")]
+power_label = [NodePath("CanvasLayer/BattleZoneCollection/BattleZone1/Power1"), NodePath("CanvasLayer/BattleZoneCollection/BattleZone2/Power2"), NodePath("CanvasLayer/BattleZoneCollection/BattleZone3/Power3")]
 
 [node name="Background" type="TextureRect" parent="."]
 offset_top = -267.0
@@ -44,7 +42,6 @@ scale = Vector2(0.7, 0.7)
 transform = Transform2D(0.7, 0, 0, 0.7, 0, 0)
 
 [node name="EffectZone" type="HBoxContainer" parent="CanvasLayer"]
-visible = false
 offset_left = 734.286
 offset_top = 355.714
 offset_right = 1411.29
@@ -357,68 +354,7 @@ theme_override_fonts/font = SubResource("SystemFont_uu5a6")
 theme_override_font_sizes/font_size = 35
 text = "Flip"
 
-[node name="Player1" type="VBoxContainer" parent="CanvasLayer"]
-offset_left = 1135.71
-offset_top = 530.0
-offset_right = 1318.71
-offset_bottom = 817.0
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="CombinePower" type="Label" parent="CanvasLayer/Player1"]
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 30
-horizontal_alignment = 1
-
-[node name="Avatar" type="TextureRect" parent="CanvasLayer/Player1"]
-layout_mode = 2
-texture = ExtResource("11_8wg8n")
-expand_mode = 4
-stretch_mode = 4
-
-[node name="Name" type="Label" parent="CanvasLayer/Player1"]
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_outline_size = 10
-theme_override_font_sizes/font_size = 30
-text = "Shinobu"
-horizontal_alignment = 1
-
-[node name="Player2" type="VBoxContainer" parent="CanvasLayer"]
-visible = false
-offset_left = 1135.71
-offset_top = 88.5714
-offset_right = 1318.71
-offset_bottom = 375.571
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="Name" type="Label" parent="CanvasLayer/Player2"]
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_outline_size = 10
-theme_override_font_sizes/font_size = 30
-text = "Kanao Black "
-horizontal_alignment = 1
-
-[node name="Avatar" type="TextureRect" parent="CanvasLayer/Player2"]
-layout_mode = 2
-texture = ExtResource("12_ftves")
-expand_mode = 4
-stretch_mode = 4
-
-[node name="CombinePower" type="Label" parent="CanvasLayer/Player2"]
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 30
-horizontal_alignment = 1
-
 [connection signal="battle_card_clicked" from="CanvasLayer/FullPile" to="." method="_on_battle_card_clicked"]
-[connection signal="card_flipped_down" from="CanvasLayer/FullPile" to="." method="_on_card_flipped_down"]
-[connection signal="card_flipped_up" from="CanvasLayer/FullPile" to="." method="_on_card_flipped_up"]
 [connection signal="card_hovered" from="CanvasLayer/FullPile" to="." method="_on_card_hovered"]
 [connection signal="card_unhovered" from="CanvasLayer/FullPile" to="." method="_on_card_unhovered"]
 [connection signal="hand_card_clicked" from="CanvasLayer/FullPile" to="." method="_on_hand_card_clicked"]
