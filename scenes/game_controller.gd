@@ -154,12 +154,7 @@ func battle_power_process(delta):
 			# set current and base power
 			p1_base_power[i] = card.card_data.power
 			p1_curent_power[i] = p1_base_power[i]
-						
-			#if p1_combine_power > p1_current_combine_power:
-				#time -= delta
-				#p1_combine_power = lerp(p1_combine_power,p1_current_combine_power, time/duration)
-				#p1_combine_power_label.text = str(round(p1_combine_power))
-			
+
 			# set text logic
 			if card.is_face_up and card.current_state == card.States.on_battle:
 				p1_power_label[i].text = str(p1_curent_power[i])
@@ -168,8 +163,8 @@ func battle_power_process(delta):
 
 		# combine power logic
 		if p1_combine_power < p1_current_combine_power:
-			time += delta/duration
-			p1_combine_value = lerpf(p1_combine_power,p1_current_combine_power, time)
+			time += delta
+			p1_combine_value = lerpf(p1_combine_power,p1_current_combine_power, time/duration)
 			p1_combine_power_label.text = str(round(p1_combine_value))
 			if time >= 1:	
 				p1_combine_power = p1_current_combine_power

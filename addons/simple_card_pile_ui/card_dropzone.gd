@@ -15,8 +15,15 @@ enum Zone {
 	environment
 }
 
-@export var zone := Zone.battle
+enum Player {
+	p1,
+	p2,
+	p3
+}
 
+@export var zone := Zone.battle
+@export var player := Player.p1
+	
 var _held_cards := []
 
 func card_ui_dropped(card_ui : CardUI):

@@ -115,33 +115,52 @@ func _card_can_be_interacted_with():
 
 func _on_mouse_enter():
 	#check if is hovering should be turned on
-	if _card_can_be_interacted_with():
+	var parent = get_parent()
+	var dropzone = parent.get_card_dropzone(self)
+	
+	if dropzone:
+		if dropzone.player != dropzone.Player.p1:
+			return
+			
+	if parent.is_card_ui_in_hand(self) or dropzone:
 		mouse_is_hovering = true
 		target_position.y -= hover_distance
-		var parent = get_parent()
 		parent.reset_card_ui_z_index()
-	emit_signal("card_hovered", self)
+		emit_signal("card_hovered", self)
+
 
 
 func _on_mouse_exited():
+	var parent = get_parent()
+	var dropzone = parent.get_card_dropzone(self)
+
 	if is_clicked:
 		return
+
+	if dropzone:
+		if dropzone.player != dropzone.Player.p1:
+			return
+
+	if parent.is_card_ui_in_hand(self) or dropzone:
+		if mouse_is_hovering:
+			mouse_is_hovering = false
+			target_position.y += hover_distance
+			if parent is CardPileUI:
+				parent.reset_card_ui_z_index()
+			emit_signal("card_unhovered", self) 
+
+	
 		
-	if mouse_is_hovering:
-		mouse_is_hovering = false
-		target_position.y += hover_distance
-		var parent = get_parent()
-		if parent is CardPileUI:
-			parent.reset_card_ui_z_index()
-		emit_signal("card_unhovered", self)
 	
 func _on_gui_input(event):
+	var parent = get_parent()
+	var dropzone = parent.get_card_dropzone(self)
+	
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		var y_add_amount = 100
 		
 		if current_state == States.on_hand:
 			if event.pressed and GameController.p1_number_is_chosen <= 2 and is_clicked == false:
-				var parent = get_parent()
 				if _card_can_be_interacted_with():
 					is_clicked = true
 					rotation = 0
@@ -159,7 +178,6 @@ func _on_gui_input(event):
 			if event.pressed and is_clicked == true:
 				is_clicked = false
 				target_position.y += y_add_amount
-				var parent = get_parent()
 				if parent is CardPileUI and parent.is_card_ui_in_hand(self):
 					parent.call_deferred("reset_target_positions")
 					emit_signal("hand_card_unclicked", self)

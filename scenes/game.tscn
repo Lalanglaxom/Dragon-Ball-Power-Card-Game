@@ -270,9 +270,9 @@ texture = ExtResource("8_txsle")
 layout_mode = 3
 anchors_preset = 0
 offset_left = 1371.0
-offset_top = 82.0
+offset_top = 145.714
 offset_right = 1531.0
-offset_bottom = 322.0
+offset_bottom = 385.714
 script = ExtResource("5_eker0")
 card_pile_ui = NodePath("../../FullPile")
 stack_display_gap = 4
@@ -308,7 +308,7 @@ offset_bottom = 1036.0
 scale = Vector2(0.65, 0.65)
 expand_mode = 1
 
-[node name="FullPile" type="Control" parent="CanvasLayer"]
+[node name="FullPile" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("hand_pile_p1_position_node", "hand_pile_p2_position_node")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("2_0rnba")
@@ -316,7 +316,8 @@ json_card_database_path = "res://card/battle/battle_database.json"
 json_card_collection_path = "res://card/battle/battle_collection.json"
 extended_card_ui = ExtResource("3_pya54")
 draw_pile_position = Vector2(20, 800)
-hand_pile_position = Vector2(800, 950)
+hand_pile_p1_position_node = NodePath("../Player1Position")
+hand_pile_p2_position_node = NodePath("../Player2Postition")
 discard_pile_position = Vector2(1250, 700)
 stack_display_gap = 4
 max_stack_display = 1
@@ -386,6 +387,14 @@ theme_override_font_sizes/font_size = 30
 text = "Shinobu"
 horizontal_alignment = 1
 
+[node name="Player1Position" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 814.286
+offset_top = 924.286
+offset_right = 854.286
+offset_bottom = 964.286
+
 [node name="Player2" type="VBoxContainer" parent="CanvasLayer"]
 offset_left = 1135.71
 offset_top = 88.5714
@@ -414,6 +423,14 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
+
+[node name="Player2Postition" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 768.571
+offset_top = -171.429
+offset_right = 808.571
+offset_bottom = -131.429
 
 [connection signal="battle_card_clicked" from="CanvasLayer/FullPile" to="." method="_on_battle_card_clicked"]
 [connection signal="card_flipped_down" from="CanvasLayer/FullPile" to="." method="_on_card_flipped_down"]
