@@ -24,7 +24,7 @@ func peer_disconnected(id):
 
 func connected_to_server():
 	print("Connected to Server")
-	send_player_info.rpc_id(1,multiplayer.get_unique_id(),$LineEdit.text)
+	send_player_info.rpc_id(1,multiplayer.get_unique_id(),"Client")
 	
 func connection_failed():
 	print("Connection failed: ")
@@ -39,7 +39,7 @@ func send_player_info(id,name):
 	
 	if multiplayer.is_server():
 		for i in GlobalManager.Players:
-			send_player_info.rpc()
+			send_player_info.rpc(i,GlobalManager.Players[i].name)
 	
 func _on_host_button_pressed():
 	var peer = ENetMultiplayerPeer.new()
@@ -47,7 +47,7 @@ func _on_host_button_pressed():
 	if error:
 		return error
 	multiplayer.multiplayer_peer = peer
-	send_player_info(multiplayer.get_unique_id(),name)
+	send_player_info(multiplayer.get_unique_id(),"Host")
 	print("Waiting for player")
 
 

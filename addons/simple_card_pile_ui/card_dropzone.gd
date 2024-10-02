@@ -1,12 +1,12 @@
 class_name CardDropzone extends Control
 
-@export var card_pile_ui : CardPileUI
+@export var card_pile_ui : FullPile
 @export var stack_display_gap := 8
 @export var max_stack_display := 6
 @export var card_ui_face_up := true
 @export var can_drag_top_card := true
 @export var held_card_direction := true
-@export var layout : CardPileUI.PilesCardLayouts = CardPileUI.PilesCardLayouts.up
+@export var layout : FullPile.PilesCardLayouts = FullPile.PilesCardLayouts.up
 
 enum Zone {
 	battle,
@@ -67,22 +67,22 @@ func _update_target_positions():
 	for i in _held_cards.size():
 		var card_ui = _held_cards[i]
 		var target_pos = position
-		if layout == CardPileUI.PilesCardLayouts.up:
+		if layout == FullPile.PilesCardLayouts.up:
 			if i <= max_stack_display:
 				target_pos.y -= i * stack_display_gap
 			else:
 				target_pos.y -= stack_display_gap * max_stack_display
-		elif layout == CardPileUI.PilesCardLayouts.down:
+		elif layout == FullPile.PilesCardLayouts.down:
 			if i <= max_stack_display:
 				target_pos.y += i * stack_display_gap
 			else:
 				target_pos.y += stack_display_gap * max_stack_display
-		elif layout == CardPileUI.PilesCardLayouts.right:
+		elif layout == FullPile.PilesCardLayouts.right:
 			if i <= max_stack_display:
 				target_pos.x += i * stack_display_gap
 			else:
 				target_pos.x += stack_display_gap * max_stack_display
-		elif layout == CardPileUI.PilesCardLayouts.left:
+		elif layout == FullPile.PilesCardLayouts.left:
 			if i <= max_stack_display:
 				target_pos.x -= i * stack_display_gap
 			else:

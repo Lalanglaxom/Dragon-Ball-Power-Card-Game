@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkx6uk6xtw1yr"]
+
+[ext_resource type="Script" path="res://players/player.gd" id="1_jnab5"]
+[ext_resource type="Script" path="res://players/player_piles.gd" id="2_hn3um"]
+[ext_resource type="PackedScene" uid="uid://bfa11717e7smk" path="res://scenes/card_ui.tscn" id="3_0ujdm"]
+[ext_resource type="Curve" uid="uid://cilxr3u0kmg7y" path="res://card/hand_rotation_curve.tres" id="4_gjawx"]
+[ext_resource type="Curve" uid="uid://cj8wyoiq7cx6r" path="res://card/hand_vertical_curve.tres" id="5_5vqu0"]
+
+[node name="Player" type="Node"]
+script = ExtResource("1_jnab5")
+
+[node name="PlayerPiles" type="Control" parent="." node_paths=PackedStringArray("hand_pile_position_node")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("2_hn3um")
+json_card_database_path = "res://card/battle/battle_database.json"
+json_card_collection_path = "res://card/battle/battle_collection.json"
+extended_card_ui = ExtResource("3_0ujdm")
+hand_pile_position_node = NodePath("../PilePosition")
+stack_display_gap = 3
+drag_when_clicked = false
+hand_rotation_curve = ExtResource("4_gjawx")
+hand_vertical_curve = ExtResource("5_5vqu0")
+
+[node name="PilePosition" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 590.0
+offset_top = 518.0
+offset_right = 590.0
+offset_bottom = 518.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]

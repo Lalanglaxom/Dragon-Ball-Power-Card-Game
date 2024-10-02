@@ -3,6 +3,9 @@ class_name GameController
 
 @onready var info = $CanvasLayer/Info
 @onready var full_pile = $CanvasLayer/FullPile
+@onready var debugger = $Panel/Debugger
+
+@onready var player = get_tree().get_nodes_in_group("player")
 
 ## Hand Control
 const CHOSEN_BOX_01 = preload("res://card/properties/chosen_box_01.png")
@@ -46,15 +49,42 @@ var time = 0
 var duration = 1.5
 
 func _ready():
-	full_pile.draw(18)
 	card_on_battle_box.hide()
+	
 
 func _process(delta):
 	battle_power_process(delta)
 	pass
 
 
-func _update_p1_power_label(i,power):
+func _input(event):
+	if event.is_action_pressed("space"):
+		#_text.rpc()
+		#full_pile.shuffle_deck.rpc_id(1)
+		full_pile.draw(5)
+
+@rpc("authority", "call_local")
+func _text():
+	#print("Debugger text:", debugger.text)
+	print("Debugger ID:", multiplayer.get_unique_id())
+	
+	#if multiplayer.is_server():
+		#print("This is server")
+		
+	#for i in GlobalManager.Players:
+		##if i == multiplayer.get_unique_id():
+			##debugger.text = "Name: " + GlobalManager.Players[i].name
+		#print(GlobalManager.Players[i])	
+	
+	#print(full_pile._hand_pile.size())
+	
+	#for card in full_pile._draw_pile:
+		#print(card.card_data.nice_name)
+	
+	for i in GlobalManager.full_pile:
+		print(i.card_data.nice_name)
+		
+func _update_power_label(i,power):
 	match i:
 		0:
 			power_1.text = str(power)
@@ -124,7 +154,7 @@ func _on_ready_button_up():
 					full_pile.set_card_dropzone(card, battle_zone_3)
 				_:
 					print("There are errors in Move to Dropzone Script")
-			#_update_p1_power_label(i,card.card_data.power)
+			#_update_power_label(i,card.card_data.power)
 			card.set_states()
 		#p1_cards_is_choosing.clear()
 		#p1_number_is_chosen = 0
@@ -172,6 +202,7 @@ func battle_power_process(delta):
 		else:
 			time = 0
 			p1_combine_value = 0
+
 
 func _on_card_flipped_up(card_ui):
 	for i in range(p1_cards_is_choosing.size()):

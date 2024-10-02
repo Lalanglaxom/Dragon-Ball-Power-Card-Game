@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://ca0r5037d1r36"]
+[gd_scene load_steps=15 format=3 uid="uid://ca0r5037d1r36"]
 
 [ext_resource type="Script" path="res://scenes/game_controller.gd" id="1_2w3ie"]
 [ext_resource type="Texture2D" uid="uid://bpjxsk1mxfl77" path="res://assets/1x1_#ffffffff.png" id="1_7cnjc"]
-[ext_resource type="PackedScene" uid="uid://bfa11717e7smk" path="res://scenes/card_ui.tscn" id="3_pya54"]
 [ext_resource type="Script" path="res://addons/simple_card_pile_ui/card_dropzone.gd" id="5_eker0"]
 [ext_resource type="Texture2D" uid="uid://bud17mwgkqh2t" path="res://environment/capsule_corps.jpg" id="5_pmlb6"]
 [ext_resource type="Texture2D" uid="uid://e3ofwn0lncir" path="res://environment/effect_area.png" id="6_0qheb"]
@@ -165,7 +164,7 @@ script = ExtResource("5_eker0")
 stack_display_gap = 4
 max_stack_display = 1
 
-[node name="BattleZone1" type="Control" parent="CanvasLayer/BattleZoneCollection"]
+[node name="BattleZone1" type="Control" parent="CanvasLayer/BattleZoneCollection" node_paths=PackedStringArray("card_pile_ui")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 532.857
@@ -173,6 +172,7 @@ offset_top = 578.571
 offset_right = 692.857
 offset_bottom = 818.571
 script = ExtResource("5_eker0")
+card_pile_ui = NodePath("")
 stack_display_gap = 4
 max_stack_display = 1
 card_ui_face_up = false
@@ -192,7 +192,7 @@ theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
 
-[node name="BattleZone2" type="Control" parent="CanvasLayer/BattleZoneCollection"]
+[node name="BattleZone2" type="Control" parent="CanvasLayer/BattleZoneCollection" node_paths=PackedStringArray("card_pile_ui")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 712.857
@@ -200,6 +200,7 @@ offset_top = 577.143
 offset_right = 872.857
 offset_bottom = 817.143
 script = ExtResource("5_eker0")
+card_pile_ui = NodePath("")
 stack_display_gap = 4
 max_stack_display = 1
 card_ui_face_up = false
@@ -219,7 +220,7 @@ theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
 
-[node name="BattleZone3" type="Control" parent="CanvasLayer/BattleZoneCollection"]
+[node name="BattleZone3" type="Control" parent="CanvasLayer/BattleZoneCollection" node_paths=PackedStringArray("card_pile_ui")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 891.429
@@ -227,6 +228,7 @@ offset_top = 575.714
 offset_right = 1051.43
 offset_bottom = 815.714
 script = ExtResource("5_eker0")
+card_pile_ui = NodePath("")
 stack_display_gap = 4
 max_stack_display = 1
 card_ui_face_up = false
@@ -248,7 +250,7 @@ horizontal_alignment = 1
 
 [node name="RipZoneCollection" type="Node" parent="CanvasLayer"]
 
-[node name="RipZone1" type="Control" parent="CanvasLayer/RipZoneCollection"]
+[node name="RipZone1" type="Control" parent="CanvasLayer/RipZoneCollection" node_paths=PackedStringArray("card_pile_ui")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 1371.0
@@ -256,6 +258,7 @@ offset_top = 624.0
 offset_right = 1531.0
 offset_bottom = 864.0
 script = ExtResource("5_eker0")
+card_pile_ui = NodePath("")
 stack_display_gap = 4
 max_stack_display = 1
 
@@ -265,7 +268,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("8_txsle")
 
-[node name="RipZone2" type="Control" parent="CanvasLayer/RipZoneCollection"]
+[node name="RipZone2" type="Control" parent="CanvasLayer/RipZoneCollection" node_paths=PackedStringArray("card_pile_ui")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 1371.0
@@ -273,6 +276,7 @@ offset_top = 145.714
 offset_right = 1531.0
 offset_bottom = 385.714
 script = ExtResource("5_eker0")
+card_pile_ui = NodePath("")
 stack_display_gap = 4
 max_stack_display = 1
 
@@ -308,9 +312,6 @@ expand_mode = 1
 
 [node name="FullPile" type="Node" parent="CanvasLayer" groups=["full pile"]]
 script = ExtResource("8_b3s7r")
-json_card_database_path = "res://card/battle/battle_database.json"
-json_card_collection_path = "res://card/battle/battle_collection.json"
-extended_card_ui = ExtResource("3_pya54")
 
 [node name="ButtonControl" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -430,12 +431,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+text = "daadadsasdasd"
 label_settings = SubResource("LabelSettings_6a406")
 
-[node name="Player" parent="." groups=["player"] instance=ExtResource("11_3ljn7")]
+[node name="Player" parent="." instance=ExtResource("11_3ljn7")]
 
 [node name="Rules" type="Node" parent="."]
 
-[connection signal="hand_pile_p1_updated" from="CanvasLayer/FullPile" to="Player" method="_on_hand_pile_p1_updated"]
 [connection signal="button_up" from="CanvasLayer/ButtonControl/Ready Button" to="." method="_on_ready_button_up"]
 [connection signal="button_up" from="CanvasLayer/ButtonControl/CardOnBattle/Flip" to="." method="_on_flip_button_up"]
