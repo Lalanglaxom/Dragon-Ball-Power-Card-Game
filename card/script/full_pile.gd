@@ -51,6 +51,12 @@ var grave_pile_p2 := []
 var grave_pile_p3 := [] 
 var _discard_pile := [] 
 
+@export_group("Draw Pile")
+@export var click_draw_pile_to_draw := true
+@export var cant_draw_at_hand_limit := true
+@export var shuffle_discard_on_empty_draw := true
+@export var draw_pile_layout := PilesCardLayouts.up
+
 
 func _ready():
 	load_json_path()

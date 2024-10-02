@@ -47,7 +47,7 @@ enum PilesCardLayouts {
 @export var card_return_speed := 0.15
 
 @export_group("Draw Pile")
-@export var click_draw_pile_to_draw := true
+@export var clickdraw_pile_to_draw := true
 @export var cant_draw_at_hand_limit := true
 @export var shuffle_discard_on_empty_draw := true
 @export var draw_pile_layout := PilesCardLayouts.up
@@ -73,9 +73,9 @@ enum PilesCardLayouts {
 var card_database := [] # an array of JSON `Card` data
 var card_collection := [] # an array of JSON `Card` data
 
-var _draw_pile := [] # an array of `CardUI`s
-var _hand_pile := [] # an array of `CardUI`s
-var _discard_pile := [] # an array of `CardUI`s
+var draw_pile := [] # an array of `CardUI`s
+var hand_pile := [] # an array of `CardUI`s
+var grave_pile := [] # an array of `CardUI`s
 
 
 var spread_curve := Curve.new()
@@ -94,10 +94,10 @@ func set_card_pile(card : CardUI, pile : Piles):
 	_maybe_remove_card_from_any_piles(card)
 	_maybe_remove_card_from_any_dropzones(card)
 	if pile == Piles.discard_pile:
-		_discard_pile.push_back(card)
+		grave_pile.push_back(card)
 		emit_signal("discard_pile_updated")
 	if pile == Piles.hand_pile:
-		_hand_pile.push_back(card)
+		hand_pile.push_back(card)
 		emit_signal("hand_pile")
 	reset_target_positions()
 	
@@ -120,36 +120,36 @@ func is_hand_enabled():
 
 func get_cards_in_pile(pile : Piles):
 	if pile == Piles.discard_pile:
-		return _discard_pile.duplicate() # duplicating these so the end user can manipulate the returned array without touching the originals (like doing a forEach remove)
+		return grave_pile.duplicate() # duplicating these so the end user can manipulate the returned array without touching the originals (like doing a forEach remove)
 	elif pile == Piles.hand_pile:
-		return _hand_pile.duplicate()
+		return hand_pile.duplicate()
 	return []
 	
 func get_card_in_pile_at(pile : Piles, index : int):
-	if pile == Piles.discard_pile and _discard_pile.size() > index:
-		return _discard_pile[index]
-	elif pile == Piles.hand_pile and _hand_pile.size() > index:
-		return _hand_pile[index]
+	if pile == Piles.discard_pile and grave_pile.size() > index:
+		return grave_pile[index]
+	elif pile == Piles.hand_pile and hand_pile.size() > index:
+		return hand_pile[index]
 	return null
 		
 func get_card_pile_size(pile : Piles):
 	if pile == Piles.discard_pile:
-		return _discard_pile.size()
+		return grave_pile.size()
 	elif pile == Piles.hand_pile:
-		return _hand_pile.size()
+		return hand_pile.size()
 	return 0
 	
 
 
 func _maybe_remove_card_from_any_piles(card : CardUI):
-	if _hand_pile.find(card) != -1:
-		_hand_pile.erase(card)
+	if hand_pile.find(card) != -1:
+		hand_pile.erase(card)
 		emit_signal("hand_pile_updated")
-	elif _draw_pile.find(card) != -1:
-		_draw_pile.erase(card)
+	elif draw_pile.find(card) != -1:
+		draw_pile.erase(card)
 		emit_signal("draw_pile_updated")
-	elif _discard_pile.find(card) != -1:
-		_discard_pile.erase(card)
+	elif grave_pile.find(card) != -1:
+		grave_pile.erase(card)
 		emit_signal("discard_pile_updated")
 		
 
@@ -193,13 +193,13 @@ func _get_dropzones(node: Node, className : String, result : Array) -> void:
 
 
 func reset_target_positions():
-	_set_draw_pile_target_positions()
-	_set_hand_pile_target_positions()
-	_set_discard_pile_target_positions()
+	_setdraw_pile_target_positions()
+	_sethand_pile_target_positions()
+	_setgrave_pile_target_positions()
 	
-func _set_draw_pile_target_positions(instantly_move = false):
-	for i in _draw_pile.size():
-		var card_ui = _draw_pile[i]
+func _setdraw_pile_target_positions(instantly_move = false):
+	for i in draw_pile.size():
+		var card_ui = draw_pile[i]
 		var target_pos = draw_pile_position
 		if draw_pile_layout == PlayerPileUI.PilesCardLayouts.up:
 			if i <= max_stack_display:
@@ -228,16 +228,16 @@ func _set_draw_pile_target_positions(instantly_move = false):
 		if instantly_move:
 			card_ui.position = target_pos
 	
-func _set_hand_pile_target_positions():
-	for i in _hand_pile.size():
-		var card_ui = _hand_pile[i]
+func _sethand_pile_target_positions():
+	for i in hand_pile.size():
+		var card_ui = hand_pile[i]
 		if !card_ui.is_clicked:
 			card_ui.move_to_front()
 			var hand_ratio = 0.5
-			if _hand_pile.size() > 1:
-				hand_ratio = float(i) / float(_hand_pile.size() - 1)
+			if hand_pile.size() > 1:
+				hand_ratio = float(i) / float(hand_pile.size() - 1)
 			var target_pos = hand_pile_position
-			var card_spacing = max_hand_spread / (_hand_pile.size() + 1)
+			var card_spacing = max_hand_spread / (hand_pile.size() + 1)
 			target_pos.x += (i + 1) * card_spacing - max_hand_spread / 2.0
 			if hand_vertical_curve:
 				target_pos.y -= hand_vertical_curve.sample(hand_ratio)
@@ -249,14 +249,14 @@ func _set_hand_pile_target_positions():
 				card_ui.set_direction(Vector2.DOWN)
 			card_ui.target_position = target_pos
 			
-	while _hand_pile.size() > max_hand_size:
-		set_card_pile(_hand_pile[_hand_pile.size() - 1], Piles.discard_pile)
-	_reset_hand_pile_z_index()
+	while hand_pile.size() > max_hand_size:
+		set_card_pile(hand_pile[hand_pile.size() - 1], Piles.discard_pile)
+	_resethand_pile_z_index()
 
 	
-func _set_discard_pile_target_positions():
-	for i in _discard_pile.size():
-		var card_ui = _discard_pile[i]
+func _setgrave_pile_target_positions():
+	for i in grave_pile.size():
+		var card_ui = grave_pile[i]
 		var target_pos = discard_pile_position
 		if discard_pile_layout == PlayerPileUI.PilesCardLayouts.up:
 			if i <= max_stack_display:
@@ -288,17 +288,17 @@ func _set_discard_pile_target_positions():
 
 # called by CardUI
 func reset_card_ui_z_index():
-	for i in _draw_pile.size():
-		var card_ui = _draw_pile[i]
+	for i in draw_pile.size():
+		var card_ui = draw_pile[i]
 		card_ui.z_index = i
-	for i in _discard_pile.size():
-		var card_ui = _discard_pile[i]
+	for i in grave_pile.size():
+		var card_ui = grave_pile[i]
 		card_ui.z_index = i
-	_reset_hand_pile_z_index()
+	_resethand_pile_z_index()
 
-func _reset_hand_pile_z_index():
-	for i in _hand_pile.size():
-		var card_ui = _hand_pile[i]
+func _resethand_pile_z_index():
+	for i in hand_pile.size():
+		var card_ui = hand_pile[i]
 		# if card_ui.is_clicked == false:	
 		card_ui.z_index = 1000 + i
 		card_ui.move_to_front()
@@ -307,11 +307,11 @@ func _reset_hand_pile_z_index():
 
 
 func is_card_ui_in_hand(card_ui):
-	return _hand_pile.filter(func(c): return c == card_ui).size()
+	return hand_pile.filter(func(c): return c == card_ui).size()
 
 
 func is_any_card_ui_clicked():
-	for card_ui in _hand_pile:
+	for card_ui in hand_pile:
 		if card_ui.is_clicked:
 			return true
 	var all_dropzones := []
@@ -329,15 +329,15 @@ func full_pile_test(number):
 
 @rpc("any_peer","call_local")
 func add_to_global_pile():
-	_draw_pile.shuffle()
-	GlobalManager.full_pile = _draw_pile
+	draw_pile.shuffle()
+	GlobalManager.full_pile = draw_pile
 
 
 func hand_is_at_max_capacity():
-	return _hand_pile.size() >= max_hand_size
+	return hand_pile.size() >= max_hand_size
 
 func sort_hand(sort_func):
-	_hand_pile.sort_custom(sort_func)
+	hand_pile.sort_custom(sort_func)
 	reset_target_positions()
 
 

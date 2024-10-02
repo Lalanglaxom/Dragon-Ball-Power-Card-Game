@@ -70,7 +70,7 @@ func set_disabled(val : bool):
 		is_clicked = false
 		rotation = 0
 		var parent = get_parent()
-		if parent is FullPile:
+		if parent is PlayerPileUI:
 			parent.reset_card_ui_z_index()
 			
 func _ready():
@@ -101,7 +101,7 @@ func _ready():
 func _card_can_be_interacted_with():
 	var parent = get_parent()
 	var valid = false
-	if parent is FullPile:
+	if parent is PlayerPileUI:
 		# check for cards in hand
 		if parent.is_card_ui_in_hand(self):
 			valid = parent.is_hand_enabled() and not is_clicked 
@@ -145,13 +145,11 @@ func _on_mouse_exited():
 		if mouse_is_hovering:
 			mouse_is_hovering = false
 			target_position.y += hover_distance
-			if parent is FullPile:
+			if parent is PlayerPileUI:
 				parent.reset_card_ui_z_index()
 			emit_signal("card_unhovered", self) 
 
-	
-		
-	
+
 func _on_gui_input(event):
 	var parent = get_parent()
 	var dropzone = parent.get_card_dropzone(self)
@@ -170,15 +168,15 @@ func _on_gui_input(event):
 					emit_signal("hand_card_clicked", self)
 					
 				if parent is FullPile and parent.get_card_pile_size(FullPile.Piles.draw_pile) > 0 \
-				and parent.is_hand_enabled() and parent.get_cards_in_pile(FullPile.Piles.draw_pile).find(self) != -1 \
-				and not parent.is_any_card_ui_clicked() and parent.click_draw_pile_to_draw:
+				and parent.get_cards_in_pile(FullPile.Piles.draw_pile).find(self) != -1 \
+				and parent.click_draw_pile_to_draw:
 					parent.draw(1)
 				return
 			
 			if event.pressed and is_clicked == true:
 				is_clicked = false
 				target_position.y += y_add_amount
-				if parent is FullPile and parent.is_card_ui_in_hand(self):
+				if parent is PlayerPileUI and parent.is_card_ui_in_hand(self):
 					parent.call_deferred("reset_target_positions")
 					emit_signal("hand_card_unclicked", self)
 				
@@ -211,7 +209,7 @@ func set_states():
 	var parent = get_parent()
 	var dropzone = parent.get_card_dropzone(self)
 	
-	if parent is FullPile and parent.is_card_ui_in_hand(self):
+	if parent is PlayerPileUI and parent.is_card_ui_in_hand(self):
 		current_state = States.on_hand
 
 	if dropzone:

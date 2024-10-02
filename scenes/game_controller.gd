@@ -1,8 +1,8 @@
 extends Node
 class_name GameController
 
-@onready var info = $CanvasLayer/Info
-@onready var full_pile = $CanvasLayer/FullPile
+@onready var info: TextureRect = $Ground/Info
+@onready var full_pile: FullPile = $FullPile
 @onready var debugger = $Panel/Debugger
 
 @onready var player = get_tree().get_nodes_in_group("player")
@@ -22,18 +22,18 @@ var p3_cards_is_choosing = []
 
 ## Card Zone Control
 # Player Zone
-@onready var battle_zone_1 = $CanvasLayer/BattleZoneCollection/BattleZone1
-@onready var battle_zone_2 = $CanvasLayer/BattleZoneCollection/BattleZone2
-@onready var battle_zone_3 = $CanvasLayer/BattleZoneCollection/BattleZone3
-@onready var power_1 = $CanvasLayer/BattleZoneCollection/BattleZone1/Power1
-@onready var power_2 = $CanvasLayer/BattleZoneCollection/BattleZone2/Power2
-@onready var power_3 = $CanvasLayer/BattleZoneCollection/BattleZone3/Power3
+@onready var battle_zone_1 = $BattleZoneCollection/BattleZone1
+@onready var battle_zone_2 = $BattleZoneCollection/BattleZone2
+@onready var battle_zone_3 = $BattleZoneCollection/BattleZone3
+@onready var power_1 = $BattleZoneCollection/BattleZone1/Power1
+@onready var power_2 = $BattleZoneCollection/BattleZone2/Power2
+@onready var power_3 = $BattleZoneCollection/BattleZone3/Power3
 
 
 ## Card On Battle Control
-@onready var card_on_battle_box = $CanvasLayer/ButtonControl/CardOnBattle
+@onready var card_on_battle_box = $ButtonControl/CardOnBattle
 var current_battle_card : CardUI
-@onready var p1_combine_power_label = $CanvasLayer/Player1/CombinePower
+@onready var p1_combine_power_label = $Player1/CombinePower
 @export var p1_power_label: Array[Control]
 var p1_base_power = [0,0,0]
 var p1_curent_power = [0,0,0]
@@ -49,7 +49,8 @@ var time = 0
 var duration = 1.5
 
 func _ready():
-	card_on_battle_box.hide()
+	#card_on_battle_box.hide()
+	pass
 	
 
 func _process(delta):

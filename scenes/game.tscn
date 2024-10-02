@@ -1,17 +1,21 @@
-[gd_scene load_steps=16 format=3 uid="uid://ca0r5037d1r36"]
+[gd_scene load_steps=17 format=3 uid="uid://ca0r5037d1r36"]
 
 [ext_resource type="Script" path="res://scenes/game_controller.gd" id="1_2w3ie"]
 [ext_resource type="Texture2D" uid="uid://bpjxsk1mxfl77" path="res://assets/1x1_#ffffffff.png" id="1_7cnjc"]
+[ext_resource type="Texture2D" uid="uid://cx6v5b8673yn1" path="res://environment/Land-of-the-Kais.png" id="2_h46hs"]
 [ext_resource type="PackedScene" uid="uid://bfa11717e7smk" path="res://scenes/card_ui.tscn" id="3_pya54"]
 [ext_resource type="Script" path="res://addons/simple_card_pile_ui/card_dropzone.gd" id="5_eker0"]
-[ext_resource type="Texture2D" uid="uid://bud17mwgkqh2t" path="res://environment/capsule_corps.jpg" id="5_pmlb6"]
 [ext_resource type="Texture2D" uid="uid://e3ofwn0lncir" path="res://environment/effect_area.png" id="6_0qheb"]
 [ext_resource type="Script" path="res://card/script/full_pile.gd" id="8_b3s7r"]
 [ext_resource type="Texture2D" uid="uid://jmgabsudjwyb" path="res://environment/rip_area.png" id="8_txsle"]
 [ext_resource type="Texture2D" uid="uid://4msuyvdhk0yc" path="res://environment/battle_area.png" id="9_08iel"]
+[ext_resource type="Texture2D" uid="uid://txvt0dqg12c7" path="res://card/battle/image/742x1122/33_Supreme Kai of Time Aeos.png" id="9_xoxcn"]
 [ext_resource type="PackedScene" uid="uid://dkx6uk6xtw1yr" path="res://players/player.tscn" id="11_3ljn7"]
 [ext_resource type="Texture2D" uid="uid://5m7mkjyr24ye" path="res://ui/shinobu.png" id="11_8wg8n"]
 [ext_resource type="Texture2D" uid="uid://cxwmbpdumvj13" path="res://ui/kanao_black.png" id="12_ftves"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6a406"]
+font_size = 25
 
 [sub_resource type="SystemFont" id="SystemFont_p8b0w"]
 font_names = PackedStringArray("Impact")
@@ -19,18 +23,15 @@ font_names = PackedStringArray("Impact")
 [sub_resource type="SystemFont" id="SystemFont_uu5a6"]
 font_names = PackedStringArray("Bahnschrift")
 
-[sub_resource type="LabelSettings" id="LabelSettings_6a406"]
-font_size = 25
-
 [node name="Game" type="Node" node_paths=PackedStringArray("p1_power_label")]
 script = ExtResource("1_2w3ie")
-p1_power_label = [NodePath("CanvasLayer/BattleZoneCollection/BattleZone1/Power1"), NodePath("CanvasLayer/BattleZoneCollection/BattleZone2/Power2"), NodePath("CanvasLayer/BattleZoneCollection/BattleZone3/Power3")]
+p1_power_label = [NodePath("Ground/ZoneContainer/PlacingCardZone/BattleZone1/BattleIMG1/PowerLaber"), NodePath("Ground/ZoneContainer/PlacingCardZone/BattleZone1/BattleIMG2/PowerLaber"), NodePath("Ground/ZoneContainer/PlacingCardZone/BattleZone1/BattleIMG3/PowerLaber")]
 
 [node name="Background" type="TextureRect" parent="."]
-offset_top = -267.0
+offset_top = -388.0
 offset_right = 1148.0
-offset_bottom = 881.0
-texture = ExtResource("5_pmlb6")
+offset_bottom = 760.0
+texture = ExtResource("2_h46hs")
 expand_mode = 1
 
 [node name="BackgroundDark" type="TextureRect" parent="."]
@@ -42,142 +43,189 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_7cnjc")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-scale = Vector2(0.7, 0.7)
-transform = Transform2D(0.7, 0, 0, 0.7, 0, 0)
+[node name="Ground" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="EffectZone" type="HBoxContainer" parent="CanvasLayer"]
-visible = false
-offset_left = 734.286
-offset_top = 355.714
-offset_right = 1411.29
-offset_bottom = 595.714
-theme_override_constants/separation = 20
-alignment = 2
+[node name="Info" type="TextureRect" parent="Ground"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 30.0
+offset_top = -350.0
+offset_right = 777.0
+offset_bottom = 772.0
+grow_vertical = 2
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("9_xoxcn")
 
-[node name="EffectIMG" type="TextureRect" parent="CanvasLayer/EffectZone"]
-layout_mode = 2
-texture = ExtResource("6_0qheb")
-
-[node name="BattleZone3" type="Control" parent="CanvasLayer/EffectZone/EffectIMG"]
-layout_mode = 2
-anchors_preset = 0
-offset_right = 160.0
-offset_bottom = 240.0
-script = ExtResource("5_eker0")
-stack_display_gap = 4
-max_stack_display = 1
-
-[node name="EnvironmentIMG" type="TextureRect" parent="CanvasLayer/EffectZone"]
-layout_mode = 2
-texture = ExtResource("9_08iel")
-
-[node name="BattleZone2" type="Control" parent="CanvasLayer/EffectZone/EnvironmentIMG"]
-layout_mode = 2
-anchors_preset = 0
-offset_right = 160.0
-offset_bottom = 240.0
-script = ExtResource("5_eker0")
-stack_display_gap = 4
-max_stack_display = 1
-
-[node name="PlacingCardZone" type="VBoxContainer" parent="CanvasLayer"]
+[node name="ZoneContainer" type="HBoxContainer" parent="Ground"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -123.143
-offset_top = -290.286
-offset_right = 553.857
-offset_bottom = 489.714
+offset_left = -122.0
+offset_top = -321.0
+offset_right = 733.0
+offset_bottom = 811.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 200
+scale = Vector2(0.5, 0.5)
+theme_override_constants/separation = 175
 alignment = 1
 
-[node name="BattleZone2" type="HBoxContainer" parent="CanvasLayer/PlacingCardZone"]
+[node name="PlacingCardZone" type="VBoxContainer" parent="Ground/ZoneContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 130
+alignment = 1
+
+[node name="BattleZone2" type="HBoxContainer" parent="Ground/ZoneContainer/PlacingCardZone"]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="BattleIMG4" type="TextureRect" parent="CanvasLayer/PlacingCardZone/BattleZone2"]
+[node name="BattleIMG4" type="TextureRect" parent="Ground/ZoneContainer/PlacingCardZone/BattleZone2"]
 layout_mode = 2
 texture = ExtResource("9_08iel")
+stretch_mode = 2
 
-[node name="BattleIMG5" type="TextureRect" parent="CanvasLayer/PlacingCardZone/BattleZone2"]
+[node name="BattleZone4" type="Control" parent="Ground/ZoneContainer/PlacingCardZone/BattleZone2/BattleIMG4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_eker0")
+stack_display_gap = 4
+max_stack_display = 1
+
+[node name="PowerLaber" type="Label" parent="Ground/ZoneContainer/PlacingCardZone/BattleZone2/BattleIMG4"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -42.0
+offset_top = 262.0
+offset_right = 40.0
+offset_bottom = 304.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+
+[node name="BattleIMG5" type="TextureRect" parent="Ground/ZoneContainer/PlacingCardZone/BattleZone2"]
 layout_mode = 2
 texture = ExtResource("9_08iel")
+stretch_mode = 2
 
-[node name="BattleIMG6" type="TextureRect" parent="CanvasLayer/PlacingCardZone/BattleZone2"]
+[node name="BattleZone5" type="Control" parent="Ground/ZoneContainer/PlacingCardZone/BattleZone2/BattleIMG5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_eker0")
+stack_display_gap = 4
+max_stack_display = 1
+
+[node name="PowerLaber" type="Label" parent="Ground/ZoneContainer/PlacingCardZone/BattleZone2/BattleIMG5"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -42.0
+offset_top = 262.0
+offset_right = 40.0
+offset_bottom = 304.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+
+[node name="BattleIMG6" type="TextureRect" parent="Ground/ZoneContainer/PlacingCardZone/BattleZone2"]
 layout_mode = 2
 texture = ExtResource("9_08iel")
+stretch_mode = 2
 
-[node name="BattleZone1" type="HBoxContainer" parent="CanvasLayer/PlacingCardZone"]
+[node name="BattleZone6" type="Control" parent="Ground/ZoneContainer/PlacingCardZone/BattleZone2/BattleIMG6"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_eker0")
+stack_display_gap = 4
+max_stack_display = 1
+
+[node name="PowerLaber" type="Label" parent="Ground/ZoneContainer/PlacingCardZone/BattleZone2/BattleIMG6"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -42.0
+offset_top = 262.0
+offset_right = 40.0
+offset_bottom = 304.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+
+[node name="EffectZone" type="HBoxContainer" parent="Ground/ZoneContainer/PlacingCardZone"]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="BattleIMG1" type="TextureRect" parent="CanvasLayer/PlacingCardZone/BattleZone1"]
+[node name="EffectIMG" type="TextureRect" parent="Ground/ZoneContainer/PlacingCardZone/EffectZone"]
+layout_mode = 2
+texture = ExtResource("6_0qheb")
+
+[node name="BattleZone3" type="Control" parent="Ground/ZoneContainer/PlacingCardZone/EffectZone/EffectIMG"]
+layout_mode = 2
+anchors_preset = 0
+offset_right = 160.0
+offset_bottom = 240.0
+script = ExtResource("5_eker0")
+stack_display_gap = 4
+max_stack_display = 1
+
+[node name="EnvironmentIMG" type="TextureRect" parent="Ground/ZoneContainer/PlacingCardZone/EffectZone"]
 layout_mode = 2
 texture = ExtResource("9_08iel")
 
-[node name="BattleIMG2" type="TextureRect" parent="CanvasLayer/PlacingCardZone/BattleZone1"]
+[node name="BattleZone2" type="Control" parent="Ground/ZoneContainer/PlacingCardZone/EffectZone/EnvironmentIMG"]
+layout_mode = 2
+anchors_preset = 0
+offset_right = 160.0
+offset_bottom = 240.0
+script = ExtResource("5_eker0")
+stack_display_gap = 4
+max_stack_display = 1
+
+[node name="BattleZone1" type="HBoxContainer" parent="Ground/ZoneContainer/PlacingCardZone"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="BattleIMG1" type="TextureRect" parent="Ground/ZoneContainer/PlacingCardZone/BattleZone1"]
 layout_mode = 2
 texture = ExtResource("9_08iel")
 
-[node name="BattleIMG3" type="TextureRect" parent="CanvasLayer/PlacingCardZone/BattleZone1"]
-layout_mode = 2
-texture = ExtResource("9_08iel")
-
-[node name="BattleZoneCollection" type="Node" parent="CanvasLayer"]
-
-[node name="BattleZone4" type="Control" parent="CanvasLayer/BattleZoneCollection"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 537.143
-offset_top = 842.143
-offset_right = 1214.14
-offset_bottom = 842.143
-script = ExtResource("5_eker0")
-stack_display_gap = 4
-max_stack_display = 1
-
-[node name="BattleZone5" type="Control" parent="CanvasLayer/BattleZoneCollection"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 537.143
-offset_top = 872.143
-offset_right = 1214.14
-offset_bottom = 872.143
-script = ExtResource("5_eker0")
-stack_display_gap = 4
-max_stack_display = 1
-
-[node name="BattleZone6" type="Control" parent="CanvasLayer/BattleZoneCollection"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 537.143
-offset_top = 902.143
-offset_right = 1214.14
-offset_bottom = 902.143
-script = ExtResource("5_eker0")
-stack_display_gap = 4
-max_stack_display = 1
-
-[node name="BattleZone1" type="Control" parent="CanvasLayer/BattleZoneCollection"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 532.857
-offset_top = 578.571
-offset_right = 692.857
-offset_bottom = 818.571
-script = ExtResource("5_eker0")
-stack_display_gap = 4
-max_stack_display = 1
-card_ui_face_up = false
-
-[node name="Power1" type="Label" parent="CanvasLayer/BattleZoneCollection/BattleZone1"]
+[node name="PowerLaber" type="Label" parent="Ground/ZoneContainer/PlacingCardZone/BattleZone1/BattleIMG1"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -185,26 +233,30 @@ anchor_right = 0.5
 offset_left = -41.0
 offset_top = -48.5711
 offset_right = 41.0
-offset_bottom = -6.57114
+offset_bottom = -6.57115
 grow_horizontal = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
 
-[node name="BattleZone2" type="Control" parent="CanvasLayer/BattleZoneCollection"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 712.857
-offset_top = 577.143
-offset_right = 872.857
-offset_bottom = 817.143
+[node name="BattleZone1" type="Control" parent="Ground/ZoneContainer/PlacingCardZone/BattleZone1/BattleIMG1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("5_eker0")
 stack_display_gap = 4
 max_stack_display = 1
 card_ui_face_up = false
 
-[node name="Power2" type="Label" parent="CanvasLayer/BattleZoneCollection/BattleZone2"]
+[node name="BattleIMG2" type="TextureRect" parent="Ground/ZoneContainer/PlacingCardZone/BattleZone1"]
+layout_mode = 2
+texture = ExtResource("9_08iel")
+
+[node name="PowerLaber" type="Label" parent="Ground/ZoneContainer/PlacingCardZone/BattleZone1/BattleIMG2"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -212,26 +264,30 @@ anchor_right = 0.5
 offset_left = -41.0
 offset_top = -48.5711
 offset_right = 41.0
-offset_bottom = -6.57114
+offset_bottom = -6.57115
 grow_horizontal = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
 
-[node name="BattleZone3" type="Control" parent="CanvasLayer/BattleZoneCollection"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 891.429
-offset_top = 575.714
-offset_right = 1051.43
-offset_bottom = 815.714
+[node name="BattleZone2" type="Control" parent="Ground/ZoneContainer/PlacingCardZone/BattleZone1/BattleIMG2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("5_eker0")
 stack_display_gap = 4
 max_stack_display = 1
 card_ui_face_up = false
 
-[node name="Power3" type="Label" parent="CanvasLayer/BattleZoneCollection/BattleZone3"]
+[node name="BattleIMG3" type="TextureRect" parent="Ground/ZoneContainer/PlacingCardZone/BattleZone1"]
+layout_mode = 2
+texture = ExtResource("9_08iel")
+
+[node name="PowerLaber" type="Label" parent="Ground/ZoneContainer/PlacingCardZone/BattleZone1/BattleIMG3"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -239,50 +295,62 @@ anchor_right = 0.5
 offset_left = -41.0
 offset_top = -48.5711
 offset_right = 41.0
-offset_bottom = -6.57114
+offset_bottom = -6.57115
 grow_horizontal = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
 
-[node name="RipZoneCollection" type="Node" parent="CanvasLayer"]
-
-[node name="RipZone1" type="Control" parent="CanvasLayer/RipZoneCollection"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 1371.0
-offset_top = 624.0
-offset_right = 1531.0
-offset_bottom = 864.0
+[node name="BattleZone3" type="Control" parent="Ground/ZoneContainer/PlacingCardZone/BattleZone1/BattleIMG3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("5_eker0")
 stack_display_gap = 4
 max_stack_display = 1
+card_ui_face_up = false
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/RipZoneCollection/RipZone1"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="RipZone" type="VBoxContainer" parent="Ground/ZoneContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 615
+alignment = 1
+
+[node name="RipZoneIMG1" type="TextureRect" parent="Ground/ZoneContainer/RipZone"]
+layout_mode = 2
 texture = ExtResource("8_txsle")
 
-[node name="RipZone2" type="Control" parent="CanvasLayer/RipZoneCollection"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 1371.0
-offset_top = 145.714
-offset_right = 1531.0
-offset_bottom = 385.714
+[node name="RipZone1" type="Control" parent="Ground/ZoneContainer/RipZone/RipZoneIMG1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("5_eker0")
 stack_display_gap = 4
 max_stack_display = 1
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/RipZoneCollection/RipZone2"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="RipZoneIMG2" type="TextureRect" parent="Ground/ZoneContainer/RipZone"]
+layout_mode = 2
 texture = ExtResource("8_txsle")
 
-[node name="LabelCollection" type="Control" parent="CanvasLayer"]
+[node name="RipZone2" type="Control" parent="Ground/ZoneContainer/RipZone/RipZoneIMG2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_eker0")
+stack_display_gap = 4
+max_stack_display = 1
+
+[node name="LabelCollection" type="Control" parent="Ground"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 660.0
@@ -290,27 +358,117 @@ offset_top = 487.143
 offset_right = 700.0
 offset_bottom = 527.143
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/LabelCollection"]
+[node name="PlayerCollection" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Player1" type="VBoxContainer" parent="PlayerCollection"]
 layout_mode = 0
-offset_left = -5.7142
-offset_top = 35.7143
-offset_right = 280.286
-offset_bottom = 75.7143
-theme_override_constants/separation = 20
+offset_left = 1135.71
+offset_top = 530.0
+offset_right = 1318.71
+offset_bottom = 817.0
+theme_override_constants/separation = 10
+alignment = 1
 
-[node name="Info" type="TextureRect" parent="CanvasLayer"]
-offset_left = 21.0
-offset_top = 26.0
-offset_right = 694.0
-offset_bottom = 1036.0
-scale = Vector2(0.65, 0.65)
-expand_mode = 1
+[node name="CombinePower" type="Label" parent="PlayerCollection/Player1"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
 
-[node name="FullPile" type="Node" parent="CanvasLayer" groups=["full pile"]]
+[node name="Avatar" type="TextureRect" parent="PlayerCollection/Player1"]
+layout_mode = 2
+texture = ExtResource("11_8wg8n")
+expand_mode = 4
+stretch_mode = 4
+
+[node name="Name" type="Label" parent="PlayerCollection/Player1"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 30
+text = "Shinobu"
+horizontal_alignment = 1
+
+[node name="Player1Position" type="Control" parent="PlayerCollection"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 814.286
+offset_top = 924.286
+offset_right = 854.286
+offset_bottom = 964.286
+
+[node name="Player2" type="VBoxContainer" parent="PlayerCollection"]
+layout_mode = 0
+offset_left = 1135.71
+offset_top = 88.5714
+offset_right = 1320.71
+offset_bottom = 377.571
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Name" type="Label" parent="PlayerCollection/Player2"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 30
+text = "Kanao Black "
+horizontal_alignment = 1
+
+[node name="Avatar" type="TextureRect" parent="PlayerCollection/Player2"]
+layout_mode = 2
+texture = ExtResource("12_ftves")
+expand_mode = 4
+stretch_mode = 4
+
+[node name="CombinePower" type="Label" parent="PlayerCollection/Player2"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+
+[node name="Player2Postition" type="Control" parent="PlayerCollection"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 768.571
+offset_top = -171.429
+offset_right = 808.571
+offset_bottom = -131.429
+
+[node name="FullPile" type="Node" parent="." groups=["full pile"]]
 script = ExtResource("8_b3s7r")
 json_card_database_path = "res://card/battle/battle_database.json"
 json_card_collection_path = "res://card/battle/battle_collection.json"
 extended_card_ui = ExtResource("3_pya54")
+
+[node name="Player" parent="." groups=["player"] instance=ExtResource("11_3ljn7")]
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+offset_left = 37.0
+offset_top = 46.0
+offset_right = 306.0
+offset_bottom = 405.0
+
+[node name="Debugger" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_6a406")
+
+[node name="Rules" type="Node" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+scale = Vector2(0.7, 0.7)
+transform = Transform2D(0.7, 0, 0, 0.7, 0, 0)
 
 [node name="ButtonControl" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -343,99 +501,5 @@ theme_override_fonts/font = SubResource("SystemFont_uu5a6")
 theme_override_font_sizes/font_size = 35
 text = "Flip"
 
-[node name="Player1" type="VBoxContainer" parent="CanvasLayer"]
-offset_left = 1135.71
-offset_top = 530.0
-offset_right = 1318.71
-offset_bottom = 817.0
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="CombinePower" type="Label" parent="CanvasLayer/Player1"]
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 30
-horizontal_alignment = 1
-
-[node name="Avatar" type="TextureRect" parent="CanvasLayer/Player1"]
-layout_mode = 2
-texture = ExtResource("11_8wg8n")
-expand_mode = 4
-stretch_mode = 4
-
-[node name="Name" type="Label" parent="CanvasLayer/Player1"]
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_outline_size = 10
-theme_override_font_sizes/font_size = 30
-text = "Shinobu"
-horizontal_alignment = 1
-
-[node name="Player1Position" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 814.286
-offset_top = 924.286
-offset_right = 854.286
-offset_bottom = 964.286
-
-[node name="Player2" type="VBoxContainer" parent="CanvasLayer"]
-offset_left = 1135.71
-offset_top = 88.5714
-offset_right = 1318.71
-offset_bottom = 375.571
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="Name" type="Label" parent="CanvasLayer/Player2"]
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_outline_size = 10
-theme_override_font_sizes/font_size = 30
-text = "Kanao Black "
-horizontal_alignment = 1
-
-[node name="Avatar" type="TextureRect" parent="CanvasLayer/Player2"]
-layout_mode = 2
-texture = ExtResource("12_ftves")
-expand_mode = 4
-stretch_mode = 4
-
-[node name="CombinePower" type="Label" parent="CanvasLayer/Player2"]
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 30
-horizontal_alignment = 1
-
-[node name="Player2Postition" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 768.571
-offset_top = -171.429
-offset_right = 808.571
-offset_bottom = -131.429
-
-[node name="Panel" type="Panel" parent="."]
-offset_left = 37.0
-offset_top = 46.0
-offset_right = 306.0
-offset_bottom = 405.0
-
-[node name="Debugger" type="Label" parent="Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-label_settings = SubResource("LabelSettings_6a406")
-
-[node name="Player" parent="." groups=["player"] instance=ExtResource("11_3ljn7")]
-
-[node name="Rules" type="Node" parent="."]
-
-[connection signal="hand_pile_p1_updated" from="CanvasLayer/FullPile" to="Player" method="_on_hand_pile_p1_updated"]
 [connection signal="button_up" from="CanvasLayer/ButtonControl/Ready Button" to="." method="_on_ready_button_up"]
 [connection signal="button_up" from="CanvasLayer/ButtonControl/CardOnBattle/Flip" to="." method="_on_flip_button_up"]

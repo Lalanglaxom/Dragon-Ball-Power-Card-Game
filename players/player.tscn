@@ -11,23 +11,23 @@ script = ExtResource("1_jnab5")
 
 [node name="PlayerPiles" type="Control" parent="." node_paths=PackedStringArray("hand_pile_position_node")]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("2_hn3um")
 json_card_database_path = "res://card/battle/battle_database.json"
 json_card_collection_path = "res://card/battle/battle_collection.json"
 extended_card_ui = ExtResource("3_0ujdm")
-hand_pile_position_node = NodePath("../PilePosition")
+hand_pile_position_node = NodePath("PilePosition")
 stack_display_gap = 3
+card_return_speed = 0.3
 drag_when_clicked = false
 hand_rotation_curve = ExtResource("4_gjawx")
 hand_vertical_curve = ExtResource("5_5vqu0")
 
-[node name="PilePosition" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 590.0
-offset_top = 518.0
-offset_right = 590.0
-offset_bottom = 518.0
+[node name="PilePosition" type="Node2D" parent="PlayerPiles"]
+position = Vector2(584, 662)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
