@@ -23,9 +23,8 @@ font_names = PackedStringArray("Impact")
 [sub_resource type="SystemFont" id="SystemFont_uu5a6"]
 font_names = PackedStringArray("Bahnschrift")
 
-[node name="Game" type="Node" node_paths=PackedStringArray("p1_power_label")]
+[node name="Game" type="Node" groups=["p1", "p2", "p3"]]
 script = ExtResource("1_2w3ie")
-p1_power_label = [NodePath("Ground/ZoneContainer/PlacingCardZone/BattleZone1/BattleIMG1/PowerLaber"), NodePath("Ground/ZoneContainer/PlacingCardZone/BattleZone1/BattleIMG2/PowerLaber"), NodePath("Ground/ZoneContainer/PlacingCardZone/BattleZone1/BattleIMG3/PowerLaber")]
 
 [node name="Background" type="TextureRect" parent="."]
 offset_top = -388.0
@@ -439,13 +438,30 @@ offset_top = -171.429
 offset_right = 808.571
 offset_bottom = -131.429
 
-[node name="FullPile" type="Node" parent="." groups=["full pile"]]
+[node name="FullPile" type="Control" parent="." groups=["full pile"]]
+visible = false
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_top = -257.0
+offset_right = 96.0
+offset_bottom = -257.0
+grow_vertical = 0
 script = ExtResource("8_b3s7r")
 json_card_database_path = "res://card/battle/battle_database.json"
 json_card_collection_path = "res://card/battle/battle_collection.json"
 extended_card_ui = ExtResource("3_pya54")
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("11_3ljn7")]
+id = 1
+
+[node name="Player2" parent="." groups=["player"] instance=ExtResource("11_3ljn7")]
+id = 20
+
+[node name="Player3" parent="." groups=["player"] instance=ExtResource("11_3ljn7")]
+id = 30
 
 [node name="Panel" type="Panel" parent="."]
 visible = false

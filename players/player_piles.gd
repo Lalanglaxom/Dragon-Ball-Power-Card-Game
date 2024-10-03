@@ -19,6 +19,7 @@ signal card_removed_from_game(card: CardUI)
 
 enum Piles {
 	hand_pile,
+	grave_pile,
 	discard_pile
 }
 
@@ -29,9 +30,9 @@ enum PilesCardLayouts {
 	down
 }
 
-@export_file("*.json") var json_card_database_path : String
-@export_file("*.json") var json_card_collection_path : String
-@export var extended_card_ui : PackedScene
+#@export_file("*.json") var json_card_database_path : String
+#@export_file("*.json") var json_card_collection_path : String
+#@export var extended_card_ui : PackedScene
 
 @export_group("Pile Positions")
 @export var draw_pile_position = Vector2(20, 460)
@@ -154,18 +155,18 @@ func _maybe_remove_card_from_any_piles(card : CardUI):
 		
 
 
-func create_card_in_dropzone(nice_name : String, dropzone : CardDropzone):
-	var card_ui = _create_card_ui(_get_card_data_by_nice_name(nice_name))
-	card_ui.position = dropzone.position
-	set_card_dropzone(card_ui, dropzone)
-			
-func create_card_in_pile(nice_name : String, pile_to_add_to : Piles):
-	var card_ui = _create_card_ui(_get_card_data_by_nice_name(nice_name))
-	if pile_to_add_to == Piles.hand_pile:
-		card_ui.position = hand_pile_position
-	if pile_to_add_to == Piles.discard_pile:
-		card_ui.position = discard_pile_position
-	set_card_pile(card_ui, pile_to_add_to)
+#func create_card_in_dropzone(nice_name : String, dropzone : CardDropzone):
+	#var card_ui = _create_card_ui(_get_card_data_by_nice_name(nice_name))
+	#card_ui.position = dropzone.position
+	#set_card_dropzone(card_ui, dropzone)
+			#
+#func create_card_in_pile(nice_name : String, pile_to_add_to : Piles):
+	#var card_ui = _create_card_ui(_get_card_data_by_nice_name(nice_name))
+	#if pile_to_add_to == Piles.hand_pile:
+		#card_ui.position = hand_pile_position
+	#if pile_to_add_to == Piles.discard_pile:
+		#card_ui.position = discard_pile_position
+	#set_card_pile(card_ui, pile_to_add_to)
 
 
 func _maybe_remove_card_from_any_dropzones(card : CardUI):
@@ -193,11 +194,11 @@ func _get_dropzones(node: Node, className : String, result : Array) -> void:
 
 
 func reset_target_positions():
-	_setdraw_pile_target_positions()
-	_sethand_pile_target_positions()
-	_setgrave_pile_target_positions()
+	_set_draw_pile_target_positions()
+	_set_hand_pile_target_positions()
+	_set_grave_pile_target_positions()
 	
-func _setdraw_pile_target_positions(instantly_move = false):
+func _set_draw_pile_target_positions(instantly_move = false):
 	for i in draw_pile.size():
 		var card_ui = draw_pile[i]
 		var target_pos = draw_pile_position
@@ -228,7 +229,7 @@ func _setdraw_pile_target_positions(instantly_move = false):
 		if instantly_move:
 			card_ui.position = target_pos
 	
-func _sethand_pile_target_positions():
+func _set_hand_pile_target_positions():
 	for i in hand_pile.size():
 		var card_ui = hand_pile[i]
 		if !card_ui.is_clicked:
@@ -251,10 +252,10 @@ func _sethand_pile_target_positions():
 			
 	while hand_pile.size() > max_hand_size:
 		set_card_pile(hand_pile[hand_pile.size() - 1], Piles.discard_pile)
-	_resethand_pile_z_index()
+	_reset_hand_pile_z_index()
 
 	
-func _setgrave_pile_target_positions():
+func _set_grave_pile_target_positions():
 	for i in grave_pile.size():
 		var card_ui = grave_pile[i]
 		var target_pos = discard_pile_position
@@ -294,9 +295,9 @@ func reset_card_ui_z_index():
 	for i in grave_pile.size():
 		var card_ui = grave_pile[i]
 		card_ui.z_index = i
-	_resethand_pile_z_index()
+	_reset_hand_pile_z_index()
 
-func _resethand_pile_z_index():
+func _reset_hand_pile_z_index():
 	for i in hand_pile.size():
 		var card_ui = hand_pile[i]
 		# if card_ui.is_clicked == false:	
@@ -341,25 +342,25 @@ func sort_hand(sort_func):
 	reset_target_positions()
 
 
-func _create_card_ui(json_data : Dictionary):
-	var card_ui = extended_card_ui.instantiate()
-	card_ui.frontface_texture = json_data.texture_path
-	card_ui.backface_texture = json_data.backface_texture_path
-
-	card_ui.card_data = ResourceLoader.load(json_data.resource_script_path).new()
-	for key in json_data.keys():
-		if key != "texture_path" and key != "backface_texture_path" and key != "resource_script_path":
-			card_ui.card_data[key] = json_data[key]
-	card_ui.connect("card_hovered", func(c_ui): emit_signal("card_hovered", c_ui))
-	card_ui.connect("card_unhovered", func(c_ui): emit_signal("card_unhovered", c_ui))
-	card_ui.connect("hand_card_clicked", func(c_ui): emit_signal("hand_card_clicked", c_ui))
-	card_ui.connect("hand_card_unclicked", func(c_ui): emit_signal("hand_card_unclicked", c_ui))
-	card_ui.connect("battle_card_clicked", func(c_ui): emit_signal("battle_card_clicked", c_ui))
-	card_ui.connect("card_flipped_up", func(c_ui): emit_signal("card_flipped_up", c_ui))	
-	card_ui.connect("card_flipped_down", func(c_ui): emit_signal("card_flipped_down", c_ui))	
-	card_ui.connect("card_dropped", func(c_ui): emit_signal("card_dropped", c_ui))
-	add_child(card_ui)
-	return card_ui
+#func _create_card_ui(json_data : Dictionary):
+	#var card_ui = extended_card_ui.instantiate()
+	#card_ui.frontface_texture = json_data.texture_path
+	#card_ui.backface_texture = json_data.backface_texture_path
+#
+	#card_ui.card_data = ResourceLoader.load(json_data.resource_script_path).new()
+	#for key in json_data.keys():
+		#if key != "texture_path" and key != "backface_texture_path" and key != "resource_script_path":
+			#card_ui.card_data[key] = json_data[key]
+	#card_ui.connect("card_hovered", func(c_ui): emit_signal("card_hovered", c_ui))
+	#card_ui.connect("card_unhovered", func(c_ui): emit_signal("card_unhovered", c_ui))
+	#card_ui.connect("hand_card_clicked", func(c_ui): emit_signal("hand_card_clicked", c_ui))
+	#card_ui.connect("hand_card_unclicked", func(c_ui): emit_signal("hand_card_unclicked", c_ui))
+	#card_ui.connect("battle_card_clicked", func(c_ui): emit_signal("battle_card_clicked", c_ui))
+	#card_ui.connect("card_flipped_up", func(c_ui): emit_signal("card_flipped_up", c_ui))	
+	#card_ui.connect("card_flipped_down", func(c_ui): emit_signal("card_flipped_down", c_ui))	
+	#card_ui.connect("card_dropped", func(c_ui): emit_signal("card_dropped", c_ui))
+	#add_child(card_ui)
+	#return card_ui
 
 
 func _get_card_data_by_nice_name(nice_name : String):

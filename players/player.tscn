@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dkx6uk6xtw1yr"]
+[gd_scene load_steps=5 format=3 uid="uid://dkx6uk6xtw1yr"]
 
 [ext_resource type="Script" path="res://players/player.gd" id="1_jnab5"]
 [ext_resource type="Script" path="res://players/player_piles.gd" id="2_hn3um"]
-[ext_resource type="PackedScene" uid="uid://bfa11717e7smk" path="res://scenes/card_ui.tscn" id="3_0ujdm"]
 [ext_resource type="Curve" uid="uid://cilxr3u0kmg7y" path="res://card/hand_rotation_curve.tres" id="4_gjawx"]
 [ext_resource type="Curve" uid="uid://cj8wyoiq7cx6r" path="res://card/hand_vertical_curve.tres" id="5_5vqu0"]
 
@@ -17,12 +16,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_hn3um")
-json_card_database_path = "res://card/battle/battle_database.json"
-json_card_collection_path = "res://card/battle/battle_collection.json"
-extended_card_ui = ExtResource("3_0ujdm")
+draw_pile_position = Vector2(200, 662)
 hand_pile_position_node = NodePath("PilePosition")
 stack_display_gap = 3
 card_return_speed = 0.3
+max_hand_size = 18
 drag_when_clicked = false
 hand_rotation_curve = ExtResource("4_gjawx")
 hand_vertical_curve = ExtResource("5_5vqu0")
