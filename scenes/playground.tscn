@@ -1,0 +1,108 @@
+[gd_scene load_steps=8 format=3 uid="uid://0u0xoqfym0sm"]
+
+[ext_resource type="Texture2D" uid="uid://c5fcpd7f20wsd" path="res://environment/space-7570809.jpg" id="1_pxvkb"]
+[ext_resource type="PackedScene" uid="uid://dwleps5an3bwi" path="res://scenes/card_3d.tscn" id="2_r3j0n"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v0lqs"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_ensmt"]
+sky_material = SubResource("ProceduralSkyMaterial_v0lqs")
+
+[sub_resource type="Environment" id="Environment_gvui6"]
+background_mode = 2
+sky = SubResource("Sky_ensmt")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ldoyx"]
+albedo_texture = ExtResource("1_pxvkb")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ho4ek"]
+size = Vector2(70, 50)
+
+[node name="Playground" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.105407, -0.548984, -0.82916, -0.859585, -0.368941, 0.353549, -0.500004, 0.75, -0.43301, 0, 5, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_gvui6")
+
+[node name="Mat" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.19209e-07, -2.54563)
+material_override = SubResource("StandardMaterial3D_ldoyx")
+mesh = SubResource("PlaneMesh_ho4ek")
+
+[node name="Card_3D" parent="." instance=ExtResource("2_r3j0n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.01, 0)
+
+[node name="Card_3D2" parent="." instance=ExtResource("2_r3j0n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+
+[node name="Card_3D3" parent="." instance=ExtResource("2_r3j0n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.01, 0)
+
+[node name="Card_3D4" parent="." instance=ExtResource("2_r3j0n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.01, -12.6708)
+
+[node name="Card_3D5" parent="." instance=ExtResource("2_r3j0n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -12.6708)
+
+[node name="Card_3D6" parent="." instance=ExtResource("2_r3j0n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.01, -12.6708)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.219608, 0.975588, 0, -0.975588, 0.219608, -0.979761, 14.6196, -0.570935)
+
+[node name="CardPosition" type="Node3D" parent="."]
+
+[node name="Player 1" type="Node3D" parent="CardPosition"]
+
+[node name="Slot 1" type="Node3D" parent="CardPosition/Player 1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1, 0.01, 0)
+
+[node name="Slot 2" type="Node3D" parent="CardPosition/Player 1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.01, 0)
+
+[node name="Slot 3" type="Node3D" parent="CardPosition/Player 1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1, 0, 0)
+
+[node name="Grave" type="Node3D" parent="CardPosition/Player 1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0.01, 0)
+
+[node name="Card_3D7" parent="CardPosition/Player 1/Grave" instance=ExtResource("2_r3j0n")]
+
+[node name="Player 2" type="Node3D" parent="CardPosition"]
+
+[node name="Slot 1" type="Node3D" parent="CardPosition/Player 2"]
+transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, -1, 0.01, -3.0001)
+
+[node name="Slot 2" type="Node3D" parent="CardPosition/Player 2"]
+transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0.01, -3.0001)
+
+[node name="Slot 3" type="Node3D" parent="CardPosition/Player 2"]
+transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 1, 0, -3.0001)
+
+[node name="Grave" type="Node3D" parent="CardPosition/Player 2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0.01, -12.6708)
+
+[node name="Card_3D7" parent="CardPosition/Player 2/Grave" instance=ExtResource("2_r3j0n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HandContainer" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0

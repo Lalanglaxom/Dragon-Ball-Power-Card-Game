@@ -1,11 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://bfa11717e7smk"]
+[gd_scene load_steps=15 format=3 uid="uid://bfa11717e7smk"]
 
 [ext_resource type="Script" path="res://addons/simple_card_pile_ui/card_ui.gd" id="1_5xsjd"]
 [ext_resource type="Script" path="res://addons/simple_card_pile_ui/card_ui_data.gd" id="2_0e1ni"]
-[ext_resource type="Texture2D" uid="uid://bghw0qfhun1dr" path="res://card/battle/image/back.png" id="3_74ysd"]
-[ext_resource type="Texture2D" uid="uid://cscvvpa7t5mvu" path="res://card/battle/image/09_Lagss of the Glass Tribe.png" id="4_sqn2k"]
+[ext_resource type="Texture2D" uid="uid://dn2d3752k6a5k" path="res://card/battle/image/750 x 1050/back.png" id="4_4e87s"]
 [ext_resource type="Shader" path="res://card/properties/fake_3d.gdshader" id="4_yf6x1"]
+[ext_resource type="Shader" path="res://card/card_2d.gdshader" id="5_tmm0r"]
+[ext_resource type="Texture2D" uid="uid://d12ud2t2cl5j6" path="res://card/battle/image/750 x 1050/anhliem50.png" id="6_jjk4c"]
 [ext_resource type="Texture2D" uid="uid://bph1hgkaw1s61" path="res://card/properties/chosen_box_03.png" id="6_kymc2"]
+[ext_resource type="Shader" path="res://card/screen.gdshader" id="8_wbekh"]
 
 [sub_resource type="Resource" id="Resource_ao327"]
 script = ExtResource("2_0e1ni")
@@ -19,35 +21,48 @@ shader_parameter/y_rot = 0.0
 shader_parameter/x_rot = 0.0
 shader_parameter/inset = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_04ib0"]
-shader = ExtResource("4_yf6x1")
-shader_parameter/fov = 20.0
-shader_parameter/cull_back = true
-shader_parameter/y_rot = 0.0
-shader_parameter/x_rot = 0.0
-shader_parameter/inset = 0.0
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_g2o1k"]
+frequency = 0.0288
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_buith"]
+noise = SubResource("FastNoiseLite_g2o1k")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_en0xu"]
+shader = ExtResource("5_tmm0r")
+shader_parameter/radius = 0.459
+shader_parameter/effectControl = 0.309
+shader_parameter/burnSpeed = 0.076
+shader_parameter/shape = 1.0
+shader_parameter/textureNoise = SubResource("NoiseTexture2D_buith")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yiayy"]
+shader = ExtResource("8_wbekh")
 
 [node name="CardUI" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+offset_left = 2.32164e-05
+offset_top = 1.20146e-05
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_5xsjd")
 card_data = SubResource("Resource_ao327")
 
 [node name="Backface" type="TextureRect" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_q2gsh")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("3_74ysd")
+texture = ExtResource("4_4e87s")
 
 [node name="Frontface" type="TextureRect" parent="."]
-material = SubResource("ShaderMaterial_04ib0")
+texture_filter = 4
+material = SubResource("ShaderMaterial_en0xu")
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("4_sqn2k")
+offset_right = 912.0
+offset_bottom = 1205.0
+texture = ExtResource("6_jjk4c")
 
 [node name="ChosenBox" type="TextureRect" parent="."]
 visible = false
@@ -58,3 +73,15 @@ offset_right = 164.0
 offset_bottom = 246.0
 texture = ExtResource("6_kymc2")
 expand_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_yiayy")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1112.0
+offset_bottom = 600.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -27,9 +27,10 @@ font_names = PackedStringArray("Bahnschrift")
 script = ExtResource("1_2w3ie")
 
 [node name="Background" type="TextureRect" parent="."]
-offset_top = -388.0
-offset_right = 1148.0
-offset_bottom = 760.0
+offset_left = 2.0
+offset_top = -501.0
+offset_right = 1150.0
+offset_bottom = 647.0
 texture = ExtResource("2_h46hs")
 expand_mode = 1
 
@@ -43,6 +44,7 @@ grow_vertical = 2
 texture = ExtResource("1_7cnjc")
 
 [node name="Ground" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -481,6 +483,9 @@ label_settings = SubResource("LabelSettings_6a406")
 
 [node name="Rules" type="Node" parent="."]
 
+[node name="CardUI" parent="." instance=ExtResource("3_pya54")]
+offset_left = 1.10477e-05
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 visible = false
 scale = Vector2(0.7, 0.7)
@@ -519,3 +524,5 @@ text = "Flip"
 
 [connection signal="button_up" from="CanvasLayer/ButtonControl/Ready Button" to="." method="_on_ready_button_up"]
 [connection signal="button_up" from="CanvasLayer/ButtonControl/CardOnBattle/Flip" to="." method="_on_flip_button_up"]
+
+[editable path="CardUI"]

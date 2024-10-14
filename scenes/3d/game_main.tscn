@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://bwihanuogtqgw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uok2a"]
+albedo_color = Color(0.172833, 0.172833, 0.172833, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jmpac"]
+size = Vector2(20, 20)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_sa1ag"]
+data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_w4218"]
+bounce = 0.67
+
+[sub_resource type="SphereMesh" id="SphereMesh_ul05l"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_adb17"]
+
+[node name="Main" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+material_override = SubResource("StandardMaterial3D_uok2a")
+mesh = SubResource("PlaneMesh_jmpac")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_sa1ag")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.812033, 0.583612, 0, -0.583612, 0.812033, 0, 3.35177, 3.4425)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.48941, 0)
+physics_material_override = SubResource("PhysicsMaterial_w4218")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("SphereMesh_ul05l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("SphereShape3D_adb17")

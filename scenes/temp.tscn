@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://d5fygv8d0ofg"]
+
+[ext_resource type="PackedScene" uid="uid://bfa11717e7smk" path="res://scenes/card_ui.tscn" id="1_xt5yk"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CardUI" parent="." instance=ExtResource("1_xt5yk")]
+offset_right = 2.32164e-05
+offset_bottom = 1.20146e-05
+
+[node name="Camera2D" type="Camera2D" parent="."]

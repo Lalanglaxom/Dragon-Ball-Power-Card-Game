@@ -26,6 +26,6 @@ hand_rotation_curve = ExtResource("4_gjawx")
 hand_vertical_curve = ExtResource("5_5vqu0")
 
 [node name="PilePosition" type="Node2D" parent="PlayerPiles"]
-position = Vector2(584, 662)
+position = Vector2(580, 564)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
