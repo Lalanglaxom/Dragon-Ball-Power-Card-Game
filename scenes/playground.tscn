@@ -1,7 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://0u0xoqfym0sm"]
+[gd_scene load_steps=12 format=3 uid="uid://0u0xoqfym0sm"]
 
 [ext_resource type="Texture2D" uid="uid://c5fcpd7f20wsd" path="res://environment/space-7570809.jpg" id="1_pxvkb"]
 [ext_resource type="PackedScene" uid="uid://dwleps5an3bwi" path="res://scenes/card_3d.tscn" id="2_r3j0n"]
+[ext_resource type="Script" path="res://card/script/hand_container.gd" id="3_w48vd"]
+[ext_resource type="PackedScene" uid="uid://cnivjgxf0idvg" path="res://scenes/card_2d.tscn" id="4_ody20"]
+[ext_resource type="Curve" uid="uid://cilxr3u0kmg7y" path="res://card/hand_rotation_curve.tres" id="4_wyjgo"]
+[ext_resource type="Curve" uid="uid://cj8wyoiq7cx6r" path="res://card/hand_vertical_curve.tres" id="5_aungs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v0lqs"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -101,8 +105,27 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -40.0
-offset_right = 20.0
+offset_left = -274.0
+offset_top = -526.0
+offset_right = -234.0
+offset_bottom = -486.0
 grow_horizontal = 2
 grow_vertical = 0
+script = ExtResource("3_w48vd")
+hand_rotation_curve = ExtResource("4_wyjgo")
+hand_vertical_curve = ExtResource("5_aungs")
+
+[node name="Card_2D" parent="CanvasLayer/HandContainer" instance=ExtResource("4_ody20")]
+layout_mode = 1
+
+[node name="Card_2D2" parent="CanvasLayer/HandContainer" instance=ExtResource("4_ody20")]
+layout_mode = 1
+
+[node name="Card_2D3" parent="CanvasLayer/HandContainer" instance=ExtResource("4_ody20")]
+layout_mode = 1
+
+[node name="Card_2D4" parent="CanvasLayer/HandContainer" instance=ExtResource("4_ody20")]
+layout_mode = 1
+
+[node name="Card_2D5" parent="CanvasLayer/HandContainer" instance=ExtResource("4_ody20")]
+layout_mode = 1

@@ -26,6 +26,7 @@ offset_top = -301.0
 offset_right = 114.0
 grow_horizontal = 2
 grow_vertical = 0
+pivot_offset = Vector2(114, 150)
 script = ExtResource("1_80ux6")
 
 [node name="Backface" type="TextureRect" parent="."]
