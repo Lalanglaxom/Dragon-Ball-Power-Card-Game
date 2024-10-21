@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://addons/simple_card_pile_ui/card_ui_data.gd" id="2_0e1ni"]
 [ext_resource type="Texture2D" uid="uid://dn2d3752k6a5k" path="res://card/battle/image/750 x 1050/back.png" id="4_4e87s"]
 [ext_resource type="Shader" path="res://card/properties/fake_3d.gdshader" id="4_yf6x1"]
-[ext_resource type="Shader" path="res://card/card_2d.gdshader" id="5_tmm0r"]
-[ext_resource type="Texture2D" uid="uid://d12ud2t2cl5j6" path="res://card/battle/image/750 x 1050/anhliem50.png" id="6_jjk4c"]
+[ext_resource type="Shader" path="res://card/script/2d_hover_outline.gdshader" id="5_tmm0r"]
+[ext_resource type="Texture2D" uid="uid://d12ud2t2cl5j6" path="res://card/battle/image/750 x 1050/456x603.png" id="6_jjk4c"]
 [ext_resource type="Texture2D" uid="uid://bph1hgkaw1s61" path="res://card/properties/chosen_box_03.png" id="6_kymc2"]
 [ext_resource type="Shader" path="res://card/screen.gdshader" id="8_wbekh"]
 

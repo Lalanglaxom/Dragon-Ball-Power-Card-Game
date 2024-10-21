@@ -5,7 +5,7 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="CardUI" parent="." instance=ExtResource("1_xt5yk")]
-offset_right = 2.32164e-05
-offset_bottom = 1.20146e-05
+offset_right = 1.85731e-05
+offset_bottom = 9.61168e-06
 
 [node name="Camera2D" type="Camera2D" parent="."]

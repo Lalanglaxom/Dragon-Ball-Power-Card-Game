@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://t6vkut1jl0o6"]
+
+[ext_resource type="Shader" path="res://card/script/2d_hover_outline.gdshader" id="1_bogsx"]
+
+[resource]
+shader = ExtResource("1_bogsx")
+shader_parameter/Smooth = true
+shader_parameter/width = 30.0
+shader_parameter/outline_color = Color(0.966667, 1, 0.5, 1)
+shader_parameter/pixel_size = 2
+shader_parameter/width_speed = 2.0

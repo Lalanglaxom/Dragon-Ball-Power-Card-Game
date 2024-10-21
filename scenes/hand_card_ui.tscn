@@ -14,11 +14,6 @@ grow_vertical = 0
 
 [node name="Card" parent="." instance=ExtResource("1_8tkiw")]
 layout_mode = 2
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 offset_left = 645.0
 offset_top = 302.0
 offset_right = 873.0
@@ -26,11 +21,6 @@ offset_bottom = 603.0
 
 [node name="Card2" parent="." instance=ExtResource("1_8tkiw")]
 layout_mode = 2
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 offset_left = 523.0
 offset_top = 302.0
 offset_right = 751.0
@@ -38,11 +28,6 @@ offset_bottom = 603.0
 
 [node name="Card3" parent="." instance=ExtResource("1_8tkiw")]
 layout_mode = 2
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 offset_left = 401.0
 offset_top = 302.0
 offset_right = 629.0
@@ -50,11 +35,6 @@ offset_bottom = 603.0
 
 [node name="Card4" parent="." instance=ExtResource("1_8tkiw")]
 layout_mode = 2
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 offset_left = 279.0
 offset_top = 302.0
 offset_right = 507.0

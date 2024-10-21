@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://hjgon8eue2aj"]
+
+[ext_resource type="Script" path="res://card/script/card_data.gd" id="1_nllwn"]
+
+[resource]
+script = ExtResource("1_nllwn")
+card_name = "Anh Liem"
+power = 69000
+effect = "Luon luon bi moi"
+front_image_path = "res://card/battle/image/750 x 1050/912x1208.png"
+back_image_path = "res://card/battle/image/750 x 1050/back.png"
