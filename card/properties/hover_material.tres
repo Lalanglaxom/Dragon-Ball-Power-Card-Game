@@ -5,7 +5,7 @@
 [resource]
 shader = ExtResource("1_bogsx")
 shader_parameter/Smooth = true
-shader_parameter/width = 30.0
+shader_parameter/width = 45.0
 shader_parameter/outline_color = Color(0.966667, 1, 0.5, 1)
-shader_parameter/pixel_size = 2
+shader_parameter/pixel_size = 4
 shader_parameter/width_speed = 2.0

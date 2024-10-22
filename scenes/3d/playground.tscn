@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://0u0xoqfym0sm"]
+[gd_scene load_steps=14 format=3 uid="uid://0u0xoqfym0sm"]
 
 [ext_resource type="Texture2D" uid="uid://c5fcpd7f20wsd" path="res://environment/space-7570809.jpg" id="1_qori4"]
 [ext_resource type="Script" path="res://scenes/3d/game_controller.gd" id="1_tpmse"]
 [ext_resource type="Script" path="res://card/script/hand_container.gd" id="2_s5h1q"]
+[ext_resource type="PackedScene" uid="uid://dwleps5an3bwi" path="res://scenes/3d/card_3d.tscn" id="3_68123"]
 [ext_resource type="Curve" uid="uid://cj8wyoiq7cx6r" path="res://card/hand_vertical_curve.tres" id="3_cxb50"]
 [ext_resource type="Curve" uid="uid://cilxr3u0kmg7y" path="res://card/hand_rotation_curve.tres" id="4_gmvg7"]
 [ext_resource type="PackedScene" uid="uid://cnivjgxf0idvg" path="res://scenes/card_2d.tscn" id="5_a8imj"]
@@ -26,6 +27,12 @@ albedo_texture = ExtResource("1_qori4")
 [sub_resource type="PlaneMesh" id="PlaneMesh_ho4ek"]
 size = Vector2(200, 100)
 
+[sub_resource type="Curve" id="Curve_u4cc6"]
+min_value = 500.0
+max_value = 1000.0
+_data = [Vector2(0, 500), 0.0, 363.585, 0, 1, Vector2(0.287129, 604.396), 1228.81, 1228.81, 0, 0, Vector2(1, 1000), 554.945, 0.0, 1, 0]
+point_count = 3
+
 [node name="Playground" type="Node3D"]
 
 [node name="GameController" type="Node" parent="."]
@@ -39,14 +46,22 @@ shadow_enabled = true
 environment = SubResource("Environment_gvui6")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.214821, 0.976654, 0, -0.976654, 0.214821, 5.71777, 37.6388, 14.6477)
+transform = Transform3D(1, 0, 0, 0, 0.214821, 0.976654, 0, -0.976654, 0.214821, 5.71777, 37.6388, 9.34677)
 
 [node name="Mat" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.19209e-07, -2.54563)
 material_override = SubResource("StandardMaterial3D_ldoyx")
 mesh = SubResource("PlaneMesh_ho4ek")
 
+[node name="FullPile" type="Node" parent="."]
+
 [node name="CardPosition" type="Node3D" parent="."]
+
+[node name="Spell Slot" type="Node3D" parent="CardPosition"]
+transform = Transform3D(0.724172, 0, -0.68962, 0, 1, 0, 0.68962, 0, 0.724172, 6.78543, 0.01, -4.25056)
+visible = false
+
+[node name="Card_3D6" parent="CardPosition/Spell Slot" instance=ExtResource("3_68123")]
 
 [node name="Player 1" type="Node3D" parent="CardPosition"]
 
@@ -56,6 +71,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.01, 7)
 [node name="Slot 2" type="Node3D" parent="CardPosition/Player 1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.01, 7)
 
+[node name="Card_3D5" parent="CardPosition/Player 1/Slot 2" instance=ExtResource("3_68123")]
+
 [node name="Slot 3" type="Node3D" parent="CardPosition/Player 1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0.01, 7)
 
@@ -63,22 +80,86 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0.01, 7)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0.01, 7)
 
 [node name="Player 2" type="Node3D" parent="CardPosition"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.40703)
 
 [node name="Slot 1" type="Node3D" parent="CardPosition/Player 2"]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -5, 0.01, -12)
 
+[node name="Card_3D" parent="CardPosition/Player 2/Slot 1" instance=ExtResource("3_68123")]
+
 [node name="Slot 2" type="Node3D" parent="CardPosition/Player 2"]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 7, 0.01, -12)
+
+[node name="Card_3D2" parent="CardPosition/Player 2/Slot 2" instance=ExtResource("3_68123")]
 
 [node name="Slot 3" type="Node3D" parent="CardPosition/Player 2"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 19, 0.01, -12)
 
+[node name="Card_3D3" parent="CardPosition/Player 2/Slot 3" instance=ExtResource("3_68123")]
+transform = Transform3D(1, 0, 2.38419e-07, 0, 1, 0, -2.38419e-07, 0, 1, 0, 0, 0)
+
 [node name="Grave" type="Node3D" parent="CardPosition/Player 2"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -25, 0.01, -12)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="HandContainerP2" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -34.0
+offset_top = -738.0
+offset_right = -34.0
+offset_bottom = -738.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 3.14159
+pivot_offset = Vector2(57, 75)
+script = ExtResource("2_s5h1q")
+player = 1
+max_hand_spread = 1000.0
+hand_position_curve = ExtResource("3_cxb50")
+hand_rotation_curve = ExtResource("4_gmvg7")
+hand_spread_curve = SubResource("Curve_u4cc6")
 
-[node name="HandContainer" type="Control" parent="CanvasLayer"]
+[node name="Card_2D" parent="HandContainerP2" instance=ExtResource("5_a8imj")]
+
+[node name="Card_2D2" parent="HandContainerP2" instance=ExtResource("5_a8imj")]
+
+[node name="Card_2D3" parent="HandContainerP2" instance=ExtResource("5_a8imj")]
+
+[node name="Card_2D4" parent="HandContainerP2" instance=ExtResource("5_a8imj")]
+
+[node name="Card_2D5" parent="HandContainerP2" instance=ExtResource("5_a8imj")]
+
+[node name="Card_2D6" parent="HandContainerP2" instance=ExtResource("5_a8imj")]
+
+[node name="Card_2D7" parent="HandContainerP2" instance=ExtResource("5_a8imj")]
+
+[node name="Card_2D8" parent="HandContainerP2" instance=ExtResource("5_a8imj")]
+
+[node name="Card_2D9" parent="HandContainerP2" instance=ExtResource("5_a8imj")]
+
+[node name="Card_2D10" parent="HandContainerP2" instance=ExtResource("5_a8imj")]
+
+[node name="Card_2D11" parent="HandContainerP2" instance=ExtResource("5_a8imj")]
+
+[node name="Card_2D12" parent="HandContainerP2" instance=ExtResource("5_a8imj")]
+
+[node name="Card_2D13" parent="HandContainerP2" instance=ExtResource("5_a8imj")]
+
+[node name="Card_2D14" parent="HandContainerP2" instance=ExtResource("5_a8imj")]
+
+[node name="Card_2D15" parent="HandContainerP2" instance=ExtResource("5_a8imj")]
+
+[node name="Card_2D16" parent="HandContainerP2" instance=ExtResource("5_a8imj")]
+
+[node name="Card_2D17" parent="HandContainerP2" instance=ExtResource("5_a8imj")]
+
+[node name="Card_2D18" parent="HandContainerP2" instance=ExtResource("5_a8imj")]
+
+[node name="HandContainerP1" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
@@ -86,9 +167,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -26.0
-offset_top = -152.0
+offset_top = -121.0
 offset_right = -26.0
-offset_bottom = -152.0
+offset_bottom = -121.0
 grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(57, 75)
@@ -96,39 +177,42 @@ script = ExtResource("2_s5h1q")
 max_hand_spread = 1000.0
 hand_position_curve = ExtResource("3_cxb50")
 hand_rotation_curve = ExtResource("4_gmvg7")
+hand_spread_curve = SubResource("Curve_u4cc6")
 
-[node name="Card_2D" parent="CanvasLayer/HandContainer" instance=ExtResource("5_a8imj")]
+[node name="Card_2D" parent="HandContainerP1" instance=ExtResource("5_a8imj")]
 
-[node name="Card_2D2" parent="CanvasLayer/HandContainer" instance=ExtResource("5_a8imj")]
+[node name="Card_2D2" parent="HandContainerP1" instance=ExtResource("5_a8imj")]
 
-[node name="Card_2D3" parent="CanvasLayer/HandContainer" instance=ExtResource("5_a8imj")]
+[node name="Card_2D3" parent="HandContainerP1" instance=ExtResource("5_a8imj")]
 
-[node name="Card_2D4" parent="CanvasLayer/HandContainer" instance=ExtResource("5_a8imj")]
+[node name="Card_2D4" parent="HandContainerP1" instance=ExtResource("5_a8imj")]
 
-[node name="Card_2D5" parent="CanvasLayer/HandContainer" instance=ExtResource("5_a8imj")]
+[node name="Card_2D5" parent="HandContainerP1" instance=ExtResource("5_a8imj")]
 
-[node name="Card_2D6" parent="CanvasLayer/HandContainer" instance=ExtResource("5_a8imj")]
+[node name="Card_2D6" parent="HandContainerP1" instance=ExtResource("5_a8imj")]
 
-[node name="Card_2D7" parent="CanvasLayer/HandContainer" instance=ExtResource("5_a8imj")]
+[node name="Card_2D7" parent="HandContainerP1" instance=ExtResource("5_a8imj")]
 
-[node name="Card_2D8" parent="CanvasLayer/HandContainer" instance=ExtResource("5_a8imj")]
+[node name="Card_2D8" parent="HandContainerP1" instance=ExtResource("5_a8imj")]
 
-[node name="Card_2D9" parent="CanvasLayer/HandContainer" instance=ExtResource("5_a8imj")]
+[node name="Card_2D9" parent="HandContainerP1" instance=ExtResource("5_a8imj")]
 
-[node name="Card_2D10" parent="CanvasLayer/HandContainer" instance=ExtResource("5_a8imj")]
+[node name="Card_2D10" parent="HandContainerP1" instance=ExtResource("5_a8imj")]
 
-[node name="Card_2D11" parent="CanvasLayer/HandContainer" instance=ExtResource("5_a8imj")]
+[node name="Card_2D11" parent="HandContainerP1" instance=ExtResource("5_a8imj")]
 
-[node name="Card_2D12" parent="CanvasLayer/HandContainer" instance=ExtResource("5_a8imj")]
+[node name="Card_2D12" parent="HandContainerP1" instance=ExtResource("5_a8imj")]
 
-[node name="Card_2D13" parent="CanvasLayer/HandContainer" instance=ExtResource("5_a8imj")]
+[node name="Card_2D13" parent="HandContainerP1" instance=ExtResource("5_a8imj")]
 
-[node name="Card_2D14" parent="CanvasLayer/HandContainer" instance=ExtResource("5_a8imj")]
+[node name="Card_2D14" parent="HandContainerP1" instance=ExtResource("5_a8imj")]
 
-[node name="Card_2D15" parent="CanvasLayer/HandContainer" instance=ExtResource("5_a8imj")]
+[node name="Card_2D15" parent="HandContainerP1" instance=ExtResource("5_a8imj")]
 
-[node name="Card_2D16" parent="CanvasLayer/HandContainer" instance=ExtResource("5_a8imj")]
+[node name="Card_2D16" parent="HandContainerP1" instance=ExtResource("5_a8imj")]
 
-[node name="Card_2D17" parent="CanvasLayer/HandContainer" instance=ExtResource("5_a8imj")]
+[node name="Card_2D17" parent="HandContainerP1" instance=ExtResource("5_a8imj")]
 
-[node name="Card_2D18" parent="CanvasLayer/HandContainer" instance=ExtResource("5_a8imj")]
+[node name="Card_2D18" parent="HandContainerP1" instance=ExtResource("5_a8imj")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
