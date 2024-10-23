@@ -1,7 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://0u0xoqfym0sm"]
+[gd_scene load_steps=17 format=3 uid="uid://0u0xoqfym0sm"]
 
-[ext_resource type="Texture2D" uid="uid://c5fcpd7f20wsd" path="res://environment/space-7570809.jpg" id="1_qori4"]
 [ext_resource type="Script" path="res://scenes/3d/game_controller.gd" id="1_tpmse"]
+[ext_resource type="Texture2D" uid="uid://dst4ivhm4ajhg" path="res://environment/texture/stone.jpg" id="2_hijyr"]
 [ext_resource type="Script" path="res://card/script/hand_container.gd" id="2_s5h1q"]
 [ext_resource type="PackedScene" uid="uid://dwleps5an3bwi" path="res://scenes/3d/card_3d.tscn" id="3_68123"]
 [ext_resource type="Script" path="res://scenes/3d/full_pile.gd" id="3_c2cdc"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scenes/3d/hand_container_p_2.gd" id="6_c08yh"]
 [ext_resource type="Curve" uid="uid://b6vvv4vkpbtvp" path="res://card/hand_position_curve.tres" id="8_no7rg"]
 [ext_resource type="Curve" uid="uid://bkbraspsnw3k8" path="res://card/hand_spread.tres" id="10_cjsaq"]
+[ext_resource type="PackedScene" uid="uid://bakfveewdx2f1" path="res://environment/3d model/vegeta/vegeta.tscn" id="11_u8p0a"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v0lqs"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -25,7 +26,7 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ldoyx"]
-albedo_texture = ExtResource("1_qori4")
+albedo_texture = ExtResource("2_hijyr")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ho4ek"]
 size = Vector2(200, 100)
@@ -36,14 +37,14 @@ size = Vector2(200, 100)
 script = ExtResource("1_tpmse")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.105407, -0.548984, -0.82916, 0.937285, -0.333427, 0.101609, -0.332246, -0.766449, 0.549699, 0, 5, 0)
+transform = Transform3D(0.267241, -0.635421, -0.724446, -0.791012, -0.574014, 0.211678, -0.550347, 0.516476, -0.656026, 0, 5, 0)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_gvui6")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.214821, 0.976654, 0, -0.976654, 0.214821, 5.71777, 37.6388, 9.34677)
+transform = Transform3D(1, 0, 0, 0, 0.214821, 0.976654, 0, -0.976654, 0.214821, 5.71777, 37.6388, -4.14466)
 
 [node name="Mat" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.19209e-07, -2.54563)
@@ -51,6 +52,7 @@ material_override = SubResource("StandardMaterial3D_ldoyx")
 mesh = SubResource("PlaneMesh_ho4ek")
 
 [node name="CardPosition" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.7823)
 
 [node name="Spell Slot" type="Node3D" parent="CardPosition"]
 transform = Transform3D(0.724172, 0, -0.68962, 0, 1, 0, 0.68962, 0, 0.724172, 6.78543, 0.01, -4.25056)
@@ -97,11 +99,17 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -25, 0
 [node name="FullPile" type="Control" parent="."]
 custom_minimum_size = Vector2(80, 120)
 layout_mode = 3
-anchors_preset = 0
-offset_left = 1020.0
-offset_top = 262.0
-offset_right = 1100.0
-offset_bottom = 382.0
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -158.0
+offset_top = 74.0
+offset_right = -77.9999
+offset_bottom = 194.0
+grow_horizontal = 0
+grow_vertical = 2
 pivot_offset = Vector2(40, 60)
 script = ExtResource("3_c2cdc")
 json_card_database_path = "res://card/battle/battle_database.json"
@@ -150,3 +158,6 @@ hand_rotation_curve = ExtResource("4_gmvg7")
 hand_spread_curve = ExtResource("10_cjsaq")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="vegeta" parent="." instance=ExtResource("11_u8p0a")]
+transform = Transform3D(-0.133593, 0, 1.99553, 0, 2, 0, -1.99553, 0, -0.133593, -24.7232, 0, -12.0095)

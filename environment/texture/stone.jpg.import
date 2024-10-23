@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cudb7ngegimq8"
-path="res://.godot/imported/47_Bounty Hunter Granolah.png-1062773188b032140e625378fa7862db.ctex"
+uid="uid://dst4ivhm4ajhg"
+path="res://.godot/imported/stone.jpg-516267b74cdc5d39439e2c419867d0a6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://card/battle/image/742x1122/47_Bounty Hunter Granolah.png"
-dest_files=["res://.godot/imported/47_Bounty Hunter Granolah.png-1062773188b032140e625378fa7862db.ctex"]
+source_file="res://environment/texture/stone.jpg"
+dest_files=["res://.godot/imported/stone.jpg-516267b74cdc5d39439e2c419867d0a6.ctex"]
 
 [params]
 

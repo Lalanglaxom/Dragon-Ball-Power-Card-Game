@@ -2,20 +2,24 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cudb7ngegimq8"
-path="res://.godot/imported/47_Bounty Hunter Granolah.png-1062773188b032140e625378fa7862db.ctex"
+uid="uid://d1pscxuj4jj10"
+path.s3tc="res://.godot/imported/vegeta_tex2.png-dfb05b8df018eee09d23d4a03dd0f890.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "cfbebfdd55f423ec13a463374b47ddbc"
 }
 
 [deps]
 
-source_file="res://card/battle/image/742x1122/47_Bounty Hunter Granolah.png"
-dest_files=["res://.godot/imported/47_Bounty Hunter Granolah.png-1062773188b032140e625378fa7862db.ctex"]
+source_file="res://environment/3d model/vegeta/vegeta_tex2.png"
+dest_files=["res://.godot/imported/vegeta_tex2.png-dfb05b8df018eee09d23d4a03dd0f890.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

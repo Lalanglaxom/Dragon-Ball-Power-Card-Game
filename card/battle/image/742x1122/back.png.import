@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dg4kpc5i7lnaw"
-path.s3tc="res://.godot/imported/back.png-d1bc0453f760306a7b78562238d417c5.s3tc.ctex"
+path="res://.godot/imported/back.png-d1bc0453f760306a7b78562238d417c5.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://card/battle/image/742x1122/back.png"
-dest_files=["res://.godot/imported/back.png-d1bc0453f760306a7b78562238d417c5.s3tc.ctex"]
+dest_files=["res://.godot/imported/back.png-d1bc0453f760306a7b78562238d417c5.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" path="res://card/battle/image/742x1122/33_Supreme Kai of Time Aeos.png" id="3_her7p"]
 [ext_resource type="Shader" path="res://card/properties/fake_3d.gdshader" id="3_vpino"]
 [ext_resource type="Script" path="res://addons/simple_card_pile_ui/card_dropzone.gd" id="5_4v1w8"]
-[ext_resource type="Texture2D" uid="uid://4msuyvdhk0yc" path="res://environment/battle_area.png" id="6_576rl"]
+[ext_resource type="Texture2D" path="res://environment/battle_area.png" id="6_576rl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0xxkf"]
 shader = ExtResource("3_vpino")
