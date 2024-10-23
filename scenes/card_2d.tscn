@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://card/script/hand_card.gd" id="1_80ux6"]
 [ext_resource type="Resource" uid="uid://hjgon8eue2aj" path="res://card/wip/anh_liem.tres" id="2_5x0nf"]
 [ext_resource type="Shader" path="res://card/properties/fake_3d.gdshader" id="2_52d3g"]
+[ext_resource type="Texture2D" path="res://card/battle/image/160x240/39_Bounty Hunter Granolah.png" id="4_dpebe"]
 [ext_resource type="Material" uid="uid://t6vkut1jl0o6" path="res://card/properties/hover_material.tres" id="4_enyvt"]
-[ext_resource type="Texture2D" uid="uid://dhbgptwgd637m" path="res://card/battle/image/750 x 1050/217x303.png" id="5_rj0so"]
-[ext_resource type="Texture2D" uid="uid://qkq76bkxpqvm" path="res://card/battle/image/750 x 1050/back217x303.png" id="6_c3a7u"]
+[ext_resource type="Texture2D" uid="uid://r7xv55xaru4c" path="res://card/battle/image/160x240/back.png" id="6_tyqhv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0wwik"]
 shader = ExtResource("2_52d3g")
@@ -16,12 +16,12 @@ shader_parameter/x_rot = 0.0
 shader_parameter/inset = 0.0
 
 [node name="Card_2D" type="Control"]
-custom_minimum_size = Vector2(114, 150)
+custom_minimum_size = Vector2(80, 120)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 114.0
-offset_bottom = 150.0
-pivot_offset = Vector2(57, 75)
+offset_right = 80.0
+offset_bottom = 120.0
+pivot_offset = Vector2(40, 60)
 script = ExtResource("1_80ux6")
 card_data = ExtResource("2_5x0nf")
 hover_amount = 50.0
@@ -30,20 +30,20 @@ hover_amount = 50.0
 texture_filter = 1
 material = ExtResource("4_enyvt")
 layout_mode = 0
-offset_right = 217.0
-offset_bottom = 303.0
+offset_right = 160.0
+offset_bottom = 240.0
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_rj0so")
+texture = ExtResource("4_dpebe")
 stretch_mode = 2
 
 [node name="Backface" type="TextureRect" parent="."]
 visible = false
 material = SubResource("ShaderMaterial_0wwik")
 layout_mode = 0
-offset_right = 217.0
-offset_bottom = 303.0
+offset_right = 160.0
+offset_bottom = 240.0
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("6_c3a7u")
+texture = ExtResource("6_tyqhv")
 stretch_mode = 2
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]

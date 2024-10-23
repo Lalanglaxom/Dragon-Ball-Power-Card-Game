@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://b6u4e7fn65va"]
 
 [ext_resource type="Script" path="res://scenes/test.gd" id="1_jju1l"]
-[ext_resource type="Texture2D" uid="uid://cnmiqaw5753v2" path="res://card/battle/image/742x1122/back.png" id="2_k8aqf"]
-[ext_resource type="Texture2D" uid="uid://txvt0dqg12c7" path="res://card/battle/image/742x1122/33_Supreme Kai of Time Aeos.png" id="3_her7p"]
+[ext_resource type="Texture2D" uid="uid://dg4kpc5i7lnaw" path="res://card/battle/image/742x1122/back.png" id="2_k8aqf"]
+[ext_resource type="Texture2D" path="res://card/battle/image/742x1122/33_Supreme Kai of Time Aeos.png" id="3_her7p"]
 [ext_resource type="Shader" path="res://card/properties/fake_3d.gdshader" id="3_vpino"]
 [ext_resource type="Script" path="res://addons/simple_card_pile_ui/card_dropzone.gd" id="5_4v1w8"]
 [ext_resource type="Texture2D" uid="uid://4msuyvdhk0yc" path="res://environment/battle_area.png" id="6_576rl"]

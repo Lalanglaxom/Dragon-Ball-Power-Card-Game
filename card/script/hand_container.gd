@@ -1,10 +1,6 @@
 extends Control
 
-enum Player {P1, P2}
-@export var player: Player
-
 var hand_pile_p1: Array[Card2D]
-var hand_pile_p2: Array[Card2D]
 
 @export var max_card_hand: int = 18
 @export var max_hand_spread: float = 700
@@ -15,73 +11,46 @@ var hand_pile_p2: Array[Card2D]
 
 func _ready() -> void:
 	
-	for i in self.get_children():
-		if player == Player.P1:
-			hand_pile_p1.append(i)
-		if player == Player.P2:
-			hand_pile_p2.append(i)
-	arrange_hand_card()
 	#GlobalManager.card_hover.connect(handle_hover)
 	GlobalManager.card_chosen.connect(card_chosen)
+	GlobalManager.card_drew.connect(receive_card)
 
 
 func _process(delta: float) -> void:
 	pass
 
 func arrange_hand_card():
-	if hand_pile_p1.size():
-		for i in hand_pile_p1.size():
-			var card_ui = hand_pile_p1[i]
-			var hand_ratio = 0.5
+	for card in get_children():
+		if card not in hand_pile_p1:
+			hand_pile_p1.append(card)
 			
-			if hand_pile_p1.size() > 1:
-				hand_ratio = float(i) / float(hand_pile_p1.size() - 1)
-			var target_pos = Vector2.ZERO
-			var target_rot = self.rotation
-			max_hand_spread = hand_spread_curve.sample(float(hand_pile_p1.size()) / float(max_card_hand))
-			var card_spacing = max_hand_spread / (hand_pile_p1.size() + 1)
-			
-			target_pos.x += (i + 1) * card_spacing - max_hand_spread / 2.0
-			
-			if hand_position_curve and hand_pile_p1.size() > 7:
-				target_pos.y -= hand_position_curve.sample(hand_ratio)
-			if hand_rotation_curve and hand_pile_p1.size() > 7:
-				target_rot = deg_to_rad(hand_rotation_curve.sample(hand_ratio))
-			
-			card_ui.target_position = target_pos
-			card_ui.target_rotation = target_rot
-		return
-		
-	for i in hand_pile_p2.size():
-		var card_ui = hand_pile_p2[i]
-		card_ui.can_be_interact = false
-		
+	for i in hand_pile_p1.size():
+		var card_ui = hand_pile_p1[i]
 		var hand_ratio = 0.5
-		if hand_pile_p2.size() > 1:
-			hand_ratio = float(i) / float(hand_pile_p2.size() - 1)
 		
+		if hand_pile_p1.size() > 1:
+			hand_ratio = float(i) / float(hand_pile_p1.size() - 1)
 		var target_pos = Vector2.ZERO
 		var target_rot = self.rotation
-		max_hand_spread = 500
-		var card_spacing = max_hand_spread / (hand_pile_p2.size() + 1)
+		max_hand_spread = hand_spread_curve.sample(float(hand_pile_p1.size()) / float(max_card_hand))
+		var card_spacing = max_hand_spread / (hand_pile_p1.size() + 1)
 		
 		target_pos.x += (i + 1) * card_spacing - max_hand_spread / 2.0
-		target_rot = 0
-		#if hand_position_curve:
-			#target_pos.y -= hand_position_curve.sample(hand_ratio)
-		#if hand_rotation_curve:
-			#target_rot = deg_to_rad(hand_rotation_curve.sample(hand_ratio))
-			
-		card_ui.set_direction(Vector2.DOWN)
+		
+		if hand_position_curve and hand_pile_p1.size() > 7:
+			target_pos.y -= hand_position_curve.sample(hand_ratio)
+		if hand_rotation_curve and hand_pile_p1.size() > 7:
+			target_rot = deg_to_rad(hand_rotation_curve.sample(hand_ratio))
+		
 		card_ui.target_position = target_pos
 		card_ui.target_rotation = target_rot
+	
 
-func handle_hover(card: Card2D):
-	for card_ui in hand_pile_p1:
-		if card != card_ui:
-			pass
 
+func receive_card(card: Card2D):
+	arrange_hand_card()
 
 func card_chosen(card3d: Card3D, card2d: Card2D):
 	hand_pile_p1.erase(card2d)
+	remove_child(card2d)
 	arrange_hand_card()

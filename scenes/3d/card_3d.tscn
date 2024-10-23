@@ -1,20 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwleps5an3bwi"]
+[gd_scene load_steps=6 format=3 uid="uid://dwleps5an3bwi"]
 
 [ext_resource type="Script" path="res://card/script/card_3d.gd" id="1_jfsc6"]
-[ext_resource type="Texture2D" uid="uid://bost7dq6wnr5v" path="res://card/battle/image/750 x 1050/912x1208.png" id="2_612vs"]
-[ext_resource type="Texture2D" uid="uid://dn2d3752k6a5k" path="res://card/battle/image/750 x 1050/back.png" id="3_ak0uk"]
+[ext_resource type="Shader" path="res://card/card_3d.gdshader" id="2_v7hvl"]
+[ext_resource type="Texture2D" path="res://card/battle/image/742x1122/39_Bounty Hunter Granolah.png" id="2_wkprx"]
+[ext_resource type="Texture2D" uid="uid://dg4kpc5i7lnaw" path="res://card/battle/image/742x1122/back.png" id="3_et54n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s8q7q"]
+render_priority = 0
+shader = ExtResource("2_v7hvl")
 
 [node name="Card_3D" type="Node3D"]
 script = ExtResource("1_jfsc6")
 
 [node name="Front" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+material_overlay = SubResource("ShaderMaterial_s8q7q")
 double_sided = false
 texture_filter = 4
-texture = ExtResource("2_612vs")
+texture = ExtResource("2_wkprx")
 
 [node name="Back" type="Sprite3D" parent="."]
 transform = Transform3D(-1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.74228e-08, -1, 4.37114e-08, 0, 0, -0.01)
+material_overlay = SubResource("ShaderMaterial_s8q7q")
 double_sided = false
 texture_filter = 4
-texture = ExtResource("3_ak0uk")
+texture = ExtResource("3_et54n")

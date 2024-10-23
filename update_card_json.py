@@ -17,7 +17,7 @@ def read_csv(file_path):
 
 
 # Path to the CSV file
-csv_file_path = "DBP - Character.csv"
+csv_file_path = "Power Card Game - Digital - Battle.csv"
 
 # Path to the JSON file
 json_data_file_path = "card/battle/battle_database.json"
@@ -26,56 +26,6 @@ json_collection_file_path = "card/battle/battle_collection.json"
 # Read data from the CSV file
 header_row, csv_data = read_csv(csv_file_path)
 
-
-# Function to update the file paths with a new folder file path
-def update_image_file_paths(csv_data, new_folder_path, big_image_path):
-    for row in csv_data:
-        # Loop through each file in the folder
-        for filename in os.listdir(new_folder_path):
-            # Get the full path of the file
-            file_path = os.path.join(new_folder_path, filename)
-
-            # Check if it's a file and doesn't contain "import" in its name
-            if (
-                os.path.isfile(file_path)
-                and "import" not in filename
-                and row[1] in filename
-            ):
-                # Perform your action on the file
-                # print(f"Processing file: {file_path}")
-                # Find the index of the first "_" character and the last "." character
-                resource_path = file_path.replace(
-                    "E:\\Zame\\Godot Game\\Dragon-Ball-Power-Card-Game", "res://"
-                )
-                row[2] = resource_path.replace("\\", "/")
-                # print(row[2])
-
-        for filename in os.listdir(big_image_path):
-            # Get the full path of the file
-            file_path = os.path.join(big_image_path, filename)
-
-            # Check if it's a file and doesn't contain "import" in its name
-            if (
-                os.path.isfile(file_path)
-                and "import" not in filename
-                and row[1] in filename
-            ):
-                # Perform your action on the file
-                # print(f"Processing file: {file_path}")
-                # Find the index of the first "_" character and the last "." character
-                resource_path = file_path.replace(
-                    "E:\\Zame\\Godot Game\\Dragon-Ball-Power-Card-Game", "res://"
-                )
-                row.append(resource_path.replace("\\", "/"))
-                print(row[6])
-
-
-# Update the file paths with the new folder file path
-update_image_file_paths(
-    csv_data,
-    r"E:\Zame\Godot Game\Dragon-Ball-Power-Card-Game\card\battle\image",
-    r"E:\Zame\Godot Game\Dragon-Ball-Power-Card-Game\card\battle\image\742x1122",
-)
 
 # Write the modified data back to the CSV file
 with open(csv_file_path, "w", newline="", encoding="utf-8") as csvfile:
@@ -90,20 +40,19 @@ json_collection = []
 for index, row in enumerate(csv_data):
     nice_name = row[1]
     texture_path = row[2]
-    power = int(row[3])  # Assuming power is an integer
-    effect = row[4]  # Assuming power is an integer
-    description = row[5]  # Assuming power is an integer
-    big_image = row[6]
+    mini_image = row[3]
+    power = int(row[4])  # Assuming power is an integer
+    effect = row[5]  # Assuming power is an integer
 
     card_data = {
         "nice_name": nice_name,
-        "texture_path": texture_path,
-        "backface_texture_path": "res://card/battle/image/back.png",
+        "front_mini_path": mini_image,
+        "back_mini_path": "res://card/battle/image/160x240/back.png",
+        "front_image_path": texture_path,
+        "back_image_path": "res://card/battle/image/742x1122/back.png",
         "resource_script_path": "res://card/battle/battle_data.gd",
         "power": power,
         "effect": effect,
-        "description": description,
-        "big_image": big_image,
     }
 
     json_data.append(card_data)

@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://t6vkut1jl0o6"]
 
-[ext_resource type="Shader" path="res://card/script/2d_hover_outline.gdshader" id="1_bogsx"]
+[ext_resource type="Shader" path="res://card/2d_hover_outline.gdshader" id="1_bogsx"]
 
 [resource]
 shader = ExtResource("1_bogsx")
