@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://yj7l7ho3evk5"
-path.s3tc="res://.godot/imported/vegeta_face1.png-c0d3c950b61cafbad2c0954f69281797.s3tc.ctex"
+uid="uid://bjtg1ax8rgpvl"
+path.s3tc="res://.godot/imported/vegeta_dance_tex4.png-1ed4db7513dda7930e39c6ab16d2b722.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "8a25b65fb99f061161df401831e39ac1"
+"md5": "c3acf5d2142a5e823719f2a862aaeea8"
 }
 
 [deps]
 
-source_file="res://environment/3d model/vegeta/vegeta_face1.png"
-dest_files=["res://.godot/imported/vegeta_face1.png-c0d3c950b61cafbad2c0954f69281797.s3tc.ctex"]
+source_file="res://environment/3d model/vegeta/vegeta_dance_tex4.png"
+dest_files=["res://.godot/imported/vegeta_dance_tex4.png-1ed4db7513dda7930e39c6ab16d2b722.s3tc.ctex"]
 
 [params]
 

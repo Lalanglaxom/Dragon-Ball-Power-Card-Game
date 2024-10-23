@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://2f0y0ig5gayn"
-path="res://.godot/imported/vegeta.glb-70fe5bf9cd0ae1ed091749cb8a49d70c.scn"
+uid="uid://b8am5drfns37s"
+path="res://.godot/imported/vegeta_dance.glb-ba8446570bbfe207eea66a25d9fc98f8.scn"
 
 [deps]
 
-source_file="res://environment/3d model/vegeta/vegeta.glb"
-dest_files=["res://.godot/imported/vegeta.glb-70fe5bf9cd0ae1ed091749cb8a49d70c.scn"]
+source_file="res://environment/3d model/vegeta/vegeta_dance.glb"
+dest_files=["res://.godot/imported/vegeta_dance.glb-ba8446570bbfe207eea66a25d9fc98f8.scn"]
 
 [params]
 
