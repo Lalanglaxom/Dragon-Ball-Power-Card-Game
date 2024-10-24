@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dwleps5an3bwi"]
+[gd_scene load_steps=7 format=3 uid="uid://dwleps5an3bwi"]
 
 [ext_resource type="Script" path="res://card/script/card_3d.gd" id="1_jfsc6"]
 [ext_resource type="Shader" path="res://card/card_3d.gdshader" id="2_v7hvl"]
@@ -9,7 +9,10 @@
 render_priority = 0
 shader = ExtResource("2_v7hvl")
 
-[node name="Card_3D" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_5tc7q"]
+size = Vector3(7.5, 0.01, 10.5)
+
+[node name="Card_3D" type="Area3D"]
 script = ExtResource("1_jfsc6")
 
 [node name="Front" type="Sprite3D" parent="."]
@@ -25,3 +28,8 @@ material_overlay = SubResource("ShaderMaterial_s8q7q")
 double_sided = false
 texture_filter = 4
 texture = ExtResource("3_et54n")
+
+[node name="CardShape" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_5tc7q")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

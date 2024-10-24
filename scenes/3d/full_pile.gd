@@ -23,13 +23,11 @@ func _ready() -> void:
 	start()
 
 
-
 func start():
 	load_json_path()
 	
 	if multiplayer.is_server():
 		reset_card_collection()
-
 		for card in get_children():
 			draw_pile.append(card)
 		draw_pile.shuffle()
@@ -45,7 +43,7 @@ func draw(num_cards := 3):
 		if draw_pile.size():
 			var card = draw_pile[draw_pile.size() - 1]
 			card.reparent(hand_container_p_1, true)
-			print_debug(card.card_data.nice_name)
+			
 			draw_pile.erase(card)
 			hand_container_p_1.arrange_hand_card()
 
