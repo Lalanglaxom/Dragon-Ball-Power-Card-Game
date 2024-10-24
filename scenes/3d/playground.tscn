@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://0u0xoqfym0sm"]
+[gd_scene load_steps=36 format=4 uid="uid://0u0xoqfym0sm"]
 
 [ext_resource type="Script" path="res://scenes/3d/game_controller.gd" id="1_tpmse"]
 [ext_resource type="Texture2D" uid="uid://dst4ivhm4ajhg" path="res://environment/texture/stone.jpg" id="2_hijyr"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://c3ft1c824ffrk" path="res://environment/3d model/vegeta/vegeta_dance_tex3.png" id="7_hvx4o"]
 [ext_resource type="Curve" uid="uid://b6vvv4vkpbtvp" path="res://card/hand_position_curve.tres" id="8_no7rg"]
 [ext_resource type="Curve" uid="uid://bkbraspsnw3k8" path="res://card/hand_spread.tres" id="10_cjsaq"]
+[ext_resource type="Script" path="res://ui/button/sync_draw_pile.gd" id="17_f071g"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v0lqs"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -641,7 +642,7 @@ _data = {
 script = ExtResource("1_tpmse")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.267241, -0.635421, -0.724446, -0.791012, -0.574014, 0.211678, -0.550347, 0.516476, -0.656026, 0, 5, 0)
+transform = Transform3D(-0.38727, -0.28813, -0.875787, -0.709844, -0.51299, 0.482662, -0.58834, 0.808593, -0.00586106, 0, 5, 0)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -972,3 +973,13 @@ hand_rotation_curve = ExtResource("4_gmvg7")
 hand_spread_curve = ExtResource("10_cjsaq")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Sync Draw Pile" type="Button" parent="CanvasLayer"]
+offset_left = 982.0
+offset_top = 166.0
+offset_right = 1103.0
+offset_bottom = 197.0
+text = "Sync Draw Pile"
+script = ExtResource("17_f071g")
+
+[connection signal="pressed" from="CanvasLayer/Sync Draw Pile" to="CanvasLayer/Sync Draw Pile" method="_on_pressed"]

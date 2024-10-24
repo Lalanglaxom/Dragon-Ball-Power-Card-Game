@@ -6,10 +6,10 @@ uid="uid://c2cleva6oqkmt"
 
 [deps]
 
-files=["res://Power Card Game - Digital - Battle.Title.translation", "res://Power Card Game - Digital - Battle.Image.translation", "res://Power Card Game - Digital - Battle.Mini Image.translation", "res://Power Card Game - Digital - Battle.Power.translation", "res://Power Card Game - Digital - Battle.Effect.translation"]
+files=["res://Power Card Game - Digital - Battle.Id.translation", "res://Power Card Game - Digital - Battle.Title.translation", "res://Power Card Game - Digital - Battle.Power.translation", "res://Power Card Game - Digital - Battle.Effect.translation", "res://Power Card Game - Digital - Battle.Image.translation", "res://Power Card Game - Digital - Battle.Mini Image.translation"]
 
 source_file="res://Power Card Game - Digital - Battle.csv"
-dest_files=["res://Power Card Game - Digital - Battle.Title.translation", "res://Power Card Game - Digital - Battle.Image.translation", "res://Power Card Game - Digital - Battle.Mini Image.translation", "res://Power Card Game - Digital - Battle.Power.translation", "res://Power Card Game - Digital - Battle.Effect.translation"]
+dest_files=["res://Power Card Game - Digital - Battle.Id.translation", "res://Power Card Game - Digital - Battle.Title.translation", "res://Power Card Game - Digital - Battle.Power.translation", "res://Power Card Game - Digital - Battle.Effect.translation", "res://Power Card Game - Digital - Battle.Image.translation", "res://Power Card Game - Digital - Battle.Mini Image.translation"]
 
 [params]
 

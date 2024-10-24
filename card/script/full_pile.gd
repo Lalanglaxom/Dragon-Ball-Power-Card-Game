@@ -1,4 +1,4 @@
-class_name FullPile
+#class_name FullPile
 extends Node
 
 signal draw_pile_updated

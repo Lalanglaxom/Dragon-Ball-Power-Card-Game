@@ -1,7 +1,15 @@
 extends Node
 
+@onready var full_pile: Control = $"../FullPile"
+
 @onready var player_1_pos: Node3D = $"../CardPosition/Player 1"
 @onready var player_2_pos: Node3D = $"../CardPosition/Player 2"
+
+@onready var hand_container_p_2: Control = $"../HandContainerP2"
+@onready var hand_container_p_1: Control = $"../HandContainerP1"
+
+var p1_pile = []
+var p2_pile = []
 
 var slot_count = 0
 

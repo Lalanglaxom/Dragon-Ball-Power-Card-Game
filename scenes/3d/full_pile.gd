@@ -1,3 +1,4 @@
+class_name FullPile
 extends Node
 
 
@@ -16,18 +17,30 @@ var card_database := [] # an array of JSON `Card` data
 var card_collection := [] # an array of JSON `Card` data
 
 var draw_pile := [] # an array of `Card2D`s
-
+var id_pile := []
 
 func _ready() -> void:
+	start()
+
+
+
+func start():
 	load_json_path()
-	_reset_card_collection()
-	for card in get_children():
-		draw_pile.append(card)
+	
+	if multiplayer.is_server():
+		reset_card_collection()
+
+		for card in get_children():
+			draw_pile.append(card)
+		draw_pile.shuffle()
+			
+		for card in draw_pile:
+			id_pile.append(card.card_data.id)  
 		
 	GlobalManager.on_draw_pressed.connect(draw)
-
+	
+	
 func draw(num_cards := 3):
-	draw_pile.shuffle()
 	for i in num_cards:
 		if draw_pile.size():
 			var card = draw_pile[draw_pile.size() - 1]
@@ -35,9 +48,14 @@ func draw(num_cards := 3):
 			print_debug(card.card_data.nice_name)
 			draw_pile.erase(card)
 			hand_container_p_1.arrange_hand_card()
-			
-	
 
+@rpc("any_peer", "call_remote", "reliable")
+func sync_draw_pile(pile):
+	id_pile = pile
+	for id in id_pile:
+		var card_data = get_card_data_by_id(id)
+		draw_pile.append(create_card_ui(card_data))
+	
 func shuffle_draw_pile():
 	draw_pile.shuffle()
 
@@ -58,14 +76,20 @@ func _load_json_cards_from_path(path : String):
 	return found
 
 
-func _reset_card_collection():
+func reset_card_collection():
 	for nice_name in card_collection:
-		var card_data = _get_card_data_by_nice_name(nice_name)
-		var card_ui = _create_card_ui(card_data)
+		var card_data = get_card_data_by_nice_name(nice_name)
+		var card_ui = create_card_ui(card_data)
 		#draw_pile.push_back(card_ui)
 
-
-func _get_card_data_by_nice_name(nice_name : String):
+func get_card_data_by_id(id : int):
+	for json_data in card_database:
+		if int(json_data.id) == id:
+			return json_data
+	return null
+	
+	
+func get_card_data_by_nice_name(nice_name : String):
 	for json_data in card_database:
 		if json_data.nice_name == nice_name:
 			return json_data
@@ -73,13 +97,13 @@ func _get_card_data_by_nice_name(nice_name : String):
 
 
 func create_card_in_pile(nice_name : String, pile_to_add_to : Piles):
-	var card_ui = _create_card_ui(_get_card_data_by_nice_name(nice_name))
+	var card_ui = create_card_ui(get_card_data_by_nice_name(nice_name))
 	#if pile_to_add_to == Piles.draw_pile:
 		#card_ui.position = Vector2.ZERO
 	set_card_pile(card_ui, pile_to_add_to)
 
 
-func _create_card_ui(json_data : Dictionary):
+func create_card_ui(json_data : Dictionary):
 	var card_ui = card_scene.instantiate()
 	card_ui.frontface_texture = json_data.front_mini_path
 	card_ui.backface_texture = json_data.back_mini_path

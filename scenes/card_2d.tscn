@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://card/script/hand_card.gd" id="1_80ux6"]
 [ext_resource type="Resource" uid="uid://hjgon8eue2aj" path="res://card/wip/anh_liem.tres" id="2_5x0nf"]
 [ext_resource type="Shader" path="res://card/properties/fake_3d.gdshader" id="2_52d3g"]
-[ext_resource type="Texture2D" uid="uid://c044huyhy0la" path="res://card/battle/image/160x240/47_Bounty Hunter Granolah.png" id="4_dpebe"]
+[ext_resource type="Texture2D" uid="uid://tdba44oybsrw" path="res://card/battle/image/160x240/47_Bounty Hunter Granolah.png" id="4_dpebe"]
 [ext_resource type="Material" uid="uid://t6vkut1jl0o6" path="res://card/properties/hover_material.tres" id="4_enyvt"]
-[ext_resource type="Texture2D" uid="uid://r7xv55xaru4c" path="res://card/battle/image/160x240/back.png" id="6_tyqhv"]
+[ext_resource type="Texture2D" uid="uid://yimowsqpcpoi" path="res://card/battle/image/160x240/back.png" id="6_tyqhv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0wwik"]
 shader = ExtResource("2_52d3g")
