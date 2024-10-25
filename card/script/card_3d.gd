@@ -36,8 +36,6 @@ func appear():
 
 
 func flip():
-	
-	
 	var tween = get_tree().create_tween()
 	
 	if direction == Vector2.DOWN:

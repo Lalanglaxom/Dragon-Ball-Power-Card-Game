@@ -56,7 +56,7 @@ func receive_card(card: Card2D):
 	add_child(card)
 	arrange_hand_card()
 
-func card_chosen(card3d: Card3D, card2d: Card2D):
+func card_chosen(card2d:Card2D, data: CardData, id: int):
 	hand_pile_p1.erase(card2d)
 	remove_child(card2d)
 	arrange_hand_card()

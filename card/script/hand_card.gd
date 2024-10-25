@@ -84,7 +84,10 @@ func _on_gui_input(event: InputEvent) -> void:
 			var parent = get_parent()
 			if parent.name == "FullPile":
 				GlobalManager.on_draw_pressed.emit() 
-				
+			
+			if parent.state != parent.State.YOUR_TURN:
+				return
+			
 			if card_belong_to_id != multiplayer.get_unique_id():
 				return
 			
@@ -97,14 +100,14 @@ func _on_gui_input(event: InputEvent) -> void:
 
 
 func create_card_3d():
-	var card_3d = CARD_3D.instantiate()
-	card_3d.frontface_texture = card_data.front_image_path
-	card_3d.backface_texture = card_data.back_image_path
-	card_3d.card_data = self.card_data
-	card_3d.card_belong_to_id = multiplayer.get_unique_id()
+	#var card_3d = CARD_3D.instantiate()
+	#card_3d.frontface_texture = card_data.front_image_path
+	#card_3d.backface_texture = card_data.back_image_path
+	#card_3d.card_data = self.card_data
+	#card_3d.card_belong_to_id = multiplayer.get_unique_id()
 	
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "position", Vector2(position.x, position.y + 150), 0.15)
 	await tween.finished
 	
-	GlobalManager.card_chosen.emit(card_3d, self)
+	GlobalManager.card_chosen.emit(self, self.card_data.id, card_belong_to_id)

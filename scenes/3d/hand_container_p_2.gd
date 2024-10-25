@@ -12,11 +12,7 @@ var hand_pile_p2: Array[Card2D]
 
 
 func _ready() -> void:
-	
-	for i in self.get_children():
-		hand_pile_p2.append(i)
-
-	arrange_hand_card()
+	GlobalManager.card_chosen.connect(card_chosen)
 
 
 
@@ -51,3 +47,10 @@ func arrange_hand_card():
 		card_ui.set_direction(Vector2.DOWN)
 		card_ui.target_position = target_pos
 		card_ui.target_rotation = target_rot
+
+
+func card_chosen(card3d: Card3D, card2d: Card2D):
+	if hand_pile_p2.has(card2d):
+		hand_pile_p2.erase(card2d)
+		remove_child(card2d)
+		arrange_hand_card()
