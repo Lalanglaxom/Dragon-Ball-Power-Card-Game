@@ -11,7 +11,11 @@ signal card_chosen(Card3D)
 
 # Pile Signal
 signal draw_pile_updated()
-signal on_draw_pressed()
+signal on_draw_pressed(amount: int)
 signal card_drew(Card2D)
 
 var Players = {}
+
+
+func print_multi(thing):
+	print(str(multiplayer.get_unique_id()) + ": " + str(thing))

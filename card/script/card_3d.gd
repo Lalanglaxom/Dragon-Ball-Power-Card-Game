@@ -11,6 +11,8 @@ var backface_texture: String
 var base_y_pos: float
 var direction: Vector2
 
+var card_belong_to_id: int = -1
+
 func _ready() -> void:
 	if frontface_texture:
 		frontface.texture = load(frontface_texture)
@@ -80,7 +82,8 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 
 
 func _on_mouse_entered() -> void:
-	GlobalManager.card_3d_hover.emit(self)
+	if direction == Vector2.UP or card_belong_to_id == multiplayer.get_unique_id():
+		GlobalManager.card_3d_hover.emit(self)
 
 
 func _on_mouse_exited() -> void:

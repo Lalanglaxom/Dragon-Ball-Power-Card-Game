@@ -24,6 +24,10 @@ func _process(delta: float) -> void:
 	pass
 
 func arrange_hand_card():
+	for card in get_children():
+		if card not in hand_pile_p2:
+			hand_pile_p2.append(card)
+			
 	for i in hand_pile_p2.size():
 		var card_ui = hand_pile_p2[i]
 		card_ui.can_be_interact = false

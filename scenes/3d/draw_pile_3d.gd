@@ -13,31 +13,32 @@ var pile_max_size := 30
 
 
 func _ready() -> void:
-	create_3d_draw_pile()
+	GlobalManager.draw_pile_updated.connect(create_3d_draw_pile)
 
 
 func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			if draw_pile_3d.size() == 0: return
-			
-			full_pile.draw(draw_amount)
-			
-			if draw_pile_3d.size() < draw_amount:
-				draw_amount = draw_pile_3d.size()
-			
-			if full_pile.draw_pile.size() <= pile_max_size:
-				while full_pile.draw_pile.size() < draw_pile_3d.size():
-					var card = draw_pile_3d[draw_pile_3d.size() - 1]
-					draw_pile_3d.erase(card)
-					remove_child(card)
+			#if draw_pile_3d.size() == 0: return
+			#
+			#full_pile.draw(draw_amount)
+			#
+			#if draw_pile_3d.size() < draw_amount:
+				#draw_amount = draw_pile_3d.size()
+			#
+			#if full_pile.draw_pile.size() <= pile_max_size:
+				#while full_pile.draw_pile.size() < draw_pile_3d.size():
+					#var card = draw_pile_3d[draw_pile_3d.size() - 1]
+					#draw_pile_3d.erase(card)
+					#remove_child(card)
+				#for i in range(draw_amount):
+					#var card = draw_pile_3d[draw_pile_3d.size() - 1]
+					#draw_pile_3d.erase(card)
+					#remove_child(card)
+					#
+				#arrange_3d_card() 
 					
-				for i in range(draw_amount):
-					var card = draw_pile_3d[draw_pile_3d.size() - 1]
-					draw_pile_3d.erase(card)
-					remove_child(card)
-					
-				arrange_3d_card() 
+			pass
 
 func create_3d_draw_pile():
 	while draw_pile_3d.size() < pile_max_size:

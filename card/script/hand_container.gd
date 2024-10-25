@@ -9,7 +9,10 @@ var hand_pile_p1: Array[Card2D]
 @export var hand_spread_curve : Curve
 
 @onready var state_chart: StateChart = $"../StateChart"
-var	current_turn: int
+
+enum State {OTHER_TURN, YOUR_TURN}
+var state: State
+var player_turn: int
 
 func _ready() -> void:
 	
@@ -50,9 +53,23 @@ func arrange_hand_card():
 
 
 func receive_card(card: Card2D):
+	add_child(card)
 	arrange_hand_card()
 
 func card_chosen(card3d: Card3D, card2d: Card2D):
 	hand_pile_p1.erase(card2d)
 	remove_child(card2d)
 	arrange_hand_card()
+
+
+func set_turn(turn_num: int):
+	player_turn = turn_num
+
+func switch_state(current_player_turn: int):
+	if  player_turn == current_player_turn:
+		state = State.YOUR_TURN
+	else:
+		state = State.OTHER_TURN
+	
+	GlobalManager.print_multi(State.keys()[state])
+	

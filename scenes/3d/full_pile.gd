@@ -22,33 +22,23 @@ var draw_pile := [] # an array of `Card2D`s
 var id_pile := []
 
 func _ready() -> void:
+	load_json_path()
 	start()
+	GlobalManager.on_draw_pressed.connect(draw)
 
 
 func start():
-	load_json_path()
-	
 	if multiplayer.is_server():
 		reset_card_collection()
 		for card in get_children():
 			draw_pile.append(card)
-		draw_pile.shuffle()
+		#draw_pile.shuffle()
 			
 		for card in draw_pile:
 			id_pile.append(card.card_data.id)
-			
-			
-	GlobalManager.on_draw_pressed.connect(draw)
-	draw(12)
-	
-func draw(num_cards := 3):
-	for i in num_cards:
-		if draw_pile.size():
-			var card = draw_pile[draw_pile.size() - 1]
-			card.reparent(hand_container_p_1, true)
-			
-			draw_pile.erase(card)
-			hand_container_p_1.arrange_hand_card()
+		
+		sync_draw_pile.rpc(id_pile)
+
 
 @rpc("any_peer", "call_remote", "reliable")
 func sync_draw_pile(pile):
@@ -56,6 +46,18 @@ func sync_draw_pile(pile):
 	for id in id_pile:
 		var card_data = get_card_data_by_id(id)
 		draw_pile.append(create_card_ui(card_data))
+	GlobalManager.emit_signal("draw_pile_updated")
+
+
+func draw():
+	if draw_pile.size():
+		var card = draw_pile[draw_pile.size() - 1]
+		#card.card_belong_to_id = multiplayer.get_unique_id()
+		#card.reparent(hand_container_p_1, true)
+		#
+		#draw_pile.erase(card)
+		#hand_container_p_1.arrange_hand_card()
+
 	
 func shuffle_draw_pile():
 	draw_pile.shuffle()
@@ -122,7 +124,3 @@ func set_card_pile(card : Card2D, pile : Piles):
 	if pile == Piles.draw_pile:
 		draw_pile.push_back(card)
 		GlobalManager.draw_pile_updated.emit()
-
-
-func _on_gui_input(event: InputEvent) -> void:
-	draw(3)

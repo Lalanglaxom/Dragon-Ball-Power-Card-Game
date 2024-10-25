@@ -18,6 +18,7 @@ var target_rotation: float
 var is_hover: bool = false
 @export var hover_amount: float = 60
 
+var card_belong_to_id: int = -1
 var can_be_interact: bool = true
 
 func _ready() -> void:
@@ -25,7 +26,8 @@ func _ready() -> void:
 	if frontface_texture:
 		frontface.texture = load(frontface_texture)
 		backface.texture = load(backface_texture)
-	
+
+
 func _process(delta: float) -> void:
 	handle_card_transform()
 
@@ -53,8 +55,10 @@ func _on_mouse_entered() -> void:
 		
 	var parent = get_parent()
 	if parent.name == "FullPile": return
-		 
-	GlobalManager.card_hover.emit(self)
+	
+	if card_belong_to_id == multiplayer.get_unique_id():
+		GlobalManager.card_hover.emit(self)
+	
 	is_hover = true
 	get_node("Frontface").material = HOVER_MATERIAL
 	
@@ -81,7 +85,9 @@ func _on_gui_input(event: InputEvent) -> void:
 			if parent.name == "FullPile":
 				GlobalManager.on_draw_pressed.emit() 
 				
-				
+			if card_belong_to_id != multiplayer.get_unique_id():
+				return
+			
 			if is_hover:
 				create_card_3d()
 
@@ -95,6 +101,7 @@ func create_card_3d():
 	card_3d.frontface_texture = card_data.front_image_path
 	card_3d.backface_texture = card_data.back_image_path
 	card_3d.card_data = self.card_data
+	card_3d.card_belong_to_id = multiplayer.get_unique_id()
 	
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "position", Vector2(position.x, position.y + 150), 0.15)

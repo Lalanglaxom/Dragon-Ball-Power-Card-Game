@@ -27,9 +27,8 @@ func hide_big_image(card: Card2D):
 
 
 func show_big_image_3d(card: Card3D):
-	if card.direction == Vector2.UP:	
-		big_image.show()
-		big_image.texture = load(card.card_data.front_image_path)
+	big_image.show()
+	big_image.texture = load(card.card_data.front_image_path)
 
 
 func hide_big_image_3d(card: Card3D):

@@ -1,7 +1,7 @@
 extends Button
 
 @onready var full_pile: FullPile = $"../../FullPile"
+@onready var hand_container_p_1: Control = $"../../../HandContainerP1"
 
 func _on_pressed() -> void:
-	if multiplayer.is_server():
-		full_pile.sync_draw_pile.rpc(full_pile.id_pile)
+	print(str(multiplayer.get_unique_id()) + ": " + str(hand_container_p_1.current_turn))

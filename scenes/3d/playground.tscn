@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://0u0xoqfym0sm"]
+[gd_scene load_steps=41 format=4 uid="uid://0u0xoqfym0sm"]
 
 [ext_resource type="Script" path="res://scenes/3d/game_controller.gd" id="1_tpmse"]
 [ext_resource type="Texture2D" uid="uid://dst4ivhm4ajhg" path="res://environment/texture/stone.jpg" id="2_hijyr"]
@@ -20,9 +20,7 @@
 [ext_resource type="Script" path="res://ui/script/ui_controller.gd" id="17_b8fvp"]
 [ext_resource type="Script" path="res://ui/button/sync_draw_pile.gd" id="17_f071g"]
 [ext_resource type="Texture2D" uid="uid://d1xbmnitd6p35" path="res://card/battle/image/742x1122/26_Kefla Legendary SSJ2.png" id="18_e4fgy"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="21_mtqg1"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="22_aogpr"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="23_4r3yx"]
+[ext_resource type="Script" path="res://scenes/3d/debugger.gd" id="21_ntedu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v0lqs"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -904,18 +902,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.40703)
 [node name="Slot 1" type="Node3D" parent="CardPosition/Player 2"]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -5, 0.01, -12)
 
-[node name="Card_3D" parent="CardPosition/Player 2/Slot 1" instance=ExtResource("3_68123")]
-
 [node name="Slot 2" type="Node3D" parent="CardPosition/Player 2"]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 7, 0.01, -12)
 
-[node name="Card_3D2" parent="CardPosition/Player 2/Slot 2" instance=ExtResource("3_68123")]
-
 [node name="Slot 3" type="Node3D" parent="CardPosition/Player 2"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 19, 0.01, -12)
-
-[node name="Card_3D3" parent="CardPosition/Player 2/Slot 3" instance=ExtResource("3_68123")]
-transform = Transform3D(1, 0, 2.38419e-07, 0, 1, 0, -2.38419e-07, 0, 1, 0, 0, 0)
 
 [node name="Grave" type="Node3D" parent="CardPosition/Player 2"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -25, 0.01, -12)
@@ -936,10 +927,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 120.0
-offset_top = -63.0
-offset_right = 200.0
-offset_bottom = 57.0
+offset_left = -1378.0
+offset_top = -32.0
+offset_right = -1298.0
+offset_bottom = 88.0
 grow_horizontal = 0
 grow_vertical = 2
 pivot_offset = Vector2(40, 60)
@@ -999,13 +990,12 @@ offset_bottom = 40.0
 script = ExtResource("17_b8fvp")
 
 [node name="Sync Draw Pile" type="Button" parent="CanvasLayer/UI"]
-visible = false
 layout_mode = 0
 offset_left = 982.0
 offset_top = 166.0
 offset_right = 1103.0
 offset_bottom = 197.0
-text = "Sync Draw Pile"
+text = "Check Multi Data"
 script = ExtResource("17_f071g")
 
 [node name="BigImage" type="TextureRect" parent="CanvasLayer/UI"]
@@ -1031,20 +1021,28 @@ offset_top = 316.0
 offset_right = 894.0
 offset_bottom = 339.0
 
-[node name="StateChart" type="Node" parent="."]
-script = ExtResource("21_mtqg1")
+[node name="Debugger" type="PanelContainer" parent="CanvasLayer/UI"]
+layout_mode = 0
+offset_right = 199.0
+offset_bottom = 277.0
+script = ExtResource("21_ntedu")
 
-[node name="PlayerState" type="Node" parent="StateChart"]
-script = ExtResource("22_aogpr")
-initial_state = NodePath("YourTurn")
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/Debugger"]
+layout_mode = 2
 
-[node name="YourTurn" type="Node" parent="StateChart/PlayerState"]
-script = ExtResource("23_4r3yx")
+[node name="Title" type="Label" parent="CanvasLayer/UI/Debugger/VBoxContainer"]
+layout_mode = 2
+text = "Debugger"
+horizontal_alignment = 1
 
-[node name="OthersTurn" type="Node" parent="StateChart/PlayerState"]
-script = ExtResource("23_4r3yx")
+[node name="PlayerTurn" type="Label" parent="CanvasLayer/UI/Debugger/VBoxContainer"]
+layout_mode = 2
+
+[node name="YourTurn" type="Label" parent="CanvasLayer/UI/Debugger/VBoxContainer"]
+layout_mode = 2
+
+[node name="State" type="Label" parent="CanvasLayer/UI/Debugger/VBoxContainer"]
+layout_mode = 2
 
 [connection signal="input_event" from="DrawPile" to="DrawPile" method="_on_input_event"]
 [connection signal="pressed" from="CanvasLayer/UI/Sync Draw Pile" to="CanvasLayer/UI/Sync Draw Pile" method="_on_pressed"]
-
-[editable path="CardPosition/Player 2/Slot 3/Card_3D3"]
