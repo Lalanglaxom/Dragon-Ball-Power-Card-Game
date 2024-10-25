@@ -83,13 +83,18 @@ func draw_card_for_player():
 
 @rpc("any_peer", "call_local", "reliable")
 func place_card(card_id, id):
-	GlobalManager.print_multi("LOZ")
+	if slot_count == 3:
+		current_player_turn += 1
+		hand_container_p_1.switch_state(current_player_turn)
+		slot_count = 0
+		return
+		
 	var card3d = create_card_3d(get_card3d_data_by_id(card_id), id)
 	if multiplayer.get_unique_id() == card3d.card_belong_to_id:
 		put_card_in_p1_slot(card3d)
 	else:
 		put_card_in_p2_slot(card3d)
-
+	slot_count += 1
 
 
 
@@ -104,6 +109,7 @@ func put_card_in_p1_slot(card3d: Card3D):
 			slot.add_child(card3d)
 			p1_battle_pile.append(card3d)
 			update_power_label()
+			
 			return
 
 
