@@ -61,6 +61,8 @@ func _on_mouse_entered() -> void:
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "position", Vector2(target_position.x - hover_amount/3.5, target_position.y - hover_amount) , 0.15)
 
+
+
 func _on_mouse_exited() -> void:
 	if !can_be_interact: return
 		
@@ -92,7 +94,8 @@ func create_card_3d():
 	var card_3d = CARD_3D.instantiate()
 	card_3d.frontface_texture = card_data.front_image_path
 	card_3d.backface_texture = card_data.back_image_path
-
+	card_3d.card_data = self.card_data
+	
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "position", Vector2(position.x, position.y + 150), 0.15)
 	await tween.finished

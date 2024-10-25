@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://0u0xoqfym0sm"]
+[gd_scene load_steps=43 format=4 uid="uid://0u0xoqfym0sm"]
 
 [ext_resource type="Script" path="res://scenes/3d/game_controller.gd" id="1_tpmse"]
 [ext_resource type="Texture2D" uid="uid://dst4ivhm4ajhg" path="res://environment/texture/stone.jpg" id="2_hijyr"]
@@ -16,7 +16,13 @@
 [ext_resource type="Texture2D" uid="uid://c3ft1c824ffrk" path="res://environment/3d model/vegeta/vegeta_dance_tex3.png" id="7_hvx4o"]
 [ext_resource type="Curve" uid="uid://b6vvv4vkpbtvp" path="res://card/hand_position_curve.tres" id="8_no7rg"]
 [ext_resource type="Curve" uid="uid://bkbraspsnw3k8" path="res://card/hand_spread.tres" id="10_cjsaq"]
+[ext_resource type="Script" path="res://scenes/3d/draw_pile_3d.gd" id="10_cmde0"]
+[ext_resource type="Script" path="res://ui/script/ui_controller.gd" id="17_b8fvp"]
 [ext_resource type="Script" path="res://ui/button/sync_draw_pile.gd" id="17_f071g"]
+[ext_resource type="Texture2D" uid="uid://d1xbmnitd6p35" path="res://card/battle/image/742x1122/26_Kefla Legendary SSJ2.png" id="18_e4fgy"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="21_mtqg1"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="22_aogpr"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="23_4r3yx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v0lqs"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -636,6 +642,9 @@ _data = {
 "HouseDance": SubResource("Animation_u3gv8")
 }
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_nxayh"]
+size = Vector3(7.5, 3, 10.5)
+
 [node name="Playground" type="Node3D"]
 
 [node name="GameController" type="Node" parent="."]
@@ -657,7 +666,7 @@ material_override = SubResource("StandardMaterial3D_ldoyx")
 mesh = SubResource("PlaneMesh_ho4ek")
 
 [node name="VegetaDance" type="Node3D" parent="."]
-transform = Transform3D(-1.43394, 0, 2.04788, 0, 2.5, 0, -2.04788, 0, -1.43394, -28.2578, 0, -12.3813)
+transform = Transform3D(0.734308, 0, -2.38973, 0, 2.5, 0, 2.38973, 0, 0.734308, 38.1029, 0, -15.3813)
 script = ExtResource("3_qnp4i")
 
 [node name="Armature" type="Node3D" parent="VegetaDance"]
@@ -911,6 +920,14 @@ transform = Transform3D(1, 0, 2.38419e-07, 0, 1, 0, -2.38419e-07, 0, 1, 0, 0, 0)
 [node name="Grave" type="Node3D" parent="CardPosition/Player 2"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -25, 0.01, -12)
 
+[node name="DrawPile" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.8942, 0.01, -4.53209)
+script = ExtResource("10_cmde0")
+gap = 0.1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DrawPile"]
+shape = SubResource("BoxShape3D_nxayh")
+
 [node name="FullPile" type="Control" parent="."]
 custom_minimum_size = Vector2(80, 120)
 layout_mode = 3
@@ -919,10 +936,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -158.0
-offset_top = 74.0
-offset_right = -77.9999
-offset_bottom = 194.0
+offset_left = 120.0
+offset_top = -63.0
+offset_right = 200.0
+offset_bottom = 57.0
 grow_horizontal = 0
 grow_vertical = 2
 pivot_offset = Vector2(40, 60)
@@ -974,7 +991,16 @@ hand_spread_curve = ExtResource("10_cjsaq")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Sync Draw Pile" type="Button" parent="CanvasLayer"]
+[node name="UI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("17_b8fvp")
+
+[node name="Sync Draw Pile" type="Button" parent="CanvasLayer/UI"]
+visible = false
+layout_mode = 0
 offset_left = 982.0
 offset_top = 166.0
 offset_right = 1103.0
@@ -982,4 +1008,43 @@ offset_bottom = 197.0
 text = "Sync Draw Pile"
 script = ExtResource("17_f071g")
 
-[connection signal="pressed" from="CanvasLayer/Sync Draw Pile" to="CanvasLayer/Sync Draw Pile" method="_on_pressed"]
+[node name="BigImage" type="TextureRect" parent="CanvasLayer/UI"]
+visible = false
+custom_minimum_size = Vector2(750, 1050)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.05
+offset_left = 2.0
+offset_top = -1051.0
+offset_right = 750.0
+offset_bottom = -1.0
+grow_vertical = 2
+scale = Vector2(0.2, 0.2)
+pivot_offset = Vector2(0, 1050)
+texture = ExtResource("18_e4fgy")
+
+[node name="PowerP1" type="Label" parent="CanvasLayer/UI"]
+visible = false
+layout_mode = 0
+offset_left = 854.0
+offset_top = 316.0
+offset_right = 894.0
+offset_bottom = 339.0
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("21_mtqg1")
+
+[node name="PlayerState" type="Node" parent="StateChart"]
+script = ExtResource("22_aogpr")
+initial_state = NodePath("YourTurn")
+
+[node name="YourTurn" type="Node" parent="StateChart/PlayerState"]
+script = ExtResource("23_4r3yx")
+
+[node name="OthersTurn" type="Node" parent="StateChart/PlayerState"]
+script = ExtResource("23_4r3yx")
+
+[connection signal="input_event" from="DrawPile" to="DrawPile" method="_on_input_event"]
+[connection signal="pressed" from="CanvasLayer/UI/Sync Draw Pile" to="CanvasLayer/UI/Sync Draw Pile" method="_on_pressed"]
+
+[editable path="CardPosition/Player 2/Slot 3/Card_3D3"]

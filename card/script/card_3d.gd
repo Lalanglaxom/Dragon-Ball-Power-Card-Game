@@ -8,6 +8,7 @@ extends Node3D
 var frontface_texture: String
 var backface_texture: String
 
+var base_y_pos: float
 var direction: Vector2
 
 func _ready() -> void:
@@ -15,9 +16,9 @@ func _ready() -> void:
 		frontface.texture = load(frontface_texture)
 		backface.texture = load(backface_texture)
 	
-	
+	base_y_pos = position.y
 	appear()
-	print(rotation)
+
 
 func appear():
 	direction = Vector2.DOWN
@@ -33,7 +34,7 @@ func appear():
 
 
 func flip():
-	var base_y_pos = position.y
+	
 	
 	var tween = get_tree().create_tween()
 	
@@ -76,3 +77,11 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			flip()
+
+
+func _on_mouse_entered() -> void:
+	GlobalManager.card_3d_hover.emit(self)
+
+
+func _on_mouse_exited() -> void:
+	GlobalManager.card_3d_unhover.emit(self)

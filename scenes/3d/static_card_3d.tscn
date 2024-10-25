@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://i06lnp7pw64w"]
+
+[ext_resource type="Shader" path="res://card/card_3d.gdshader" id="3_3slql"]
+[ext_resource type="Texture2D" uid="uid://dg4kpc5i7lnaw" path="res://card/battle/image/742x1122/back.png" id="4_u428b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s8q7q"]
+render_priority = 0
+shader = ExtResource("3_3slql")
+
+[node name="Card_3D" type="Node3D"]
+
+[node name="Back" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.01)
+material_overlay = SubResource("ShaderMaterial_s8q7q")
+double_sided = false
+texture_filter = 4
+texture = ExtResource("4_u428b")

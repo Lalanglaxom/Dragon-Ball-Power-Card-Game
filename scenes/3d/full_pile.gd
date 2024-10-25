@@ -9,6 +9,8 @@ extends Node
 @onready var hand_container_p_2: Control = $"../HandContainerP2"
 @onready var hand_container_p_1: Control = $"../HandContainerP1"
 
+@onready var draw_pile_3d: Area3D = $"../DrawPile"
+
 enum Piles {
 	draw_pile,
 }
@@ -33,10 +35,11 @@ func start():
 		draw_pile.shuffle()
 			
 		for card in draw_pile:
-			id_pile.append(card.card_data.id)  
-		
+			id_pile.append(card.card_data.id)
+			
+			
 	GlobalManager.on_draw_pressed.connect(draw)
-	
+	draw(12)
 	
 func draw(num_cards := 3):
 	for i in num_cards:

@@ -4,6 +4,8 @@ extends Node
 # Card Signal
 signal card_hover(Card2D)
 signal card_unhover(Card2D)
+signal card_3d_hover(Card3D)
+signal card_3d_unhover(Card3D)
 
 signal card_chosen(Card3D)
 
