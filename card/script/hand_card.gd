@@ -92,22 +92,16 @@ func _on_gui_input(event: InputEvent) -> void:
 				return
 			
 			if is_hover:
-				create_card_3d()
+				choose_card()
 
 		if event.button_index == MOUSE_BUTTON_LEFT and event.is_released():
 			#print_debug(self.card_data.nice_name)
 			pass
 
 
-func create_card_3d():
-	#var card_3d = CARD_3D.instantiate()
-	#card_3d.frontface_texture = card_data.front_image_path
-	#card_3d.backface_texture = card_data.back_image_path
-	#card_3d.card_data = self.card_data
-	#card_3d.card_belong_to_id = multiplayer.get_unique_id()
-	
+func choose_card():
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "position", Vector2(position.x, position.y + 150), 0.15)
 	await tween.finished
 	
-	GlobalManager.card_chosen.emit(self, self.card_data.id, card_belong_to_id)
+	GlobalManager.card_chosen.emit(self, card_data.id, card_belong_to_id)

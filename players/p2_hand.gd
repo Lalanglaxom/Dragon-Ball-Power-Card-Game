@@ -1,8 +1,8 @@
 extends Control
 
 
-
 var hand_pile_p2: Array[Card2D]
+var remove_hand: Array[Card2D]
 
 @export var max_card_hand: int = 18
 @export var max_hand_spread: float = 700
@@ -13,6 +13,7 @@ var hand_pile_p2: Array[Card2D]
 
 func _ready() -> void:
 	GlobalManager.card_chosen.connect(card_chosen)
+	pass
 
 
 
@@ -49,8 +50,18 @@ func arrange_hand_card():
 		card_ui.target_rotation = target_rot
 
 
-func card_chosen(card3d: Card3D, card2d: Card2D):
-	if hand_pile_p2.has(card2d):
-		hand_pile_p2.erase(card2d)
-		remove_child(card2d)
-		arrange_hand_card()
+func card_chosen(card2d: Card2D, card2d_id: int, player_id: int):
+	if multiplayer.get_unique_id() != player_id:
+		var card_2d = get_card_data_by_id(card2d_id)
+		if hand_pile_p2.has(card_2d):
+			remove_hand.append(card2d)
+			hand_pile_p2.erase(card_2d)
+			remove_child(card_2d)
+			arrange_hand_card()
+
+
+func get_card_data_by_id(id : int):
+	for card in hand_pile_p2:
+		if card.card_data.id == id:
+			return card
+	return null

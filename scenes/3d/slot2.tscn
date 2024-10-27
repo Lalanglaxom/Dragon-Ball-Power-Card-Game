@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjfilmjk4nug4"]
+
+[ext_resource type="Script" path="res://scenes/3d/slot.gd" id="1_pabl7"]
+[ext_resource type="SystemFont" uid="uid://u2gscpfvqfcr" path="res://environment/power_font.tres" id="4_14o2l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m5o7l"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 0.392157)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6bxo6"]
+material = SubResource("StandardMaterial3D_m5o7l")
+size = Vector2(4.5, 1.5)
+
+[node name="Slot 1" type="Node3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 19, 0.01, -12)
+script = ExtResource("1_pabl7")
+target_power = 8500
+
+[node name="PowerLabel" type="Label3D" parent="."]
+transform = Transform3D(-1, -8.44439e-08, 2.26267e-08, 0, 0.258819, 0.965926, -8.74228e-08, 0.965926, -0.258819, 1.90735e-06, 1, -7.09976)
+visible = false
+render_priority = 1
+text = "69000"
+font = ExtResource("4_14o2l")
+font_size = 300
+outline_size = 100
+
+[node name="Background" type="MeshInstance3D" parent="PowerLabel"]
+transform = Transform3D(1, 0, 0, 0, 0.258819, -0.965926, 0, 0.965926, 0.258819, 0, -0.125494, -0.161153)
+visible = false
+mesh = SubResource("PlaneMesh_6bxo6")

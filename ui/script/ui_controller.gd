@@ -13,7 +13,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	big_image.global_position = get_viewport().get_mouse_position() + offset
+	#big_image.global_position = get_viewport().get_mouse_position() + offset
+	pass
 
 
 func show_big_image(card: Card2D):

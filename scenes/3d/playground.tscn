@@ -1,8 +1,8 @@
-[gd_scene load_steps=41 format=4 uid="uid://0u0xoqfym0sm"]
+[gd_scene load_steps=44 format=4 uid="uid://0u0xoqfym0sm"]
 
 [ext_resource type="Script" path="res://scenes/3d/game_controller.gd" id="1_tpmse"]
 [ext_resource type="Texture2D" uid="uid://dst4ivhm4ajhg" path="res://environment/texture/stone.jpg" id="2_hijyr"]
-[ext_resource type="Script" path="res://card/script/hand_container.gd" id="2_s5h1q"]
+[ext_resource type="Script" path="res://players/p1_hand.gd" id="2_s5h1q"]
 [ext_resource type="PackedScene" uid="uid://dwleps5an3bwi" path="res://scenes/3d/card_3d.tscn" id="3_68123"]
 [ext_resource type="Script" path="res://scenes/3d/full_pile.gd" id="3_c2cdc"]
 [ext_resource type="Texture2D" uid="uid://dg7nxa66d8jt8" path="res://environment/3d model/vegeta/vegeta_dance_tex1.png" id="3_k8efk"]
@@ -11,16 +11,19 @@
 [ext_resource type="Curve" uid="uid://cilxr3u0kmg7y" path="res://card/hand_rotation_curve.tres" id="4_gmvg7"]
 [ext_resource type="PackedScene" uid="uid://cnivjgxf0idvg" path="res://scenes/card_2d.tscn" id="5_a8imj"]
 [ext_resource type="Texture2D" uid="uid://bjtg1ax8rgpvl" path="res://environment/3d model/vegeta/vegeta_dance_tex4.png" id="5_evkn5"]
-[ext_resource type="Script" path="res://scenes/3d/hand_container_p_2.gd" id="6_c08yh"]
+[ext_resource type="Script" path="res://players/p2_hand.gd" id="6_c08yh"]
 [ext_resource type="Texture2D" uid="uid://dtdu1a6hkrkgt" path="res://environment/3d model/vegeta/vegeta_dance_face1.png" id="6_s31b6"]
 [ext_resource type="Texture2D" uid="uid://c3ft1c824ffrk" path="res://environment/3d model/vegeta/vegeta_dance_tex3.png" id="7_hvx4o"]
 [ext_resource type="Curve" uid="uid://b6vvv4vkpbtvp" path="res://card/hand_position_curve.tres" id="8_no7rg"]
 [ext_resource type="Curve" uid="uid://bkbraspsnw3k8" path="res://card/hand_spread.tres" id="10_cjsaq"]
 [ext_resource type="Script" path="res://scenes/3d/draw_pile_3d.gd" id="10_cmde0"]
+[ext_resource type="PackedScene" uid="uid://fhihbq6ixpx4" path="res://scenes/3d/slot.tscn" id="10_l8saf"]
+[ext_resource type="PackedScene" uid="uid://bjfilmjk4nug4" path="res://scenes/3d/slot2.tscn" id="11_nlpbd"]
+[ext_resource type="Script" path="res://scenes/3d/grave.gd" id="11_wmtgq"]
 [ext_resource type="Script" path="res://ui/script/ui_controller.gd" id="17_b8fvp"]
-[ext_resource type="Script" path="res://ui/button/sync_draw_pile.gd" id="17_f071g"]
 [ext_resource type="Texture2D" uid="uid://d1xbmnitd6p35" path="res://card/battle/image/742x1122/26_Kefla Legendary SSJ2.png" id="18_e4fgy"]
 [ext_resource type="Script" path="res://scenes/3d/debugger.gd" id="21_ntedu"]
+[ext_resource type="Script" path="res://ui/script/card_button.gd" id="22_6mj4c"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v0lqs"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -665,6 +668,7 @@ mesh = SubResource("PlaneMesh_ho4ek")
 
 [node name="VegetaDance" type="Node3D" parent="."]
 transform = Transform3D(0.734308, 0, -2.38973, 0, 2.5, 0, 2.38973, 0, 0.734308, 38.1029, 0, -15.3813)
+visible = false
 script = ExtResource("3_qnp4i")
 
 [node name="Armature" type="Node3D" parent="VegetaDance"]
@@ -884,29 +888,30 @@ visible = false
 
 [node name="Player 1" type="Node3D" parent="CardPosition"]
 
-[node name="Slot 1" type="Node3D" parent="CardPosition/Player 1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.01, 7)
+[node name="Slot 1" parent="CardPosition/Player 1" instance=ExtResource("10_l8saf")]
+target_power = 21000
 
-[node name="Slot 2" type="Node3D" parent="CardPosition/Player 1"]
+[node name="Slot 2" parent="CardPosition/Player 1" instance=ExtResource("10_l8saf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.01, 7)
 
-[node name="Slot 3" type="Node3D" parent="CardPosition/Player 1"]
+[node name="Slot 3" parent="CardPosition/Player 1" instance=ExtResource("10_l8saf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0.01, 7)
+target_power = 3900
 
 [node name="Grave" type="Node3D" parent="CardPosition/Player 1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0.01, 7)
+script = ExtResource("11_wmtgq")
 
 [node name="Player 2" type="Node3D" parent="CardPosition"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.40703)
 
-[node name="Slot 1" type="Node3D" parent="CardPosition/Player 2"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 19, 0.01, -12)
+[node name="Slot 4" parent="CardPosition/Player 2" instance=ExtResource("11_nlpbd")]
 
-[node name="Slot 2" type="Node3D" parent="CardPosition/Player 2"]
+[node name="Slot 5" parent="CardPosition/Player 2" instance=ExtResource("11_nlpbd")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7, 0.01, -12)
 
-[node name="Slot 3" type="Node3D" parent="CardPosition/Player 2"]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -5, 0.01, -12)
+[node name="Slot 6" parent="CardPosition/Player 2" instance=ExtResource("11_nlpbd")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -5, 0.01, -12)
 
 [node name="Grave" type="Node3D" parent="CardPosition/Player 2"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -25, 0.01, -12)
@@ -982,6 +987,34 @@ hand_spread_curve = ExtResource("10_cjsaq")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="CardOption" type="VBoxContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(140, 66)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -33.0
+offset_right = 70.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(70, 33)
+size_flags_horizontal = 4
+script = ExtResource("22_6mj4c")
+offset = Vector3(-6, 0, -3)
+
+[node name="Flip" type="Button" parent="CanvasLayer/CardOption"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Flip"
+
+[node name="Return" type="Button" parent="CanvasLayer/CardOption"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Return"
+
 [node name="UI" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
@@ -989,17 +1022,9 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("17_b8fvp")
 
-[node name="Sync Draw Pile" type="Button" parent="CanvasLayer/UI"]
-layout_mode = 0
-offset_left = 982.0
-offset_top = 166.0
-offset_right = 1103.0
-offset_bottom = 197.0
-text = "Check Multi Data"
-script = ExtResource("17_f071g")
-
 [node name="BigImage" type="TextureRect" parent="CanvasLayer/UI"]
 visible = false
+texture_filter = 4
 custom_minimum_size = Vector2(750, 1050)
 layout_mode = 1
 anchors_preset = -1
@@ -1010,16 +1035,7 @@ offset_right = 750.0
 offset_bottom = -1.0
 grow_vertical = 2
 scale = Vector2(0.2, 0.2)
-pivot_offset = Vector2(0, 1050)
 texture = ExtResource("18_e4fgy")
-
-[node name="PowerP1" type="Label" parent="CanvasLayer/UI"]
-visible = false
-layout_mode = 0
-offset_left = 854.0
-offset_top = 316.0
-offset_right = 894.0
-offset_bottom = 339.0
 
 [node name="Debugger" type="PanelContainer" parent="CanvasLayer/UI"]
 layout_mode = 0
@@ -1045,4 +1061,5 @@ layout_mode = 2
 layout_mode = 2
 
 [connection signal="input_event" from="DrawPile" to="DrawPile" method="_on_input_event"]
-[connection signal="pressed" from="CanvasLayer/UI/Sync Draw Pile" to="CanvasLayer/UI/Sync Draw Pile" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/CardOption/Flip" to="CanvasLayer/CardOption" method="_on_flip_pressed"]
+[connection signal="pressed" from="CanvasLayer/CardOption/Return" to="CanvasLayer/CardOption" method="_on_return_pressed"]

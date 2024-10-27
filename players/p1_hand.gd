@@ -1,6 +1,7 @@
 extends Control
 
 var hand_pile_p1: Array[Card2D]
+var remove_hand: Array[Card2D]
 
 @export var max_card_hand: int = 18
 @export var max_hand_spread: float = 700
@@ -56,10 +57,16 @@ func receive_card(card: Card2D):
 	add_child(card)
 	arrange_hand_card()
 
-func card_chosen(card2d:Card2D, data: CardData, id: int):
+func card_chosen(card2d: Card2D, card2d_id: int, player_id: int):
+	remove_hand.append(card2d)
 	hand_pile_p1.erase(card2d)
 	remove_child(card2d)
 	arrange_hand_card()
+
+
+func card_take_back():
+	pass
+	
 
 
 func set_turn(turn_num: int):

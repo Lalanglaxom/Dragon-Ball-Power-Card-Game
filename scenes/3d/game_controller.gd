@@ -25,15 +25,16 @@ var p2_battle_pile := []
 var p2_grave_pile := []
 var p2_battle_power: int
 
-var game_turn: int
+var game_turn: int = 0
 var turn_id := [1,2]
 var current_player_turn := 1
 
 var slot_count = 0
 
 func _ready() -> void:
-	GlobalManager.card_chosen.connect(func(card2d: Card2D, card_id: int, id: int): place_card.rpc(card_id, id))
 	GlobalManager.draw_pile_updated.connect(func(): draw_card_for_player.rpc())
+	GlobalManager.card_chosen.connect(place_card.rpc)
+	GlobalManager.card_3d_flip.connect(flip_card.rpc)
 	self.start()
 
 
@@ -82,7 +83,7 @@ func draw_card_for_player():
 
 
 @rpc("any_peer", "call_local", "reliable")
-func place_card(card_id, id):
+func place_card(card_2d, card_id, id):
 	if slot_count == 3:
 		current_player_turn += 1
 		hand_container_p_1.switch_state(current_player_turn)
@@ -105,20 +106,20 @@ func text(id):
 
 func put_card_in_p1_slot(card3d: Card3D):
 	for slot in player_1_pos.get_children():
-		if slot.get_child_count() == 0 and slot.name != "Grave":
+		if slot.get_child_count() == 1 and slot.name != "Grave":
 			slot.add_child(card3d)
 			p1_battle_pile.append(card3d)
-			update_power_label()
+			
 			
 			return
 
 
 func put_card_in_p2_slot(card3d: Card3D):
 	for slot in player_2_pos.get_children():
-		if slot.get_child_count() == 0 and slot.name != "Grave":
+		if slot.get_child_count() == 1 and slot.name != "Grave":
 			slot.add_child(card3d)
 			p2_battle_pile.append(card3d)
-			update_power_label()
+			
 			return
 
 
@@ -142,8 +143,22 @@ func create_card_3d(json_data: Dictionary, id: int):
 	return card_3d
 	
 
-func update_power_label():
+func update_total_power_label():
 	p1_battle_power = 0
 	for card in p1_battle_pile:
 		p1_battle_power += card.card_data.power
 	power_p_1.text = str(p1_battle_power)
+
+
+@rpc("any_peer", "call_local", "reliable")
+func flip_card(card_3d, card_id, player_id):
+	if multiplayer.get_unique_id() == player_id:
+		card_3d.flip()
+		GlobalManager.print_multi(player_id)
+	else:
+		for card in p2_battle_pile:
+			if card.card_data.id == card_id:
+				card.flip()
+
+func update_turn():
+	pass

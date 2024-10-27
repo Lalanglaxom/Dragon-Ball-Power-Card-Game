@@ -37,7 +37,6 @@ func appear():
 
 func flip():
 	var tween = get_tree().create_tween()
-	
 	if direction == Vector2.DOWN:
 		tween.tween_property(self, "position", Vector3(0, position.y + 3, 0), 0.1)
 		
@@ -76,7 +75,7 @@ func set_direction(direction: Vector2):
 func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			flip()
+			GlobalManager.card_3d_button.emit(self, card_data.id, multiplayer.get_unique_id())
 
 
 func _on_mouse_entered() -> void:

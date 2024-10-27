@@ -2,12 +2,16 @@ extends Node
 
 ## Signal Bus
 # Card Signal
+# The arguments is for separating, not functioning
 signal card_hover(Card2D)
 signal card_unhover(Card2D)
+signal card_chosen(Card2D)
+
 signal card_3d_hover(Card3D)
 signal card_3d_unhover(Card3D)
+signal card_3d_button(Card3D)
+signal card_3d_flip(Card3D)
 
-signal card_chosen(Card3D)
 
 # Pile Signal
 signal draw_pile_updated()
