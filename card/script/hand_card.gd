@@ -85,7 +85,7 @@ func _on_gui_input(event: InputEvent) -> void:
 			if parent.name == "FullPile":
 				GlobalManager.on_draw_pressed.emit() 
 			
-			if parent.state != parent.State.YOUR_TURN:
+			if GlobalManager.state != GlobalManager.State.YOUR_TURN:
 				return
 			
 			if card_belong_to_id != multiplayer.get_unique_id():

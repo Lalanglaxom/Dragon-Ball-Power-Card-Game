@@ -987,34 +987,6 @@ hand_spread_curve = ExtResource("10_cjsaq")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="CardOption" type="VBoxContainer" parent="CanvasLayer"]
-custom_minimum_size = Vector2(140, 66)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -70.0
-offset_top = -33.0
-offset_right = 70.0
-offset_bottom = 33.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(70, 33)
-size_flags_horizontal = 4
-script = ExtResource("22_6mj4c")
-offset = Vector3(-6, 0, -3)
-
-[node name="Flip" type="Button" parent="CanvasLayer/CardOption"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Flip"
-
-[node name="Return" type="Button" parent="CanvasLayer/CardOption"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Return"
-
 [node name="UI" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
@@ -1022,24 +994,9 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("17_b8fvp")
 
-[node name="BigImage" type="TextureRect" parent="CanvasLayer/UI"]
-visible = false
-texture_filter = 4
-custom_minimum_size = Vector2(750, 1050)
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.05
-offset_left = 2.0
-offset_top = -1051.0
-offset_right = 750.0
-offset_bottom = -1.0
-grow_vertical = 2
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("18_e4fgy")
-
 [node name="Debugger" type="PanelContainer" parent="CanvasLayer/UI"]
 layout_mode = 0
-offset_right = 199.0
+offset_right = 221.0
 offset_bottom = 277.0
 script = ExtResource("21_ntedu")
 
@@ -1060,6 +1017,71 @@ layout_mode = 2
 [node name="State" type="Label" parent="CanvasLayer/UI/Debugger/VBoxContainer"]
 layout_mode = 2
 
+[node name="Phase" type="Label" parent="CanvasLayer/UI/Debugger/VBoxContainer"]
+layout_mode = 2
+
+[node name="BigImage" type="TextureRect" parent="CanvasLayer/UI"]
+visible = false
+texture_filter = 4
+custom_minimum_size = Vector2(750, 1050)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.05
+offset_left = 2.0
+offset_top = -1051.0
+offset_right = 750.0
+offset_bottom = -1.0
+grow_vertical = 2
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("18_e4fgy")
+
+[node name="CardOption" type="VBoxContainer" parent="CanvasLayer/UI"]
+visible = false
+custom_minimum_size = Vector2(140, 66)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 486.0
+offset_top = 271.0
+offset_right = 626.0
+offset_bottom = 337.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(70, 33)
+size_flags_horizontal = 4
+script = ExtResource("22_6mj4c")
+offset = Vector3(-6, 0, -3)
+
+[node name="Flip" type="Button" parent="CanvasLayer/UI/CardOption"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Flip"
+
+[node name="Return" type="Button" parent="CanvasLayer/UI/CardOption"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Return"
+
+[node name="End Turn" type="Button" parent="CanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 1003.0
+offset_top = 289.0
+offset_right = 1081.0
+offset_bottom = 320.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "End Turn"
+
 [connection signal="input_event" from="DrawPile" to="DrawPile" method="_on_input_event"]
-[connection signal="pressed" from="CanvasLayer/CardOption/Flip" to="CanvasLayer/CardOption" method="_on_flip_pressed"]
-[connection signal="pressed" from="CanvasLayer/CardOption/Return" to="CanvasLayer/CardOption" method="_on_return_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/CardOption/Flip" to="CanvasLayer/UI/CardOption" method="_on_flip_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/CardOption/Return" to="CanvasLayer/UI/CardOption" method="_on_return_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/End Turn" to="CanvasLayer/UI" method="_on_end_turn_pressed"]

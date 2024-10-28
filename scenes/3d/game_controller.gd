@@ -25,24 +25,34 @@ var p2_battle_pile := []
 var p2_grave_pile := []
 var p2_battle_power: int
 
+# Turn control
 var game_turn: int = 0
-var turn_id := [1,2]
-var current_player_turn := 1
 
-var slot_count = 0
+
+
+var has_action: bool
+
+var turn_new_round := [1,2]
+var current_player_turn := 1
+var amount_turns_end := 0
+
+var p1_slot_count = 0
+var p2_slot_count = 0
 
 func _ready() -> void:
 	GlobalManager.draw_pile_updated.connect(func(): draw_card_for_player.rpc())
 	GlobalManager.card_chosen.connect(place_card.rpc)
 	GlobalManager.card_3d_flip.connect(flip_card.rpc)
-	self.start()
+	GlobalManager.card_return.connect(return_card.rpc)
+	GlobalManager.end_turn_pressed.connect(update_turn.rpc)
+	self.set_new_round_turn()
 
 
-func start():
-	turn_id.shuffle()
+func set_new_round_turn():
+	turn_new_round.shuffle()
 	if multiplayer.is_server():
-		set_turn.rpc(turn_id[0])
-		hand_container_p_1.set_turn(turn_id[1])
+		set_turn.rpc(turn_new_round[0])
+		hand_container_p_1.set_turn(turn_new_round[1])
 		hand_container_p_1.switch_state(current_player_turn)
 	
 @rpc("any_peer","call_remote")
@@ -84,19 +94,16 @@ func draw_card_for_player():
 
 @rpc("any_peer", "call_local", "reliable")
 func place_card(card_2d, card_id, id):
-	if slot_count == 3:
-		current_player_turn += 1
-		hand_container_p_1.switch_state(current_player_turn)
-		slot_count = 0
-		return
 		
 	var card3d = create_card_3d(get_card3d_data_by_id(card_id), id)
 	if multiplayer.get_unique_id() == card3d.card_belong_to_id:
+		if p1_slot_count == 3:
+			return
+
 		put_card_in_p1_slot(card3d)
+		p1_slot_count += 1
 	else:
 		put_card_in_p2_slot(card3d)
-	slot_count += 1
-
 
 
 @rpc("any_peer", "call_local", "reliable")
@@ -109,8 +116,6 @@ func put_card_in_p1_slot(card3d: Card3D):
 		if slot.get_child_count() == 1 and slot.name != "Grave":
 			slot.add_child(card3d)
 			p1_battle_pile.append(card3d)
-			
-			
 			return
 
 
@@ -119,9 +124,45 @@ func put_card_in_p2_slot(card3d: Card3D):
 		if slot.get_child_count() == 1 and slot.name != "Grave":
 			slot.add_child(card3d)
 			p2_battle_pile.append(card3d)
-			
 			return
 
+
+@rpc("any_peer", "call_local", "reliable")
+func flip_card(card_3d, card_id, player_id):
+	if multiplayer.get_unique_id() == player_id:
+		card_3d.flip()
+		var card_slot = card_3d.get_parent()
+		card_slot.set_target_power(card_3d.card_data.power, card_3d.direction)
+		if card_3d.direction == Vector2.UP:
+			p1_battle_power += card_3d.card_data.power
+		else:
+			p1_battle_power -= card_3d.card_data.power
+	else:
+		for card in p2_battle_pile:
+			if card.card_data.id == card_id:
+				card.flip()
+				var card_slot = card.get_parent()
+				card_slot.set_target_power(card.card_data.power, card.direction)
+				if card.direction == Vector2.UP:
+					p2_battle_power += card.card_data.power
+				else:
+					p2_battle_power -= card.card_data.power
+					
+	GlobalManager.print_multi(p1_battle_power)
+	GlobalManager.print_multi(p2_battle_power)
+
+@rpc("any_peer","call_local","reliable")
+func return_card(card3d, card_id, player_id):
+	if multiplayer.get_unique_id() == player_id:
+		card3d.move_out()
+		p1_battle_pile.erase(card3d)
+		p1_slot_count -= 1
+	else:
+		for card in p2_battle_pile:
+			if card.card_data.id == card_id:
+				card.move_out()
+				p2_battle_pile.erase(card)
+	
 
 func get_card3d_data_by_id(id : int):
 	for json_data in full_pile.card_database:
@@ -150,15 +191,26 @@ func update_total_power_label():
 	power_p_1.text = str(p1_battle_power)
 
 
-@rpc("any_peer", "call_local", "reliable")
-func flip_card(card_3d, card_id, player_id):
-	if multiplayer.get_unique_id() == player_id:
-		card_3d.flip()
-		GlobalManager.print_multi(player_id)
-	else:
-		for card in p2_battle_pile:
-			if card.card_data.id == card_id:
-				card.flip()
-
+@rpc("any_peer","call_local")
 func update_turn():
-	pass
+	current_player_turn += 1
+	if current_player_turn > 2:
+		current_player_turn = 1
+	hand_container_p_1.switch_state(current_player_turn)
+	
+	amount_turns_end += 1
+	
+	if amount_turns_end == 2:
+		switch_phase()
+		amount_turns_end = 0
+
+
+@rpc("any_peer","call_local","reliable")
+func switch_phase():
+	if GlobalManager.current_phase == GlobalManager.Phase.STANDOFF:
+		GlobalManager.current_phase = GlobalManager.Phase.BATTLE
+		
+	else:
+		game_turn += 1
+		GlobalManager.current_phase = GlobalManager.Phase.STANDOFF
+		set_new_round_turn()

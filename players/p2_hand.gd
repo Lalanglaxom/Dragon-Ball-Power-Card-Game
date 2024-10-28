@@ -13,6 +13,7 @@ var remove_hand: Array[Card2D]
 
 func _ready() -> void:
 	GlobalManager.card_chosen.connect(card_chosen)
+	GlobalManager.card_return.connect(add_card)
 	pass
 
 
@@ -49,6 +50,16 @@ func arrange_hand_card():
 		card_ui.target_position = target_pos
 		card_ui.target_rotation = target_rot
 
+
+func add_card(card3d, card_id, player_id):
+	await get_tree().create_timer(0.1).timeout
+	if multiplayer.get_unique_id() != player_id:
+		for card in remove_hand:
+			if card.card_data.id == card_id:
+				hand_pile_p2.append(card)
+				remove_hand.erase(card)
+				add_child(card)
+		arrange_hand_card()
 
 func card_chosen(card2d: Card2D, card2d_id: int, player_id: int):
 	if multiplayer.get_unique_id() != player_id:

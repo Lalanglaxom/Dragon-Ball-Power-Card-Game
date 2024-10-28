@@ -1,3 +1,4 @@
+class_name Player2
 extends Control
 
 @onready var full_pile: FullPile = $"../../FullPile"
@@ -15,17 +16,21 @@ func _ready() -> void:
 
 
 func show_button(card3d, card_id, player_id):
+	if card3d.card_belong_to_id != multiplayer.get_unique_id(): return
+	if GlobalManager.state != GlobalManager.State.YOUR_TURN: return
+	
+	
 	self.show()
 	self.card3d = card3d
 	self.card_id = card_id
 	self.player_id = player_id
 	
-	#offset = Vector3(-4.5, 0, 0)
 	position = get_viewport().get_camera_3d().unproject_position(card3d.global_transform.origin + offset)
 	
 func _on_flip_pressed() -> void:
 	GlobalManager.card_3d_flip.emit(self.card3d, self.card_id, self.player_id)
-
+	self.hide()
 
 func _on_return_pressed() -> void:
-	GlobalManager.print_multi("Return Pressed")
+	GlobalManager.card_return.emit(card3d, card_id, player_id)
+	self.hide()

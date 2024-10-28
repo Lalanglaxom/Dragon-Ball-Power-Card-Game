@@ -1,3 +1,4 @@
+class_name Player1
 extends Control
 
 var hand_pile_p1: Array[Card2D]
@@ -11,15 +12,14 @@ var remove_hand: Array[Card2D]
 
 @onready var state_chart: StateChart = $"../StateChart"
 
-enum State {OTHER_TURN, YOUR_TURN}
-var state: State
+
 var player_turn: int
 
 func _ready() -> void:
 	
 	#GlobalManager.card_hover.connect(handle_hover)
 	GlobalManager.card_chosen.connect(card_chosen)
-	GlobalManager.card_drew.connect(receive_card)
+	GlobalManager.card_return.connect(add_card)
 
 
 func _process(delta: float) -> void:
@@ -50,12 +50,7 @@ func arrange_hand_card():
 		
 		card_ui.target_position = target_pos
 		card_ui.target_rotation = target_rot
-	
 
-
-func receive_card(card: Card2D):
-	add_child(card)
-	arrange_hand_card()
 
 func card_chosen(card2d: Card2D, card2d_id: int, player_id: int):
 	remove_hand.append(card2d)
@@ -64,8 +59,15 @@ func card_chosen(card2d: Card2D, card2d_id: int, player_id: int):
 	arrange_hand_card()
 
 
-func card_take_back():
-	pass
+func add_card(card3d, card_id, player_id):
+	await get_tree().create_timer(0.1).timeout
+	if multiplayer.get_unique_id() == player_id:
+		for card in remove_hand:
+			if card.card_data.id == card_id:
+				hand_pile_p1.append(card)
+				remove_hand.erase(card)
+				add_child(card)
+		arrange_hand_card()
 	
 
 
@@ -74,9 +76,6 @@ func set_turn(turn_num: int):
 
 func switch_state(current_player_turn: int):
 	if  player_turn == current_player_turn:
-		state = State.YOUR_TURN
+		GlobalManager.state = GlobalManager.State.YOUR_TURN
 	else:
-		state = State.OTHER_TURN
-	
-	GlobalManager.print_multi(State.keys()[state])
-	
+		GlobalManager.state = GlobalManager.State.OTHER_TURN

@@ -35,3 +35,7 @@ func show_big_image_3d(card: Card3D):
 func hide_big_image_3d(card: Card3D):
 	big_image.texture = null
 	big_image.hide()
+
+
+func _on_end_turn_pressed() -> void:
+	GlobalManager.end_turn_pressed.emit()
