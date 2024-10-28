@@ -25,6 +25,8 @@ signal end_turn_pressed()
 
 var Players = {}
 
+var faux_cards: Array[Card2D]
+
 enum State {OTHER_TURN, YOUR_TURN}
 var state: State
 

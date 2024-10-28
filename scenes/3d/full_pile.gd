@@ -2,8 +2,8 @@ class_name FullPile
 extends Node
 
 
-@export_file("*.json") var json_card_database_path : String
-@export_file("*.json") var json_card_collection_path : String
+@export_file("*.json") var json_battle_database_path : String
+@export_file("*.json") var json_battle_collection_path : String
 @export var card_scene : PackedScene
 
 @onready var hand_container_p_2: Control = $"../HandContainerP2"
@@ -15,8 +15,8 @@ enum Piles {
 	draw_pile,
 }
 
-var card_database := [] # an array of JSON `Card` data
-var card_collection := [] # an array of JSON `Card` data
+var battle_database := [] # an array of JSON `Card` data
+var battle_collection := [] # an array of JSON `Card` data
 
 var draw_pile := [] # an array of `Card2D`s
 var id_pile := []
@@ -29,7 +29,7 @@ func _ready() -> void:
 
 func start():
 	if multiplayer.is_server():
-		reset_card_collection()
+		reset_battle_collection()
 		for card in get_children():
 			draw_pile.append(card)
 		#draw_pile.shuffle()
@@ -64,8 +64,8 @@ func shuffle_draw_pile():
 
 
 func load_json_path():
-	card_database = _load_json_cards_from_path(json_card_database_path)
-	card_collection = _load_json_cards_from_path(json_card_collection_path)
+	battle_database = _load_json_cards_from_path(json_battle_database_path)
+	battle_collection = _load_json_cards_from_path(json_battle_collection_path)
 
 
 func _load_json_cards_from_path(path : String):
@@ -79,21 +79,21 @@ func _load_json_cards_from_path(path : String):
 	return found
 
 
-func reset_card_collection():
-	for nice_name in card_collection:
+func reset_battle_collection():
+	for nice_name in battle_collection:
 		var card_data = get_card_data_by_nice_name(nice_name)
 		var card_ui = create_card_ui(card_data)
 		#draw_pile.push_back(card_ui)
 
 func get_card_data_by_id(id : int):
-	for json_data in card_database:
+	for json_data in battle_database:
 		if int(json_data.id) == id:
 			return json_data
 	return null
 	
 	
 func get_card_data_by_nice_name(nice_name : String):
-	for json_data in card_database:
+	for json_data in battle_database:
 		if json_data.nice_name == nice_name:
 			return json_data
 	return null

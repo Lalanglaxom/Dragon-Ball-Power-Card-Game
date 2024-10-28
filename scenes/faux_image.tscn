@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://bc20e3st7fl8q"]
+
+[ext_resource type="Texture2D" uid="uid://civoefkhtw7l5" path="res://card/faux/image/160x240/Frieren.png" id="2_7x23f"]
+[ext_resource type="Material" uid="uid://q6cfppc7lsq1" path="res://card/faux/faux_highlight.tres" id="2_28jc4"]
+[ext_resource type="Script" path="res://ui/script/faux_image.gd" id="2_qso78"]
+[ext_resource type="Material" uid="uid://bwjld7a1nmcrb" path="res://card/faux/faux_image.tres" id="3_71lxc"]
+
+[node name="FauxImage" type="Control"]
+custom_minimum_size = Vector2(160, 240)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 160.0
+offset_bottom = 240.0
+script = ExtResource("2_qso78")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = ExtResource("2_28jc4")
+layout_mode = 0
+offset_left = 1.0
+offset_right = 161.0
+offset_bottom = 240.0
+texture = ExtResource("2_7x23f")
+
+[node name="ColorRect" type="ColorRect" parent="TextureRect"]
+visible = false
+material = ExtResource("3_71lxc")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

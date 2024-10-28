@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://c7g2urxg26sdy"
+
+[deps]
+
+files=["res://Power Card Game - Digital - Faux.Id.translation", "res://Power Card Game - Digital - Faux.Title.translation", "res://Power Card Game - Digital - Faux.Effect.translation", "res://Power Card Game - Digital - Faux.Image.translation", "res://Power Card Game - Digital - Faux.Mini Image.translation"]
+
+source_file="res://Power Card Game - Digital - Faux.csv"
+dest_files=["res://Power Card Game - Digital - Faux.Id.translation", "res://Power Card Game - Digital - Faux.Title.translation", "res://Power Card Game - Digital - Faux.Effect.translation", "res://Power Card Game - Digital - Faux.Image.translation", "res://Power Card Game - Digital - Faux.Mini Image.translation"]
+
+[params]
+
+compress=true
+delimiter=0

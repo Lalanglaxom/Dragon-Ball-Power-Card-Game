@@ -9,11 +9,11 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0wwik"]
 shader = ExtResource("2_52d3g")
-shader_parameter/fov = 24.0
-shader_parameter/cull_back = true
-shader_parameter/y_rot = 0.0
-shader_parameter/x_rot = 0.0
-shader_parameter/inset = 0.0
+shader_parameter/shine_color = Color(1, 1, 1, 0.25)
+shader_parameter/line_width = 0.1
+shader_parameter/angle = 0.785398
+shader_parameter/speed = 1.0
+shader_parameter/wait_cycles = 1.0
 
 [node name="Card_2D" type="Control"]
 custom_minimum_size = Vector2(80, 120)
@@ -27,7 +27,6 @@ card_data = ExtResource("2_5x0nf")
 hover_amount = 50.0
 
 [node name="Frontface" type="TextureRect" parent="."]
-texture_filter = 1
 material = ExtResource("4_enyvt")
 layout_mode = 0
 offset_right = 160.0

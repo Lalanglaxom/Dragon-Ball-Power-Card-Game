@@ -17,18 +17,26 @@ def read_csv(file_path):
 
 
 # Path to the CSV file
-csv_file_path = "Power Card Game - Digital - Battle.csv"
+battle_file_path = "Power Card Game - Digital - Battle.csv"
+faux_file_path = "Power Card Game - Digital - Faux.csv"
 
 # Path to the JSON file
-json_data_file_path = "card/battle/battle_database.json"
-json_collection_file_path = "card/battle/battle_collection.json"
+json_data_battle_path = "card/battle/battle_database.json"
+json_collection_battle_path = "card/battle/battle_collection.json"
+json_data_faux_path = "card/faux/faux_database.json"
+json_collection_faux_path = "card/faux/faux_collection.json"
+
+
+
+
+##################################################################### BATTLE JSON ############################################################################
 
 # Read data from the CSV file
-header_row, csv_data = read_csv(csv_file_path)
+header_row, csv_data = read_csv(battle_file_path)
 
 
 # Write the modified data back to the CSV file
-with open(csv_file_path, "w", newline="", encoding="utf-8") as csvfile:
+with open(battle_file_path, "w", newline="", encoding="utf-8") as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(header_row)
     writer.writerows(csv_data)
@@ -54,17 +62,64 @@ for index, row in enumerate(csv_data):
         "back_mini_path": "res://card/battle/image/160x240/back.png",
         "front_image_path": texture_path.strip(),
         "back_image_path": "res://card/battle/image/742x1122/back.png",
-        "resource_script_path": "res://card/battle/battle_data.gd",
+        "resource_script_path": "res://card/script/battle_data.gd",
     }
 
     json_data.append(card_data)
     json_collection.append(nice_name.strip())
 
 # Write JSON data to the file
-with open(json_data_file_path, "w", encoding="utf-8") as jsonfile:
+with open(json_data_battle_path, "w", encoding="utf-8") as jsonfile:
     json.dump(json_data, jsonfile, ensure_ascii=False, indent=2)
 
-with open(json_collection_file_path, "w", encoding="utf-8") as jsonfile:
+with open(json_collection_battle_path, "w", encoding="utf-8") as jsonfile:
     json.dump(json_collection, jsonfile, indent=2)
 
-print("JSON data has been written to", json_data_file_path)
+print("JSON data has been written to", json_data_battle_path)
+
+
+##################################################################### FAUX JSON ############################################################################
+
+# Read data from the CSV file
+header_row, csv_data = read_csv(faux_file_path)
+
+
+# Write the modified data back to the CSV file
+with open(faux_file_path, "w", newline="", encoding="utf-8") as csvfile:
+    writer = csv.writer(csvfile)
+    writer.writerow(header_row)
+    writer.writerows(csv_data)
+
+
+# # Prepare the JSON data
+json_data = []
+json_collection = []
+for index, row in enumerate(csv_data):
+    id = row[1]
+    nice_name = row[2]
+    effect = row[3] 
+    texture_path = row[4]
+    mini_image = row[5]
+
+    card_data = {
+        "id" : id,
+        "nice_name": nice_name.strip(),
+        "effect": effect.strip(),
+        "front_mini_path": mini_image.strip(),
+        "back_mini_path": "res://card/battle/image/160x240/back.png",
+        "front_image_path": texture_path.strip(),
+        "back_image_path": "res://card/battle/image/742x1122/back.png",
+        "resource_script_path": "res://card/script/faux_data.gd",
+    }
+
+    json_data.append(card_data)
+    json_collection.append(nice_name.strip())
+
+# Write JSON data to the file
+with open(json_data_faux_path, "w", encoding="utf-8") as jsonfile:
+    json.dump(json_data, jsonfile, ensure_ascii=False, indent=2)
+
+with open(json_collection_faux_path, "w", encoding="utf-8") as jsonfile:
+    json.dump(json_collection, jsonfile, indent=2)
+
+print("JSON data has been written to", json_data_faux_path)

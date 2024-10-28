@@ -18,7 +18,7 @@ var player_turn: int
 func _ready() -> void:
 	
 	#GlobalManager.card_hover.connect(handle_hover)
-	GlobalManager.card_chosen.connect(card_chosen)
+	#GlobalManager.card_chosen.connect(card_chosen)
 	GlobalManager.card_return.connect(add_card)
 
 

@@ -18,7 +18,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-GlobalManager="*res://scenes/GlobalManager.gd"
+GlobalManager="*res://scenes/scripts/GlobalManager.gd"
 
 [display]
 
@@ -31,7 +31,7 @@ movie_writer/movie_file="E:/Videos/Captures/godot/power card game.avi"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/Asset_Drawer/plugin.cfg", "res://addons/YouCanDoIt/plugin.cfg", "res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/cyberassets/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg")
+enabled=PackedStringArray("res://addons/Asset_Drawer/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/YouCanDoIt/plugin.cfg", "res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/cyberassets/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg")
 
 [file_customization]
 
@@ -39,7 +39,8 @@ folder_colors={
 "res://card/": "yellow",
 "res://environment/": "green",
 "res://players/": "red",
-"res://scenes/": "orange"
+"res://scenes/": "orange",
+"res://ui/": "purple"
 }
 
 [input]

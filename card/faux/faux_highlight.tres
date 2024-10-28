@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://q6cfppc7lsq1"]
+
+[ext_resource type="Shader" path="res://card/properties/fake_3d.gdshader" id="1_k6ol2"]
+
+[resource]
+shader = ExtResource("1_k6ol2")
+shader_parameter/shine_color = Color(1, 1, 1, 0.25)
+shader_parameter/line_width = 0.1
+shader_parameter/angle = 3.92699
+shader_parameter/speed = 0.885
+shader_parameter/wait_cycles = 1.0

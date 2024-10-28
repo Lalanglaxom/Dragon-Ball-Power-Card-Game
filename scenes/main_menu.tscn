@@ -1,6 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://2qr2cpxlrumy"]
+[gd_scene load_steps=5 format=3 uid="uid://2qr2cpxlrumy"]
 
-[ext_resource type="Script" path="res://scenes/multiplayer_menu.gd" id="1_rcsq5"]
+[ext_resource type="Script" path="res://scenes/scripts/multiplayer_menu.gd" id="1_rcsq5"]
+[ext_resource type="Script" path="res://ui/script/faux_card_select.gd" id="2_yyewi"]
+[ext_resource type="PackedScene" uid="uid://cnivjgxf0idvg" path="res://scenes/card_2d.tscn" id="3_nbtqn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b0np0"]
+bg_color = Color(1, 1, 1, 1)
+draw_center = false
+border_width_left = 200
+border_width_top = 10
+border_width_right = 110
+border_width_bottom = 10
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 20.0
+expand_margin_top = 20.0
+expand_margin_right = 20.0
+expand_margin_bottom = 20.0
+shadow_offset = Vector2(-3.345, 0)
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
@@ -44,6 +65,45 @@ offset_left = 37.0
 offset_top = 54.0
 offset_right = 496.0
 offset_bottom = 85.0
+
+[node name="Faux Card Select" type="Control" parent="."]
+custom_minimum_size = Vector2(508, 480)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1.0
+offset_top = -206.0
+offset_right = 509.0
+offset_bottom = 274.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_yyewi")
+json_faux_database_path = "res://card/faux/faux_database.json"
+json_faux_collection_path = "res://card/faux/faux_collection.json"
+card_scene = ExtResource("3_nbtqn")
+
+[node name="Panel" type="Panel" parent="Faux Card Select"]
+custom_minimum_size = Vector2(508, 480)
+layout_mode = 2
+offset_right = 508.0
+offset_bottom = 480.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_b0np0")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Faux Card Select"]
+custom_minimum_size = Vector2(480, 480)
+layout_mode = 2
+offset_right = 508.0
+offset_bottom = 480.0
+horizontal_scroll_mode = 0
+
+[node name="GridContainer" type="GridContainer" parent="Faux Card Select/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 3
 
 [connection signal="pressed" from="Host" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="Join" to="." method="_on_join_button_pressed"]

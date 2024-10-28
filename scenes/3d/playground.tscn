@@ -940,8 +940,8 @@ grow_horizontal = 0
 grow_vertical = 2
 pivot_offset = Vector2(40, 60)
 script = ExtResource("3_c2cdc")
-json_card_database_path = "res://card/battle/battle_database.json"
-json_card_collection_path = "res://card/battle/battle_collection.json"
+json_battle_database_path = "res://card/battle/battle_database.json"
+json_battle_collection_path = "res://card/battle/battle_collection.json"
 card_scene = ExtResource("5_a8imj")
 
 [node name="HandContainerP2" type="Control" parent="."]

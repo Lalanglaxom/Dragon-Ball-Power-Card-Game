@@ -1,6 +1,7 @@
 extends Control
 
 @onready var big_image: TextureRect = $BigImage
+@onready var end_turn: Button = $"End Turn"
 
 var offset = Vector2(5, -225)
 
@@ -9,11 +10,11 @@ func _ready() -> void:
 	GlobalManager.card_unhover.connect(hide_big_image)
 	GlobalManager.card_3d_hover.connect(show_big_image_3d)
 	GlobalManager.card_3d_unhover.connect(hide_big_image_3d)
+	
 
 
 
 func _process(delta: float) -> void:
-	#big_image.global_position = get_viewport().get_mouse_position() + offset
 	pass
 
 

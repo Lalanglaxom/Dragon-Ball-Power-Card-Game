@@ -12,7 +12,7 @@ var remove_hand: Array[Card2D]
 
 
 func _ready() -> void:
-	GlobalManager.card_chosen.connect(card_chosen)
+	#GlobalManager.card_chosen.connect(card_chosen)
 	GlobalManager.card_return.connect(add_card)
 	pass
 
@@ -61,11 +61,11 @@ func add_card(card3d, card_id, player_id):
 				add_child(card)
 		arrange_hand_card()
 
-func card_chosen(card2d: Card2D, card2d_id: int, player_id: int):
+func card_chosen(card2d_id: int, player_id: int):
 	if multiplayer.get_unique_id() != player_id:
 		var card_2d = get_card_data_by_id(card2d_id)
 		if hand_pile_p2.has(card_2d):
-			remove_hand.append(card2d)
+			remove_hand.append(card_2d)
 			hand_pile_p2.erase(card_2d)
 			remove_child(card_2d)
 			arrange_hand_card()

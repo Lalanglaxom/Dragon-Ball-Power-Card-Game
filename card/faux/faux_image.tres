@@ -1,0 +1,16 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bwjld7a1nmcrb"]
+
+[ext_resource type="Shader" path="res://ui/script/faux_material.gdshader" id="1_4l8x8"]
+
+[resource]
+shader = ExtResource("1_4l8x8")
+shader_parameter/Line_Smoothness = 0.045
+shader_parameter/Line_Width = 0.075
+shader_parameter/Brightness = 3.0
+shader_parameter/Rotation_deg = 59.348
+shader_parameter/Distortion = 1.8
+shader_parameter/Speed = 0.7
+shader_parameter/Position = 0.0
+shader_parameter/Position_Min = 0.25
+shader_parameter/Position_Max = 0.5
+shader_parameter/Alpha = 1.0

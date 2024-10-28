@@ -1,15 +1,17 @@
 extends Node
 
+
 @onready var full_pile: Control = $"../FullPile"
 
 @onready var player_1_pos: Node3D = $"../CardPosition/Player 1"
+@onready var p1_hand: Control = $"../HandContainerP1"
 @onready var power_p_1: Label = $"../CanvasLayer/UI/PowerP1"
 
 @onready var player_2_pos: Node3D = $"../CardPosition/Player 2"
+@onready var p2_hand: Control = $"../HandContainerP2"
 
-@onready var hand_container_p_2: Control = $"../HandContainerP2"
-@onready var hand_container_p_1: Control = $"../HandContainerP1"
 
+@onready var ui: Control = $"../CanvasLayer/UI"
 const CARD_3D = preload("res://scenes/3d/card_3d.tscn")
 
 var start_card_hand_amount: int = 13
@@ -45,20 +47,21 @@ func _ready() -> void:
 	GlobalManager.card_3d_flip.connect(flip_card.rpc)
 	GlobalManager.card_return.connect(return_card.rpc)
 	GlobalManager.end_turn_pressed.connect(update_turn.rpc)
-	self.set_new_round_turn()
+	set_new_round_turn()
 
 
 func set_new_round_turn():
 	turn_new_round.shuffle()
 	if multiplayer.is_server():
 		set_turn.rpc(turn_new_round[0])
-		hand_container_p_1.set_turn(turn_new_round[1])
-		hand_container_p_1.switch_state(current_player_turn)
-	
+		p1_hand.set_turn(turn_new_round[1])
+		p1_hand.switch_state(current_player_turn)
+
+
 @rpc("any_peer","call_remote")
 func set_turn(turn: int):
-	hand_container_p_1.set_turn(turn)	
-	hand_container_p_1.switch_state(current_player_turn)
+	p1_hand.set_turn(turn)	
+	p1_hand.switch_state(current_player_turn)
 
 
 @rpc("any_peer", "call_local", "reliable")
@@ -67,43 +70,49 @@ func draw_card_for_player():
 		for i in range(0,start_card_hand_amount):
 			var card = full_pile.draw_pile[i]
 			p1_pile.append(card)
-			card.reparent(hand_container_p_1, true)
+			card.reparent(p1_hand, true)
 			card.card_belong_to_id = multiplayer.get_unique_id()
-		hand_container_p_1.arrange_hand_card()
+		p1_hand.arrange_hand_card()
 
 		for i in range(start_card_hand_amount, start_card_hand_amount * 2):
 			var card = full_pile.draw_pile[i]
 			p2_pile.append(card)
-			card.reparent(hand_container_p_2, true)
-		hand_container_p_2.arrange_hand_card()
+			card.reparent(p2_hand, true)
+		p2_hand.arrange_hand_card()
 		
 	else:
 		for i in range(0,start_card_hand_amount):
 			var card = full_pile.draw_pile[i]
 			p1_pile.append(card)
-			card.reparent(hand_container_p_2, true)
-		hand_container_p_2.arrange_hand_card()
+			card.reparent(p2_hand, true)
+		p2_hand.arrange_hand_card()
 
 		for i in range(start_card_hand_amount, start_card_hand_amount * 2):
 			var card = full_pile.draw_pile[i]
 			p2_pile.append(card)
-			card.reparent(hand_container_p_1, true)
+			card.reparent(p1_hand, true)
 			card.card_belong_to_id = multiplayer.get_unique_id()
-			hand_container_p_1.arrange_hand_card()
+			p1_hand.arrange_hand_card()
 
 
 @rpc("any_peer", "call_local", "reliable")
 func place_card(card_2d, card_id, id):
-		
+	
 	var card3d = create_card_3d(get_card3d_data_by_id(card_id), id)
 	if multiplayer.get_unique_id() == card3d.card_belong_to_id:
 		if p1_slot_count == 3:
 			return
-
+			
+		p1_hand.card_chosen(card_2d, card_id, id)
 		put_card_in_p1_slot(card3d)
 		p1_slot_count += 1
 	else:
+		if p2_slot_count == 3:
+			return
+		
+		p2_hand.card_chosen(card_id, id)
 		put_card_in_p2_slot(card3d)
+		p2_slot_count += 1
 
 
 @rpc("any_peer", "call_local", "reliable")
@@ -162,6 +171,7 @@ func return_card(card3d, card_id, player_id):
 			if card.card_data.id == card_id:
 				card.move_out()
 				p2_battle_pile.erase(card)
+				p2_slot_count -= 1
 	
 
 func get_card3d_data_by_id(id : int):
@@ -196,13 +206,15 @@ func update_turn():
 	current_player_turn += 1
 	if current_player_turn > 2:
 		current_player_turn = 1
-	hand_container_p_1.switch_state(current_player_turn)
+	p1_hand.switch_state(current_player_turn)
 	
 	amount_turns_end += 1
 	
 	if amount_turns_end == 2:
 		switch_phase()
 		amount_turns_end = 0
+	
+	ui.end_turn.disabled = !ui.end_turn.disabled
 
 
 @rpc("any_peer","call_local","reliable")
@@ -214,3 +226,14 @@ func switch_phase():
 		game_turn += 1
 		GlobalManager.current_phase = GlobalManager.Phase.STANDOFF
 		set_new_round_turn()
+
+
+func check_end_turn() -> bool:
+	var valid = false
+	
+	#if GlobalManager.state == GlobalManager.State.YOUR_TURN:
+		#if p1_slot_count == 3 and p1_battle_power >= p2_battle_power: 
+			#valid = true
+		#if p1_slot_count == 3 and p1_battle_power >= p2_battle_power: 
+	
+	return valid
