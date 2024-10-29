@@ -83,9 +83,9 @@
 	"id": "2008",
 	"nice_name": "Gokubu",
 	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/VegeGokubu.png",
+	"front_mini_path": "res://card/faux/image/160x240/Gokubu.png",
 	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/VegeGokubu.png",
+	"front_image_path": "res://card/faux/image/742x1122/Gokubu.png",
 	"back_image_path": "res://card/battle/image/742x1122/back.png",
 	"resource_script_path": "res://card/script/faux_data.gd"
   },
