@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://dwleps5an3bwi"]
 
 [ext_resource type="Script" path="res://card/script/card_3d.gd" id="1_jfsc6"]
+[ext_resource type="Texture2D" uid="uid://ckkk3o5lki85k" path="res://card/battle/image/742x1122/49_Heart Ultimate Form.png" id="2_bs2de"]
 [ext_resource type="Shader" path="res://card/card_3d.gdshader" id="2_v7hvl"]
-[ext_resource type="Texture2D" uid="uid://nxe5hxccb6ic" path="res://card/battle/image/742x1122/58_Vegito Super Saiyan Blue.png" id="2_xv63o"]
 [ext_resource type="Texture2D" uid="uid://dg4kpc5i7lnaw" path="res://card/battle/image/742x1122/back.png" id="3_et54n"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s8q7q"]
@@ -20,7 +20,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 
 transparent = false
 shaded = true
 double_sided = false
-texture = ExtResource("2_xv63o")
+texture = ExtResource("2_bs2de")
 
 [node name="Back" type="Sprite3D" parent="."]
 transform = Transform3D(-1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.74228e-08, -1, 4.37114e-08, 0, 0, -0.01)

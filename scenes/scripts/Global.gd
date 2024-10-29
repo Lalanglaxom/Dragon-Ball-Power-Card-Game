@@ -21,8 +21,9 @@ signal on_draw_pressed(amount: int)
 signal card_drew(Card2D)
 
 
-# Game Siganl
+# Game Signal
 signal end_turn_pressed()
+signal game_turn_end()
 
 var Players = {}
 

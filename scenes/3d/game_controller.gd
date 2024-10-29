@@ -1,14 +1,17 @@
 extends Node
 
+signal end_turn_valid
 
 @onready var full_pile: Control = $"../FullPile"
 
 @onready var player_1_pos: Node3D = $"../CardPosition/Player 1"
 @onready var p1_hand: Control = $"../HandContainerP1"
 @onready var power_p_1: Label = $"../CanvasLayer/UI/PowerP1"
+@onready var grave_1: Node3D = $"../CardPosition/Player 1/Grave 1"
 
 @onready var player_2_pos: Node3D = $"../CardPosition/Player 2"
 @onready var p2_hand: Control = $"../HandContainerP2"
+@onready var grave_2: Node3D = $"../CardPosition/Player 2/Grave 2"
 
 
 @onready var ui: Control = $"../CanvasLayer/UI"
@@ -47,12 +50,20 @@ func _ready() -> void:
 	Global.card_3d_flip.connect(flip_card.rpc)
 	Global.card_return.connect(return_card.rpc)
 	Global.end_turn_pressed.connect(update_turn.rpc)
+	Global.game_turn_end.connect(send_to_grave)
 	
 	set_new_round_turn()
 	
-	set_faux_for_player.rpc(Global.faux_cards_chosen[0].card_data.id, \
-							Global.faux_cards_chosen[1].card_data.id, \
-							multiplayer.get_unique_id())
+	#set_faux_for_player.rpc(Global.faux_cards_chosen[0].card_data.id, \
+							#Global.faux_cards_chosen[1].card_data.id, \
+							#multiplayer.get_unique_id())
+
+
+func _process(delta: float) -> void:
+	if check_end_turn_criteria():
+		ui.end_turn.disabled = false
+	else:
+		ui.end_turn.disabled = true
 
 func set_new_round_turn():
 	turn_new_round.shuffle()
@@ -124,15 +135,11 @@ func place_card(card_2d, card_id, id):
 	
 	var card3d = create_card_3d(get_card3d_data_by_id(card_id), id)
 	if multiplayer.get_unique_id() == card3d.card_belong_to_id:
-		#if p1_slot_count == 3:
-			#return
 
 		put_card_in_p1_slot(card3d, card_2d, card_id, id)
 		p1_slot_count += 1
 		
 	else:
-		#if p2_slot_count == 3:
-			#return
 		
 		p2_hand.card_chosen(card_id, id)
 		put_card_in_p2_slot(card3d)
@@ -195,7 +202,25 @@ func return_card(card3d, card_id, player_id):
 				p2_slot_count -= 1
 				card.move_out()
 				p2_battle_pile.erase(card)
-	
+
+
+func send_to_grave(card3d, player_grave: int):
+	if player_grave == 1:
+		p1_battle_pile.erase(card3d)
+		p1_grave_pile.append(card3d)
+
+		card3d.reparent(grave_1, true)
+		card3d.move_to(Vector3(0, card3d.position.y, 0))
+	else:
+		p2_battle_pile.erase(card3d)
+		p2_grave_pile.append(card3d)
+
+		card3d.reparent(grave_2, true)
+		card3d.move_to(Vector3(0, card3d.position.y, 0))
+
+	grave_1.arrange_grave_card()
+	grave_2.arrange_grave_card()
+
 
 func get_card3d_data_by_id(id : int):
 	if id >= 2000:
@@ -243,8 +268,7 @@ func update_turn():
 	if amount_turns_end == 2:
 		switch_phase()
 		amount_turns_end = 0
-	
-	#ui.end_turn.disabled = !ui.end_turn.disabled
+
 
 
 @rpc("any_peer","call_local","reliable")
@@ -255,15 +279,73 @@ func switch_phase():
 	else:
 		game_turn += 1
 		Global.current_phase = Global.Phase.STANDOFF
+		reset_card_on_field()
 		set_new_round_turn()
 
 
-func check_end_turn() -> bool:
+func reset_card_on_field():
+	for card in p1_battle_pile:
+		if card.card_data is Battle:
+			send_to_grave(card,1)
+			
+	for card in p2_battle_pile:
+		if card.card_data is Battle:
+			send_to_grave(card,2)
+
+func check_end_turn_criteria() -> bool:
 	var valid = false
 	
-	#if Global.state == Global.State.YOUR_TURN:
-		#if p1_slot_count == 3 and p1_battle_power >= p2_battle_power: 
-			#valid = true
-		#if p1_slot_count == 3 and p1_battle_power >= p2_battle_power: 
+	if Global.state != Global.State.YOUR_TURN: return valid
+	
+	if game_turn == 0:
+		if Global.current_phase == Global.Phase.STANDOFF:
+			if p1_battle_pile.size() < 3: return valid
+			valid = true
+			return valid
+	else:
+		if Global.current_phase == Global.Phase.STANDOFF:
+			if p1_battle_pile.size() < 3: return valid
+			
+			var total_power = 0
+			for card in p1_battle_pile:
+				total_power += card.card_data.power
+			
+			if total_power >= p2_battle_power:
+				valid = true
+			else:
+				valid = count_card()
+			return valid
+			
+	if Global.current_phase == Global.Phase.BATTLE:
+		if current_player_turn == 1:
+			for card in p1_battle_pile:
+				if card.direction == Vector2.UP:
+					valid = true
+		else:
+			if p1_battle_power >= p2_battle_power: 
+				valid = true
+			else:
+				valid = count_card()
+			
+	
+	return valid
+
+
+func count_card():
+	var p1_card_count = 0
+	var p2_card_count = 0
+	
+	var valid = false
+	
+	for card in p1_battle_pile:
+		if card.card_data is Battle and card.direction == Vector2.UP:
+			p1_card_count += 1
+			
+	for card in p2_battle_pile:
+		if card.card_data is Battle and card.direction == Vector2.UP:
+			p2_card_count += 1
+		
+	if p1_card_count >= p2_card_count:
+		valid = true
 	
 	return valid

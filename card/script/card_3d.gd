@@ -51,6 +51,12 @@ func move_out():
 	queue_free()
 
 
+func move_to(new_pos: Vector3):
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "position", new_pos, 0.5) \
+	.set_trans(Tween.TRANS_EXPO)\
+	.set_ease(Tween.EASE_OUT)
+
 func flip():
 	var tween = get_tree().create_tween()
 	if direction == Vector2.DOWN:
@@ -91,13 +97,14 @@ func set_direction(direction: Vector2):
 func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			if multiplayer.get_unique_id() != card_belong_to_id: return 
-			if Global.state != Global.State.YOUR_TURN: return
-			
-			if Global.current_phase == Global.Phase.BATTLE:
-				Global.card_3d_button.emit(self, card_data.id, card_belong_to_id)
-			else:
-				Global.card_return.emit(self, card_data.id, card_belong_to_id)
+			#if multiplayer.get_unique_id() != card_belong_to_id: return 
+			#if Global.state != Global.State.YOUR_TURN: return
+			#
+			#if Global.current_phase == Global.Phase.BATTLE:
+				#Global.card_3d_button.emit(self, card_data.id, card_belong_to_id)
+			#else:
+				#Global.card_return.emit(self, card_data.id, card_belong_to_id)
+			Global.game_turn_end.emit(self, 1, 1)
 
 func _on_mouse_entered() -> void:
 	if direction == Vector2.UP or card_belong_to_id == multiplayer.get_unique_id():

@@ -891,14 +891,20 @@ visible = false
 [node name="Slot 1" parent="CardPosition/Player 1" instance=ExtResource("10_l8saf")]
 target_power = 21000
 
+[node name="Card_3D" parent="CardPosition/Player 1/Slot 1" instance=ExtResource("3_68123")]
+
 [node name="Slot 2" parent="CardPosition/Player 1" instance=ExtResource("10_l8saf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.01, 7)
+
+[node name="Card_3D" parent="CardPosition/Player 1/Slot 2" instance=ExtResource("3_68123")]
 
 [node name="Slot 3" parent="CardPosition/Player 1" instance=ExtResource("10_l8saf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0.01, 7)
 target_power = 3900
 
-[node name="Grave" type="Node3D" parent="CardPosition/Player 1"]
+[node name="Card_3D" parent="CardPosition/Player 1/Slot 3" instance=ExtResource("3_68123")]
+
+[node name="Grave 1" type="Node3D" parent="CardPosition/Player 1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0.01, 7)
 script = ExtResource("11_wmtgq")
 
@@ -907,17 +913,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.40703)
 
 [node name="Slot 4" parent="CardPosition/Player 2" instance=ExtResource("11_nlpbd")]
 
+[node name="Card_3D" parent="CardPosition/Player 2/Slot 4" instance=ExtResource("3_68123")]
+
 [node name="Slot 5" parent="CardPosition/Player 2" instance=ExtResource("11_nlpbd")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7, 0.01, -12)
+
+[node name="Card_3D" parent="CardPosition/Player 2/Slot 5" instance=ExtResource("3_68123")]
 
 [node name="Slot 6" parent="CardPosition/Player 2" instance=ExtResource("11_nlpbd")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -5, 0.01, -12)
 
-[node name="Grave" type="Node3D" parent="CardPosition/Player 2"]
+[node name="Card_3D" parent="CardPosition/Player 2/Slot 6" instance=ExtResource("3_68123")]
+
+[node name="Grave 2" type="Node3D" parent="CardPosition/Player 2"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -25, 0.01, -12)
+script = ExtResource("11_wmtgq")
 
 [node name="DrawPile" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.8942, 0.01, -4.53209)
+visible = false
 script = ExtResource("10_cmde0")
 gap = 0.1
 
