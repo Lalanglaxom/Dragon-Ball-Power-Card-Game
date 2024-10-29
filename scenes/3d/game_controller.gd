@@ -42,13 +42,17 @@ var p1_slot_count = 0
 var p2_slot_count = 0
 
 func _ready() -> void:
-	GlobalManager.draw_pile_updated.connect(func(): draw_card_for_player.rpc())
-	GlobalManager.card_chosen.connect(place_card.rpc)
-	GlobalManager.card_3d_flip.connect(flip_card.rpc)
-	GlobalManager.card_return.connect(return_card.rpc)
-	GlobalManager.end_turn_pressed.connect(update_turn.rpc)
+	Global.draw_pile_updated.connect(draw_card_for_player.rpc)
+	Global.card_chosen.connect(place_card.rpc)
+	Global.card_3d_flip.connect(flip_card.rpc)
+	Global.card_return.connect(return_card.rpc)
+	Global.end_turn_pressed.connect(update_turn.rpc)
+	
 	set_new_round_turn()
-
+	
+	set_faux_for_player.rpc(Global.faux_cards_chosen[0].card_data.id, \
+							Global.faux_cards_chosen[1].card_data.id, \
+							multiplayer.get_unique_id())
 
 func set_new_round_turn():
 	turn_new_round.shuffle()
@@ -71,30 +75,50 @@ func draw_card_for_player():
 			var card = full_pile.draw_pile[i]
 			p1_pile.append(card)
 			card.reparent(p1_hand, true)
-			card.card_belong_to_id = multiplayer.get_unique_id()
-		p1_hand.arrange_hand_card()
+			card.card_belong_to_id = multiplayer.get_unique_id()		
+		#p1_hand.arrange_hand_card()
 
 		for i in range(start_card_hand_amount, start_card_hand_amount * 2):
 			var card = full_pile.draw_pile[i]
 			p2_pile.append(card)
 			card.reparent(p2_hand, true)
-		p2_hand.arrange_hand_card()
-		
+		#p2_hand.arrange_hand_card()
+
 	else:
 		for i in range(0,start_card_hand_amount):
 			var card = full_pile.draw_pile[i]
 			p1_pile.append(card)
 			card.reparent(p2_hand, true)
-		p2_hand.arrange_hand_card()
 
 		for i in range(start_card_hand_amount, start_card_hand_amount * 2):
 			var card = full_pile.draw_pile[i]
 			p2_pile.append(card)
 			card.reparent(p1_hand, true)
 			card.card_belong_to_id = multiplayer.get_unique_id()
-			p1_hand.arrange_hand_card()
+	
+	
+	p1_hand.arrange_hand_card()
+	p2_hand.arrange_hand_card()
+			
 
 
+@rpc("any_peer", "call_local", "reliable")
+func set_faux_for_player(faux_id_1: int, faux_id_2: int, player_id: int):
+	if multiplayer.get_unique_id() == player_id:
+		for card in Global.faux_cards_chosen:
+			card.card_belong_to_id = player_id
+			p1_pile.append(card)
+			p1_hand.add_card(card)
+			Global.print_multi(card.get_parent())
+	else:
+		var faux_card_1 = Global.create_faux_ui(Global.get_faux_data_by_id(faux_id_1))
+		var faux_card_2 = Global.create_faux_ui(Global.get_faux_data_by_id(faux_id_2))
+		p2_pile.append(faux_card_1)
+		p2_pile.append(faux_card_2)
+		p2_hand.add_card(faux_card_1)
+		p2_hand.add_card(faux_card_2)
+
+	
 @rpc("any_peer", "call_local", "reliable")
 func place_card(card_2d, card_id, id):
 	
@@ -117,7 +141,7 @@ func place_card(card_2d, card_id, id):
 
 @rpc("any_peer", "call_local", "reliable")
 func text(id):
-	GlobalManager.print_multi(id)
+	print(id)
 
 
 func put_card_in_p1_slot(card3d: Card3D):
@@ -140,25 +164,27 @@ func put_card_in_p2_slot(card3d: Card3D):
 func flip_card(card_3d, card_id, player_id):
 	if multiplayer.get_unique_id() == player_id:
 		card_3d.flip()
-		var card_slot = card_3d.get_parent()
-		card_slot.set_target_power(card_3d.card_data.power, card_3d.direction)
-		if card_3d.direction == Vector2.UP:
-			p1_battle_power += card_3d.card_data.power
-		else:
-			p1_battle_power -= card_3d.card_data.power
+		if card_3d.card_data is Battle:
+			var card_slot = card_3d.get_parent()
+			card_slot.set_target_power(card_3d.card_data.power, card_3d.direction)
+			if card_3d.direction == Vector2.UP:
+				p1_battle_power += card_3d.card_data.power
+			else:
+				p1_battle_power -= card_3d.card_data.power
 	else:
 		for card in p2_battle_pile:
 			if card.card_data.id == card_id:
 				card.flip()
-				var card_slot = card.get_parent()
-				card_slot.set_target_power(card.card_data.power, card.direction)
-				if card.direction == Vector2.UP:
-					p2_battle_power += card.card_data.power
-				else:
-					p2_battle_power -= card.card_data.power
+				if card.card_data is Battle:
+					var card_slot = card.get_parent()
+					card_slot.set_target_power(card.card_data.power, card.direction)
+					if card.direction == Vector2.UP:
+						p2_battle_power += card.card_data.power
+					else:
+						p2_battle_power -= card.card_data.power
 					
-	GlobalManager.print_multi(p1_battle_power)
-	GlobalManager.print_multi(p2_battle_power)
+	Global.print_multi(p1_battle_power)
+	Global.print_multi(p2_battle_power)
 
 @rpc("any_peer","call_local","reliable")
 func return_card(card3d, card_id, player_id):
@@ -175,10 +201,17 @@ func return_card(card3d, card_id, player_id):
 	
 
 func get_card3d_data_by_id(id : int):
-	for json_data in full_pile.card_database:
+	if id >= 2000:
+		for json_data in Global.faux_database:
+			if int(json_data.id) == id:
+				return json_data
+		Global.print_multi("Null 3D Data")
+		return null
+
+	for json_data in full_pile.battle_database:
 		if int(json_data.id) == id:
 			return json_data
-	GlobalManager.print_multi("Null 3D Data")
+	Global.print_multi("Null 3D Data")
 	return null
 
 
@@ -214,24 +247,24 @@ func update_turn():
 		switch_phase()
 		amount_turns_end = 0
 	
-	ui.end_turn.disabled = !ui.end_turn.disabled
+	#ui.end_turn.disabled = !ui.end_turn.disabled
 
 
 @rpc("any_peer","call_local","reliable")
 func switch_phase():
-	if GlobalManager.current_phase == GlobalManager.Phase.STANDOFF:
-		GlobalManager.current_phase = GlobalManager.Phase.BATTLE
+	if Global.current_phase == Global.Phase.STANDOFF:
+		Global.current_phase = Global.Phase.BATTLE
 		
 	else:
 		game_turn += 1
-		GlobalManager.current_phase = GlobalManager.Phase.STANDOFF
+		Global.current_phase = Global.Phase.STANDOFF
 		set_new_round_turn()
 
 
 func check_end_turn() -> bool:
 	var valid = false
 	
-	#if GlobalManager.state == GlobalManager.State.YOUR_TURN:
+	#if Global.state == Global.State.YOUR_TURN:
 		#if p1_slot_count == 3 and p1_battle_power >= p2_battle_power: 
 			#valid = true
 		#if p1_slot_count == 3 and p1_battle_power >= p2_battle_power: 

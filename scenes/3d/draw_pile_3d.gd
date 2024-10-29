@@ -13,7 +13,7 @@ var pile_max_size := 30
 
 
 func _ready() -> void:
-	GlobalManager.draw_pile_updated.connect(create_3d_draw_pile)
+	Global.draw_pile_updated.connect(create_3d_draw_pile)
 
 
 func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:

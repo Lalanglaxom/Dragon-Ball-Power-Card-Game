@@ -91,17 +91,17 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			if multiplayer.get_unique_id() != card_belong_to_id: return 
-			if GlobalManager.state != GlobalManager.State.YOUR_TURN: return
+			if Global.state != Global.State.YOUR_TURN: return
 			
-			if GlobalManager.current_phase == GlobalManager.Phase.BATTLE:
-				GlobalManager.card_3d_button.emit(self, card_data.id, card_belong_to_id)
+			if Global.current_phase == Global.Phase.BATTLE:
+				Global.card_3d_button.emit(self, card_data.id, card_belong_to_id)
 			else:
-				GlobalManager.card_return.emit(self, card_data.id, card_belong_to_id)
+				Global.card_return.emit(self, card_data.id, card_belong_to_id)
 
 func _on_mouse_entered() -> void:
 	if direction == Vector2.UP or card_belong_to_id == multiplayer.get_unique_id():
-		GlobalManager.card_3d_hover.emit(self)
+		Global.card_3d_hover.emit(self)
 
 
 func _on_mouse_exited() -> void:
-	GlobalManager.card_3d_unhover.emit(self)
+	Global.card_3d_unhover.emit(self)

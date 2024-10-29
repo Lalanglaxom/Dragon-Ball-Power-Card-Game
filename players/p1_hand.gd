@@ -17,9 +17,9 @@ var player_turn: int
 
 func _ready() -> void:
 	
-	#GlobalManager.card_hover.connect(handle_hover)
-	#GlobalManager.card_chosen.connect(card_chosen)
-	GlobalManager.card_return.connect(add_card)
+	#Global.card_hover.connect(handle_hover)
+	#Global.card_chosen.connect(card_chosen)
+	Global.card_return.connect(add_remove_card)
 
 
 func _process(delta: float) -> void:
@@ -59,7 +59,12 @@ func card_chosen(card2d: Card2D, card2d_id: int, player_id: int):
 	arrange_hand_card()
 
 
-func add_card(card3d, card_id, player_id):
+func add_card(card: Card2D):
+	add_child(card)
+	arrange_hand_card()
+
+
+func add_remove_card(card3d, card_id, player_id):
 	await get_tree().create_timer(0.1).timeout
 	if multiplayer.get_unique_id() == player_id:
 		for card in remove_hand:
@@ -76,6 +81,6 @@ func set_turn(turn_num: int):
 
 func switch_state(current_player_turn: int):
 	if  player_turn == current_player_turn:
-		GlobalManager.state = GlobalManager.State.YOUR_TURN
+		Global.state = Global.State.YOUR_TURN
 	else:
-		GlobalManager.state = GlobalManager.State.OTHER_TURN
+		Global.state = Global.State.OTHER_TURN

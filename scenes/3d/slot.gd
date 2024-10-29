@@ -7,7 +7,7 @@ var current_power: int = 0
 var increase_speed = 2
 var scale_speed = 1
 func _ready() -> void:
-	GlobalManager.card_return.connect(hide_label.rpc)
+	Global.card_return.connect(hide_label.rpc)
 	pass
 
 func _process(delta: float) -> void:

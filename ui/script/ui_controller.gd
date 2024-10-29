@@ -6,10 +6,10 @@ extends Control
 var offset = Vector2(5, -225)
 
 func _ready() -> void:
-	GlobalManager.card_hover.connect(show_big_image)
-	GlobalManager.card_unhover.connect(hide_big_image)
-	GlobalManager.card_3d_hover.connect(show_big_image_3d)
-	GlobalManager.card_3d_unhover.connect(hide_big_image_3d)
+	Global.card_hover.connect(show_big_image)
+	Global.card_unhover.connect(hide_big_image)
+	Global.card_3d_hover.connect(show_big_image_3d)
+	Global.card_3d_unhover.connect(hide_big_image_3d)
 	
 
 
@@ -39,4 +39,4 @@ func hide_big_image_3d(card: Card3D):
 
 
 func _on_end_turn_pressed() -> void:
-	GlobalManager.end_turn_pressed.emit()
+	Global.end_turn_pressed.emit()

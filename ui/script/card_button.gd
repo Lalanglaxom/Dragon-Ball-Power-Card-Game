@@ -12,12 +12,12 @@ var player_id: int
 
 
 func _ready() -> void:
-	GlobalManager.card_3d_button.connect(show_button)
+	Global.card_3d_button.connect(show_button)
 
 
 func show_button(card3d, card_id, player_id):
 	if card3d.card_belong_to_id != multiplayer.get_unique_id(): return
-	if GlobalManager.state != GlobalManager.State.YOUR_TURN: return
+	if Global.state != Global.State.YOUR_TURN: return
 	
 	
 	self.show()
@@ -28,9 +28,9 @@ func show_button(card3d, card_id, player_id):
 	position = get_viewport().get_camera_3d().unproject_position(card3d.global_transform.origin + offset)
 	
 func _on_flip_pressed() -> void:
-	GlobalManager.card_3d_flip.emit(self.card3d, self.card_id, self.player_id)
+	Global.card_3d_flip.emit(self.card3d, self.card_id, self.player_id)
 	self.hide()
 
 func _on_return_pressed() -> void:
-	GlobalManager.card_return.emit(card3d, card_id, player_id)
+	Global.card_return.emit(card3d, card_id, player_id)
 	self.hide()

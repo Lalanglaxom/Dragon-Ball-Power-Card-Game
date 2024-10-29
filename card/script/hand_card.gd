@@ -57,7 +57,7 @@ func _on_mouse_entered() -> void:
 	if parent.name == "FullPile": return
 	
 	if card_belong_to_id == multiplayer.get_unique_id():
-		GlobalManager.card_hover.emit(self)
+		Global.card_hover.emit(self)
 	
 	is_hover = true
 	get_node("Frontface").material = HOVER_MATERIAL
@@ -70,7 +70,7 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	if !can_be_interact: return
 		
-	GlobalManager.card_unhover.emit(self)
+	Global.card_unhover.emit(self)
 	is_hover = false
 	get_node("Frontface").material = null
 
@@ -83,9 +83,9 @@ func _on_gui_input(event: InputEvent) -> void:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			var parent = get_parent()
 			if parent.name == "FullPile":
-				GlobalManager.on_draw_pressed.emit() 
+				Global.on_draw_pressed.emit() 
 			
-			if GlobalManager.state != GlobalManager.State.YOUR_TURN:
+			if Global.state != Global.State.YOUR_TURN:
 				return
 			
 			if card_belong_to_id != multiplayer.get_unique_id():
@@ -104,4 +104,4 @@ func choose_card():
 	tween.tween_property(self, "position", Vector2(position.x, position.y + 150), 0.15)
 	await tween.finished
 	
-	GlobalManager.card_chosen.emit(self, card_data.id, card_belong_to_id)
+	Global.card_chosen.emit(self, card_data.id, card_belong_to_id)

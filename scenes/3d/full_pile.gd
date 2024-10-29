@@ -24,7 +24,7 @@ var id_pile := []
 func _ready() -> void:
 	load_json_path()
 	start()
-	GlobalManager.on_draw_pressed.connect(draw)
+	Global.on_draw_pressed.connect(draw)
 
 
 func start():
@@ -46,7 +46,7 @@ func sync_draw_pile(pile):
 	for id in id_pile:
 		var card_data = get_card_data_by_id(id)
 		draw_pile.append(create_card_ui(card_data))
-	GlobalManager.emit_signal("draw_pile_updated")
+	Global.emit_signal("draw_pile_updated")
 
 
 func draw():
@@ -123,4 +123,4 @@ func create_card_ui(json_data : Dictionary):
 func set_card_pile(card : Card2D, pile : Piles):
 	if pile == Piles.draw_pile:
 		draw_pile.push_back(card)
-		GlobalManager.draw_pile_updated.emit()
+		Global.draw_pile_updated.emit()

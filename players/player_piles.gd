@@ -331,7 +331,7 @@
 #@rpc("any_peer","call_local")
 #func add_to_global_pile():
 	#draw_pile.shuffle()
-	#GlobalManager.full_pile = draw_pile
+	#Global.full_pile = draw_pile
 #
 #
 #func hand_is_at_max_capacity():
