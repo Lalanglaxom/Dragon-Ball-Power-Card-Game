@@ -50,6 +50,7 @@ func move_out():
 	await tween.finished
 	queue_free()
 
+
 func flip():
 	var tween = get_tree().create_tween()
 	if direction == Vector2.DOWN:

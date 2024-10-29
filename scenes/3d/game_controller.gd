@@ -124,31 +124,27 @@ func place_card(card_2d, card_id, id):
 	
 	var card3d = create_card_3d(get_card3d_data_by_id(card_id), id)
 	if multiplayer.get_unique_id() == card3d.card_belong_to_id:
-		if p1_slot_count == 3:
-			return
-			
-		p1_hand.card_chosen(card_2d, card_id, id)
-		put_card_in_p1_slot(card3d)
+		#if p1_slot_count == 3:
+			#return
+
+		put_card_in_p1_slot(card3d, card_2d, card_id, id)
 		p1_slot_count += 1
+		
 	else:
-		if p2_slot_count == 3:
-			return
+		#if p2_slot_count == 3:
+			#return
 		
 		p2_hand.card_chosen(card_id, id)
 		put_card_in_p2_slot(card3d)
 		p2_slot_count += 1
 
 
-@rpc("any_peer", "call_local", "reliable")
-func text(id):
-	print(id)
-
-
-func put_card_in_p1_slot(card3d: Card3D):
+func put_card_in_p1_slot(card3d: Card3D, card2d: Card2D, card_id: int, id: int):
 	for slot in player_1_pos.get_children():
 		if slot.get_child_count() == 1 and slot.name != "Grave":
 			slot.add_child(card3d)
 			p1_battle_pile.append(card3d)
+			p1_hand.card_chosen(card2d, card_id, id)
 			return
 
 
@@ -189,15 +185,16 @@ func flip_card(card_3d, card_id, player_id):
 @rpc("any_peer","call_local","reliable")
 func return_card(card3d, card_id, player_id):
 	if multiplayer.get_unique_id() == player_id:
+		p1_slot_count -= 1
 		card3d.move_out()
 		p1_battle_pile.erase(card3d)
-		p1_slot_count -= 1
+		Global.print_multi(p1_slot_count)
 	else:
 		for card in p2_battle_pile:
 			if card.card_data.id == card_id:
+				p2_slot_count -= 1
 				card.move_out()
 				p2_battle_pile.erase(card)
-				p2_slot_count -= 1
 	
 
 func get_card3d_data_by_id(id : int):

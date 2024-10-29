@@ -63,7 +63,8 @@ func _on_mouse_entered() -> void:
 	get_node("Frontface").material = HOVER_MATERIAL
 	
 	var tween = get_tree().create_tween()
-	tween.tween_property(self, "position", Vector2(target_position.x - hover_amount/3.5, target_position.y - hover_amount) , 0.15)
+	tween.tween_property(self, "position", \
+						Vector2(target_position.x - hover_amount/3.5, target_position.y - hover_amount) , 0.15)
 
 
 
