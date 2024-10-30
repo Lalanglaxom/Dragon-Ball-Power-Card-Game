@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcbxe3m1ynl5j"
-path="res://.godot/imported/07_Vados.png-9dac8310e900d086c368f293acf64eb4.ctex"
+uid="uid://n542a0410aki"
+path="res://.godot/imported/GokuDitBu.png-3f499b96e0cd5a0d9e1904c2c43d8dbf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://card/faux/image/160x240/07_Vados.png"
-dest_files=["res://.godot/imported/07_Vados.png-9dac8310e900d086c368f293acf64eb4.ctex"]
+source_file="res://card/faux/image/160x240/GokuDitBu.png"
+dest_files=["res://.godot/imported/GokuDitBu.png-3f499b96e0cd5a0d9e1904c2c43d8dbf.ctex"]
 
 [params]
 

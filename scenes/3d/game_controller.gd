@@ -31,7 +31,7 @@ var p2_grave_pile := []
 var p2_battle_power: int
 
 # Turn control
-var game_turn: int = 0
+var game_round: int = 0
 
 
 
@@ -50,13 +50,13 @@ func _ready() -> void:
 	Global.card_3d_flip.connect(flip_card.rpc)
 	Global.card_return.connect(return_card.rpc)
 	Global.end_turn_pressed.connect(update_turn.rpc)
-	Global.game_turn_end.connect(send_to_grave)
+	Global.game_round_end.connect(reset_card_on_field.rpc)
 	
 	set_new_round_turn()
 	
-	#set_faux_for_player.rpc(Global.faux_cards_chosen[0].card_data.id, \
-							#Global.faux_cards_chosen[1].card_data.id, \
-							#multiplayer.get_unique_id())
+	set_faux_for_player.rpc(Global.faux_cards_chosen[0].card_data.id, \
+							Global.faux_cards_chosen[1].card_data.id, \
+							multiplayer.get_unique_id())
 
 
 func _process(delta: float) -> void:
@@ -133,7 +133,7 @@ func set_faux_for_player(faux_id_1: int, faux_id_2: int, player_id: int):
 @rpc("any_peer", "call_local", "reliable")
 func place_card(card_2d, card_id, id):
 	
-	var card3d = create_card_3d(get_card3d_data_by_id(card_id), id)
+	var card3d = Global.create_card_3d(Global.get_card3d_data_by_id(card_id), id)
 	if multiplayer.get_unique_id() == card3d.card_belong_to_id:
 
 		put_card_in_p1_slot(card3d, card_2d, card_id, id)
@@ -195,7 +195,7 @@ func return_card(card3d, card_id, player_id):
 		p1_slot_count -= 1
 		card3d.move_out()
 		p1_battle_pile.erase(card3d)
-		Global.print_multi(p1_slot_count)
+
 	else:
 		for card in p2_battle_pile:
 			if card.card_data.id == card_id:
@@ -204,50 +204,23 @@ func return_card(card3d, card_id, player_id):
 				p2_battle_pile.erase(card)
 
 
-func send_to_grave(card3d, player_grave: int):
-	if player_grave == 1:
-		p1_battle_pile.erase(card3d)
+func send_to_grave(card3d):
+	if card3d.card_belong_to_id == multiplayer.get_unique_id():
+		card3d.set_direction(Vector2.UP)
+		card3d.reparent(grave_1, true)
 		p1_grave_pile.append(card3d)
 
-		card3d.reparent(grave_1, true)
 		card3d.move_to(Vector3(0, card3d.position.y, 0))
 	else:
-		p2_battle_pile.erase(card3d)
+		card3d.set_direction(Vector2.UP)
+		card3d.reparent(grave_2, true)
 		p2_grave_pile.append(card3d)
 
-		card3d.reparent(grave_2, true)
 		card3d.move_to(Vector3(0, card3d.position.y, 0))
 
 	grave_1.arrange_grave_card()
 	grave_2.arrange_grave_card()
 
-
-func get_card3d_data_by_id(id : int):
-	if id >= 2000:
-		for json_data in Global.faux_database:
-			if int(json_data.id) == id:
-				return json_data
-		Global.print_multi("Null 3D Data")
-		return null
-
-	for json_data in full_pile.battle_database:
-		if int(json_data.id) == id:
-			return json_data
-	Global.print_multi("Null 3D Data")
-	return null
-
-
-func create_card_3d(json_data: Dictionary, id: int):
-	var card_3d = CARD_3D.instantiate()
-	card_3d.frontface_texture = json_data.front_image_path
-	card_3d.backface_texture = json_data.back_image_path
-	card_3d.card_data = ResourceLoader.load(json_data.resource_script_path).new()
-	for key in json_data.keys():
-		if key != "front_mini_path" and key != "back_mini_path" and key != "resource_script_path":
-			card_3d.card_data[key] = json_data[key]
-	card_3d.card_belong_to_id = id
-	return card_3d
-	
 
 func update_total_power_label():
 	p1_battle_power = 0
@@ -275,29 +248,95 @@ func update_turn():
 func switch_phase():
 	if Global.current_phase == Global.Phase.STANDOFF:
 		Global.current_phase = Global.Phase.BATTLE
-		
+
+	elif Global.current_phase == Global.Phase.BATTLE:
+		Global.current_phase = Global.Phase.DAMAGE
+		Global.damage_phase_enter.connect(damage_phase_behaviour)
+	
 	else:
-		game_turn += 1
 		Global.current_phase = Global.Phase.STANDOFF
-		reset_card_on_field()
-		set_new_round_turn()
+
+func damage_phase_behaviour():
+	pass
 
 
+func switch_round():
+	game_round += 1
+	reset_card_on_field()
+	set_new_round_turn()
+
+
+@rpc("any_peer","call_local")
 func reset_card_on_field():
-	for card in p1_battle_pile:
-		if card.card_data is Battle:
-			send_to_grave(card,1)
+	if p1_battle_power > p2_battle_power:
+		for card in p2_battle_pile:
+			card.health = 2
 			
-	for card in p2_battle_pile:
-		if card.card_data is Battle:
-			send_to_grave(card,2)
+			if card.card_data is not Faux:
+				send_to_grave(card)
+			else:
+				return_card_local(card, card.card_belong_to_id)
+		
+		p2_battle_power = 0
+		p2_battle_pile.clear()
+	
+		for card in p1_battle_pile:
+			if card.card_data is not Faux:
+				card.health -= 1
+			
+			if card.card_data is not Faux and card.health == 0:
+				send_to_grave(card)
+			elif card.card_data is Faux:
+				return_card_local(card, card.card_belong_to_id)
+		
+		for card in p1_grave_pile:
+			if p1_battle_pile.has(card): 
+				p1_battle_pile.erase(card)
+				p1_battle_power -= card.card_data.power
+	else:
+		for card in p1_battle_pile:
+			card.health = 2
+			
+			if card.card_data is not Faux:
+				send_to_grave(card)
+			else:
+				return_card_local(card, card.card_belong_to_id)
+		
+		p1_battle_power = 0
+		p1_battle_pile.clear()
+
+		for card in p2_battle_pile:
+			if card.card_data is not Faux:
+				card.health -= 1
+			
+			if card.card_data is not Faux or card.health == 0:
+				send_to_grave(card)
+			elif card.card_data is Faux:
+				return_card_local(card, card.card_belong_to_id)
+				
+		for card in p2_grave_pile:
+			if p2_battle_pile.has(card): 
+				p2_battle_pile.erase(card)
+				p2_battle_power -= card.card_data.power
+
+
+func return_card_local(card3d, player_id):
+	if multiplayer.get_unique_id() == player_id:
+		card3d.move_out()
+		Global.card_return_local.emit(card3d, card3d.card_data.id, player_id)
+	else:
+		for card in p2_battle_pile:
+			if card.card_data.id == card3d.card_data.id:
+				card.move_out()
+				Global.card_return_local.emit(card3d, card3d.card_data.id, player_id)
+
 
 func check_end_turn_criteria() -> bool:
 	var valid = false
 	
 	if Global.state != Global.State.YOUR_TURN: return valid
 	
-	if game_turn == 0:
+	if game_round == 0:
 		if Global.current_phase == Global.Phase.STANDOFF:
 			if p1_battle_pile.size() < 3: return valid
 			valid = true

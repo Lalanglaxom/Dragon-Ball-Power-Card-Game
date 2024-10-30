@@ -81,8 +81,8 @@ offset_bottom = 274.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_yyewi")
-json_faux_database_path = "res://card/faux/faux_database.json"
 json_faux_collection_path = "res://card/faux/faux_collection.json"
+json_faux_database_path = "res://card/faux/faux_database.json"
 card_scene = ExtResource("3_nbtqn")
 
 [node name="Panel" type="Panel" parent="Faux Card Select"]

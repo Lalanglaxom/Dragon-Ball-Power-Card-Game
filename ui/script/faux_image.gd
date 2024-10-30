@@ -37,7 +37,7 @@ func _on_gui_input(event: InputEvent) -> void:
 
 func _on_mouse_entered() -> void:
 	texture_rect.self_modulate.v = 1
-	texture_rect.material = FAUX_HIGHLIGHT 
+	texture_rect.material = FAUX_HIGHLIGHT
 
 
 func _on_mouse_exited() -> void:

@@ -14,6 +14,7 @@ var remove_hand: Array[Card2D]
 func _ready() -> void:
 	#Global.card_chosen.connect(card_chosen)
 	Global.card_return.connect(add_remove_card)
+	Global.card_return_local.connect(add_remove_card)
 	pass
 
 

@@ -1,7 +1,7 @@
 extends Control
 
-@export_file("*.json") var json_faux_database_path : String
 @export_file("*.json") var json_faux_collection_path : String
+@export_file("*.json") var json_faux_database_path : String
 @export var card_scene : PackedScene
 const FAUX_IMAGE = preload("res://scenes/faux_image.tscn")
 

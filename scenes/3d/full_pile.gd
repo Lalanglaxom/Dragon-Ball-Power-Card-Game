@@ -66,7 +66,9 @@ func shuffle_draw_pile():
 func load_json_path():
 	battle_database = _load_json_cards_from_path(json_battle_database_path)
 	battle_collection = _load_json_cards_from_path(json_battle_collection_path)
-
+	
+	Global.battle_database = battle_database
+	Global.battle_collection = battle_collection
 
 func _load_json_cards_from_path(path : String):
 	var found = []

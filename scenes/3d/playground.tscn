@@ -891,18 +891,12 @@ visible = false
 [node name="Slot 1" parent="CardPosition/Player 1" instance=ExtResource("10_l8saf")]
 target_power = 21000
 
-[node name="Card_3D" parent="CardPosition/Player 1/Slot 1" instance=ExtResource("3_68123")]
-
 [node name="Slot 2" parent="CardPosition/Player 1" instance=ExtResource("10_l8saf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.01, 7)
-
-[node name="Card_3D" parent="CardPosition/Player 1/Slot 2" instance=ExtResource("3_68123")]
 
 [node name="Slot 3" parent="CardPosition/Player 1" instance=ExtResource("10_l8saf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0.01, 7)
 target_power = 3900
-
-[node name="Card_3D" parent="CardPosition/Player 1/Slot 3" instance=ExtResource("3_68123")]
 
 [node name="Grave 1" type="Node3D" parent="CardPosition/Player 1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0.01, 7)
@@ -913,17 +907,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.40703)
 
 [node name="Slot 4" parent="CardPosition/Player 2" instance=ExtResource("11_nlpbd")]
 
-[node name="Card_3D" parent="CardPosition/Player 2/Slot 4" instance=ExtResource("3_68123")]
-
 [node name="Slot 5" parent="CardPosition/Player 2" instance=ExtResource("11_nlpbd")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7, 0.01, -12)
 
-[node name="Card_3D" parent="CardPosition/Player 2/Slot 5" instance=ExtResource("3_68123")]
-
 [node name="Slot 6" parent="CardPosition/Player 2" instance=ExtResource("11_nlpbd")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -5, 0.01, -12)
-
-[node name="Card_3D" parent="CardPosition/Player 2/Slot 6" instance=ExtResource("3_68123")]
 
 [node name="Grave 2" type="Node3D" parent="CardPosition/Player 2"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -25, 0.01, -12)
@@ -1095,7 +1083,14 @@ grow_horizontal = 0
 grow_vertical = 2
 text = "End Turn"
 
+[node name="TestButton" type="Button" parent="CanvasLayer/UI"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Send To Grave"
+
 [connection signal="input_event" from="DrawPile" to="DrawPile" method="_on_input_event"]
 [connection signal="pressed" from="CanvasLayer/UI/CardOption/Flip" to="CanvasLayer/UI/CardOption" method="_on_flip_pressed"]
 [connection signal="pressed" from="CanvasLayer/UI/CardOption/Return" to="CanvasLayer/UI/CardOption" method="_on_return_pressed"]
 [connection signal="pressed" from="CanvasLayer/UI/End Turn" to="CanvasLayer/UI" method="_on_end_turn_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/TestButton" to="CanvasLayer/UI" method="_on_test_button_pressed"]

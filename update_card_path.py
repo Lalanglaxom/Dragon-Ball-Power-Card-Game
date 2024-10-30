@@ -20,6 +20,8 @@ def read_csv(file_path):
 battle_file_path = "Power Card Game - Digital - Battle.csv"
 faux_file_path = "Power Card Game - Digital - Faux.csv"
 
+
+##################################################################### BATTLE JSON ############################################################################
 # Read data from the CSV file
 header_row, csv_data = read_csv(battle_file_path)
 
@@ -39,7 +41,6 @@ def update_battle_file_paths(csv_data, new_folder_path, big_image_path):
                 and "import" not in filename
                 and row[2] in filename
             ):
-                print(file_path)
                 resource_path = file_path.replace(
                     "D:/Godot Game/Dragon-Ball-Power-Card-Game/", "res://"
                 )
@@ -79,6 +80,7 @@ with open(battle_file_path, "w", newline="", encoding="utf-8") as csvfile:
     writer.writerow(header_row)
     writer.writerows(csv_data)
 
+##################################################################### FAUX JSON ############################################################################
 
 # Read data from the CSV file
 header_row, csv_data = read_csv(faux_file_path)
@@ -96,7 +98,7 @@ def update_faux_file_paths(csv_data, new_folder_path, big_image_path):
             if (
                 os.path.isfile(file_path)
                 and "import" not in filename
-                and row[2] in filename
+                and row[2] == filename.replace(".png","")
             ):
                 print(file_path)
                 resource_path = file_path.replace(
@@ -113,7 +115,7 @@ def update_faux_file_paths(csv_data, new_folder_path, big_image_path):
             if (
                 os.path.isfile(file_path)
                 and "import" not in filename
-                and row[2] in filename
+                and row[2] == filename.replace(".png","")
             ):
                 # Perform your action on the file
                 # print(f"Processing file: {file_path}")

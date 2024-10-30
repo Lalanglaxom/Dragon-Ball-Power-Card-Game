@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwarvr64ngt4d"
-path="res://.godot/imported/5_Torisaki Kurumi.png-e29038f49ee253e9bc77281b5656fa01.ctex"
+uid="uid://c3d6sgun7htkn"
+path="res://.godot/imported/Kurumi.png-f72404890c505398dd3732259d3457d6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://card/faux/image/160x240/5_Torisaki Kurumi.png"
-dest_files=["res://.godot/imported/5_Torisaki Kurumi.png-e29038f49ee253e9bc77281b5656fa01.ctex"]
+source_file="res://card/faux/image/160x240/Kurumi.png"
+dest_files=["res://.godot/imported/Kurumi.png-f72404890c505398dd3732259d3457d6.ctex"]
 
 [params]
 

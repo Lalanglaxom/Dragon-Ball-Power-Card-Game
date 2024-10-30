@@ -20,6 +20,7 @@ func _ready() -> void:
 	#Global.card_hover.connect(handle_hover)
 	#Global.card_chosen.connect(card_chosen)
 	Global.card_return.connect(add_remove_card)
+	Global.card_return_local.connect(add_remove_card)
 
 
 func _process(delta: float) -> void:

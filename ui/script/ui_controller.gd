@@ -40,3 +40,7 @@ func hide_big_image_3d(card: Card3D):
 
 func _on_end_turn_pressed() -> void:
 	Global.end_turn_pressed.emit()
+
+
+func _on_test_button_pressed() -> void:
+	Global.game_turn_end.emit()

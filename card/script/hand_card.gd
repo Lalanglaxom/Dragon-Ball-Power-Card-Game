@@ -88,6 +88,9 @@ func _on_gui_input(event: InputEvent) -> void:
 			
 			if Global.state != Global.State.YOUR_TURN:
 				return
+				
+			if Global.current_phase == Global.Phase.DAMAGE:
+				return
 			
 			if card_belong_to_id != multiplayer.get_unique_id():
 				return
@@ -95,9 +98,6 @@ func _on_gui_input(event: InputEvent) -> void:
 			if is_hover:
 				choose_card()
 
-		if event.button_index == MOUSE_BUTTON_LEFT and event.is_released():
-			#print_debug(self.card_data.nice_name)
-			pass
 
 
 func choose_card():
