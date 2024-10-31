@@ -1,0 +1,28 @@
+[gd_scene load_steps=8 format=3 uid="uid://5m2id4rsekxd"]
+
+[ext_resource type="Script" path="res://card/script/full_pile_new.gd" id="1_6j0xs"]
+[ext_resource type="PackedScene" uid="uid://dwleps5an3bwi" path="res://scenes/3d/card_3d.tscn" id="2_46gup"]
+[ext_resource type="Script" path="res://card/script/p1_hand.gd" id="3_lan8t"]
+[ext_resource type="Script" path="res://free_look_camera.gd" id="3_raq5v"]
+[ext_resource type="Curve" uid="uid://b6vvv4vkpbtvp" path="res://card/hand_position_curve.tres" id="4_g8060"]
+[ext_resource type="Curve" uid="uid://cilxr3u0kmg7y" path="res://card/hand_rotation_curve.tres" id="5_2f7nr"]
+[ext_resource type="Curve" uid="uid://bkbraspsnw3k8" path="res://card/hand_spread.tres" id="6_5lubm"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="FullPile" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.68934)
+script = ExtResource("1_6j0xs")
+json_battle_database_path = "res://card/battle/battle_database.json"
+json_battle_collection_path = "res://card/battle/battle_collection.json"
+card_scene = ExtResource("2_46gup")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.467421, 0.884035, 0, -0.884035, 0.467421, 0, 3.73745, 0.942782)
+script = ExtResource("3_raq5v")
+
+[node name="HandContainerP1" type="Node3D" parent="."]
+script = ExtResource("3_lan8t")
+hand_position_curve = ExtResource("4_g8060")
+hand_rotation_curve = ExtResource("5_2f7nr")
+hand_spread_curve = ExtResource("6_5lubm")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://0u0xoqfym0sm"]
+[gd_scene load_steps=42 format=4 uid="uid://0u0xoqfym0sm"]
 
 [ext_resource type="Script" path="res://scenes/3d/game_controller.gd" id="1_tpmse"]
 [ext_resource type="Texture2D" uid="uid://dst4ivhm4ajhg" path="res://environment/texture/stone.jpg" id="2_hijyr"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://environment/3d model/vegeta/vegeta.gd" id="3_qnp4i"]
 [ext_resource type="Texture2D" uid="uid://c32guov02usva" path="res://environment/3d model/vegeta/vegeta_dance_tex2.png" id="4_2mfer"]
 [ext_resource type="Curve" uid="uid://cilxr3u0kmg7y" path="res://card/hand_rotation_curve.tres" id="4_gmvg7"]
-[ext_resource type="PackedScene" uid="uid://cnivjgxf0idvg" path="res://scenes/card_2d.tscn" id="5_a8imj"]
 [ext_resource type="Texture2D" uid="uid://bjtg1ax8rgpvl" path="res://environment/3d model/vegeta/vegeta_dance_tex4.png" id="5_evkn5"]
 [ext_resource type="Script" path="res://players/p2_hand.gd" id="6_c08yh"]
 [ext_resource type="Texture2D" uid="uid://dtdu1a6hkrkgt" path="res://environment/3d model/vegeta/vegeta_dance_face1.png" id="6_s31b6"]
@@ -21,7 +20,6 @@
 [ext_resource type="PackedScene" uid="uid://bjfilmjk4nug4" path="res://scenes/3d/slot2.tscn" id="11_nlpbd"]
 [ext_resource type="Script" path="res://scenes/3d/grave.gd" id="11_wmtgq"]
 [ext_resource type="Script" path="res://ui/script/ui_controller.gd" id="17_b8fvp"]
-[ext_resource type="Texture2D" uid="uid://d1xbmnitd6p35" path="res://card/battle/image/742x1122/26_Kefla Legendary SSJ2.png" id="18_e4fgy"]
 [ext_resource type="Script" path="res://scenes/3d/debugger.gd" id="21_ntedu"]
 [ext_resource type="Script" path="res://ui/script/card_button.gd" id="22_6mj4c"]
 
@@ -668,7 +666,6 @@ mesh = SubResource("PlaneMesh_ho4ek")
 
 [node name="VegetaDance" type="Node3D" parent="."]
 transform = Transform3D(0.734308, 0, -2.38973, 0, 2.5, 0, 2.38973, 0, 0.734308, 38.1029, 0, -15.3813)
-visible = false
 script = ExtResource("3_qnp4i")
 
 [node name="Armature" type="Node3D" parent="VegetaDance"]
@@ -942,9 +939,6 @@ grow_horizontal = 0
 grow_vertical = 2
 pivot_offset = Vector2(40, 60)
 script = ExtResource("3_c2cdc")
-json_battle_database_path = "res://card/battle/battle_database.json"
-json_battle_collection_path = "res://card/battle/battle_collection.json"
-card_scene = ExtResource("5_a8imj")
 
 [node name="HandContainerP2" type="Control" parent="."]
 custom_minimum_size = Vector2(80, 120)
@@ -1023,19 +1017,17 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="BigImage" type="TextureRect" parent="CanvasLayer/UI"]
-visible = false
 texture_filter = 4
 custom_minimum_size = Vector2(750, 1050)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.05
-offset_left = 2.0
-offset_top = -1051.0
-offset_right = 750.0
-offset_bottom = -1.0
+offset_left = 126.0
+offset_top = -314.0
+offset_right = 874.0
+offset_bottom = 736.0
 grow_vertical = 2
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("18_e4fgy")
 
 [node name="CardOption" type="VBoxContainer" parent="CanvasLayer/UI"]
 visible = false

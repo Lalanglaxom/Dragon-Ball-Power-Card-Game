@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://nxe5hxccb6ic"
-path="res://.godot/imported/58_Vegito Super Saiyan Blue.png-e9f2c3c4cfa19f5a6b66e20bad80f711.ctex"
+uid="uid://waebdswld7o0"
+path="res://.godot/imported/SynchronizeIcon.png-1ab42da4ce082c51caf3ddd6acec7d17.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://card/battle/image/742x1122/58_Vegito Super Saiyan Blue.png"
-dest_files=["res://.godot/imported/58_Vegito Super Saiyan Blue.png-e9f2c3c4cfa19f5a6b66e20bad80f711.ctex"]
+source_file="res://addons/GD-Sync/UI/Icons/SynchronizeIcon.png"
+dest_files=["res://.godot/imported/SynchronizeIcon.png-1ab42da4ce082c51caf3ddd6acec7d17.ctex"]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

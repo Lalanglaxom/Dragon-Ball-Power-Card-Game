@@ -1,38 +1,60 @@
 class_name Card3D
-extends Node3D
+extends Area3D
+
+signal state_updated
 
 @export var card_data : CardData
+@export var hover_amount: float = 60
+@export var return_speed := 0.2
 
-@onready var frontface = $Front
-@onready var backface = $Back
+@onready var frontface: Sprite3D = $Front
+@onready var backface: Sprite3D = $Back
 var frontface_texture: String
 var backface_texture: String
 
-var base_y_pos: float
-var direction: Vector2
-var health: int = 2
+const HOVER_MATERIAL = preload("res://card/properties/hover_material.tres")
 
+# Properties
+var base_y_pos: float
+var target_position: Vector3
+var target_rotation: float 
+
+var direction: Vector2
 var card_belong_to_id: int = -1
+
+# State
+var is_all_visible: bool
+var is_on_hand: bool
+var is_hover: bool = false
+
 
 func _ready() -> void:
 	if frontface_texture:
 		frontface.texture = load(frontface_texture)
-		backface.texture = load(backface_texture)
 	
 	base_y_pos = position.y
-	appear()
+
+func _process(delta: float) -> void:
+	handle_card_transform()
+
+
+func handle_card_transform():
+	if is_hover:
+		return
+	
+	position = lerp(position, target_position, return_speed)
+	rotation.y = target_rotation
 
 
 func appear():
 	direction = Vector2.DOWN
 	set_direction(direction)
-	
 	move_in()
 
 
 func move_in():
 	var base_z_pos = position.z
-	position.z += 20
+	position.z += 3
 	
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "position", Vector3(0,0,base_z_pos), 0.5) \
@@ -41,7 +63,7 @@ func move_in():
 
 
 func move_out():
-	var new_z_pos = position.z + 30
+	var new_z_pos = position.z + 2
 	
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "position", Vector3(0,0,new_z_pos), 0.5) \
@@ -57,6 +79,7 @@ func move_to(new_pos: Vector3):
 	tween.tween_property(self, "position", new_pos, 0.5) \
 	.set_trans(Tween.TRANS_EXPO)\
 	.set_ease(Tween.EASE_OUT)
+
 
 func flip():
 	var tween = get_tree().create_tween()
@@ -104,9 +127,9 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 			if Global.current_phase == Global.Phase.BATTLE:
 				Global.card_3d_button.emit(self, card_data.id, card_belong_to_id)
 			
-			elif Global.current_phase == Global.Phase.STANDOFF:
+			elif Global.current_phase == Global.Phase.STANDOFF and direction != Vector2.UP:
 				Global.card_return.emit(self, card_data.id, card_belong_to_id)
-			#Global.game_turn_end.emit(self, 1, 1)
+
 
 func _on_mouse_entered() -> void:
 	if direction == Vector2.UP or card_belong_to_id == multiplayer.get_unique_id():

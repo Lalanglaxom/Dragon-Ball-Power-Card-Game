@@ -137,9 +137,9 @@ func set_faux_for_player(faux_id_1: int, faux_id_2: int, player_id: int):
 		p2_hand.add_card(faux_card_2)
 
 	
-@rpc("any_peer", "call_local", "unreliable")
+@rpc("any_peer", "call_local", "reliable")
 func place_card(card_2d, card_id, id):
-	
+	# BUG: Card P2 don't update
 	var card3d = Global.create_card_3d(Global.get_card3d_data_by_id(card_id), id)
 	if multiplayer.get_unique_id() == card3d.card_belong_to_id:
 
@@ -213,13 +213,13 @@ func send_to_grave(card3d):
 	if card3d.card_belong_to_id == multiplayer.get_unique_id():
 		card3d.set_direction(Vector2.UP)
 		card3d.reparent(grave_1, true)
-		p1_grave_pile.append(card3d)
+		p1_grave_pile.push_front(card3d)
 		p1_hand.hand_pile_p1.erase(card3d)
 		card3d.move_to(Vector3(0, card3d.position.y, 0))
 	else:
 		card3d.set_direction(Vector2.UP)
 		card3d.reparent(grave_2, true)
-		p2_grave_pile.append(card3d)
+		p2_grave_pile.push_front(card3d)
 		p2_hand.hand_pile_p2.erase(card3d)
 		card3d.move_to(Vector3(0, card3d.position.y, 0))
 
@@ -296,10 +296,10 @@ func reset_card_on_field():
 				send_to_grave(card)
 			else:
 				return_card_local(card, card.card_belong_to_id)
-		
+		# FIXME: hide label from slot that have no card
 		p2_battle_power = 0
 		p2_battle_pile.clear()
-	
+			
 		for card in p1_battle_pile:
 			if card.card_data is not Faux:
 				card.health -= 1
@@ -309,11 +309,19 @@ func reset_card_on_field():
 			elif card.card_data is Faux:
 				return_card_local(card, card.card_belong_to_id)
 		
+		for slot in player_2_pos.get_children():
+			if slot is BattleSlot:
+				slot.power_label.hide()
+		
+		for slot in player_1_pos.get_children():
+			if slot is BattleSlot and slot.get_child_count() < 2:
+				slot.power_label.hide()
+		
+		
 		for card in p1_grave_pile:
 			if p1_battle_pile.has(card): 
 				p1_battle_pile.erase(card)
 				p1_battle_power -= card.card_data.power
-			
 			
 	else:
 		for card in p2_battle_pile:
@@ -342,13 +350,13 @@ func reset_card_on_field():
 		p1_battle_power = 0
 		p1_battle_pile.clear()
 	
-	for slot in player_1_pos.get_children():
-		if slot is BattleSlot:
-			slot.power_label.hide()
+		for slot in player_1_pos.get_children():
+			if slot is BattleSlot:
+				slot.power_label.hide()
 		
-	for slot in player_2_pos.get_children():
-		if slot is BattleSlot:
-			slot.power_label.hide()
+		for slot in player_2_pos.get_children():
+			if slot is BattleSlot and slot.get_child_count() < 2:
+				slot.power_label.hide()
 
 
 func return_card_local(card3d, player_id):
@@ -362,8 +370,7 @@ func return_card_local(card3d, player_id):
 				Global.card_return_local.emit(card3d, card3d.card_data.id, player_id)
 
 
-func check_end_turn_criteria() -> bool:
-	# TODO: PRINTING
+func check_end_turn_criteria() -> bool:	
 
 	var valid = false
 	
@@ -425,11 +432,11 @@ func count_card_battle_p1_p2():
 	var p1_hand_battle_card = 0
 	
 	for card in p1_battle_pile:
-		if card.card_data is Battle and card.direction == Vector2.UP:
+		if card.card_data is Battle:
 			p1_card_battle_count += 1
 			
 	for card in p2_battle_pile:
-		if card.card_data is Battle and card.direction == Vector2.UP:
+		if card.card_data is Battle:
 			p2_card_battle_count += 1
 	
 	

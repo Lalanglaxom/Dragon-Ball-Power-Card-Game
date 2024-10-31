@@ -8,11 +8,17 @@
 
 config_version=5
 
+[GD-Sync]
+
+version="0.6"
+privateKey="87c035664b158c9a"
+publicKey="cc2bb96f44278168"
+
 [application]
 
 config/name="Dragon Ball Power Card Game"
 config/description="Bộ bài sức mạnh Dragon Ball"
-run/main_scene="res://scenes/main_menu.tscn"
+run/main_scene="res://scenes/3d/test.tscn"
 config/features=PackedStringArray("4.3")
 config/icon="res://icon.png"
 

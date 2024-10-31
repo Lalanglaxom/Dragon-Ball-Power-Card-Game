@@ -17,7 +17,7 @@ signal card_3d_flip(Card3D)
 
 
 # Pile Signal
-signal draw_pile_updated()
+signal draw_pile_updated
 signal on_draw_pressed(amount: int)
 signal card_drew(Card2D)
 

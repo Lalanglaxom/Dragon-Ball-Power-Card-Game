@@ -12,7 +12,7 @@ var backface_texture : String
 const CARD_3D = preload("res://scenes/3d/card_3d.tscn")
 const HOVER_MATERIAL = preload("res://card/properties/hover_material.tres")
 
-var target_position: Vector2 
+var target_position: Vector2
 var target_rotation: float 
 
 var is_hover: bool = false
@@ -58,6 +58,8 @@ func _on_mouse_entered() -> void:
 	
 	if card_belong_to_id == multiplayer.get_unique_id():
 		Global.card_hover.emit(self)
+	
+	Global.card_hover.emit(self)
 	
 	is_hover = true
 	get_node("Frontface").material = HOVER_MATERIAL

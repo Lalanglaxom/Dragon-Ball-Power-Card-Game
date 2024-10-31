@@ -16,6 +16,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	big_image.position = get_viewport().get_mouse_position() + offset
 	pass
 
 

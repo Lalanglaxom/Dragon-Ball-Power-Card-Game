@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://21pwf05i32e6"
-path="res://.godot/imported/07_Sonic Warrior Dyspo.png-c80667031b3145fc97b23cb09b34fc1e.ctex"
+path.s3tc="res://.godot/imported/07_Sonic Warrior Dyspo.png-c80667031b3145fc97b23cb09b34fc1e.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://card/battle/image/742x1122/07_Sonic Warrior Dyspo.png"
-dest_files=["res://.godot/imported/07_Sonic Warrior Dyspo.png-c80667031b3145fc97b23cb09b34fc1e.ctex"]
+dest_files=["res://.godot/imported/07_Sonic Warrior Dyspo.png-c80667031b3145fc97b23cb09b34fc1e.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
@@ -31,4 +32,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0
