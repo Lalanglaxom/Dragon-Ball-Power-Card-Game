@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://2qr2cpxlrumy"]
+[gd_scene load_steps=4 format=3 uid="uid://2qr2cpxlrumy"]
 
 [ext_resource type="Script" path="res://scenes/scripts/multiplayer_menu.gd" id="1_rcsq5"]
 [ext_resource type="Script" path="res://ui/script/faux_card_select.gd" id="2_yyewi"]
-[ext_resource type="PackedScene" uid="uid://cnivjgxf0idvg" path="res://scenes/card_2d.tscn" id="3_nbtqn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b0np0"]
 bg_color = Color(1, 1, 1, 1)
@@ -98,7 +97,6 @@ grow_vertical = 2
 script = ExtResource("2_yyewi")
 json_faux_collection_path = "res://card/faux/faux_collection.json"
 json_faux_database_path = "res://card/faux/faux_database.json"
-card_scene = ExtResource("3_nbtqn")
 
 [node name="Panel" type="Panel" parent="Faux Card Select"]
 custom_minimum_size = Vector2(508, 480)

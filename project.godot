@@ -18,7 +18,7 @@ publicKey="cc2bb96f44278168"
 
 config/name="Dragon Ball Power Card Game"
 config/description="Bộ bài sức mạnh Dragon Ball"
-run/main_scene="res://scenes/3d/test.tscn"
+run/main_scene="res://scenes/main_menu.tscn"
 config/features=PackedStringArray("4.3")
 config/icon="res://icon.png"
 

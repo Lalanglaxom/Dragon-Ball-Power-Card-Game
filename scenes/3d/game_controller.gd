@@ -17,7 +17,7 @@ signal end_turn_valid
 @onready var ui: Control = $"../CanvasLayer/UI"
 const CARD_3D = preload("res://scenes/3d/card_3d.tscn")
 
-var start_card_hand_amount: int = 20
+var start_card_hand_amount: int = 15
 
 var p1_pile := []
 var p1_hand_pile := []
@@ -139,7 +139,7 @@ func set_faux_for_player(faux_id_1: int, faux_id_2: int, player_id: int):
 	
 @rpc("any_peer", "call_local", "reliable")
 func place_card(card_2d, card_id, id):
-	# BUG: Card P2 don't update
+	# FIXME: Card P2 don't update
 	var card3d = Global.create_card_3d(Global.get_card3d_data_by_id(card_id), id)
 	if multiplayer.get_unique_id() == card3d.card_belong_to_id:
 
@@ -215,13 +215,13 @@ func send_to_grave(card3d):
 		card3d.reparent(grave_1, true)
 		p1_grave_pile.push_front(card3d)
 		p1_hand.hand_pile_p1.erase(card3d)
-		card3d.move_to(Vector3(0, card3d.position.y, 0))
+		card3d.move_to(Vector3(0, card3d.position.y, 0), 0.5)
 	else:
 		card3d.set_direction(Vector2.UP)
 		card3d.reparent(grave_2, true)
 		p2_grave_pile.push_front(card3d)
 		p2_hand.hand_pile_p2.erase(card3d)
-		card3d.move_to(Vector3(0, card3d.position.y, 0))
+		card3d.move_to(Vector3(0, card3d.position.y, 0), 0.5)
 
 	grave_1.arrange_grave_card()
 	grave_2.arrange_grave_card()

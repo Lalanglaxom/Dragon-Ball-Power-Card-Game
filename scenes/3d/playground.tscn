@@ -939,6 +939,8 @@ grow_horizontal = 0
 grow_vertical = 2
 pivot_offset = Vector2(40, 60)
 script = ExtResource("3_c2cdc")
+json_battle_database_path = "res://card/battle/battle_database.json"
+json_battle_collection_path = "res://card/battle/battle_collection.json"
 
 [node name="HandContainerP2" type="Control" parent="."]
 custom_minimum_size = Vector2(80, 120)
@@ -976,7 +978,7 @@ grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(40, 60)
 script = ExtResource("2_s5h1q")
-max_hand_spread = 1000.0
+max_hand_spread = 400.0
 hand_position_curve = ExtResource("8_no7rg")
 hand_rotation_curve = ExtResource("4_gmvg7")
 hand_spread_curve = ExtResource("10_cjsaq")

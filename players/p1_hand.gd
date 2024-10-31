@@ -39,7 +39,12 @@ func arrange_hand_card():
 			hand_ratio = float(i) / float(hand_pile_p1.size() - 1)
 		var target_pos = Vector2.ZERO
 		var target_rot = self.rotation
-		max_hand_spread = hand_spread_curve.sample(float(hand_pile_p1.size()) / float(max_card_hand))
+		if hand_pile_p1.size() >= max_card_hand:
+			max_hand_spread = hand_spread_curve.sample(1)
+			
+		else:
+			max_hand_spread = hand_spread_curve.sample(float(hand_pile_p1.size()) / float(max_card_hand))
+		
 		var card_spacing = max_hand_spread / (hand_pile_p1.size() + 1)
 		
 		target_pos.x += (i + 1) * card_spacing - max_hand_spread / 2.0

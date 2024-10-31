@@ -4,7 +4,8 @@ extends Node
 
 @export_file("*.json") var json_battle_database_path : String
 @export_file("*.json") var json_battle_collection_path : String
-@export var card_scene : PackedScene
+
+const card_scene = preload("res://scenes/card_2d.tscn")
 
 @onready var hand_container_p_2: Control = $"../HandContainerP2"
 @onready var hand_container_p_1: Control = $"../HandContainerP1"

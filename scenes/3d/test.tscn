@@ -1,12 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://5m2id4rsekxd"]
+[gd_scene load_steps=14 format=3 uid="uid://5m2id4rsekxd"]
 
 [ext_resource type="Script" path="res://card/script/full_pile_new.gd" id="1_6j0xs"]
 [ext_resource type="PackedScene" uid="uid://dwleps5an3bwi" path="res://scenes/3d/card_3d.tscn" id="2_46gup"]
+[ext_resource type="Script" path="res://card/script/card_3d.gd" id="3_an2wp"]
 [ext_resource type="Script" path="res://card/script/p1_hand.gd" id="3_lan8t"]
 [ext_resource type="Script" path="res://free_look_camera.gd" id="3_raq5v"]
 [ext_resource type="Curve" uid="uid://b6vvv4vkpbtvp" path="res://card/hand_position_curve.tres" id="4_g8060"]
+[ext_resource type="Texture2D" uid="uid://21pwf05i32e6" path="res://card/battle/image/742x1122/07_Sonic Warrior Dyspo.png" id="4_s4eh1"]
 [ext_resource type="Curve" uid="uid://cilxr3u0kmg7y" path="res://card/hand_rotation_curve.tres" id="5_2f7nr"]
+[ext_resource type="Texture2D" uid="uid://dg4kpc5i7lnaw" path="res://card/battle/image/742x1122/back.png" id="5_fx1hn"]
 [ext_resource type="Curve" uid="uid://bkbraspsnw3k8" path="res://card/hand_spread.tres" id="6_5lubm"]
+[ext_resource type="Texture2D" uid="uid://bknv8oasor5ud" path="res://card/battle/image/742x1122/48_Cumber (Golden Great Ape).png" id="6_yqixe"]
+[ext_resource type="Texture2D" uid="uid://b3dj6edqm711m" path="res://card/battle/image/742x1122/53_Dark King Mechikabura.png" id="7_np81n"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5tc7q"]
+size = Vector3(7.5, 0.01, 10.5)
 
 [node name="Node3D" type="Node3D"]
 
@@ -18,7 +26,7 @@ json_battle_collection_path = "res://card/battle/battle_collection.json"
 card_scene = ExtResource("2_46gup")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.467421, 0.884035, 0, -0.884035, 0.467421, 0, 3.73745, 0.942782)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.22851, 0)
 script = ExtResource("3_raq5v")
 
 [node name="HandContainerP1" type="Node3D" parent="."]
@@ -26,3 +34,76 @@ script = ExtResource("3_lan8t")
 hand_position_curve = ExtResource("4_g8060")
 hand_rotation_curve = ExtResource("5_2f7nr")
 hand_spread_curve = ExtResource("6_5lubm")
+
+[node name="Temp" type="Node3D" parent="."]
+visible = false
+
+[node name="Card_3D" type="Area3D" parent="Temp"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -3.68934)
+visible = false
+script = ExtResource("3_an2wp")
+
+[node name="Front" type="Sprite3D" parent="Temp/Card_3D"]
+transform = Transform3D(0.135, 0, 0, 0, 0.135, 0, 0, 0, 0.135, 0, 0, 0)
+shaded = true
+double_sided = false
+texture = ExtResource("4_s4eh1")
+region_rect = Rect2(521, 558, 89, 58)
+
+[node name="Back" type="Sprite3D" parent="Temp/Card_3D"]
+transform = Transform3D(-0.135, 0, -1.18021e-08, 0, 0.135, 0, 1.18021e-08, 0, -0.135, 0, 0, 0)
+double_sided = false
+texture = ExtResource("5_fx1hn")
+
+[node name="CardShape" type="CollisionShape3D" parent="Temp/Card_3D"]
+shape = SubResource("BoxShape3D_5tc7q")
+
+[node name="Card_3D2" type="Area3D" parent="Temp"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -3.68934)
+visible = false
+script = ExtResource("3_an2wp")
+
+[node name="Front" type="Sprite3D" parent="Temp/Card_3D2"]
+transform = Transform3D(0.135, 0, 0, 0, 0.135, 0, 0, 0, 0.135, 0, 0, 0)
+shaded = true
+double_sided = false
+texture = ExtResource("6_yqixe")
+region_rect = Rect2(521, 558, 89, 58)
+
+[node name="Back" type="Sprite3D" parent="Temp/Card_3D2"]
+transform = Transform3D(-0.135, 0, -1.18021e-08, 0, 0.135, 0, 1.18021e-08, 0, -0.135, 0, 0, 0)
+double_sided = false
+texture = ExtResource("5_fx1hn")
+
+[node name="CardShape" type="CollisionShape3D" parent="Temp/Card_3D2"]
+shape = SubResource("BoxShape3D_5tc7q")
+
+[node name="Card_3D3" type="Area3D" parent="Temp"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -3.68934)
+visible = false
+script = ExtResource("3_an2wp")
+
+[node name="Front" type="Sprite3D" parent="Temp/Card_3D3"]
+transform = Transform3D(0.135, 0, 0, 0, 0.135, 0, 0, 0, 0.135, 0, 0, 0)
+shaded = true
+double_sided = false
+texture = ExtResource("7_np81n")
+region_rect = Rect2(521, 558, 89, 58)
+
+[node name="Back" type="Sprite3D" parent="Temp/Card_3D3"]
+transform = Transform3D(-0.135, 0, -1.18021e-08, 0, 0.135, 0, 1.18021e-08, 0, -0.135, 0, 0, 0)
+double_sided = false
+texture = ExtResource("5_fx1hn")
+
+[node name="CardShape" type="CollisionShape3D" parent="Temp/Card_3D3"]
+shape = SubResource("BoxShape3D_5tc7q")
+
+[connection signal="input_event" from="Temp/Card_3D" to="Temp/Card_3D" method="_on_input_event"]
+[connection signal="mouse_entered" from="Temp/Card_3D" to="Temp/Card_3D" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Temp/Card_3D" to="Temp/Card_3D" method="_on_mouse_exited"]
+[connection signal="input_event" from="Temp/Card_3D2" to="Temp/Card_3D2" method="_on_input_event"]
+[connection signal="mouse_entered" from="Temp/Card_3D2" to="Temp/Card_3D2" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Temp/Card_3D2" to="Temp/Card_3D2" method="_on_mouse_exited"]
+[connection signal="input_event" from="Temp/Card_3D3" to="Temp/Card_3D3" method="_on_input_event"]
+[connection signal="mouse_entered" from="Temp/Card_3D3" to="Temp/Card_3D3" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Temp/Card_3D3" to="Temp/Card_3D3" method="_on_mouse_exited"]

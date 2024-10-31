@@ -31,6 +31,7 @@ func arrange_hand_card():
 			
 	for i in hand_pile_p1.size():
 		var card_ui = hand_pile_p1[i]
+		card_ui.set_state(card_ui.State.ON_HAND)
 		var hand_ratio = 0.5
 		
 		if hand_pile_p1.size() > 1:
@@ -41,11 +42,13 @@ func arrange_hand_card():
 		var card_spacing = max_hand_spread / (hand_pile_p1.size() + 1)
 		
 		target_pos.x += (i + 1) * card_spacing - max_hand_spread / 2.0
+		target_pos.y += i
+		print(target_pos.y)
 		
 		if hand_position_curve and hand_pile_p1.size() > 7:
 			target_pos.z -= hand_position_curve.sample(hand_ratio)
 		if hand_rotation_curve and hand_pile_p1.size() > 7:
-			target_rot = deg_to_rad(hand_rotation_curve.sample(hand_ratio))
+			target_rot = deg_to_rad(-hand_rotation_curve.sample(hand_ratio))
 		
 		card_ui.target_position = target_pos
 		card_ui.target_rotation = target_rot
