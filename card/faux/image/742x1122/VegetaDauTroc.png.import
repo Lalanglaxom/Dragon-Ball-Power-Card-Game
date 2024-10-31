@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b00yklpr2gjye"
-path="res://.godot/imported/5_Torisaki Kurumi.png-ce5bb21bb64285d5f7f5f382b52d0cc2.ctex"
+uid="uid://b6aaycnvd8003"
+path="res://.godot/imported/VegetaDauTroc.png-0e4074beb9f059152615f9ae889378db.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://card/faux/image/742x1122/5_Torisaki Kurumi.png"
-dest_files=["res://.godot/imported/5_Torisaki Kurumi.png-ce5bb21bb64285d5f7f5f382b52d0cc2.ctex"]
+source_file="res://card/faux/image/742x1122/VegetaDauTroc.png"
+dest_files=["res://.godot/imported/VegetaDauTroc.png-0e4074beb9f059152615f9ae889378db.ctex"]
 
 [params]
 

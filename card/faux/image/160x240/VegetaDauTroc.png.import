@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tq3lkex4xtub"
-path="res://.godot/imported/goku.png-22cffb142423c71c60ae82d9df3a3daa.ctex"
+uid="uid://cy32ks2f71vic"
+path="res://.godot/imported/VegetaDauTroc.png-26cf831b4d6453500efd24007d5e30fe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://card/faux/image/742x1122/goku.png"
-dest_files=["res://.godot/imported/goku.png-22cffb142423c71c60ae82d9df3a3daa.ctex"]
+source_file="res://card/faux/image/160x240/VegetaDauTroc.png"
+dest_files=["res://.godot/imported/VegetaDauTroc.png-26cf831b4d6453500efd24007d5e30fe.ctex"]
 
 [params]
 

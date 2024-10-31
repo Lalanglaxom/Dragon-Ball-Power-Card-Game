@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyi83mmrb2uyi"
-path="res://.godot/imported/07_Vados.png-f9624969bab573fc27af3c8b613c34e7.ctex"
+uid="uid://bcaudbkf5ttur"
+path="res://.godot/imported/VegetaDauTay.png-a8f00bbb512444a1cb803601d9fdc11a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://card/faux/image/742x1122/07_Vados.png"
-dest_files=["res://.godot/imported/07_Vados.png-f9624969bab573fc27af3c8b613c34e7.ctex"]
+source_file="res://card/faux/image/160x240/VegetaDauTay.png"
+dest_files=["res://.godot/imported/VegetaDauTay.png-a8f00bbb512444a1cb803601d9fdc11a.ctex"]
 
 [params]
 

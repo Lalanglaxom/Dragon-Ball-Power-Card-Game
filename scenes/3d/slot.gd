@@ -1,3 +1,4 @@
+class_name BattleSlot
 extends Node3D
 
 @onready var power_label: Label3D = $PowerLabel

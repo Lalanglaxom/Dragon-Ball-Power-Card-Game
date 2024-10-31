@@ -32,7 +32,7 @@ func start():
 		reset_battle_collection()
 		for card in get_children():
 			draw_pile.append(card)
-		#draw_pile.shuffle()
+		draw_pile.shuffle()
 			
 		for card in draw_pile:
 			id_pile.append(card.card_data.id)
@@ -66,7 +66,7 @@ func shuffle_draw_pile():
 func load_json_path():
 	battle_database = _load_json_cards_from_path(json_battle_database_path)
 	battle_collection = _load_json_cards_from_path(json_battle_collection_path)
-	
+	# TODO: FIX THE NAME IN JSON PYTHON
 	Global.battle_database = battle_database
 	Global.battle_collection = battle_collection
 

@@ -2,6 +2,7 @@ extends Control
 
 @onready var big_image: TextureRect = $BigImage
 @onready var end_turn: Button = $"End Turn"
+@onready var card_option: Player2 = $CardOption
 
 var offset = Vector2(5, -225)
 

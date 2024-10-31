@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://t5g01s6glog3"
-path="res://.godot/imported/4_Farmer.png-81597d682e9770f93f167d90a3755795.ctex"
+uid="uid://dpx0la6d5xdxr"
+path="res://.godot/imported/VegetaGiay.png-caad8a720b4a194ea12747a5a9e3ba50.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://card/faux/image/742x1122/4_Farmer.png"
-dest_files=["res://.godot/imported/4_Farmer.png-81597d682e9770f93f167d90a3755795.ctex"]
+source_file="res://card/faux/image/160x240/VegetaGiay.png"
+dest_files=["res://.godot/imported/VegetaGiay.png-caad8a720b4a194ea12747a5a9e3ba50.ctex"]
 
 [params]
 

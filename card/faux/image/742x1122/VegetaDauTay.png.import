@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djhb5tcci2rb7"
-path="res://.godot/imported/1_Vegeta God Of Destruction.png-494fdc29117a1406a51087d400690a31.ctex"
+uid="uid://25x5vmycjo7q"
+path="res://.godot/imported/VegetaDauTay.png-22ecd1dc58ea9e661f2a854d753dbb63.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://card/faux/image/742x1122/1_Vegeta God Of Destruction.png"
-dest_files=["res://.godot/imported/1_Vegeta God Of Destruction.png-494fdc29117a1406a51087d400690a31.ctex"]
+source_file="res://card/faux/image/742x1122/VegetaDauTay.png"
+dest_files=["res://.godot/imported/VegetaDauTay.png-22ecd1dc58ea9e661f2a854d753dbb63.ctex"]
 
 [params]
 

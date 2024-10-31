@@ -18,7 +18,7 @@ func _ready() -> void:
 func show_button(card3d, card_id, player_id):
 	if card3d.card_belong_to_id != multiplayer.get_unique_id(): return
 	if Global.state != Global.State.YOUR_TURN: return
-	
+	if card3d.direction == Vector2.UP: return
 	
 	self.show()
 	self.card3d = card3d

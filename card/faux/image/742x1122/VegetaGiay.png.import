@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpbkjoq0xi82r"
-path="res://.godot/imported/gohan.png-fa0815ef72207ca43f6773bf0a431534.ctex"
+uid="uid://ioh45lejjcjn"
+path="res://.godot/imported/VegetaGiay.png-153bbf00acc09146870017f21236381a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://card/faux/image/742x1122/gohan.png"
-dest_files=["res://.godot/imported/gohan.png-fa0815ef72207ca43f6773bf0a431534.ctex"]
+source_file="res://card/faux/image/742x1122/VegetaGiay.png"
+dest_files=["res://.godot/imported/VegetaGiay.png-153bbf00acc09146870017f21236381a.ctex"]
 
 [params]
 

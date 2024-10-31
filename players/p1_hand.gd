@@ -66,13 +66,12 @@ func add_card(card: Card2D):
 
 
 func add_remove_card(card3d, card_id, player_id):
-	await get_tree().create_timer(0.1).timeout
 	if multiplayer.get_unique_id() == player_id:
 		for card in remove_hand:
 			if card.card_data.id == card_id:
 				hand_pile_p1.append(card)
-				remove_hand.erase(card)
 				add_child(card)
+				remove_hand.erase(card)
 		arrange_hand_card()
 	
 

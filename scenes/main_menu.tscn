@@ -60,11 +60,26 @@ text = "Start Game
 "
 
 [node name="NameBox" type="LineEdit" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 37.0
 offset_top = 54.0
 offset_right = 496.0
 offset_bottom = 85.0
+
+[node name="NameBox2" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 99.0
+offset_right = 496.0
+offset_bottom = 130.0
+
+[node name="Label" type="Label" parent="NameBox2"]
+layout_mode = 0
+offset_top = -34.0
+offset_right = 72.0
+offset_bottom = -11.0
+text = "IP Adress"
 
 [node name="Faux Card Select" type="Control" parent="."]
 custom_minimum_size = Vector2(508, 480)

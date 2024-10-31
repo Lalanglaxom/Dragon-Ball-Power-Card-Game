@@ -44,11 +44,16 @@ var faux_id_chosen: Array[int]
 var battle_database := [] # an array of JSON `Card` data
 var battle_collection := [] # an array of JSON `Card` data
 
+# Game round
 enum State {OTHER_TURN, YOUR_TURN}
 var state: State
 
 enum Phase {STANDOFF, BATTLE, DAMAGE} 
 var current_phase: Phase    
+
+var round_turn: int = 0
+var card_button_can_show: bool = false
+
 
 func print_multi(thing):
 	print(str(multiplayer.get_unique_id()) + ": " + str(thing))

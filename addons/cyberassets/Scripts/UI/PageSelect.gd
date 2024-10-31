@@ -17,7 +17,7 @@ var pageButtonContainer
 signal _page_selected(page : int)
 
 func _enter_tree() -> void:
-	#todo move to method, so we can update when maxPage is set
+	# move to method, so we can update when maxPage is set
 
 	page = minPage
 

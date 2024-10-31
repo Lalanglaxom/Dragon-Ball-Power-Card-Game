@@ -1,9 +1,11 @@
 extends Control
 
 const PORT = 7000
-const SERVER_IP = "127.0.0.1" # IPv4 localhost
+var server_ip = "" # IPv4 localhost
 const MAX_CONNECTIONS = 3
+
 @onready var main_menu = $"."
+@onready var name_box_2: LineEdit = $NameBox2
 
 var players = {}
 var player_info = {
@@ -13,12 +15,33 @@ var player_info = {
 @onready var faux_card_select: Control = $"Faux Card Select"
 
 func _ready():
+	server_ip = name_box_2.text
 	multiplayer.peer_connected.connect(peer_connected)
 	multiplayer.peer_disconnected.connect(peer_disconnected)
 	multiplayer.connected_to_server.connect(connected_to_server)
 	multiplayer.connection_failed.connect(connection_failed)
-	
-	
+
+
+func connect_upnp():
+	var upnp = UPNP.new()
+	var discover_result = upnp.discover()
+
+	if discover_result == UPNP.UPNP_RESULT_SUCCESS:
+		if upnp.get_gateway() and upnp.get_gateway().is_valid_gateway():
+			var map_result_udp = upnp.add_port_mapping(9999, 9999, "godot_udp", "UDP", 0)
+			var map_result_tcp = upnp.add_port_mapping(9999, 9999, "godot_tcp", "TCP", 0)
+
+			if map_result_udp != UPNP.UPNP_RESULT_SUCCESS:
+				upnp.add_port_mapping(9999, 9999, "", "UDP")
+			if map_result_tcp != UPNP.UPNP_RESULT_SUCCESS:
+				upnp.add_port_mapping(9999, 9999, "", "TCP")
+
+	var external_adress = upnp.query_external_address()
+	print(external_adress)
+	print("A")
+	upnp.delete_port_mapping(9999, "UDP")
+	upnp.delete_port_mapping(9999, "TCP")
+
 func peer_connected(id):
 	print("Player Connected: ", id)
 	add_player_info.rpc_id(id, player_info)
@@ -34,8 +57,8 @@ func connection_failed():
 	print("Connection failed: ")
 
 
-
 func _on_host_button_pressed():
+
 	var peer = ENetMultiplayerPeer.new()
 	var error = peer.create_server(PORT, MAX_CONNECTIONS)
 	if error:
@@ -47,7 +70,7 @@ func _on_host_button_pressed():
 
 func _on_join_button_pressed():
 	var peer = ENetMultiplayerPeer.new()
-	var error = peer.create_client(SERVER_IP, PORT)
+	var error = peer.create_client(server_ip, PORT)
 	if error:
 		return error
 	multiplayer.multiplayer_peer = peer
