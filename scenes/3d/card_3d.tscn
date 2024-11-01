@@ -8,7 +8,6 @@
 size = Vector3(7.5, 0.01, 10.5)
 
 [node name="Card_3D" type="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("1_jfsc6")
 
 [node name="Front" type="Sprite3D" parent="."]

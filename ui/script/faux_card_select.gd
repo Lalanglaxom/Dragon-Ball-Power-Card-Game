@@ -105,3 +105,7 @@ func start_set_faux_card():
 		for card in Global.faux_cards:
 			if card != Global.faux_cards_chosen[0]:
 				Global.faux_cards_chosen.append(card)
+
+
+func _on_faux_button_pressed() -> void:
+	self.show()

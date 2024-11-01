@@ -20,6 +20,10 @@ config/name="Dragon Ball Power Card Game"
 config/description="Bộ bài sức mạnh Dragon Ball"
 run/main_scene="res://scenes/main_menu.tscn"
 config/features=PackedStringArray("4.3")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/show_image=false
+boot_splash/image="res://ui/texture/dragonball.png"
+boot_splash/fullsize=false
 config/icon="res://icon.png"
 
 [autoload]
@@ -28,7 +32,8 @@ Global="*res://scenes/scripts/Global.gd"
 
 [display]
 
-window/size/always_on_top=true
+window/size/viewport_width=1366
+window/size/viewport_height=768
 window/stretch/mode="canvas_items"
 
 [editor]
@@ -46,7 +51,8 @@ folder_colors={
 "res://environment/": "green",
 "res://players/": "red",
 "res://scenes/": "orange",
-"res://ui/": "purple"
+"res://sound/": "purple",
+"res://ui/": "pink"
 }
 
 [input]

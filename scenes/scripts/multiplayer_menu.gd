@@ -5,7 +5,7 @@ var server_ip = "" # IPv4 localhost
 const MAX_CONNECTIONS = 3
 
 @onready var main_menu = $"."
-@onready var name_box_2: LineEdit = $NameBox2
+@onready var ip_box: LineEdit = $IPBox
 
 var players = {}
 var player_info = {
@@ -50,7 +50,7 @@ func _on_host_button_pressed():
 
 
 func _on_join_button_pressed():
-	server_ip = name_box_2.text
+	server_ip = ip_box.text
 	var peer = ENetMultiplayerPeer.new()
 	var error = peer.create_client(server_ip, PORT)
 	if error:

@@ -1,15 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://2qr2cpxlrumy"]
+[gd_scene load_steps=5 format=3 uid="uid://2qr2cpxlrumy"]
 
 [ext_resource type="Script" path="res://scenes/scripts/multiplayer_menu.gd" id="1_rcsq5"]
 [ext_resource type="Script" path="res://ui/script/faux_card_select.gd" id="2_yyewi"]
+[ext_resource type="Texture2D" uid="uid://ny08g27rcwch" path="res://ui/texture/bg1.png" id="3_gs2q4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b0np0"]
-bg_color = Color(1, 1, 1, 1)
-draw_center = false
-border_width_left = 200
-border_width_top = 10
-border_width_right = 110
-border_width_bottom = 10
+bg_color = Color(0, 0, 0, 0.282353)
+border_width_left = 50
+border_width_top = 50
+border_width_right = 50
+border_width_bottom = 50
 border_color = Color(0, 0, 0, 1)
 border_blend = true
 corner_radius_top_left = 10
@@ -20,7 +20,6 @@ expand_margin_left = 20.0
 expand_margin_top = 20.0
 expand_margin_right = 20.0
 expand_margin_bottom = 20.0
-shadow_offset = Vector2(-3.345, 0)
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
@@ -30,6 +29,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_rcsq5")
+
+[node name="Background" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(1366, 768)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -683.0
+offset_top = -384.0
+offset_right = 683.0
+offset_bottom = 384.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_gs2q4")
+expand_mode = 1
 
 [node name="Host" type="Button" parent="."]
 layout_mode = 0
@@ -58,29 +74,30 @@ offset_bottom = 575.0
 text = "Start Game
 "
 
-[node name="NameBox" type="LineEdit" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 37.0
-offset_top = 54.0
-offset_right = 496.0
-offset_bottom = 85.0
-
-[node name="NameBox2" type="LineEdit" parent="."]
+[node name="IPBox" type="LineEdit" parent="."]
 layout_mode = 0
 offset_left = 37.0
 offset_top = 99.0
 offset_right = 496.0
 offset_bottom = 130.0
 
-[node name="Label" type="Label" parent="NameBox2"]
+[node name="Label" type="Label" parent="IPBox"]
 layout_mode = 0
 offset_top = -34.0
 offset_right = 72.0
 offset_bottom = -11.0
 text = "IP Adress"
 
+[node name="FauxButton" type="Button" parent="."]
+layout_mode = 1
+offset_left = 341.0
+offset_top = 155.0
+offset_right = 525.0
+offset_bottom = 200.0
+text = "Faux Card Select"
+
 [node name="Faux Card Select" type="Control" parent="."]
+visible = false
 custom_minimum_size = Vector2(508, 480)
 layout_mode = 1
 anchors_preset = 8
@@ -118,6 +135,9 @@ theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 3
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
 [connection signal="pressed" from="Host" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="Join" to="." method="_on_join_button_pressed"]
 [connection signal="pressed" from="Start" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="FauxButton" to="Faux Card Select" method="_on_faux_button_pressed"]

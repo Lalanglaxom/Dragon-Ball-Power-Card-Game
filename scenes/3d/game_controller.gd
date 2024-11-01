@@ -49,6 +49,7 @@ func _ready() -> void:
 	Global.card_3d_flip.connect(flip_card.rpc)
 	Global.card_return.connect(return_card.rpc)
 	Global.end_turn_pressed.connect(update_turn.rpc)
+	Global.end_turn_pressed.connect(update_end_turn_button)
 	Global.game_round_end.connect(reset_card_on_field.rpc)
 	
 	set_new_round_turn()
@@ -56,14 +57,13 @@ func _ready() -> void:
 	set_faux_for_player.rpc(Global.faux_cards_chosen[0].card_data.id, \
 							Global.faux_cards_chosen[1].card_data.id, \
 							multiplayer.get_unique_id())
+	
+	update_end_turn_button.call_deferred()
 
 
 func _process(delta: float) -> void:
-	if check_end_turn_criteria():
-		ui.end_turn.disabled = false
-	else:
-		ui.end_turn.disabled = true
-	
+	pass
+
 	
 func set_new_round_turn():
 	turn_new_round.shuffle()
@@ -152,7 +152,7 @@ func place_card(card_2d, card_id, id):
 		put_card_in_p2_slot(card3d)
 		p2_slot_count += 1
 
-
+	update_end_turn_button.call_deferred()
 func put_card_in_p1_slot(card3d: Card3D, card2d: Card2D, card_id: int, id: int):
 	for slot in player_1_pos.get_children():
 		if slot.get_child_count() == 1 and slot.name != "Grave":
@@ -192,8 +192,8 @@ func flip_card(card_3d, card_id, player_id):
 						p2_battle_power += card.card_data.power
 					else:
 						p2_battle_power -= card.card_data.power
-
-
+						
+	update_end_turn_button.call_deferred()
 @rpc("any_peer","call_local","unreliable")
 func return_card(card3d, card_id, player_id):
 	if multiplayer.get_unique_id() == player_id:
@@ -207,8 +207,8 @@ func return_card(card3d, card_id, player_id):
 				p2_slot_count -= 1
 				card.move_out()
 				p2_battle_pile.erase(card)
-
-
+				
+	update_end_turn_button.call_deferred()
 func send_to_grave(card3d):
 	if card3d.card_belong_to_id == multiplayer.get_unique_id():
 		card3d.set_direction(Vector2.UP)
@@ -225,8 +225,7 @@ func send_to_grave(card3d):
 
 	grave_1.arrange_grave_card()
 	grave_2.arrange_grave_card()
-
-
+	update_end_turn_button.call_deferred()
 func update_total_power_label():
 	p1_battle_power = 0
 	for card in p1_battle_pile:
@@ -267,8 +266,8 @@ func update_turn():
 				print("PLAYER 2 WIN")
 			if p2_hand.hand_pile_p2.size() - 2 <= 0:
 				print("PLAYER 1 WIN")
-
-
+				
+	update_end_turn_button.call_deferred()
 
 @rpc("any_peer","call_local","reliable")
 func switch_phase(phase: Global.Phase):
@@ -295,8 +294,8 @@ func reset_card_on_field():
 			if card.card_data is not Faux:
 				send_to_grave(card)
 			else:
-				return_card_local(card, card.card_belong_to_id)
-		# FIXME: hide label from slot that have no card
+				return_faux_card(card, card.card_belong_to_id)
+		
 		p2_battle_power = 0
 		p2_battle_pile.clear()
 			
@@ -307,7 +306,7 @@ func reset_card_on_field():
 			if card.card_data is not Faux and card.health == 0:
 				send_to_grave(card)
 			elif card.card_data is Faux:
-				return_card_local(card, card.card_belong_to_id)
+				return_faux_card(card, card.card_belong_to_id)
 		
 		for slot in player_2_pos.get_children():
 			if slot is BattleSlot:
@@ -319,7 +318,7 @@ func reset_card_on_field():
 		
 		
 		for card in p1_grave_pile:
-			if p1_battle_pile.has(card): 
+			if p1_battle_pile.has(card):
 				p1_battle_pile.erase(card)
 				p1_battle_power -= card.card_data.power
 			
@@ -331,7 +330,7 @@ func reset_card_on_field():
 			if card.card_data is not Faux and card.health == 0:
 				send_to_grave(card)
 			elif card.card_data is Faux:
-				return_card_local(card, card.card_belong_to_id)
+				return_faux_card(card, card.card_belong_to_id)
 				
 		for card in p2_grave_pile:
 			if p2_battle_pile.has(card): 
@@ -345,7 +344,7 @@ func reset_card_on_field():
 			if card.card_data is not Faux:
 				send_to_grave(card)
 			else:
-				return_card_local(card, card.card_belong_to_id)
+				return_faux_card(card, card.card_belong_to_id)
 		
 		p1_battle_power = 0
 		p1_battle_pile.clear()
@@ -357,18 +356,29 @@ func reset_card_on_field():
 		for slot in player_2_pos.get_children():
 			if slot is BattleSlot and slot.get_child_count() < 2:
 				slot.power_label.hide()
+	
+	remove_faux_card()
+
+func remove_faux_card():
+	for i in range(p1_battle_pile.size() - 1, -1 , -1):
+		if p1_battle_pile[i].card_data is Faux:
+			p1_battle_pile.remove_at(i)
+	
+	for i in range(p2_battle_pile.size() - 1, -1 , -1):
+		if p2_battle_pile[i].card_data is Faux:
+			p2_battle_pile.remove_at(i)
 
 
-func return_card_local(card3d, player_id):
+func return_faux_card(card3d, player_id):
 	if multiplayer.get_unique_id() == player_id:
 		card3d.move_out()
 		Global.card_return_local.emit(card3d, card3d.card_data.id, player_id)
 	else:
-		for card in p2_battle_pile:
-			if card.card_data.id == card3d.card_data.id:
-				card.move_out()
-				Global.card_return_local.emit(card3d, card3d.card_data.id, player_id)
-
+		#for card in p2_battle_pile:
+			#if card.card_data.id == card3d.card_data.id:
+		card3d.move_out()
+		Global.card_return_local.emit(card3d, card3d.card_data.id, player_id)
+	
 
 func check_end_turn_criteria() -> bool:	
 
@@ -410,8 +420,8 @@ func check_end_turn_criteria() -> bool:
 			if get_p1_total_power() >= p2_battle_power:
 				valid = true
 			else:
-				valid = count_card_battle_p1_p2()
-			return valid
+				valid = count_card_battle_p1_p2() # FIXME: NOT WORK WHEN OTHER HAVE ONLY 1 CARDs
+			return valid						  # FIXME: CAN NOT END TURN WHEN ALL CARD ON FIELD ON ROUND 2
 			
 		if Global.current_phase == Global.Phase.BATTLE:
 			if p1_battle_power >= p2_battle_power:
@@ -425,6 +435,13 @@ func check_end_turn_criteria() -> bool:
 	return valid
 
 
+func update_end_turn_button():
+	if check_end_turn_criteria():
+		ui.end_turn.disabled = false
+	else:
+		ui.end_turn.disabled = true
+
+
 func count_card_battle_p1_p2():
 	var p1_card_battle_count = 0
 	var p2_card_battle_count = 0
@@ -436,7 +453,7 @@ func count_card_battle_p1_p2():
 			p1_card_battle_count += 1
 			
 	for card in p2_battle_pile:
-		if card.card_data is Battle:
+		if card.card_data is Battle and card.direction == Vector2.UP:
 			p2_card_battle_count += 1
 	
 	

@@ -13,6 +13,8 @@ var backface_texture: String
 const HOVER_MATERIAL = preload("res://card/properties/hover_material.tres")
 
 # Properties
+var health := 2
+
 var base_y_pos: float
 var target_position: Vector3
 var target_rotation: float 
