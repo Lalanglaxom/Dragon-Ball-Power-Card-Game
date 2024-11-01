@@ -952,9 +952,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -40.0
-offset_top = -837.0
+offset_top = -735.0
 offset_right = 40.0
-offset_bottom = -717.0
+offset_bottom = -615.0
 grow_horizontal = 2
 grow_vertical = 0
 rotation = 3.14159
@@ -1008,22 +1008,18 @@ text = "Debugger"
 horizontal_alignment = 1
 
 [node name="YourTurn" type="Label" parent="CanvasLayer/UI/Debugger/VBoxContainer"]
-visible = false
 layout_mode = 2
 
 [node name="PlayerTurn" type="Label" parent="CanvasLayer/UI/Debugger/VBoxContainer"]
-visible = false
 layout_mode = 2
 
 [node name="State" type="Label" parent="CanvasLayer/UI/Debugger/VBoxContainer"]
 layout_mode = 2
 
 [node name="Phase" type="Label" parent="CanvasLayer/UI/Debugger/VBoxContainer"]
-visible = false
 layout_mode = 2
 
 [node name="Current Round" type="Label" parent="CanvasLayer/UI/Debugger/VBoxContainer"]
-visible = false
 layout_mode = 2
 
 [node name="P1 Card" type="Label" parent="CanvasLayer/UI/Debugger/VBoxContainer"]
@@ -1085,10 +1081,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 1176.0
-offset_top = 330.0
-offset_right = 1302.0
-offset_bottom = 382.0
+offset_left = 999.0
+offset_top = 277.0
+offset_right = 1098.0
+offset_bottom = 329.0
 grow_horizontal = 0
 grow_vertical = 2
 text = "End Turn"
@@ -1100,10 +1096,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 1180.0
-offset_top = -1.0
-offset_right = 1306.0
-offset_bottom = 51.0
+offset_left = 964.0
+offset_top = -6.0
+offset_right = 1090.0
+offset_bottom = 46.0
 grow_horizontal = 0
 grow_vertical = 2
 text = "Quit Game"

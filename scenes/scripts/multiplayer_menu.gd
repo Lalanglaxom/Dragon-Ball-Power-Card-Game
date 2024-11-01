@@ -25,6 +25,7 @@ func _ready():
 func peer_connected(id):
 	print("Player Connected: ", id)
 	add_player_info.rpc_id(id, player_info)
+	start_game.call_deferred()
 	
 func peer_disconnected(id):
 	print("Disconnected to Server: ", id)
@@ -55,10 +56,9 @@ func _on_join_button_pressed():
 	var error = peer.create_client(server_ip, PORT)
 	if error:
 		return error
-	print(server_ip)
-	
 	multiplayer.multiplayer_peer = peer
-
+	
+	
 
 @rpc("any_peer","reliable")
 func add_player_info(name, id):
@@ -72,7 +72,8 @@ func add_player_info(name, id):
 		for i in Global.Players:
 			add_player_info.rpc(Global.Players[i].name, i)
 
-@rpc("any_peer","call_local")
+
+@rpc("any_peer","call_local","reliable")
 func start_game():
 	faux_card_select.start_set_faux_card()
 	

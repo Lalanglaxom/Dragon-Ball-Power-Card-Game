@@ -1,5 +1,5 @@
 extends Node3D
-
+class_name Grave
 
 var grave_pile_3d := []
 var pile_max_size := 30
@@ -22,7 +22,7 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 func arrange_grave_card():
 	for child in get_children():
 		if child not in grave_pile_3d:
-			grave_pile_3d.append(child)
+			grave_pile_3d.push_front(child)
 		
 	for i in grave_pile_3d.size():
 		grave_pile_3d[i].position.y = 0
