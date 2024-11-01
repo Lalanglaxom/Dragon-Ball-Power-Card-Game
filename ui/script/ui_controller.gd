@@ -46,3 +46,7 @@ func _on_end_turn_pressed() -> void:
 
 func _on_test_button_pressed() -> void:
 	Global.game_turn_end.emit()
+
+
+func _on_quit_game_pressed() -> void:
+	get_tree().quit()

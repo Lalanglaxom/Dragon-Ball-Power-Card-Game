@@ -31,7 +31,7 @@ func peer_disconnected(id):
 
 func connected_to_server():
 	print("Connected to Server")
-	add_player_info.rpc_id(1, $NameBox.text, multiplayer.get_unique_id())
+	add_player_info.rpc_id(1, "Goku", multiplayer.get_unique_id())
 
 func connection_failed():
 	print("Connection failed: ")
@@ -44,7 +44,7 @@ func _on_host_button_pressed():
 	if error:
 		return error
 	multiplayer.multiplayer_peer = peer
-	add_player_info($NameBox.text, multiplayer.get_unique_id())
+	add_player_info("Goku", multiplayer.get_unique_id())
 	
 	print("Waiting for player")
 
@@ -83,3 +83,15 @@ func start_game():
 	
 func _on_start_button_pressed():
 	start_game.rpc()
+
+
+func _on_screen_button_pressed() -> void:
+	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		return
+		
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+
+
+func _on_quit_button_pressed() -> void:
+	get_tree().quit()

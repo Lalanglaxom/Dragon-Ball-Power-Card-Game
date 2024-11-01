@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://korshe6fwpx6"
+path="res://.godot/imported/Flow Hero.mp3-bd6bcc4c978431266bcd5336b3a34437.mp3str"
+
+[deps]
+
+source_file="res://sound/music/Flow Hero.mp3"
+dest_files=["res://.godot/imported/Flow Hero.mp3-bd6bcc4c978431266bcd5336b3a34437.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
