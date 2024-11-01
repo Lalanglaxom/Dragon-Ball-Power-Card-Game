@@ -452,8 +452,9 @@ func check_end_turn_criteria() -> bool:
 	if Global.state != Global.State.YOUR_TURN: return valid
 
 
+	if p1_battle_pile.size() < 3: return false
+	
 	if Global.current_phase == Global.Phase.STANDOFF:
-		if p1_battle_pile.size() < 3: return false
 		
 		if get_p2_num_card() == 0:
 			return true
@@ -481,9 +482,13 @@ func check_end_turn_criteria() -> bool:
 		if get_p2_num_card_up() > 0:
 			if get_p1_total_power() > get_p2_total_power():
 				return true
+			if get_p1_total_power() < get_p2_total_power():
+				if get_p1_card_down() > 0:
+					return false
 			if get_p1_num_card_up() >= get_p2_num_card_up():
 				return true
-		
+			if get_p1_num_card_up() >= get_p2_1hp_num_card_up():
+				return true
 		
 	# FIXME: NOT WORK WHEN OTHER HAVE ONLY 1 CARDs
 	# FIXME: If Other up 1 card this turn, it count toward the total up amount -> khong the thi 2 la
@@ -509,6 +514,16 @@ func get_p2_num_card_up():
 			
 	return total
 
+func get_p2_1hp_num_card_up():
+	var total = 0
+	
+	for card in p2_battle_pile:
+		if card.card_data is Battle and card.direction == Vector2.UP and card.health == 1:
+															# or card.health != card.data.health
+			total += 1
+			
+	return total
+
 func get_p2_total_power():
 	var total = 0
 	for card in p2_battle_pile:
@@ -519,7 +534,6 @@ func get_p2_total_power():
 	
 func get_p1_num_card():
 	return p1_battle_pile.size()
-
 
 func get_p1_num_card_up():
 	var total = 0
@@ -538,7 +552,6 @@ func get_p1_card_battle():
 			total += 1
 	return total
 
-
 func get_p1_total_power():
 	var total = 0
 	for card in p1_battle_pile:
@@ -546,6 +559,14 @@ func get_p1_total_power():
 			total += card.card_data.power
 	
 	return total
+
+func get_p1_card_down():
+	var total = 0
+	
+	for card in p1_battle_pile:
+		if card.direction == Vector2.DOWN:
+			total += 1
+
 
 func count_card_battle_p1_p2():
 	var p1_card_battle_count = 0
