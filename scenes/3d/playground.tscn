@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://0u0xoqfym0sm"]
+[gd_scene load_steps=47 format=4 uid="uid://0u0xoqfym0sm"]
 
 [ext_resource type="Script" path="res://scenes/3d/game_controller.gd" id="1_tpmse"]
 [ext_resource type="Texture2D" uid="uid://dqaebtakgg5l3" path="res://environment/texture/space.jpg" id="2_qu00h"]
@@ -20,6 +20,8 @@
 [ext_resource type="PackedScene" uid="uid://bjfilmjk4nug4" path="res://scenes/3d/slot2.tscn" id="11_nlpbd"]
 [ext_resource type="Script" path="res://scenes/3d/grave.gd" id="11_wmtgq"]
 [ext_resource type="Script" path="res://ui/script/ui_controller.gd" id="17_b8fvp"]
+[ext_resource type="Script" path="res://sound/sound_control.gd" id="20_w1gmd"]
+[ext_resource type="AudioStream" uid="uid://dgo3sk736aesn" path="res://sound/sfx/dbz-teleport.mp3" id="21_21lmv"]
 [ext_resource type="Script" path="res://scenes/3d/debugger.gd" id="21_ntedu"]
 [ext_resource type="Script" path="res://ui/script/card_button.gd" id="22_6mj4c"]
 
@@ -645,6 +647,19 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_nxayh"]
 size = Vector3(7.5, 3, 10.5)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ge3y0"]
+random_pitch = 6.48
+random_volume_offset_db = 3.08
+streams_count = 1
+stream_0/stream = ExtResource("21_21lmv")
+
+[sub_resource type="SystemFont" id="SystemFont_swetk"]
+font_names = PackedStringArray("iCiel Crocante")
+
+[sub_resource type="LabelSettings" id="LabelSettings_obyxy"]
+font = SubResource("SystemFont_swetk")
+font_size = 50
+
 [node name="Playground" type="Node3D"]
 
 [node name="GameController" type="Node" parent="."]
@@ -984,6 +999,13 @@ hand_position_curve = ExtResource("8_no7rg")
 hand_rotation_curve = ExtResource("4_gmvg7")
 hand_spread_curve = ExtResource("10_cjsaq")
 
+[node name="SoundControl" type="Node" parent="."]
+script = ExtResource("20_w1gmd")
+
+[node name="SwitchTurnSound" type="AudioStreamPlayer" parent="SoundControl"]
+stream = SubResource("AudioStreamRandomizer_ge3y0")
+volume_db = -5.0
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="UI" type="Control" parent="CanvasLayer"]
@@ -1040,7 +1062,6 @@ offset_left = 126.0
 offset_top = -314.0
 offset_right = 874.0
 offset_bottom = 736.0
-grow_vertical = 2
 scale = Vector2(0.2, 0.2)
 
 [node name="CardOption" type="VBoxContainer" parent="CanvasLayer/UI"]
@@ -1111,11 +1132,30 @@ offset_right = 8.0
 offset_bottom = 8.0
 text = "Send To Grave"
 
-[node name="Temp" type="Control" parent="CanvasLayer/UI"]
+[node name="End Turn Player" type="Panel" parent="CanvasLayer/UI"]
 visible = false
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 0
+offset_left = 319.0
+offset_top = 277.0
+offset_right = 819.0
+offset_bottom = 377.0
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/End Turn Player"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Player 1 Turn"
+label_settings = SubResource("LabelSettings_obyxy")
 
 [connection signal="input_event" from="DrawPile" to="DrawPile" method="_on_input_event"]
 [connection signal="pressed" from="CanvasLayer/UI/CardOption/Flip" to="CanvasLayer/UI/CardOption" method="_on_flip_pressed"]

@@ -3,16 +3,20 @@ extends Control
 @onready var big_image: TextureRect = $BigImage
 @onready var end_turn: Button = $"End Turn"
 @onready var card_option: Player2 = $CardOption
+@onready var end_turn_text: Panel = $"End Turn Player"
 
 var offset = Vector2(5, -225)
+var base_end_text_pos: Vector2
 
 func _ready() -> void:
 	Global.card_hover.connect(show_big_image)
 	Global.card_unhover.connect(hide_big_image)
 	Global.card_3d_hover.connect(show_big_image_3d)
 	Global.card_3d_unhover.connect(hide_big_image_3d)
+	Global.end_turn_pressed.connect(show_player_turn.rpc)
 	
-
+	base_end_text_pos = end_turn_text.position
+	
 
 
 func _process(delta: float) -> void:
@@ -20,6 +24,26 @@ func _process(delta: float) -> void:
 	pass
 
 
+@rpc("any_peer","call_local","reliable")
+func show_player_turn():
+	end_turn_text.show()
+	
+	if Global.state == Global.State.YOUR_TURN:
+		end_turn_text.get_child(0).text = "Your Turn"
+	else:
+		end_turn_text.get_child(0).text = "Opponent Turn"
+	
+	end_turn_text.position = Vector2(base_end_text_pos.x + 900, end_turn_text.position.y)
+	
+	var tween = get_tree().create_tween()
+	tween.tween_property(end_turn_text, "position", Vector2(base_end_text_pos.x, end_turn_text.position.y), 0.5) \
+	.set_trans(Tween.TRANS_EXPO)\
+	.set_ease(Tween.EASE_OUT)
+	
+	tween.tween_property(end_turn_text, "position", Vector2(base_end_text_pos.x - 900, end_turn_text.position.y), 0.5) \
+	.set_trans(Tween.TRANS_EXPO)\
+	.set_ease(Tween.EASE_IN)
+	
 func show_big_image(card: Card2D):
 	big_image.show()
 	big_image.texture = load(card.card_data.front_image_path)

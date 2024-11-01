@@ -566,7 +566,8 @@ func get_p1_card_down():
 	for card in p1_battle_pile:
 		if card.direction == Vector2.DOWN:
 			total += 1
-
+	
+	return total
 
 func count_card_battle_p1_p2():
 	var p1_card_battle_count = 0
