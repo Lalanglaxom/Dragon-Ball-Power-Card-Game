@@ -70,14 +70,14 @@ func add_card(card: Card2D):
 	arrange_hand_card()
 
 
-func add_remove_card(card3d, card_id, player_id):
-	if multiplayer.get_unique_id() == player_id:
-		for card in remove_hand:
-			if card.card_data.id == card_id:
-				hand_pile_p1.append(card)
-				add_child(card)
-				remove_hand.erase(card)
-		arrange_hand_card()
+func add_remove_card(card_id):
+	#if multiplayer.get_unique_id() == player_id:
+	for card in remove_hand:
+		if card.card_data.id == card_id:
+			hand_pile_p1.append(card)
+			add_child(card)
+			remove_hand.erase(card)
+	arrange_hand_card()
 	
 
 

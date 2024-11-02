@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c0d678usuu4v6"
+path="res://.godot/imported/Voicy_beam charge .mp3-4fad4cfaff4118a953f0e4d1d72a71be.mp3str"
+
+[deps]
+
+source_file="res://sound/sfx/Dragon Ball Z Sounds/Voicy_beam charge .mp3"
+dest_files=["res://.godot/imported/Voicy_beam charge .mp3-4fad4cfaff4118a953f0e4d1d72a71be.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

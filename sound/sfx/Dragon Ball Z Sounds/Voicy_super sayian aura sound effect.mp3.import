@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b6shy82i6uxqd"
+path="res://.godot/imported/Voicy_super sayian aura sound effect.mp3-81f6030fa09d0307c18b650de96a74ca.mp3str"
+
+[deps]
+
+source_file="res://sound/sfx/Dragon Ball Z Sounds/Voicy_super sayian aura sound effect.mp3"
+dest_files=["res://.godot/imported/Voicy_super sayian aura sound effect.mp3-81f6030fa09d0307c18b650de96a74ca.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

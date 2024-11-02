@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dpbfbxgt206c3"
+path="res://.godot/imported/Dragon Ball Z - Shenron eyes glowing - Sound Effect.mp3-bd02fcfe91147fdc19fc7d699387268a.mp3str"
+
+[deps]
+
+source_file="res://sound/sfx/Dragon Ball Z Sounds/Dragon Ball Z - Shenron eyes glowing - Sound Effect.mp3"
+dest_files=["res://.godot/imported/Dragon Ball Z - Shenron eyes glowing - Sound Effect.mp3-bd02fcfe91147fdc19fc7d699387268a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

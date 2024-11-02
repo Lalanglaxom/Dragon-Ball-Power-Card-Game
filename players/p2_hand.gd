@@ -55,27 +55,29 @@ func add_card(card: Card2D):
 	add_child(card)
 	arrange_hand_card()
 
-func add_remove_card(card3d, card_id, player_id):
-	await get_tree().create_timer(0.1).timeout
-	if multiplayer.get_unique_id() != player_id:
-		for card in remove_hand:
-			if card.card_data.id == card_id:
-				hand_pile_p2.append(card)
-				remove_hand.erase(card)
-				add_child(card)
-		arrange_hand_card()
+func add_remove_card(card_id):
+	#if multiplayer.get_unique_id() != player_id:
+	for card in remove_hand:
+		if card.card_data.id == card_id:
+			add_child(card)
+			hand_pile_p2.append(card)
+			remove_hand.erase(card)
+			Global.print_multi(card.card_data.nice_name)
+	arrange_hand_card()
+
 
 func card_chosen(card2d_id: int, player_id: int):
 	if multiplayer.get_unique_id() != player_id:
-		var card_2d = get_card_data_by_id(card2d_id)
-		if hand_pile_p2.has(card_2d):
+		var card_2d = get_card_by_id(card2d_id)
+		if card_2d:
 			remove_hand.append(card_2d)
 			hand_pile_p2.erase(card_2d)
 			remove_child(card_2d)
-			arrange_hand_card()
+		arrange_hand_card()
 
 
-func get_card_data_by_id(id : int):
+
+func get_card_by_id(id : int):
 	for card in hand_pile_p2:
 		if card.card_data.id == id:
 			return card

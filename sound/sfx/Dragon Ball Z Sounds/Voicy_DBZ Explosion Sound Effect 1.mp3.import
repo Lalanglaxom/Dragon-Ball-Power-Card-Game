@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://707ngiwnmnbp"
+path="res://.godot/imported/Voicy_DBZ Explosion Sound Effect 1.mp3-b914ed23c412ed243686a449e2c9a2a2.mp3str"
+
+[deps]
+
+source_file="res://sound/sfx/Dragon Ball Z Sounds/Voicy_DBZ Explosion Sound Effect 1.mp3"
+dest_files=["res://.godot/imported/Voicy_DBZ Explosion Sound Effect 1.mp3-b914ed23c412ed243686a449e2c9a2a2.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

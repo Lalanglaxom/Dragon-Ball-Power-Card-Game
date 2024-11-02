@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c4yj1w2kc8f20"
+path="res://.godot/imported/Dragon Ball Xenoverse - Kamehameha Regular Sound Effect.mp3-bcc636067540df7d8d518bd757145e02.mp3str"
+
+[deps]
+
+source_file="res://sound/sfx/Dragon Ball Z Sounds/Dragon Ball Xenoverse - Kamehameha Regular Sound Effect.mp3"
+dest_files=["res://.godot/imported/Dragon Ball Xenoverse - Kamehameha Regular Sound Effect.mp3-bcc636067540df7d8d518bd757145e02.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

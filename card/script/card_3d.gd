@@ -136,7 +136,7 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 			if Global.current_phase == Global.Phase.BATTLE:
 				Global.card_3d_button.emit(self, card_data.id, card_belong_to_id)
 			
-			elif Global.current_phase == Global.Phase.STANDOFF and direction != Vector2.UP:
+			elif Global.current_phase == Global.Phase.STANDOFF and direction == Vector2.DOWN:
 				Global.card_return.emit(self, card_data.id, card_belong_to_id)
 
 

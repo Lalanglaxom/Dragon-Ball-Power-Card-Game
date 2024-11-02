@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b8pr7f06plt0s"
+path="res://.godot/imported/Voicy_ki blast.mp3-2fa134bdbb9457588eefcc8d0465d77d.mp3str"
+
+[deps]
+
+source_file="res://sound/sfx/Dragon Ball Z Sounds/Voicy_ki blast.mp3"
+dest_files=["res://.godot/imported/Voicy_ki blast.mp3-2fa134bdbb9457588eefcc8d0465d77d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

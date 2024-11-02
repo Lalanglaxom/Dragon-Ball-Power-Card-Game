@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=4 uid="uid://0u0xoqfym0sm"]
+[gd_scene load_steps=49 format=4 uid="uid://0u0xoqfym0sm"]
 
 [ext_resource type="Script" path="res://scenes/3d/game_controller.gd" id="1_tpmse"]
 [ext_resource type="Texture2D" uid="uid://dqaebtakgg5l3" path="res://environment/texture/space.jpg" id="2_qu00h"]
@@ -22,8 +22,10 @@
 [ext_resource type="Script" path="res://ui/script/ui_controller.gd" id="17_b8fvp"]
 [ext_resource type="Script" path="res://sound/sound_control.gd" id="20_w1gmd"]
 [ext_resource type="AudioStream" uid="uid://dgo3sk736aesn" path="res://sound/sfx/dbz-teleport.mp3" id="21_21lmv"]
+[ext_resource type="AudioStream" uid="uid://y3nyallkfi3q" path="res://sound/sfx/Dragon Ball Z Sounds/DBZ Sound effect Strong Punch.mp3" id="21_arrpg"]
 [ext_resource type="Script" path="res://scenes/3d/debugger.gd" id="21_ntedu"]
 [ext_resource type="Script" path="res://ui/script/card_button.gd" id="22_6mj4c"]
+[ext_resource type="AudioStream" uid="uid://ddher67gefir5" path="res://sound/sfx/Dragon Ball Z Sounds/Voicy_dbz fly up.mp3" id="22_hobaq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v0lqs"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -648,10 +650,12 @@ _data = {
 size = Vector3(7.5, 3, 10.5)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ge3y0"]
-random_pitch = 6.48
-random_volume_offset_db = 3.08
-streams_count = 1
-stream_0/stream = ExtResource("21_21lmv")
+random_pitch = 1.5
+random_volume_offset_db = 1.5
+streams_count = 3
+stream_0/stream = ExtResource("21_arrpg")
+stream_1/stream = ExtResource("22_hobaq")
+stream_2/stream = ExtResource("21_21lmv")
 
 [sub_resource type="SystemFont" id="SystemFont_swetk"]
 font_names = PackedStringArray("iCiel Crocante")
@@ -1045,11 +1049,9 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="P1 Card" type="Label" parent="CanvasLayer/UI/Debugger/VBoxContainer"]
-visible = false
 layout_mode = 2
 
 [node name="P2 Card" type="Label" parent="CanvasLayer/UI/Debugger/VBoxContainer"]
-visible = false
 layout_mode = 2
 
 [node name="BigImage" type="TextureRect" parent="CanvasLayer/UI"]

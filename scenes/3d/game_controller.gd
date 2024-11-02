@@ -17,7 +17,7 @@ signal end_turn_valid
 @onready var ui: Control = $"../CanvasLayer/UI"
 const CARD_3D = preload("res://scenes/3d/card_3d.tscn")
 
-var start_card_hand_amount: int = 15
+var start_card_hand_amount: int = 5
 
 var p1_pile := []
 var p1_hand_pile := []
@@ -115,7 +115,6 @@ func draw_card_for_player():
 	
 	p1_hand.arrange_hand_card()
 	p2_hand.arrange_hand_card()
-			
 
 
 @rpc("any_peer", "call_local", "reliable")
@@ -143,13 +142,16 @@ func place_card(card_2d, card_id, id):
 	# FIXME: Card P2 don't update
 	var card3d = Global.create_card_3d(Global.get_card3d_data_by_id(card_id), id)
 	if multiplayer.get_unique_id() == card3d.card_belong_to_id:
+			
 		put_card_in_p1_slot(card3d, card_2d, card_id, id)
-		p1_slot_count += 1
 		
 	else:
+		if !is_p1_slot_available():
+			return
+		
 		p2_hand.card_chosen(card_id, id)
 		put_card_in_p2_slot(card3d)
-		p2_slot_count += 1
+		
 
 	update_end_turn_button.call_deferred()
 
@@ -170,7 +172,15 @@ func put_card_in_p2_slot(card3d: Card3D):
 			p2_battle_pile.append(card3d)
 			return
 
-
+# HACK: Not cool
+func is_p1_slot_available():
+	var slot_count = 0
+	
+	for slot in player_2_pos.get_children():
+		if slot.get_child_count() == 1 and slot != Grave:
+			slot_count += 1
+	
+	return slot_count > 0
 
 @rpc("any_peer", "call_local", "reliable")
 func flip_card(card_3d, card_id, player_id):
@@ -200,17 +210,16 @@ func flip_card(card_3d, card_id, player_id):
 @rpc("any_peer","call_local","reliable")
 func return_card(card3d, card_id, player_id):
 	if multiplayer.get_unique_id() == player_id:
-		p1_slot_count -= 1
 		card3d.move_out()
 		p1_battle_pile.erase(card3d)
-
 	else:
 		for card in p2_battle_pile:
 			if card.card_data.id == card_id:
-				p2_slot_count -= 1
 				card.move_out()
 				p2_battle_pile.erase(card)
 				
+	Global.card_return.emit(card_id)
+
 	update_end_turn_button.call_deferred()
 
 
@@ -294,18 +303,18 @@ func switch_round():
 
 @rpc("any_peer","call_local","reliable")
 func reset_card_on_field():
-	# FIXME: DONT PUT CARD FACE DOWN TO GRAVE
 	# FIXME: CAN"T END TURN WITH 1 CARD FACE UP
 	# FIXME: CAN END TURN WITHOUT FACE UP
 	# FIXME: CAN END TURN WITH 1 FAUX CARD
 	# FIXME: GAME GET BROKEN TOWARD THE END
 	# FIXME: FACE DOWN CARD GET ALL SEND TO GRAVE WTF
 	# FIXME: TWO PLAYER OUT OF CARD WHICH PLAYER STRONGER WIN
+
 	if p1_battle_power > p2_battle_power:
 		for card in p2_battle_pile:
 			card.health = 2
 			
-			if card.card_data is not Faux:
+			if card.card_data is Battle:
 				send_to_grave(card)
 			else:
 				return_faux_card(card, card.card_belong_to_id)
@@ -386,65 +395,13 @@ func remove_faux_card():
 func return_faux_card(card3d, player_id):
 	if multiplayer.get_unique_id() == player_id:
 		card3d.move_out()
-		Global.card_return_local.emit(card3d, card3d.card_data.id, player_id)
+		#Global.card_return_local.emit(card3d.card_data.id)
 	else:
-		#for card in p2_battle_pile:
-			#if card.card_data.id == card3d.card_data.id:
-		card3d.move_out()
-		Global.card_return_local.emit(card3d, card3d.card_data.id, player_id)
-	
-
-#func check_end_turn_criteria() -> bool:	
-	#var valid = false
-	#
-	#if Global.state != Global.State.YOUR_TURN: return valid
-	#
-	#if game_round == 0:
-		#if Global.current_phase == Global.Phase.STANDOFF:
-			#if p1_battle_pile.size() < 3: return valid
-			#valid = true
-			#return valid
-#
-		#if Global.current_phase == Global.Phase.BATTLE:
-			#if current_player_turn == 1 and round_turn <= 2:
-				#if p1_battle_power > 0:
-					#valid = true
-					#return valid
-						#
-			#elif current_player_turn == 2 and round_turn <= 2:
-				#if p1_battle_power >= p2_battle_power: 
-					#valid = true
-				#else:
-					#if count_card_up() == 3:
-						#valid = true
-					#
-			#elif round_turn > 2:
-				#if p1_battle_power >= p2_battle_power:
-					#valid = true
-					#return valid
-				#else:
-					#if count_card_up() == 3:
-						#valid = true
-						#
-	#elif game_round > 0:
-		#if Global.current_phase == Global.Phase.STANDOFF:
-			#if p1_battle_pile.size() < 3: return valid
-			#
-			#if get_p1_total_power() >= p2_battle_power:
-				#valid = true
-			#else:
-				#valid = count_card_battle_p1_p2() # FIXME: NOT WORK WHEN OTHER HAVE ONLY 1 CARDs
-			#return valid						  # FIXME: CAN NOT END TURN WHEN ALL CARD ON FIELD ON ROUND 2
-			#
-		#if Global.current_phase == Global.Phase.BATTLE:
-			#if p1_battle_power >= p2_battle_power:
-				#valid = true
-				#return valid
-			#else: 
-				#if count_card_up() == 3:
-					#valid = true
-#
-	#return valid
+		for card in p2_battle_pile:
+			if card.card_data.id == card3d.card_data.id:
+				card3d.move_out()
+		
+	Global.card_return.emit(card3d.card_data.id)
 
 func check_end_turn_criteria() -> bool:	
 	var valid = false
@@ -464,9 +421,9 @@ func check_end_turn_criteria() -> bool:
 				return true
 			
 		if get_p2_num_card_up() > 0:
-			if get_p1_total_power() > get_p2_total_power():
+			if get_p1_total_power() >= get_p2_total_up_power():
 				return true
-			if get_p1_total_power() < get_p2_total_power():
+			if get_p1_total_power() < get_p2_total_up_power():
 				if get_p1_card_battle() == get_p2_num_card_up():
 					return true
 				else:
@@ -480,19 +437,16 @@ func check_end_turn_criteria() -> bool:
 				return false
 		
 		if get_p2_num_card_up() > 0:
-			if get_p1_total_power() > get_p2_total_power():
+			if get_p1_total_up_power() > get_p2_total_up_power():
 				return true
-			if get_p1_total_power() < get_p2_total_power():
+			if get_p1_total_up_power() < get_p2_total_up_power():
 				if get_p1_card_down() > 0:
 					return false
 			if get_p1_num_card_up() >= get_p2_num_card_up():
 				return true
 			if get_p1_num_card_up() >= get_p2_1hp_num_card_up():
 				return true
-		
-	# FIXME: NOT WORK WHEN OTHER HAVE ONLY 1 CARDs
-	# FIXME: If Other up 1 card this turn, it count toward the total up amount -> khong the thi 2 la
-
+	
 	return valid
 
 func update_end_turn_button():
@@ -500,6 +454,20 @@ func update_end_turn_button():
 		ui.end_turn.disabled = false
 	else:
 		ui.end_turn.disabled = true
+
+
+func print_card_status():
+	print("p1 num card: ", str(get_p1_num_card()))
+	print("p1 num card up: ", str(get_p1_num_card_up()))
+	print("p1 card battle: ", str(get_p1_card_battle()))
+	print("p1 total power: ", str(get_p1_total_power()))
+	print("p1 total up power: ", str(get_p1_total_up_power()))
+	print("p1 card down: ", str(get_p1_card_down()))
+	
+	print("p2 num card: ", str(get_p2_num_card()))
+	print("p2 num card up: ", str(get_p2_num_card_up()))
+	print("p2 1hp card: ", str(get_p2_1hp_num_card_up()))
+	print("p2 total up power: ", str(get_p2_total_up_power()))
 
 
 func get_p2_num_card():
@@ -524,7 +492,7 @@ func get_p2_1hp_num_card_up():
 			
 	return total
 
-func get_p2_total_power():
+func get_p2_total_up_power():
 	var total = 0
 	for card in p2_battle_pile:
 		if card.card_data is Battle and card.direction == Vector2.UP:
@@ -555,11 +523,19 @@ func get_p1_card_battle():
 func get_p1_total_power():
 	var total = 0
 	for card in p1_battle_pile:
-		if card.card_data is Battle and card.direction == Vector2.UP:
+		if card.card_data is Battle:
 			total += card.card_data.power
 	
 	return total
 
+func get_p1_total_up_power():
+	var total = 0
+	for card in p1_battle_pile:
+		if card.card_data is Battle and card.direction == Vector2.UP:
+			total += card.card_data.power
+	
+	return total
+	
 func get_p1_card_down():
 	var total = 0
 	
@@ -568,45 +544,3 @@ func get_p1_card_down():
 			total += 1
 	
 	return total
-
-func count_card_battle_p1_p2():
-	var p1_card_battle_count = 0
-	var p2_card_battle_count = 0
-	
-	var p1_hand_battle_card = 0
-	
-	for card in p1_battle_pile:
-		if card.card_data is Battle:
-			p1_card_battle_count += 1
-			
-	for card in p2_battle_pile:
-		if card.card_data is Battle and card.direction == Vector2.UP:
-			p2_card_battle_count += 1
-	
-	
-	
-	if p1_hand.hand_pile_p1.size() - 2 < p2_card_battle_count:
-		return true
-	
-	return p1_card_battle_count == p2_card_battle_count
-
-
-func count_card_up():
-	var p1_card_up_count = 0
-	var p2_card_up_count = 0
-	
-	var valid = false
-	
-	for card in p1_battle_pile:
-
-		if card.direction == Vector2.UP:
-			p1_card_up_count += 1
-
-			
-	for card in p2_battle_pile:
-
-		if card.direction == Vector2.UP:
-			p2_card_up_count += 1
-			
-	
-	return p1_card_up_count

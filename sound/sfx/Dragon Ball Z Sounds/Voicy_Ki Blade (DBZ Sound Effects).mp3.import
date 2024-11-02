@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dw0hu40iwym1u"
+path="res://.godot/imported/Voicy_Ki Blade (DBZ Sound Effects).mp3-54cb1ba1dad6950691e30e1c3d9431bf.mp3str"
+
+[deps]
+
+source_file="res://sound/sfx/Dragon Ball Z Sounds/Voicy_Ki Blade (DBZ Sound Effects).mp3"
+dest_files=["res://.godot/imported/Voicy_Ki Blade (DBZ Sound Effects).mp3-54cb1ba1dad6950691e30e1c3d9431bf.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

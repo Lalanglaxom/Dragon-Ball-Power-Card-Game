@@ -15,7 +15,7 @@ extends PanelContainer
 
 func _process(delta: float) -> void:
 	player_turn.text = "Current Turn: " + str(game_controller.current_player_turn)
-	your_turn.text = "Your Turn: " + str(hand_container_p_1.player_turn)
+	your_turn.text = "Your Go: " + str(hand_container_p_1.player_turn)
 	state.text = "State: " + str(Global.State.keys()[Global.state])
 	phase.text = "Current Phase: " + str(Global.Phase.keys()[Global.current_phase])
 	current_round.text = "Current Round: " + str(game_controller.game_round)
