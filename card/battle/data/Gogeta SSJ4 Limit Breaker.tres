@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Battle" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://card/script/battle_data.gd" id="1_l65xk"]
+
+[resource]
+script = ExtResource("1_l65xk")
+power = 8500
+health = 2
+front_mini_path = "res://card/battle/image/160x240/57_Gogeta SSJ4 Limit Breaker.png"
+back_mini_path = "res://card/battle/image/160x240/back.png"
+front_image_path = "res://card/battle/image/742x1122/57_Gogeta SSJ4 Limit Breaker.png"
+back_image_path = "res://card/battle/image/742x1122/back.png"
+id = 57
+nice_name = "Gogeta SSJ4 Limit Breaker"
+effect = "[ Zenkai ]"

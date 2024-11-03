@@ -433,9 +433,9 @@
 	"nice_name": "Gogeta SSJ",
 	"power": 5700,
 	"effect": "[ Zenkai ]",
-	"front_mini_path": "res://card/battle/image/160x240/40_Gogeta SSJ.png",
+	"front_mini_path": "res://card/battle/image/160x240/57_Gogeta SSJ4 Limit Breaker.png",
 	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/battle/image/742x1122/40_Gogeta SSJ.png",
+	"front_image_path": "res://card/battle/image/742x1122/57_Gogeta SSJ4 Limit Breaker.png",
 	"back_image_path": "res://card/battle/image/742x1122/back.png",
 	"resource_script_path": "res://card/script/battle_data.gd"
   },

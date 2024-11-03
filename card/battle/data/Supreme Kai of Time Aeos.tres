@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Battle" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://card/script/battle_data.gd" id="1_c2xb4"]
+
+[resource]
+script = ExtResource("1_c2xb4")
+power = 5600
+health = 2
+front_mini_path = "res://card/battle/image/160x240/38_Supreme Kai of Time Aeos.png"
+back_mini_path = "res://card/battle/image/160x240/back.png"
+front_image_path = "res://card/battle/image/742x1122/38_Supreme Kai of Time Aeos.png"
+back_image_path = "res://card/battle/image/742x1122/back.png"
+id = 38
+nice_name = "Supreme Kai of Time Aeos"
+effect = "Đóng băng thời gian: Chọn 1 lá bất kỳ trên tay đối phương và lật lên - Lá đó bị dừng hoạt động đến khi người chơi không còn lá nào hoặc Aeos bị chết (Không có tác dụng với các lá thực thể siêu phàm)"

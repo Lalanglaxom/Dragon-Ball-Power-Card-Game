@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Battle" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://card/script/battle_data.gd" id="1_32ai8"]
+
+[resource]
+script = ExtResource("1_32ai8")
+power = 5400
+health = 2
+front_mini_path = "res://card/battle/image/160x240/36_Xeno Omega shenron.png"
+back_mini_path = "res://card/battle/image/160x240/back.png"
+front_image_path = "res://card/battle/image/742x1122/36_Xeno Omega shenron.png"
+back_image_path = "res://card/battle/image/742x1122/back.png"
+id = 36
+nice_name = "Xeno Omega shenron"
+effect = "Hắc hóa 1 lá bất kỳ từ bộ bài bên ngoài rồi đưa vào sân đấu làm đối thủ riêng biệt. Bất kỳ lá bài nào của người chơi ở trên sân yếu hơn lá này thì sẽ bị giết (trừ lá này)"

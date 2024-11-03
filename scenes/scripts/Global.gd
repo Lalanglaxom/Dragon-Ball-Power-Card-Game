@@ -6,8 +6,8 @@ extends Node
 signal card_hover(Card2D)
 signal card_unhover(Card2D)
 signal card_chosen(Card2D)
-signal card_return(Card2D)
-signal card_return_local
+signal card_returned(Card2D)
+signal return_chosen(Card2D)
 signal faux_chosen()
 
 signal card_3d_hover(Card3D)
@@ -79,15 +79,22 @@ func get_card3d_data_by_id(id : int):
 		return null
 
 
-func create_card_3d(json_data: Dictionary, id: int):
+func create_card_3d(card_name: String, id: int):
 	var card_3d = CARD_3D.instantiate()
-	card_3d.frontface_texture = json_data.front_image_path
-	card_3d.backface_texture = json_data.back_image_path
-	card_3d.card_data = ResourceLoader.load(json_data.resource_script_path).new()
-	for key in json_data.keys():
-		if key != "front_mini_path" and key != "back_mini_path" and key != "resource_script_path":
-			card_3d.card_data[key] = json_data[key]
-	card_3d.card_belong_to_id = id
+	
+	card_3d.card_data = ResourceLoader.load('res://card/battle/data/' + card_name + '.tres')
+	
+	if card_3d.card_data == null:
+		card_3d.card_data = ResourceLoader.load('res://card/effect/data/' + card_name + '.tres')
+		
+	if card_3d.card_data == null:
+		card_3d.card_data = ResourceLoader.load('res://card/faux/data/' + card_name + '.tres')
+	
+	card_3d.frontface_texture = card_3d.card_data.front_image_path
+	card_3d.backface_texture = card_3d.card_data.back_image_path
+			
+	card_3d.set_multiplayer_authority(id)
+	
 	return card_3d
 	
 	
@@ -99,17 +106,16 @@ func get_faux_data_by_id(id : int):
 	return null
 
 
-func create_faux_ui(json_data : Dictionary):
+func create_faux_ui(card_name):
 	var card_ui = card_scene.instantiate()
-	card_ui.frontface_texture = json_data.front_mini_path
-	card_ui.backface_texture = json_data.back_mini_path
 	
-	card_ui.card_data = ResourceLoader.load(json_data.resource_script_path).new()
-	for key in json_data.keys():
-		if key != "front_mini_path" and key != "back_mini_path" and key != "resource_script_path":
-			card_ui.card_data[key] = json_data[key]
-
+	card_ui.card_data = ResourceLoader.load('res://card/faux/data/' + card_name + '.tres')
+	
+	card_ui.frontface_texture = card_ui.card_data.front_mini_path
+	card_ui.backface_texture = card_ui.card_data.back_mini_path
+	
 	return card_ui
+
 
 func get_card_data_by_nice_name(nice_name : String):
 	for json_data in battle_database:
@@ -126,6 +132,23 @@ func get_card_data_by_nice_name(nice_name : String):
 	
 	print_debug("No Card Found")
 	return null
+
+
+func create_faux_resource(json_data : Dictionary):
+	var card_ui = Faux.new()
+	
+	card_ui.front_image_path = json_data.front_image_path
+	card_ui.back_image_path = json_data.back_image_path
+	card_ui.front_mini_path = json_data.front_mini_path
+	card_ui.back_mini_path = json_data.back_mini_path
+	card_ui.id = json_data.id
+	card_ui.nice_name = json_data.nice_name
+	card_ui.effect = json_data.effect
+	
+	var save_result = ResourceSaver.save(card_ui, 'res://card/faux/data/' + json_data.nice_name + '.tres')
+	
+	if save_result != OK:
+		print(save_result)
 
 
 func create_card_ui(json_data : Dictionary):

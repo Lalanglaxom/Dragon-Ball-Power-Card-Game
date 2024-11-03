@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Battle" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://card/script/battle_data.gd" id="1_0cegh"]
+
+[resource]
+script = ExtResource("1_0cegh")
+power = 4000
+health = 2
+front_mini_path = "res://card/battle/image/160x240/23_Toppo the Destroyer.png"
+back_mini_path = "res://card/battle/image/160x240/back.png"
+front_image_path = "res://card/battle/image/742x1122/23_Toppo the Destroyer.png"
+back_image_path = "res://card/battle/image/742x1122/back.png"
+id = 23
+nice_name = "Toppo the Destroyer"
+effect = "Có thể sử dụng để Hakai 1 lá bài trên sân, nếu lá này mạnh hơn thì chết"

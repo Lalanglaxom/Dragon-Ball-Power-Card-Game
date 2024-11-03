@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Battle" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://card/script/battle_data.gd" id="1_jp31m"]
+
+[resource]
+script = ExtResource("1_jp31m")
+power = 0
+health = 2
+front_mini_path = "res://card/battle/image/160x240/65_Archon.png"
+back_mini_path = "res://card/battle/image/160x240/back.png"
+front_image_path = "res://card/battle/image/742x1122/65_Archon.png"
+back_image_path = "res://card/battle/image/742x1122/back.png"
+id = 65
+nice_name = "Archon"
+effect = "Hấp thụ một nửa sức mạnh của những sinh vật có godki; Lượng điểm sức mạnh này có thể làm hồi sinh nhũng lá đã chết (Chỉ dc hồi sinh 1 lá)"

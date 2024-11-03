@@ -14,11 +14,9 @@ var remove_hand: Array[Card2D]
 var player_turn: int
 
 func _ready() -> void:
-	
-	#Global.card_hover.connect(handle_hover)
-	#Global.card_chosen.connect(card_chosen)
-	Global.card_return.connect(add_remove_card)
-	Global.card_return_local.connect(add_remove_card)
+
+	Global.card_returned.connect(add_remove_card)
+
 
 
 func _process(delta: float) -> void:
@@ -56,7 +54,7 @@ func arrange_hand_card():
 		card_ui.target_rotation = target_rot
 
 
-func card_chosen(card2d: Card2D, card2d_id: int, player_id: int):
+func card_chosen(card2d: Card2D):
 	remove_hand.append(card2d)
 	hand_pile_p1.erase(card2d)
 	remove_child(card2d)

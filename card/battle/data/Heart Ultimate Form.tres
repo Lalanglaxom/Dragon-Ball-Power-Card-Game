@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Battle" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://card/script/battle_data.gd" id="1_5g45y"]
+
+[resource]
+script = ExtResource("1_5g45y")
+power = 7000
+health = 2
+front_mini_path = "res://card/battle/image/160x240/49_Heart Ultimate Form.png"
+back_mini_path = "res://card/battle/image/160x240/back.png"
+front_image_path = "res://card/battle/image/742x1122/49_Heart Ultimate Form.png"
+back_image_path = "res://card/battle/image/742x1122/back.png"
+id = 49
+nice_name = "Heart Ultimate Form"
+effect = "Gravity: Chỉ định 1 lá bài của đối phương úp xuống (lá này bằng 50% sm heart trở xuống) -Khi áp dụng kỹ năng này lên lá lagss của team mình thì tạo thành khối pha lê trọng lực có sức mạnh là 5000 điểm"

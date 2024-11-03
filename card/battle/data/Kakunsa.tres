@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Battle" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://card/script/battle_data.gd" id="1_fht85"]
+
+[resource]
+script = ExtResource("1_fht85")
+power = 1200
+health = 2
+front_mini_path = "res://card/battle/image/160x240/02_Kakunsa.png"
+back_mini_path = "res://card/battle/image/160x240/back.png"
+front_image_path = "res://card/battle/image/742x1122/02_Kakunsa.png"
+back_image_path = "res://card/battle/image/742x1122/back.png"
+id = 2
+nice_name = "Kakunsa"
+effect = ""

@@ -1,6 +1,6 @@
 Duplication,Id,Title,Effect,Image,Mini Image
-,1000,09_Beerus,Hakai: Hủy diệt 2 lá bất kỳ trên tay người chơi khác. Hoặc hủy diệt 1 lá chỉ định trên sân,,
-,1001,13_Mr Satan,Hủy diệt 1 lá bất kỳ trên sân của mỗi người chơi. Lá này nếu bị Hakai thì sẽ hakai lại 1 lá ngẫu nhiên trên tay những người còn lại,,
-,1002,15_Shinobu Kochou,"Khi số lá chiến binh ở trong mộ của đối phương đạt từ 5 trở lên, có thể sử dụng lá bài này để hồi sinh ngẫu nhiên 1 lá về trên tay mình",,
-,1003,Belmod,Hoán đổi ngẫu nhiên tất cá lá úp trên sân,,
-,1004,Fortuneteller Baba,Hạ một form của 1 lá chỉ định.,,
+,1000,09_Beerus,Hakai: Hủy diệt 2 lá bất kỳ trên tay người chơi khác. Hoặc hủy diệt 1 lá chỉ định trên sân,res://card/effect/image/742x1122/09_Beerus.png,res://card/effect/image/160x240/09_Beerus.png
+,1001,13_Mr Satan,Hủy diệt 1 lá bất kỳ trên sân của mỗi người chơi. Lá này nếu bị Hakai thì sẽ hakai lại 1 lá ngẫu nhiên trên tay những người còn lại,res://card/effect/image/742x1122/13_Mr Satan.png,res://card/effect/image/160x240/13_Mr Satan.png
+,1002,15_Shinobu Kochou,"Khi số lá chiến binh ở trong mộ của đối phương đạt từ 5 trở lên, có thể sử dụng lá bài này để hồi sinh ngẫu nhiên 1 lá về trên tay mình",res://card/effect/image/742x1122/15_Shinobu Kochou.png,res://card/effect/image/160x240/15_Shinobu Kochou.png
+,1003,Belmod,Hoán đổi ngẫu nhiên tất cá lá úp trên sân,res://card/effect/image/742x1122/Belmod.png,res://card/effect/image/160x240/Belmod.png
+,1004,Fortuneteller Baba,Hạ một form của 1 lá chỉ định.,res://card/effect/image/742x1122/Fortuneteller Baba.png,res://card/effect/image/160x240/Fortuneteller Baba.png

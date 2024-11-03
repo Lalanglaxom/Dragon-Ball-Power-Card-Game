@@ -13,8 +13,7 @@ var remove_hand: Array[Card2D]
 
 func _ready() -> void:
 	#Global.card_chosen.connect(card_chosen)
-	Global.card_return.connect(add_remove_card)
-	Global.card_return_local.connect(add_remove_card)
+	Global.card_returned.connect(add_remove_card)
 	pass
 
 
@@ -29,7 +28,7 @@ func arrange_hand_card():
 			
 	for i in hand_pile_p2.size():
 		var card_ui = hand_pile_p2[i]
-		card_ui.can_be_interact = false
+		card_ui.properties.can_be_chosen = false
 		
 		var hand_ratio = 0.5
 		if hand_pile_p2.size() > 1:
@@ -64,14 +63,14 @@ func add_remove_card(card_id):
 	arrange_hand_card()
 
 
-func card_chosen(card2d_id: int, player_id: int):
-	if multiplayer.get_unique_id() != player_id:
-		var card_2d = get_card_by_id(card2d_id)
-		if card_2d:
-			remove_hand.append(card_2d)
-			hand_pile_p2.erase(card_2d)
-			remove_child(card_2d)
-		arrange_hand_card()
+func card_chosen(card2d_id: int):
+	#if multiplayer.get_unique_id() != player_id:
+	var card_2d = get_card_by_id(card2d_id)
+	if card_2d:
+		remove_hand.append(card_2d)
+		hand_pile_p2.erase(card_2d)
+		remove_child(card_2d)
+	arrange_hand_card()
 
 
 

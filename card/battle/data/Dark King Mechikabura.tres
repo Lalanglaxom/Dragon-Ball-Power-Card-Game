@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Battle" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://card/script/battle_data.gd" id="1_cop8u"]
+
+[resource]
+script = ExtResource("1_cop8u")
+power = 8000
+health = 2
+front_mini_path = "res://card/battle/image/160x240/53_Dark King Mechikabura.png"
+back_mini_path = "res://card/battle/image/160x240/back.png"
+front_image_path = "res://card/battle/image/742x1122/53_Dark King Mechikabura.png"
+back_image_path = "res://card/battle/image/742x1122/back.png"
+id = 53
+nice_name = "Dark King Mechikabura"
+effect = "Khi 3 lá mạnh mẽ trong bộ bài của mày bị mất đi 1 cách vớ vẩn thì được phép hiến tế 1 lá bài chính nghĩa bất kỳ để chiêu mộ lá này. Lá bài này cho phép toàn bộ lá bài mày sở hữu evil aura & được cộng 1000 điểm sm (không tính lá này)"

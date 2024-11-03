@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Battle" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://card/script/battle_data.gd" id="1_bsa0f"]
+
+[resource]
+script = ExtResource("1_bsa0f")
+power = 8500
+health = 2
+front_mini_path = "res://card/battle/image/160x240/58_Vegito Super Saiyan Blue.png"
+back_mini_path = "res://card/battle/image/160x240/back.png"
+front_image_path = "res://card/battle/image/742x1122/58_Vegito Super Saiyan Blue.png"
+back_image_path = "res://card/battle/image/742x1122/back.png"
+id = 58
+nice_name = "Vegito Super Saiyan Blue"
+effect = "[ Zenkai ] Kaioken x 20: Nâng sức mạnh tức thời của Vegito lên mức 10500 điểm sm. Tuy nhiên, hiệp sau chỉ còn lại 7500 điểm (Trong lượt đầu)"

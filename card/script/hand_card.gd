@@ -18,16 +18,24 @@ var target_rotation: float
 var is_hover: bool = false
 @export var hover_amount: float = 60
 
-var card_belong_to_id: int = -1
-var can_be_interact: bool = true
+## Properties
+var properties: CardObject = CardObject.new()
 
 func _ready() -> void:
 	get_node("Frontface").material = null
+	
 	if frontface_texture:
 		frontface.texture = load(frontface_texture)
 		backface.texture = load(backface_texture)
-
-
+	
+	if card_data is Battle:
+		properties.power = card_data.power
+	
+	properties.health = 2
+	properties.belong_to_id = -1
+	properties.can_be_chosen = true
+	
+	
 func _process(delta: float) -> void:
 	handle_card_transform()
 
@@ -50,37 +58,26 @@ func set_direction(direction: Vector2):
 
 
 func _on_mouse_entered() -> void:
-	if !can_be_interact:
-		return
-		
-	var parent = get_parent()
-	if parent.name == "FullPile": return
-	
-	if card_belong_to_id == multiplayer.get_unique_id():
+	if is_multiplayer_authority():
 		Global.card_hover.emit(self)
 	
-	Global.card_hover.emit(self)
+	#Global.card_hover.emit(self)
 	
-	is_hover = true
-	get_node("Frontface").material = HOVER_MATERIAL
-	
-	var tween = get_tree().create_tween()
-	tween.tween_property(self, "position", \
-						Vector2(target_position.x - hover_amount/3.5, target_position.y - hover_amount) , 0.15)
+		is_hover = true
+		get_node("Frontface").material = HOVER_MATERIAL
 
+		var tween = get_tree().create_tween()
+		tween.tween_property(self, "position", \
+							Vector2(target_position.x - hover_amount/3.5, target_position.y - hover_amount) , 0.15)
 
 
 func _on_mouse_exited() -> void:
-	if !can_be_interact: return
-		
 	Global.card_unhover.emit(self)
 	is_hover = false
 	get_node("Frontface").material = null
 
 	
 func _on_gui_input(event: InputEvent) -> void:
-	if !can_be_interact:
-		return
 	
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
@@ -94,7 +91,7 @@ func _on_gui_input(event: InputEvent) -> void:
 			if Global.current_phase == Global.Phase.DAMAGE:
 				return
 			
-			if card_belong_to_id != multiplayer.get_unique_id():
+			if !is_multiplayer_authority():
 				return
 			
 			if is_hover:
@@ -107,4 +104,4 @@ func choose_card():
 	tween.tween_property(self, "position", Vector2(position.x, position.y + 150), 0.15)
 	await tween.finished
 	
-	Global.card_chosen.emit(self, card_data.id, card_belong_to_id)
+	Global.card_chosen.emit(self, card_data.nice_name)

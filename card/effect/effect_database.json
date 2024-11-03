@@ -1,0 +1,52 @@
+[
+  {
+	"id": "1000",
+	"nice_name": "09_Beerus",
+	"effect": "Hakai: Hủy diệt 2 lá bất kỳ trên tay người chơi khác. Hoặc hủy diệt 1 lá chỉ định trên sân",
+	"front_mini_path": "res://card/effect/image/160x240/09_Beerus.png",
+	"back_mini_path": "res://card/effect/image/160x240/back.png",
+	"front_image_path": "res://card/effect/image/742x1122/09_Beerus.png",
+	"back_image_path": "res://card/effect/image/742x1122/back.png",
+	"resource_script_path": "res://card/script/effect_data.gd"
+  },
+  {
+	"id": "1001",
+	"nice_name": "13_Mr Satan",
+	"effect": "Hủy diệt 1 lá bất kỳ trên sân của mỗi người chơi. Lá này nếu bị Hakai thì sẽ hakai lại 1 lá ngẫu nhiên trên tay những người còn lại",
+	"front_mini_path": "res://card/effect/image/160x240/13_Mr Satan.png",
+	"back_mini_path": "res://card/effect/image/160x240/back.png",
+	"front_image_path": "res://card/effect/image/742x1122/13_Mr Satan.png",
+	"back_image_path": "res://card/effect/image/742x1122/back.png",
+	"resource_script_path": "res://card/script/effect_data.gd"
+  },
+  {
+	"id": "1002",
+	"nice_name": "15_Shinobu Kochou",
+	"effect": "Khi số lá chiến binh ở trong mộ của đối phương đạt từ 5 trở lên, có thể sử dụng lá bài này để hồi sinh ngẫu nhiên 1 lá về trên tay mình",
+	"front_mini_path": "res://card/effect/image/160x240/15_Shinobu Kochou.png",
+	"back_mini_path": "res://card/effect/image/160x240/back.png",
+	"front_image_path": "res://card/effect/image/742x1122/15_Shinobu Kochou.png",
+	"back_image_path": "res://card/effect/image/742x1122/back.png",
+	"resource_script_path": "res://card/script/effect_data.gd"
+  },
+  {
+	"id": "1003",
+	"nice_name": "Belmod",
+	"effect": "Hoán đổi ngẫu nhiên tất cá lá úp trên sân",
+	"front_mini_path": "res://card/effect/image/160x240/Belmod.png",
+	"back_mini_path": "res://card/effect/image/160x240/back.png",
+	"front_image_path": "res://card/effect/image/742x1122/Belmod.png",
+	"back_image_path": "res://card/effect/image/742x1122/back.png",
+	"resource_script_path": "res://card/script/effect_data.gd"
+  },
+  {
+	"id": "1004",
+	"nice_name": "Fortuneteller Baba",
+	"effect": "Hạ một form của 1 lá chỉ định.",
+	"front_mini_path": "res://card/effect/image/160x240/Fortuneteller Baba.png",
+	"back_mini_path": "res://card/effect/image/160x240/back.png",
+	"front_image_path": "res://card/effect/image/742x1122/Fortuneteller Baba.png",
+	"back_image_path": "res://card/effect/image/742x1122/back.png",
+	"resource_script_path": "res://card/script/effect_data.gd"
+  }
+]

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Battle" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://card/script/battle_data.gd" id="1_m0pdh"]
+
+[resource]
+script = ExtResource("1_m0pdh")
+power = 12000
+health = 2
+front_mini_path = "res://card/battle/image/160x240/62_Universe Tree FU.png"
+back_mini_path = "res://card/battle/image/160x240/back.png"
+front_image_path = "res://card/battle/image/742x1122/62_Universe Tree FU.png"
+back_image_path = "res://card/battle/image/742x1122/back.png"
+id = 62
+nice_name = "Universe Tree FU"
+effect = "Khi hội tụ đủ Dark King Fu, Dogi Dogi & vũ trụ giả đang kích hoạt, thì được phép chiêu mộ lá bài này để chiến đấu. Lá bài này sở tất cả kỹ năng của các lá bài trước ở mức cao nhất. Với sức mạnh của vũ trụ giả, Fu đươc phép hồi sinh tất cả các lá bài ác nhân trên mộ của tất cả người chơi"

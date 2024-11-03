@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Battle" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://card/script/battle_data.gd" id="1_i7afw"]
+
+[resource]
+script = ExtResource("1_i7afw")
+power = 2900
+health = 2
+front_mini_path = "res://card/battle/image/160x240/12_Mystic Gohan.png"
+back_mini_path = "res://card/battle/image/160x240/back.png"
+front_image_path = "res://card/battle/image/742x1122/12_Mystic Gohan.png"
+back_image_path = "res://card/battle/image/742x1122/back.png"
+id = 12
+nice_name = "Mystic Gohan"
+effect = "[ Zenkai ]"

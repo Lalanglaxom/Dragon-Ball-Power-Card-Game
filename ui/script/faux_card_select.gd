@@ -11,6 +11,9 @@ var faux_chosen := []
 
 func _ready() -> void:
 	load_json_path()
+	#for card in Global.faux_database:
+		#Global.create_faux_resource(card)
+		
 	reset_faux_collection()
 	
 	Global.faux_cards_chosen.append(Global.faux_cards[0])
@@ -19,16 +22,7 @@ func _ready() -> void:
 	Global.faux_id_chosen.append(Global.faux_cards[1].card_data.id)
 	
 	Global.faux_chosen.connect(set_color)
-
-
-#func get_random_faux():
-	#for child in grid_container.get_children():
-		#if faux_chosen.size() == 2 : return
-		#
-		#if (randi() % 51 + 10) % 5 == 0:
-			#faux_chosen.append(child)
-			#child.isSelect = true
-			#child.get_child(0).self_modulate.v = 1
+	
 
 func load_json_path():
 	Global.faux_database = _load_json_cards_from_path(json_faux_database_path)
@@ -45,12 +39,12 @@ func _load_json_cards_from_path(path : String):
 				found.push_back(c)
 	return found
 
+
 func reset_faux_collection():
 	Global.faux_collection.shuffle()
 	
 	for nice_name in Global.faux_collection:
-		var card_data = get_card_data_by_nice_name(nice_name)
-		var card_ui = create_card_ui(card_data)
+		var card_ui = create_card_ui(nice_name)
 		
 		
 func get_card_data_by_nice_name(nice_name : String):
@@ -60,20 +54,18 @@ func get_card_data_by_nice_name(nice_name : String):
 	return null
 
 
-func create_card_ui(json_data : Dictionary):
+func create_card_ui(card_name: String):
 	var card_ui = card_scene.instantiate()
-	card_ui.frontface_texture = json_data.front_mini_path
-	card_ui.backface_texture = json_data.back_mini_path
 	
-	card_ui.card_data = ResourceLoader.load(json_data.resource_script_path).new()
-	for key in json_data.keys():
-		if key != "front_mini_path" and key != "back_mini_path" and key != "resource_script_path":
-			card_ui.card_data[key] = json_data[key]
+	card_ui.card_data = ResourceLoader.load('res://card/faux/data/' + card_name + '.tres')
+	
+	card_ui.frontface_texture = card_ui.card_data.front_mini_path
+	card_ui.backface_texture = card_ui.card_data.back_mini_path
 
 	Global.faux_cards.append(card_ui)
 	
 	var faux_image = FAUX_IMAGE.instantiate()
-	faux_image.get_node("TextureRect").texture = load(json_data.front_mini_path)
+	faux_image.get_node("TextureRect").texture = load(card_ui.card_data.front_mini_path)
 	grid_container.add_child(faux_image)
 	faux_image.card2d = card_ui
 	

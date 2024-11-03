@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Battle" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://card/script/battle_data.gd" id="1_imtyp"]
+
+[resource]
+script = ExtResource("1_imtyp")
+power = 4500
+health = 2
+front_mini_path = "res://card/battle/image/160x240/27_Vegeta SSJ Blue Evolution.png"
+back_mini_path = "res://card/battle/image/160x240/back.png"
+front_image_path = "res://card/battle/image/742x1122/27_Vegeta SSJ Blue Evolution.png"
+back_image_path = "res://card/battle/image/742x1122/back.png"
+id = 27
+nice_name = "Vegeta SSJ Blue Evolution"
+effect = "[ Zenkai ] [Final Explosion] Kích hoạt toàn bộ sức mạnh của bản thân để tung ra đòn tự sát với điểm sức mạnh là 5000 (chỉ dùng trong lượt 1)"

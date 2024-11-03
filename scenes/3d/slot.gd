@@ -10,7 +10,7 @@ var scale_speed = 1
 
 
 func _ready() -> void:
-	Global.card_return.connect(hide_label.rpc)
+	Global.card_returned.connect(hide_label.rpc)
 	pass
 
 func _process(delta: float) -> void:

@@ -48,7 +48,7 @@ func _ready() -> void:
 	Global.draw_pile_updated.connect(draw_card_for_player.rpc)
 	Global.card_chosen.connect(place_card.rpc)
 	Global.card_3d_flip.connect(flip_card.rpc)
-	Global.card_return.connect(return_card.rpc)
+	Global.return_chosen.connect(return_card.rpc)
 	Global.end_turn_pressed.connect(update_turn.rpc)
 	Global.end_turn_pressed.connect(update_end_turn_button.rpc)
 	Global.game_round_end.connect(reset_card_on_field.rpc)
@@ -56,13 +56,14 @@ func _ready() -> void:
 	if multiplayer.is_server():
 		set_start_hand.rpc(Global.start_hand_amount)
 	
-	set_faux_for_player.rpc(Global.faux_cards_chosen[0].card_data.id, \
-							Global.faux_cards_chosen[1].card_data.id, \
+	set_faux_for_player.rpc(Global.faux_cards_chosen[0].card_data.nice_name, \
+							Global.faux_cards_chosen[1].card_data.nice_name, \
 							multiplayer.get_unique_id())
 	
 	set_new_round_turn()
 	update_end_turn_button.call_deferred()
 
+# FIXME: CREATE 2 card if click too fast
 
 func _process(delta: float) -> void:
 	pass
@@ -95,15 +96,13 @@ func draw_card_for_player():
 			p1_pile.append(card)
 			p1_hand_pile.append(card)
 			card.reparent(p1_hand, true)
-			card.card_belong_to_id = multiplayer.get_unique_id()		
-		#p1_hand.arrange_hand_card()
 
 		for i in range(start_card_hand_amount, start_card_hand_amount * 2):
 			var card = full_pile.draw_pile[i]
 			p2_pile.append(card)
 			p2_hand_pile.append(card)
 			card.reparent(p2_hand, true)
-		#p2_hand.arrange_hand_card()
+			card.set_multiplayer_authority(-1) # HACK: For some reason the default id is 1
 
 	else:
 		for i in range(0,start_card_hand_amount):
@@ -111,31 +110,32 @@ func draw_card_for_player():
 			p1_pile.append(card)
 			p1_hand_pile.append(card)
 			card.reparent(p2_hand, true)
-
+			
 		for i in range(start_card_hand_amount, start_card_hand_amount * 2):
 			var card = full_pile.draw_pile[i]
 			p2_pile.append(card)
 			p2_hand_pile.append(card)
 			card.reparent(p1_hand, true)
-			card.card_belong_to_id = multiplayer.get_unique_id()
-	
-	
+			card.set_multiplayer_authority(multiplayer.get_unique_id())
+			
 	p1_hand.arrange_hand_card()
 	p2_hand.arrange_hand_card()
 
 
 @rpc("any_peer", "call_local", "reliable")
-func set_faux_for_player(faux_id_1: int, faux_id_2: int, player_id: int):
+func set_faux_for_player(faux_name_1: String, faux_name_2: String, player_id: int):
 	if multiplayer.get_unique_id() == player_id:
 		for card in Global.faux_cards_chosen:
-			card.card_belong_to_id = player_id
+			card.set_multiplayer_authority(player_id)
 			p1_pile.append(card)
 			p1_hand_pile.append(card)
 			p1_hand.add_card(card)
-			Global.print_multi(card.get_parent())
+
 	else:
-		var faux_card_1 = Global.create_faux_ui(Global.get_faux_data_by_id(faux_id_1))
-		var faux_card_2 = Global.create_faux_ui(Global.get_faux_data_by_id(faux_id_2))
+		var faux_card_1 = Global.create_faux_ui(faux_name_1)
+		var faux_card_2 = Global.create_faux_ui(faux_name_2)
+		faux_card_1.set_multiplayer_authority(-1)
+		faux_card_2.set_multiplayer_authority(-1)
 		p2_pile.append(faux_card_1)
 		p2_pile.append(faux_card_2)
 		p2_hand_pile.append(faux_card_1)
@@ -145,31 +145,33 @@ func set_faux_for_player(faux_id_1: int, faux_id_2: int, player_id: int):
 
 
 @rpc("any_peer", "call_local", "reliable")
-func place_card(card_2d, card_id, id):
+func place_card(card_2d, card_name):
 	# FIXME: Card P2 don't update
 	# FIXME: Can't open flip button
-	var card3d = Global.create_card_3d(Global.get_card3d_data_by_id(card_id), id)
-	if multiplayer.get_unique_id() == card3d.card_belong_to_id:
-			
-		put_card_in_p1_slot(card3d, card_2d, card_id, id)
+	
+	var card3d = Global.create_card_3d(card_name, multiplayer.get_remote_sender_id())
+
+
+	if multiplayer.get_unique_id() == multiplayer.get_remote_sender_id():
+		put_card_in_p1_slot(card3d, card_2d)
 		
 	else:
-		if !is_p1_slot_available():
+		if !is_p2_slot_available():
 			return
 		
-		p2_hand.card_chosen(card_id, id)
+		p2_hand.card_chosen(card3d.card_data.id)
 		put_card_in_p2_slot(card3d)
 		
 
 	update_end_turn_button.rpc()
 
 
-func put_card_in_p1_slot(card3d: Card3D, card2d: Card2D, card_id: int, id: int):
+func put_card_in_p1_slot(card3d: Card3D, card2d: Card2D):
 	for slot in player_1_pos.get_children():
 		if slot.get_child_count() == 1 and slot != Grave:
 			slot.add_child(card3d)
 			p1_battle_pile.append(card3d)
-			p1_hand.card_chosen(card2d, card_id, id)
+			p1_hand.card_chosen(card2d)
 			return
 
 
@@ -181,7 +183,7 @@ func put_card_in_p2_slot(card3d: Card3D):
 			return
 
 # HACK: Not cool
-func is_p1_slot_available():
+func is_p2_slot_available():
 	var slot_count = 0
 	
 	for slot in player_2_pos.get_children():
@@ -197,22 +199,22 @@ func flip_card(card_3d, card_id, player_id):
 		card_3d.flip()
 		if card_3d.card_data is Battle:
 			var card_slot = card_3d.get_parent()
-			card_slot.set_target_power(card_3d.card_data.power, card_3d.direction)
+			card_slot.set_target_power(card_3d.properties.power, card_3d.direction)
 			if card_3d.direction == Vector2.UP:
-				p1_battle_power += card_3d.card_data.power
+				p1_battle_power += card_3d.properties.power
 			else:
-				p1_battle_power -= card_3d.card_data.power
+				p1_battle_power -= card_3d.properties.power
 	else:
 		for card in p2_battle_pile:
 			if card.card_data.id == card_id:
 				card.flip()
 				if card.card_data is Battle:
 					var card_slot = card.get_parent()
-					card_slot.set_target_power(card.card_data.power, card.direction)
+					card_slot.set_target_power(card.properties.power, card.direction)
 					if card.direction == Vector2.UP:
-						p2_battle_power += card.card_data.power
+						p2_battle_power += card.properties.power
 					else:
-						p2_battle_power -= card.card_data.power
+						p2_battle_power -= card.properties.power
 						
 	update_end_turn_button.rpc()
 	
@@ -227,19 +229,19 @@ func return_card(card3d, card_id, player_id):
 				card.move_out()
 				p2_battle_pile.erase(card)
 				
-	Global.card_return.emit(card_id)
-
+	Global.card_returned.emit(card_id)
 	update_end_turn_button.rpc()
 
 
 func send_to_grave(card3d):
-	if card3d.card_belong_to_id == multiplayer.get_unique_id():
+	if card3d.get_multiplayer_authority() == multiplayer.get_unique_id():
 		card3d.set_direction(Vector2.UP)
 		card3d.reparent(grave_1, true)
 		p1_grave_pile.append(card3d)
 		p1_hand.hand_pile_p1.erase(card3d)
 		card3d.move_to_grave(Vector3(0, card3d.position.y, 0), 1)
 	else:
+		
 		card3d.set_direction(Vector2.UP)
 		card3d.reparent(grave_2, true)
 		p2_grave_pile.append(card3d)
@@ -257,7 +259,7 @@ func send_to_grave(card3d):
 func update_total_power_label():
 	p1_battle_power = 0
 	for card in p1_battle_pile:
-		p1_battle_power += card.card_data.power
+		p1_battle_power += card.properties.power
 	power_p_1.text = str(p1_battle_power)
 
 
@@ -343,24 +345,25 @@ func end_game():
 func reset_card_on_field():
 	if p1_battle_power > p2_battle_power:
 		for card in p2_battle_pile:
-			card.health = 2
+			card.properties.health = 2
 			
 			if card.card_data is Battle:
 				send_to_grave(card)
 			else:
-				return_faux_card(card, card.card_belong_to_id)
+				return_faux_card(card, card.get_multiplayer_authority())
 		
 		p2_battle_power = 0
 		p2_battle_pile.clear()
 			
 		for card in p1_battle_pile:
 			if card.card_data is Battle and card.direction == Vector2.UP:
-				card.health -= 1
+				card.properties.health -= 1
 			
-			if card.card_data is Battle and card.health == 0:
+			if card.card_data is Battle and card.properties.health == 0:
 				send_to_grave(card)
 			elif card.card_data is Faux:
-				return_faux_card(card, card.card_belong_to_id)
+				#return_card(card, card.card_data.id, card.get_multiplayer_authority())
+				return_faux_card(card, card.get_multiplayer_authority())
 		
 		for slot in player_2_pos.get_children():
 			if slot is BattleSlot:
@@ -374,31 +377,33 @@ func reset_card_on_field():
 		for card in p1_grave_pile:
 			if p1_battle_pile.has(card):
 				p1_battle_pile.erase(card)
-				p1_battle_power -= card.card_data.power
+				p1_battle_power -= card.properties.power
 			
 	else:
 		for card in p2_battle_pile:
 			if card.card_data is Battle and card.direction == Vector2.UP:
-				card.health -= 1
+				card.properties.health -= 1
 			
-			if card.card_data is Battle and card.health == 0:
+			if card.card_data is Battle and card.properties.health == 0:
 				send_to_grave(card)
 			elif card.card_data is Faux:
-				return_faux_card(card, card.card_belong_to_id)
+				#return_card(card, card.card_data.id, card.get_multiplayer_authority())
+				return_faux_card(card, card.get_multiplayer_authority())
 				
 		for card in p2_grave_pile:
 			if p2_battle_pile.has(card): 
 				p2_battle_pile.erase(card)
-				p2_battle_power -= card.card_data.power
+				p2_battle_power -= card.properties.power
 
 		
 		for card in p1_battle_pile:
-			card.health = 2
+			card.properties.health = 2
 			
 			if card.card_data is not Faux:
 				send_to_grave(card)
 			else:
-				return_faux_card(card, card.card_belong_to_id)
+				#return_card(card, card.card_data.id, card.get_multiplayer_authority())
+				return_faux_card(card, card.get_multiplayer_authority())
 		
 		p1_battle_power = 0
 		p1_battle_pile.clear()
@@ -427,13 +432,13 @@ func remove_faux_card():
 func return_faux_card(card3d, player_id):
 	if multiplayer.get_unique_id() == player_id:
 		card3d.move_out()
-		#Global.card_return_local.emit(card3d.card_data.id)
+
 	else:
 		for card in p2_battle_pile:
 			if card.card_data.id == card3d.card_data.id:
 				card3d.move_out()
 		
-	Global.card_return.emit(card3d.card_data.id)
+	Global.card_returned.emit(card3d.card_data.id)
 
 
 func check_end_turn_criteria() -> bool:	
@@ -534,8 +539,8 @@ func get_p2_1hp_num_card_up():
 	var total = 0
 	
 	for card in p2_battle_pile:
-		if card.card_data is Battle and card.direction == Vector2.UP and card.health == 1:
-															# or card.health != card.data.health
+		if card.card_data is Battle and card.direction == Vector2.UP and card.properties.health == 1:
+															# or card.properties.health != card.data.properties.health
 			total += 1
 			
 	return total
@@ -544,7 +549,7 @@ func get_p2_total_up_power():
 	var total = 0
 	for card in p2_battle_pile:
 		if card.card_data is Battle and card.direction == Vector2.UP:
-			total += card.card_data.power
+			total += card.properties.power
 	
 	return total
 
@@ -574,7 +579,7 @@ func get_p1_total_power():
 	var total = 0
 	for card in p1_battle_pile:
 		if card.card_data is Battle:
-			total += card.card_data.power
+			total += card.properties.power
 	
 	return total
 
@@ -582,7 +587,7 @@ func get_p1_total_up_power():
 	var total = 0
 	for card in p1_battle_pile:
 		if card.card_data is Battle and card.direction == Vector2.UP:
-			total += card.card_data.power
+			total += card.properties.power
 	
 	return total
 

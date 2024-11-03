@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Battle" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://card/script/battle_data.gd" id="1_gxxiu"]
+
+[resource]
+script = ExtResource("1_gxxiu")
+power = 3800
+health = 2
+front_mini_path = "res://card/battle/image/160x240/20_Supreme Kai of Time Chronoa.png"
+back_mini_path = "res://card/battle/image/160x240/back.png"
+front_image_path = "res://card/battle/image/742x1122/20_Supreme Kai of Time Chronoa.png"
+back_image_path = "res://card/battle/image/742x1122/back.png"
+id = 20
+nice_name = "Supreme Kai of Time Chronoa"
+effect = "Tăng thêm 1 lượt cho toàn bộ phe ta; hoặc giảm 1 lượt toàn bộ phe địch. Nếu hiến tế toki toki thì cứ mỗi khi Chronoa có mặt trên sân, toàn bộ phe ta sẽ được cộng 1 lượt. Khi chết trừ 1 lượt toàn bộ team địch"

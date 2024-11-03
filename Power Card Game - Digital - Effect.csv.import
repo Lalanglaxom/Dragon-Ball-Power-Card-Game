@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://ckywt6i8jqb5q"
+
+[deps]
+
+files=["res://Power Card Game - Digital - Effect.Id.translation", "res://Power Card Game - Digital - Effect.Title.translation", "res://Power Card Game - Digital - Effect.Effect.translation", "res://Power Card Game - Digital - Effect.Image.translation", "res://Power Card Game - Digital - Effect.Mini Image.translation"]
+
+source_file="res://Power Card Game - Digital - Effect.csv"
+dest_files=["res://Power Card Game - Digital - Effect.Id.translation", "res://Power Card Game - Digital - Effect.Title.translation", "res://Power Card Game - Digital - Effect.Effect.translation", "res://Power Card Game - Digital - Effect.Image.translation", "res://Power Card Game - Digital - Effect.Mini Image.translation"]
+
+[params]
+
+compress=true
+delimiter=0

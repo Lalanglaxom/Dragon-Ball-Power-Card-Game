@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Battle" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://card/script/battle_data.gd" id="1_7udwn"]
+
+[resource]
+script = ExtResource("1_7udwn")
+power = 7400
+health = 2
+front_mini_path = "res://card/battle/image/160x240/52_Goku Ultra Instinct.png"
+back_mini_path = "res://card/battle/image/160x240/back.png"
+front_image_path = "res://card/battle/image/742x1122/52_Goku Ultra Instinct.png"
+back_image_path = "res://card/battle/image/742x1122/back.png"
+id = 52
+nice_name = "Goku Ultra Instinct"
+effect = "[ Zenkai ]  Khi bị đối thủ vượt qua bởi điểm số sức mạnh của đối thủ, thay vì phải chết, lá bài này có thể thực hiện \"kỹ năng né tránh\" và quay về trên tay đối phương. Sau đó lá bài này chỉ còn 1 lượt"
