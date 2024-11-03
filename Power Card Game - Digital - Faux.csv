@@ -1,36 +1,48 @@
 Duplication,Id,Title,Effect,Image,Mini Image
-,2000,BaseCabba,,res://card/faux/image/742x1122/BaseCabba.png,res://card/faux/image/160x240/BaseCabba.png
-,2001,BinhTinh,,res://card/faux/image/742x1122/BinhTinh.png,res://card/faux/image/160x240/BinhTinh.png
+,2001,AnyaKhoc,,res://card/faux/image/742x1122/AnyaKhoc.png,res://card/faux/image/160x240/AnyaKhoc.png
 ,2002,Breast,,res://card/faux/image/742x1122/Breast.png,res://card/faux/image/160x240/Breast.png
-,2003,Chaotzu,,res://card/faux/image/742x1122/Chaotzu.png,res://card/faux/image/160x240/Chaotzu.png
-,2004,Farmer,,res://card/faux/image/742x1122/Farmer.png,res://card/faux/image/160x240/Farmer.png
-,2005,Frieren 2,,res://card/faux/image/742x1122/Frieren 2.png,res://card/faux/image/160x240/Frieren 2.png
-,2006,Frieren 3,,res://card/faux/image/742x1122/Frieren 3.png,res://card/faux/image/160x240/Frieren 3.png
-,2007,Frieren,,res://card/faux/image/742x1122/Frieren.png,res://card/faux/image/160x240/Frieren.png
-,2008,Gokubu,,res://card/faux/image/742x1122/Gokubu.png,res://card/faux/image/160x240/Gokubu.png
-,2009,GokuDitBu 2,,res://card/faux/image/742x1122/GokuDitBu 2.png,res://card/faux/image/160x240/GokuDitBu 2.png
-,2010,GokuDitBu,,res://card/faux/image/742x1122/GokuDitBu.png,res://card/faux/image/160x240/GokuDitBu.png
-,2011,Kaneki,,res://card/faux/image/742x1122/Kaneki.png,res://card/faux/image/160x240/Kaneki.png
-,2012,Kotoha,,res://card/faux/image/742x1122/Kotoha.png,res://card/faux/image/160x240/Kotoha.png
-,2013,Kurumi,,res://card/faux/image/742x1122/Kurumi.png,res://card/faux/image/160x240/Kurumi.png
-,2014,L,,res://card/faux/image/742x1122/L.png,res://card/faux/image/160x240/L.png
-,2015,Marcarita,,res://card/faux/image/742x1122/Marcarita.png,res://card/faux/image/160x240/Marcarita.png
-,2016,Marin 2,,res://card/faux/image/742x1122/Marin 2.png,res://card/faux/image/160x240/Marin 2.png
-,2017,Marin,,res://card/faux/image/742x1122/Marin.png,res://card/faux/image/160x240/Marin.png
-,2018,MayCac,,res://card/faux/image/742x1122/MayCac.png,res://card/faux/image/160x240/MayCac.png
-,2019,Serie,,res://card/faux/image/742x1122/Serie.png,res://card/faux/image/160x240/Serie.png
-,2020,SeriouslyMan,,res://card/faux/image/742x1122/SeriouslyMan.png,res://card/faux/image/160x240/SeriouslyMan.png
-,2021,Shinobu 2,,res://card/faux/image/742x1122/Shinobu 2.png,res://card/faux/image/160x240/Shinobu 2.png
-,2022,Shinobu,,res://card/faux/image/742x1122/Shinobu.png,res://card/faux/image/160x240/Shinobu.png
-,2023,Shizucon,,res://card/faux/image/742x1122/Shizucon.png,res://card/faux/image/160x240/Shizucon.png
-,2024,Vados,,res://card/faux/image/742x1122/Vados.png,res://card/faux/image/160x240/Vados.png
-,2025,VegeGokubu,,res://card/faux/image/742x1122/VegeGokubu.png,res://card/faux/image/160x240/VegeGokubu.png
-,2026,Vegeta Hakai,,res://card/faux/image/742x1122/Vegeta Hakai.png,res://card/faux/image/160x240/Vegeta Hakai.png
-,2027,Violet,,res://card/faux/image/742x1122/Violet.png,res://card/faux/image/160x240/Violet.png
-,2028,Yamcha,,res://card/faux/image/742x1122/Yamcha.png,res://card/faux/image/160x240/Yamcha.png
-,2029,Yor,,res://card/faux/image/742x1122/Yor.png,res://card/faux/image/160x240/Yor.png
-,2030,Yuki,,res://card/faux/image/742x1122/Yuki.png,res://card/faux/image/160x240/Yuki.png
-,2031,Yuki 2,,res://card/faux/image/742x1122/Yuki 2.png,res://card/faux/image/160x240/Yuki 2.png
-,2032,VegetaGiay,,res://card/faux/image/742x1122/VegetaGiay.png,res://card/faux/image/160x240/VegetaGiay.png
-,2033,VegetaDauTroc,,res://card/faux/image/742x1122/VegetaDauTroc.png,res://card/faux/image/160x240/VegetaDauTroc.png
-,2034,VegetaDauTay,,res://card/faux/image/742x1122/VegetaDauTay.png,res://card/faux/image/160x240/VegetaDauTay.png
+,2003,BrolyDitBu,,res://card/faux/image/742x1122/BrolyDitBu.png,res://card/faux/image/160x240/BrolyDitBu.png
+,2004,Chaotzu,,res://card/faux/image/742x1122/Chaotzu.png,res://card/faux/image/160x240/Chaotzu.png
+,2005,ChizuruDen,,res://card/faux/image/742x1122/ChizuruDen.png,res://card/faux/image/160x240/ChizuruDen.png
+,2006,CoolerCuBu,,res://card/faux/image/742x1122/CoolerCuBu.png,res://card/faux/image/160x240/CoolerCuBu.png
+,2007,DamCastle,,res://card/faux/image/742x1122/DamCastle.png,res://card/faux/image/160x240/DamCastle.png
+,2008,Frieren 2,,res://card/faux/image/742x1122/Frieren 2.png,res://card/faux/image/160x240/Frieren 2.png
+,2009,Frieren 3,,res://card/faux/image/742x1122/Frieren 3.png,res://card/faux/image/160x240/Frieren 3.png
+,2010,Frieren,,res://card/faux/image/742x1122/Frieren.png,res://card/faux/image/160x240/Frieren.png
+,2011,Gokubu,,res://card/faux/image/742x1122/Gokubu.png,res://card/faux/image/160x240/Gokubu.png
+,2012,GokuCuBu,,res://card/faux/image/742x1122/GokuCuBu.png,res://card/faux/image/160x240/GokuCuBu.png
+,2013,GokuDitBu 2,,res://card/faux/image/742x1122/GokuDitBu 2.png,res://card/faux/image/160x240/GokuDitBu 2.png
+,2014,GokuDitBu,,res://card/faux/image/742x1122/GokuDitBu.png,res://card/faux/image/160x240/GokuDitBu.png
+,2015,GokuPetrol,,res://card/faux/image/742x1122/GokuPetrol.png,res://card/faux/image/160x240/GokuPetrol.png
+,2016,Homelander,,res://card/faux/image/742x1122/Homelander.png,res://card/faux/image/160x240/Homelander.png
+,2017,Kaneki,,res://card/faux/image/742x1122/Kaneki.png,res://card/faux/image/160x240/Kaneki.png
+,2018,Kotoha,,res://card/faux/image/742x1122/Kotoha.png,res://card/faux/image/160x240/Kotoha.png
+,2019,L,,res://card/faux/image/742x1122/L.png,res://card/faux/image/160x240/L.png
+,2020,Marcarita,,res://card/faux/image/742x1122/Marcarita.png,res://card/faux/image/160x240/Marcarita.png
+,2021,Marin 2,,res://card/faux/image/742x1122/Marin 2.png,res://card/faux/image/160x240/Marin 2.png
+,2022,Marin 3,,res://card/faux/image/742x1122/Marin 3.png,res://card/faux/image/160x240/Marin 3.png
+,2023,Marin,,res://card/faux/image/742x1122/Marin.png,res://card/faux/image/160x240/Marin.png
+,2024,MayCac,,res://card/faux/image/742x1122/MayCac.png,res://card/faux/image/160x240/MayCac.png
+,2025,MGay,,res://card/faux/image/742x1122/MGay.png,res://card/faux/image/160x240/MGay.png
+,2026,Miku,,res://card/faux/image/742x1122/Miku.png,res://card/faux/image/160x240/Miku.png
+,2027,MotMinh,,res://card/faux/image/742x1122/MotMinh.png,res://card/faux/image/160x240/MotMinh.png
+,2028,Muzan,,res://card/faux/image/742x1122/Muzan.png,res://card/faux/image/160x240/Muzan.png
+,2029,Noem,,res://card/faux/image/742x1122/Noem.png,res://card/faux/image/160x240/Noem.png
+,2030,QuaTe,,res://card/faux/image/742x1122/QuaTe.png,res://card/faux/image/160x240/QuaTe.png
+,2031,RonaldoGaiCu,,res://card/faux/image/742x1122/RonaldoGaiCu.png,res://card/faux/image/160x240/RonaldoGaiCu.png
+,2032,Serie,,res://card/faux/image/742x1122/Serie.png,res://card/faux/image/160x240/Serie.png
+,2033,SeriouslyMan,,res://card/faux/image/742x1122/SeriouslyMan.png,res://card/faux/image/160x240/SeriouslyMan.png
+,2034,Shinobu 2,,res://card/faux/image/742x1122/Shinobu 2.png,res://card/faux/image/160x240/Shinobu 2.png
+,2035,Shinobu,,res://card/faux/image/742x1122/Shinobu.png,res://card/faux/image/160x240/Shinobu.png
+,2036,Shizucon,,res://card/faux/image/742x1122/Shizucon.png,res://card/faux/image/160x240/Shizucon.png
+,2037,Vados,,res://card/faux/image/742x1122/Vados.png,res://card/faux/image/160x240/Vados.png
+,2038,VegeGokubu,,res://card/faux/image/742x1122/VegeGokubu.png,res://card/faux/image/160x240/VegeGokubu.png
+,2039,VegetaDauTay,,res://card/faux/image/742x1122/VegetaDauTay.png,res://card/faux/image/160x240/VegetaDauTay.png
+,2040,VegetaDauTroc,,res://card/faux/image/742x1122/VegetaDauTroc.png,res://card/faux/image/160x240/VegetaDauTroc.png
+,2041,VegetaDitBu,,res://card/faux/image/742x1122/VegetaDitBu.png,res://card/faux/image/160x240/VegetaDitBu.png
+,2042,VegetaGiay,,res://card/faux/image/742x1122/VegetaGiay.png,res://card/faux/image/160x240/VegetaGiay.png
+,2043,VegitoCuBu,,res://card/faux/image/742x1122/VegitoCuBu.png,res://card/faux/image/160x240/VegitoCuBu.png
+,2044,VegitoWin,,res://card/faux/image/742x1122/VegitoWin.png,res://card/faux/image/160x240/VegitoWin.png
+,2045,Violet,,res://card/faux/image/742x1122/Violet.png,res://card/faux/image/160x240/Violet.png
+,2046,Yamcha,,res://card/faux/image/742x1122/Yamcha.png,res://card/faux/image/160x240/Yamcha.png
+,2047,Yuki,,res://card/faux/image/742x1122/Yuki.png,res://card/faux/image/160x240/Yuki.png

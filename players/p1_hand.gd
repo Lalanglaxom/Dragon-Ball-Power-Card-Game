@@ -10,8 +10,6 @@ var remove_hand: Array[Card2D]
 @export var hand_rotation_curve : Curve
 @export var hand_spread_curve : Curve
 
-@onready var state_chart: StateChart = $"../StateChart"
-
 
 var player_turn: int
 

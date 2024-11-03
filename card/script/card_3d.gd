@@ -1,7 +1,7 @@
 class_name Card3D
 extends Area3D
 
-signal state_updated
+signal moved_to_grave
 
 @export var card_data : CardData
 
@@ -61,7 +61,7 @@ func appear():
 
 func move_in():
 	var base_z_pos = position.z
-	position.z += 30
+	position.z += 5
 	
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "position", Vector3(0,0,base_z_pos), 0.5) \
@@ -70,7 +70,7 @@ func move_in():
 
 
 func move_out():
-	var new_z_pos = position.z + 20
+	var new_z_pos = position.z + 10
 	
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "position", Vector3(0,0,new_z_pos), 0.5) \
@@ -80,7 +80,15 @@ func move_out():
 	await tween.finished
 	queue_free()
 
-
+func move_to_grave(new_pos: Vector3, time: float):
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "position", new_pos, time) \
+	.set_trans(Tween.TRANS_EXPO)\
+	.set_ease(Tween.EASE_OUT)
+	await tween.finished
+	
+	moved_to_grave.emit()
+	
 func move_to(new_pos: Vector3, time: float):
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "position", new_pos, time) \
@@ -93,7 +101,7 @@ func flip():
 	if direction == Vector2.DOWN:
 		direction = Vector2.UP
 		
-		tween.tween_property(self, "position", Vector3(0, position.y + 3, 0), 0.1)
+		tween.tween_property(self, "position", Vector3(0, position.y + 0.5, 0), 0.1)
 		
 		tween.tween_property(self, "rotation", Vector3(0,0,deg_to_rad(0)), 0.2) \
 		.set_trans(Tween.TRANS_LINEAR)\
@@ -106,7 +114,7 @@ func flip():
 	else:
 		direction = Vector2.DOWN
 		
-		tween.tween_property(self, "position", Vector3(0, position.y + 3, 0), 0.1)
+		tween.tween_property(self, "position", Vector3(0, position.y + 0.5, 0), 0.1)
 		
 		tween.tween_property(self, "rotation", Vector3(0,0,deg_to_rad(180)), 0.2) \
 		.set_trans(Tween.TRANS_LINEAR)\

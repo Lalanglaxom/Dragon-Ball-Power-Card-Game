@@ -18,13 +18,11 @@ script = ExtResource("1_pabl7")
 target_power = 8500
 
 [node name="PowerLabel" type="Label3D" parent="."]
-transform = Transform3D(-1, -8.44439e-08, 2.26267e-08, 0, 0.258819, 0.965926, -8.74228e-08, 0.965926, -0.258819, 1.90735e-06, 1, -7.09976)
+transform = Transform3D(-1, -8.44439e-08, 2.26267e-08, 0, 0.258819, 0.965926, -8.74228e-08, 0.965926, -0.258819, 0, 0.0622019, -0.93358)
 visible = false
 render_priority = 1
 text = "69000"
 font = ExtResource("4_14o2l")
-font_size = 300
-outline_size = 100
 
 [node name="Background" type="MeshInstance3D" parent="PowerLabel"]
 transform = Transform3D(1, 0, 0, 0, 0.258819, -0.965926, 0, 0.965926, 0.258819, 0, -0.125494, -0.161153)

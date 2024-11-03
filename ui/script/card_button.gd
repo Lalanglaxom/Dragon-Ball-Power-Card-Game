@@ -4,7 +4,7 @@ extends Control
 @onready var full_pile: FullPile = $"../../FullPile"
 @onready var hand_container_p_1: Control = $"../../../HandContainerP1"
 
-@export var offset: Vector3 = Vector3(-6,0,3) # Test manually
+@export var offset: Vector3 = Vector3(4,0,0) # Test manually
 
 var card3d: Card3D
 var card_id: int

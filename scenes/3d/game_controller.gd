@@ -41,8 +41,8 @@ var has_action: bool
 var turn_new_round := [1,2]
 var current_player_turn := 1
 
-var p1_slot_count = 0
-var p2_slot_count = 0
+var p1_win: bool = false
+var game_ended: bool = false
 
 func _ready() -> void:
 	Global.draw_pile_updated.connect(draw_card_for_player.rpc)
@@ -50,22 +50,28 @@ func _ready() -> void:
 	Global.card_3d_flip.connect(flip_card.rpc)
 	Global.card_return.connect(return_card.rpc)
 	Global.end_turn_pressed.connect(update_turn.rpc)
-	Global.end_turn_pressed.connect(update_end_turn_button)
+	Global.end_turn_pressed.connect(update_end_turn_button.rpc)
 	Global.game_round_end.connect(reset_card_on_field.rpc)
 	
-	set_new_round_turn()
+	if multiplayer.is_server():
+		set_start_hand.rpc(Global.start_hand_amount)
 	
 	set_faux_for_player.rpc(Global.faux_cards_chosen[0].card_data.id, \
 							Global.faux_cards_chosen[1].card_data.id, \
 							multiplayer.get_unique_id())
 	
+	set_new_round_turn()
 	update_end_turn_button.call_deferred()
 
 
 func _process(delta: float) -> void:
 	pass
 
-	
+
+@rpc("any_peer","call_local","reliable")
+func set_start_hand(num: int):
+	start_card_hand_amount = num
+
 func set_new_round_turn():
 	turn_new_round.shuffle()
 	if multiplayer.is_server():
@@ -78,6 +84,7 @@ func set_new_round_turn():
 func set_turn(turn: int):
 	p1_hand.set_turn(turn)	
 	p1_hand.switch_state(current_player_turn)
+	Global.finished_set_turn.emit()
 
 
 @rpc("any_peer", "call_local", "reliable")
@@ -136,10 +143,11 @@ func set_faux_for_player(faux_id_1: int, faux_id_2: int, player_id: int):
 		p2_hand.add_card(faux_card_1)
 		p2_hand.add_card(faux_card_2)
 
-	
+
 @rpc("any_peer", "call_local", "reliable")
 func place_card(card_2d, card_id, id):
 	# FIXME: Card P2 don't update
+	# FIXME: Can't open flip button
 	var card3d = Global.create_card_3d(Global.get_card3d_data_by_id(card_id), id)
 	if multiplayer.get_unique_id() == card3d.card_belong_to_id:
 			
@@ -153,7 +161,7 @@ func place_card(card_2d, card_id, id):
 		put_card_in_p2_slot(card3d)
 		
 
-	update_end_turn_button.call_deferred()
+	update_end_turn_button.rpc()
 
 
 func put_card_in_p1_slot(card3d: Card3D, card2d: Card2D, card_id: int, id: int):
@@ -182,6 +190,7 @@ func is_p1_slot_available():
 	
 	return slot_count > 0
 
+
 @rpc("any_peer", "call_local", "reliable")
 func flip_card(card_3d, card_id, player_id):
 	if multiplayer.get_unique_id() == player_id:
@@ -205,7 +214,7 @@ func flip_card(card_3d, card_id, player_id):
 					else:
 						p2_battle_power -= card.card_data.power
 						
-	update_end_turn_button.call_deferred()
+	update_end_turn_button.rpc()
 	
 @rpc("any_peer","call_local","reliable")
 func return_card(card3d, card_id, player_id):
@@ -220,26 +229,29 @@ func return_card(card3d, card_id, player_id):
 				
 	Global.card_return.emit(card_id)
 
-	update_end_turn_button.call_deferred()
+	update_end_turn_button.rpc()
 
 
 func send_to_grave(card3d):
 	if card3d.card_belong_to_id == multiplayer.get_unique_id():
 		card3d.set_direction(Vector2.UP)
 		card3d.reparent(grave_1, true)
-		p1_grave_pile.push_front(card3d)
+		p1_grave_pile.append(card3d)
 		p1_hand.hand_pile_p1.erase(card3d)
-		card3d.move_to(Vector3(0, card3d.position.y, 0), 1)
+		card3d.move_to_grave(Vector3(0, card3d.position.y, 0), 1)
 	else:
 		card3d.set_direction(Vector2.UP)
 		card3d.reparent(grave_2, true)
-		p2_grave_pile.push_front(card3d)
+		p2_grave_pile.append(card3d)
 		p2_hand.hand_pile_p2.erase(card3d)
-		card3d.move_to(Vector3(0, card3d.position.y, 0), 1)
-
+		card3d.move_to_grave(Vector3(0, card3d.position.y, 0), 1)
+	
+	await card3d.moved_to_grave
+	
 	grave_1.arrange_grave_card()
 	grave_2.arrange_grave_card()
-	update_end_turn_button.call_deferred()
+	
+	update_end_turn_button.rpc()
 
 
 func update_total_power_label():
@@ -251,7 +263,6 @@ func update_total_power_label():
 
 @rpc("any_peer","call_local","reliable")
 func update_turn():
-	
 	current_player_turn += 1
 	if current_player_turn > 2:
 		current_player_turn = 1
@@ -263,31 +274,55 @@ func update_turn():
 		if Global.current_phase == Global.Phase.STANDOFF:
 			switch_phase(Global.Phase.BATTLE)
 		elif Global.current_phase == Global.Phase.BATTLE:
+			var phase = Global.Phase.STANDOFF # HACK: Can not find a way to not show the end turn text 
+			var can_switch_round = true
+			
 			if p1_battle_power > p2_battle_power:
 				for card in p2_battle_pile:
 					if card.direction == Vector2.DOWN:
-						return
+						phase = Global.Phase.BATTLE
+						can_switch_round = false
 						
 			else:
 				for card in p1_battle_pile:
 					if card.direction == Vector2.DOWN:
-						return
+						phase = Global.Phase.BATTLE
+						can_switch_round = false
 			
-			
-			switch_phase(Global.Phase.STANDOFF)
-			switch_round()
-			round_turn = 0
-
-			if p1_hand.hand_pile_p1.size() - 2 <= 0:
-				print("PLAYER 2 WIN")
-			if p2_hand.hand_pile_p2.size() - 2 <= 0:
-				print("PLAYER 1 WIN")
+			if get_p1_total_power() > get_p2_total_up_power():
+				p1_win = true
+			else:
+				p1_win = false
 				
-	update_end_turn_button.call_deferred()
+			
+			switch_phase(phase)
+			
+			if can_switch_round:
+				reset_card_on_field()
+				
+				if get_p2_card_hand() - 2 <= 0 and get_p2_num_card_up() == 0:
+					end_game()
+					return
+				
+				if get_p1_card_hand() - 2 <= 0 and get_p1_num_card_up() == 0:
+					end_game()
+					return
+				
+				set_new_round_turn()
+				round_turn = 0
+				game_round += 1
+				
+	if game_ended:
+		return
+	
+	ui.show_player_turn()
+	
+	update_end_turn_button.rpc()
 
 @rpc("any_peer","call_local","reliable")
 func switch_phase(phase: Global.Phase):
 	Global.current_phase = phase
+
 
 func damage_phase_behaviour():
 	# TODO: The avatar with stronger attack beat the one with lower attack
@@ -295,21 +330,17 @@ func damage_phase_behaviour():
 	pass
 
 
-func switch_round():
-	game_round += 1
-	reset_card_on_field()
-	set_new_round_turn()
+@rpc("any_peer","call_local","reliable")
+func end_game():
+	game_ended = true
+	if p1_win == true:
+		ui.show_player_win(1)
+	else:
+		ui.show_player_win(0)
 
 
 @rpc("any_peer","call_local","reliable")
 func reset_card_on_field():
-	# FIXME: CAN"T END TURN WITH 1 CARD FACE UP
-	# FIXME: CAN END TURN WITHOUT FACE UP
-	# FIXME: CAN END TURN WITH 1 FAUX CARD
-	# FIXME: GAME GET BROKEN TOWARD THE END
-	# FIXME: FACE DOWN CARD GET ALL SEND TO GRAVE WTF
-	# FIXME: TWO PLAYER OUT OF CARD WHICH PLAYER STRONGER WIN
-
 	if p1_battle_power > p2_battle_power:
 		for card in p2_battle_pile:
 			card.health = 2
@@ -382,6 +413,7 @@ func reset_card_on_field():
 	
 	remove_faux_card()
 
+
 func remove_faux_card():
 	for i in range(p1_battle_pile.size() - 1, -1 , -1):
 		if p1_battle_pile[i].card_data is Faux:
@@ -403,6 +435,7 @@ func return_faux_card(card3d, player_id):
 		
 	Global.card_return.emit(card3d.card_data.id)
 
+
 func check_end_turn_criteria() -> bool:	
 	var valid = false
 	
@@ -419,6 +452,10 @@ func check_end_turn_criteria() -> bool:
 		if get_p2_num_card_up() == 0:
 			if get_p1_card_battle() > 0:
 				return true
+		
+		if get_p1_card_hand() - 2 <= get_p2_num_card_up():
+			if get_p1_num_card() == 3:
+				return true
 			
 		if get_p2_num_card_up() > 0:
 			if get_p1_total_power() >= get_p2_total_up_power():
@@ -428,13 +465,19 @@ func check_end_turn_criteria() -> bool:
 					return true
 				else:
 					return false
-					
+		
+		
+		
 	if Global.current_phase == Global.Phase.BATTLE:
 		if get_p2_num_card_up() == 0:
 			if get_p1_num_card_up() > 0:
 				return true
 			else:
 				return false
+
+		if get_p1_card_hand() - 2 <= get_p2_num_card_up():
+			if get_p1_card_down() == 0:
+				return true
 		
 		if get_p2_num_card_up() > 0:
 			if get_p1_total_up_power() > get_p2_total_up_power():
@@ -449,6 +492,8 @@ func check_end_turn_criteria() -> bool:
 	
 	return valid
 
+
+@rpc("any_peer","call_local","reliable")
 func update_end_turn_button():
 	if check_end_turn_criteria():
 		ui.end_turn.disabled = false
@@ -472,6 +517,9 @@ func print_card_status():
 
 func get_p2_num_card():
 	return p2_battle_pile.size()
+
+func get_p2_card_hand():
+	return p2_hand.hand_pile_p2.size()
 
 func get_p2_num_card_up():
 	var total = 0
@@ -499,9 +547,12 @@ func get_p2_total_up_power():
 			total += card.card_data.power
 	
 	return total
-	
+
 func get_p1_num_card():
 	return p1_battle_pile.size()
+
+func get_p1_card_hand():
+	return p1_hand.hand_pile_p1.size()
 
 func get_p1_num_card_up():
 	var total = 0
@@ -511,7 +562,6 @@ func get_p1_num_card_up():
 			total += 1
 			
 	return total
-
 
 func get_p1_card_battle():
 	var total = 0
@@ -535,7 +585,7 @@ func get_p1_total_up_power():
 			total += card.card_data.power
 	
 	return total
-	
+
 func get_p1_card_down():
 	var total = 0
 	

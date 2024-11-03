@@ -56,13 +56,11 @@ func add_card(card: Card2D):
 	arrange_hand_card()
 
 func add_remove_card(card_id):
-	#if multiplayer.get_unique_id() != player_id:
 	for card in remove_hand:
 		if card.card_data.id == card_id:
 			add_child(card)
 			hand_pile_p2.append(card)
 			remove_hand.erase(card)
-			Global.print_multi(card.card_data.nice_name)
 	arrange_hand_card()
 
 

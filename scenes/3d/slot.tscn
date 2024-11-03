@@ -10,7 +10,6 @@ albedo_color = Color(0, 0, 0, 0.392157)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_w4pxc"]
 material = SubResource("StandardMaterial3D_nnjvd")
-size = Vector2(4.5, 1.5)
 
 [node name="Slot 1" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.01, 7)
@@ -18,13 +17,11 @@ script = ExtResource("1_dnq2c")
 target_power = 7000
 
 [node name="PowerLabel" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, -0.0363226, 1, -6.90828)
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 0.0802197, -0.855526)
 visible = false
 render_priority = 1
 text = "69000"
 font = ExtResource("4_buhie")
-font_size = 300
-outline_size = 100
 
 [node name="Background" type="MeshInstance3D" parent="PowerLabel"]
 transform = Transform3D(1, 0, 0, 0, 0.258819, -0.965926, 0, 0.965926, 0.258819, 0, -0.0882726, -0.171126)

@@ -46,6 +46,8 @@ func _load_json_cards_from_path(path : String):
 	return found
 
 func reset_faux_collection():
+	Global.faux_collection.shuffle()
+	
 	for nice_name in Global.faux_collection:
 		var card_data = get_card_data_by_nice_name(nice_name)
 		var card_ui = create_card_ui(card_data)

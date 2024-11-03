@@ -1,24 +1,24 @@
 [gd_scene load_steps=5 format=3 uid="uid://dwleps5an3bwi"]
 
 [ext_resource type="Script" path="res://card/script/card_3d.gd" id="1_jfsc6"]
-[ext_resource type="Texture2D" uid="uid://21pwf05i32e6" path="res://card/battle/image/742x1122/07_Sonic Warrior Dyspo.png" id="2_76npb"]
+[ext_resource type="Texture2D" uid="uid://dxccoscf8am74" path="res://card/battle/image/742x1122/21_Xeno Baby Vegeta.png" id="2_xskrj"]
 [ext_resource type="Texture2D" uid="uid://dg4kpc5i7lnaw" path="res://card/battle/image/742x1122/back.png" id="3_et54n"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5tc7q"]
-size = Vector3(7.5, 0.01, 10.5)
+size = Vector3(1, 0.01, 1.4)
 
 [node name="Card_3D" type="Area3D"]
 script = ExtResource("1_jfsc6")
 
 [node name="Front" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(0.135, 0, 0, 0, -5.90104e-09, 0.135, 0, -0.135, -5.90104e-09, 0, 0, 0)
 shaded = true
 double_sided = false
-texture = ExtResource("2_76npb")
+texture = ExtResource("2_xskrj")
 region_rect = Rect2(521, 558, 89, 58)
 
 [node name="Back" type="Sprite3D" parent="."]
-transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0, 0, 0)
+transform = Transform3D(-0.135, -2.03844e-08, 8.91032e-16, 0, -5.90104e-09, -0.135, 2.03844e-08, -0.135, 5.90104e-09, 0, 0, 0)
 double_sided = false
 texture = ExtResource("3_et54n")
 

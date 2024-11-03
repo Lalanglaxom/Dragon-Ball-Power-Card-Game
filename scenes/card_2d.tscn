@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://card/script/hand_card.gd" id="1_80ux6"]
 [ext_resource type="Resource" uid="uid://hjgon8eue2aj" path="res://card/wip/anh_liem.tres" id="2_5x0nf"]
-[ext_resource type="Texture2D" uid="uid://tdba44oybsrw" path="res://card/battle/image/160x240/47_Bounty Hunter Granolah.png" id="4_dpebe"]
 [ext_resource type="Material" uid="uid://t6vkut1jl0o6" path="res://card/properties/hover_material.tres" id="4_enyvt"]
-[ext_resource type="Texture2D" uid="uid://yimowsqpcpoi" path="res://card/battle/image/160x240/back.png" id="6_tyqhv"]
+[ext_resource type="Texture2D" uid="uid://di6rjskw8kby5" path="res://card/battle/image/742x1122/64_Ultra Instict Yamcha.png" id="4_i2gak"]
+[ext_resource type="Texture2D" uid="uid://dg4kpc5i7lnaw" path="res://card/battle/image/742x1122/back.png" id="5_4v6qt"]
 
 [node name="Card_2D" type="Control"]
 custom_minimum_size = Vector2(80, 120)
@@ -23,16 +23,16 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 240.0
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_dpebe")
+texture = ExtResource("4_i2gak")
 stretch_mode = 2
 
 [node name="Backface" type="TextureRect" parent="."]
 visible = false
 layout_mode = 0
-offset_right = 160.0
-offset_bottom = 240.0
+offset_right = 747.0
+offset_bottom = 1122.0
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("6_tyqhv")
+texture = ExtResource("5_4v6qt")
 stretch_mode = 2
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]

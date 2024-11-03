@@ -4,4 +4,4 @@
 font_names = PackedStringArray("Roboto Slab")
 generate_mipmaps = true
 subpixel_positioning = 0
-msdf_pixel_range = 200
+msdf_pixel_range = 24

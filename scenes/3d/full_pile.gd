@@ -86,7 +86,7 @@ func reset_battle_collection():
 	for nice_name in battle_collection:
 		var card_data = get_card_data_by_nice_name(nice_name)
 		var card_ui = create_card_ui(card_data)
-		#draw_pile.push_back(card_ui)
+
 
 func get_card_data_by_id(id : int):
 	for json_data in battle_database:
@@ -104,8 +104,6 @@ func get_card_data_by_nice_name(nice_name : String):
 
 func create_card_in_pile(nice_name : String, pile_to_add_to : Piles):
 	var card_ui = create_card_ui(get_card_data_by_nice_name(nice_name))
-	#if pile_to_add_to == Piles.draw_pile:
-		#card_ui.position = Vector2.ZERO
 	set_card_pile(card_ui, pile_to_add_to)
 
 

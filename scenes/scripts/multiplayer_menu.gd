@@ -5,7 +5,9 @@ var server_ip = "" # IPv4 localhost
 const MAX_CONNECTIONS = 3
 
 @onready var main_menu = $"."
+@onready var host_button: Button = $Host
 @onready var ip_box: LineEdit = $IPBox
+@onready var hand_amount: LineEdit = $"Hand Amount"
 
 var players = {}
 var player_info = {
@@ -25,6 +27,7 @@ func _ready():
 func peer_connected(id):
 	print("Player Connected: ", id)
 	add_player_info.rpc_id(id, player_info)
+
 	start_game.call_deferred()
 	
 func peer_disconnected(id):
@@ -39,7 +42,8 @@ func connection_failed():
 
 
 func _on_host_button_pressed():
-
+	set_start_hand_amount(int(hand_amount.text))
+	
 	var peer = ENetMultiplayerPeer.new()
 	var error = peer.create_server(PORT, MAX_CONNECTIONS)
 	if error:
@@ -52,6 +56,7 @@ func _on_host_button_pressed():
 
 func _on_join_button_pressed():
 	server_ip = ip_box.text
+	
 	var peer = ENetMultiplayerPeer.new()
 	var error = peer.create_client(server_ip, PORT)
 	if error:
@@ -80,8 +85,12 @@ func start_game():
 	var game_scene = load("res://scenes/3d/playground.tscn").instantiate()
 	get_tree().root.add_child(game_scene)
 	main_menu.hide()
-	
-	
+
+
+func set_start_hand_amount(num: int):
+	Global.start_hand_amount = num
+
+
 func _on_start_button_pressed():
 	start_game.rpc()
 
@@ -93,6 +102,12 @@ func _on_screen_button_pressed() -> void:
 		
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
-
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_hand_amount_text_changed(new_text: String) -> void:
+	if new_text.is_valid_int() and int(new_text) <= 30:
+		host_button.disabled = false
+	else:
+		host_button.disabled = true

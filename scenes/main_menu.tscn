@@ -54,6 +54,7 @@ offset_left = 35.0
 offset_top = 154.0
 offset_right = 330.0
 offset_bottom = 237.0
+disabled = true
 text = "Host
 "
 
@@ -80,7 +81,7 @@ text = "Start Game
 layout_mode = 0
 offset_left = 37.0
 offset_top = 99.0
-offset_right = 496.0
+offset_right = 330.0
 offset_bottom = 130.0
 
 [node name="Label" type="Label" parent="IPBox"]
@@ -90,12 +91,33 @@ offset_right = 72.0
 offset_bottom = -11.0
 text = "IP Adress"
 
+[node name="Hand Amount" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 343.0
+offset_top = 156.0
+offset_right = 410.063
+offset_bottom = 187.0
+max_length = 2
+
+[node name="Label" type="Label" parent="Hand Amount"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 77.0
+offset_top = -11.5
+offset_right = 180.0
+offset_bottom = 11.5
+grow_vertical = 2
+text = "Card Amount
+"
+
 [node name="FauxButton" type="Button" parent="."]
 layout_mode = 1
-offset_left = 341.0
-offset_top = 155.0
-offset_right = 525.0
-offset_bottom = 200.0
+offset_left = 342.0
+offset_top = 97.0
+offset_right = 526.0
+offset_bottom = 142.0
 text = "Faux Card Select"
 
 [node name="ScreenButton" type="Button" parent="."]
@@ -159,6 +181,7 @@ stream = ExtResource("4_x64jb")
 [connection signal="pressed" from="Host" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="Join" to="." method="_on_join_button_pressed"]
 [connection signal="pressed" from="Start" to="." method="_on_start_button_pressed"]
+[connection signal="text_changed" from="Hand Amount" to="." method="_on_hand_amount_text_changed"]
 [connection signal="pressed" from="FauxButton" to="Faux Card Select" method="_on_faux_button_pressed"]
 [connection signal="pressed" from="ScreenButton" to="." method="_on_screen_button_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]

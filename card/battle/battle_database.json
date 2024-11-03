@@ -706,7 +706,7 @@
   {
 	"id": "65",
 	"nice_name": "Archon",
-	"power": 1,
+	"power": 0,
 	"effect": "Hấp thụ một nửa sức mạnh của những sinh vật có godki; Lượng điểm sức mạnh này có thể làm hồi sinh nhũng lá đã chết (Chỉ dc hồi sinh 1 lá)",
 	"front_mini_path": "res://card/battle/image/160x240/65_Archon.png",
 	"back_mini_path": "res://card/battle/image/160x240/back.png",
