@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Beerus" load_steps=2 format=3 uid="uid://6gdqlt4p8dtg"]
+
+[ext_resource type="Script" path="res://card/effect/scripts/beerus.gd" id="1_c8tms"]
+
+[resource]
+script = ExtResource("1_c8tms")
+beerus = false
+star = 0
+front_mini_path = "res://card/effect/image/160x240/Beerus.png"
+back_mini_path = "res://card/effect/image/160x240/back.png"
+front_image_path = "res://card/effect/image/742x1122/Beerus.png"
+back_image_path = "res://card/effect/image/742x1122/back.png"
+id = 1000
+nice_name = "Beerus"
+effect = "Hakai: Hủy diệt 2 lá bất kỳ trên tay người chơi khác. Hoặc hủy diệt 1 lá chỉ định trên sân"

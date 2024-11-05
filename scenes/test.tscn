@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://mj26hinl6yer"]
+
+[ext_resource type="Script" path="res://scenes/scripts/test.gd" id="1_0h6pa"]
+[ext_resource type="PackedScene" uid="uid://dwleps5an3bwi" path="res://scenes/3d/card_3d.tscn" id="2_g4m7n"]
+[ext_resource type="Resource" path="res://card/battle/data/Lagss of the Glass Tribe.tres" id="3_jy1ag"]
+
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("card")]
+script = ExtResource("1_0h6pa")
+card = NodePath("Card_3D")
+
+[node name="Card_3D" parent="." instance=ExtResource("2_g4m7n")]
+card_data = ExtResource("3_jy1ag")

@@ -2,6 +2,8 @@ extends Control
 
 @export_file("*.json") var json_faux_collection_path : String
 @export_file("*.json") var json_faux_database_path : String
+@export_file("*.json") var json_effect_collection_path : String
+@export_file("*.json") var json_effect_database_path : String
 
 const FAUX_IMAGE = preload("res://scenes/faux_image.tscn")
 const card_scene = preload("res://scenes/card_2d.tscn")
@@ -11,9 +13,6 @@ var faux_chosen := []
 
 func _ready() -> void:
 	load_json_path()
-	#for card in Global.faux_database:
-		#Global.create_faux_resource(card)
-		
 	reset_faux_collection()
 	
 	Global.faux_cards_chosen.append(Global.faux_cards[0])

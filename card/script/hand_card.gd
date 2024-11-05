@@ -16,17 +16,18 @@ var target_position: Vector2
 var target_rotation: float 
 
 var is_hover: bool = false
+var is_click: bool = false
 @export var hover_amount: float = 60
 
 ## Properties
-var properties: CardObject = CardObject.new()
+var properties: CardProperties = CardProperties.new()
 
 func _ready() -> void:
 	get_node("Frontface").material = null
 	
 	if frontface_texture:
 		frontface.texture = load(frontface_texture)
-		backface.texture = load(backface_texture)
+		#backface.texture = load(backface_texture)
 	
 	if card_data is Battle:
 		properties.power = card_data.power
@@ -44,6 +45,9 @@ func handle_card_transform():
 	if is_hover:
 		return
 	
+	if is_click:
+		return
+		
 	position = lerp(position, target_position, return_speed)
 	rotation = target_rotation
 
@@ -61,11 +65,11 @@ func _on_mouse_entered() -> void:
 	if is_multiplayer_authority():
 		Global.card_hover.emit(self)
 	
-	#Global.card_hover.emit(self)
-	
 		is_hover = true
 		get_node("Frontface").material = HOVER_MATERIAL
-
+		
+		if is_click: return
+		
 		var tween = get_tree().create_tween()
 		tween.tween_property(self, "position", \
 							Vector2(target_position.x - hover_amount/3.5, target_position.y - hover_amount) , 0.15)
@@ -78,7 +82,6 @@ func _on_mouse_exited() -> void:
 
 	
 func _on_gui_input(event: InputEvent) -> void:
-	
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			var parent = get_parent()
@@ -94,14 +97,36 @@ func _on_gui_input(event: InputEvent) -> void:
 			if !is_multiplayer_authority():
 				return
 			
-			if is_hover:
+			if is_hover and card_data is not Effect:
 				choose_card()
-
+			
+			if is_hover and card_data is Effect:
+				choose_effect()
 
 
 func choose_card():
+	is_hover = false
+	
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "position", Vector2(position.x, position.y + 150), 0.15)
 	await tween.finished
 	
 	Global.card_chosen.emit(self, card_data.nice_name)
+
+
+func choose_effect():
+	if is_click == true:
+		is_click = false
+		is_hover = false
+		Global.card2d_button_unneeded.emit()
+		return
+	
+	is_click = true
+	
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "position", \
+	Vector2(target_position.x - hover_amount/3.5, target_position.y - hover_amount*2) , 0.15)
+	tween.set_parallel()
+	tween.tween_property(self, "rotation", 0, 0.15)
+	
+	Global.card2d_button_needed.emit(self, card_data.nice_name)

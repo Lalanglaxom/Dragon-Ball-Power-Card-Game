@@ -42,7 +42,7 @@ func set_power_label(power: int):
 
 
 @rpc("any_peer","call_local","reliable")
-func hide_label(card_3d, card_id, player_id):
+func hide_label(card_3d: Card3D, card_id: int, player_id: int):
 	if multiplayer.get_unique_id() == player_id:
 		var card_slot = card_3d.get_parent()
 		if card_slot == self:

@@ -2,7 +2,7 @@ extends Control
 
 @onready var big_image: TextureRect = $BigImage
 @onready var end_turn: Button = $"End Turn"
-@onready var card_option: Player2 = $CardOption
+@onready var card_option: VBoxContainer = $CardOption
 @onready var end_turn_text: Panel = $"End Turn Player"
 @onready var winner: Panel = $Winner
 

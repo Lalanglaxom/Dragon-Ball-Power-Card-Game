@@ -1,12 +1,13 @@
-[gd_scene load_steps=33 format=3 uid="uid://0u0xoqfym0sm"]
+[gd_scene load_steps=34 format=3 uid="uid://0u0xoqfym0sm"]
 
 [ext_resource type="Script" path="res://scenes/3d/game_controller.gd" id="1_tpmse"]
 [ext_resource type="Texture2D" uid="uid://dqaebtakgg5l3" path="res://environment/texture/space.jpg" id="2_qu00h"]
 [ext_resource type="Script" path="res://players/p1_hand.gd" id="2_s5h1q"]
 [ext_resource type="Script" path="res://free_look_camera.gd" id="2_ytu0f"]
-[ext_resource type="PackedScene" uid="uid://dwleps5an3bwi" path="res://scenes/3d/card_3d.tscn" id="3_68123"]
 [ext_resource type="Script" path="res://scenes/3d/full_pile.gd" id="3_c2cdc"]
 [ext_resource type="Curve" uid="uid://cilxr3u0kmg7y" path="res://card/hand_rotation_curve.tres" id="4_gmvg7"]
+[ext_resource type="Script" path="res://scenes/3d/spell_slot.gd" id="4_r26dp"]
+[ext_resource type="Script" path="res://scenes/3d/neutral_slot.gd" id="4_w411y"]
 [ext_resource type="Script" path="res://players/p2_hand.gd" id="6_c08yh"]
 [ext_resource type="Curve" uid="uid://b6vvv4vkpbtvp" path="res://card/hand_position_curve.tres" id="8_no7rg"]
 [ext_resource type="Curve" uid="uid://bkbraspsnw3k8" path="res://card/hand_spread.tres" id="10_cjsaq"]
@@ -91,13 +92,12 @@ mesh = SubResource("PlaneMesh_ho4ek")
 [node name="CardPosition" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.7823)
 
-[node name="Spell Slot" type="Node3D" parent="CardPosition"]
-transform = Transform3D(0.724172, 0, -0.68962, 0, 1, 0, 0.68962, 0, 0.724172, 6.78543, 0.01, -4.25056)
-visible = false
-
-[node name="Card_3D6" parent="CardPosition/Spell Slot" instance=ExtResource("3_68123")]
+[node name="Neutral" type="Node3D" parent="CardPosition"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.907, 0.01, 5.5)
+script = ExtResource("4_w411y")
 
 [node name="Player 1" type="Node3D" parent="CardPosition"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.322191)
 
 [node name="Slot 1" parent="CardPosition/Player 1" instance=ExtResource("10_l8saf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2779, 0.01, 7)
@@ -110,12 +110,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.01, 7)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.64792, 0.01, 7)
 target_power = 3900
 
+[node name="Spell Slot" type="Node3D" parent="CardPosition/Player 1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.90714, 0.01, 5.17759)
+script = ExtResource("4_r26dp")
+
 [node name="Grave 1" type="Node3D" parent="CardPosition/Player 1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.51016, 0.01, 7)
 script = ExtResource("11_wmtgq")
 
 [node name="Player 2" type="Node3D" parent="CardPosition"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.40703)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.97109)
 
 [node name="Slot 4" parent="CardPosition/Player 2" instance=ExtResource("11_nlpbd")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.73299, 0.01, 7.61661)
@@ -125,6 +129,10 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7, 0.0
 
 [node name="Slot 6" parent="CardPosition/Player 2" instance=ExtResource("11_nlpbd")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 5.22994, 0.01, 7.61661)
+
+[node name="Spell Slot" type="Node3D" parent="CardPosition/Player 2"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6.90714, 0.01, 9.47087)
+script = ExtResource("4_r26dp")
 
 [node name="Grave 2" type="Node3D" parent="CardPosition/Player 2"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.82204, 0.01, 7.61661)
@@ -157,6 +165,8 @@ pivot_offset = Vector2(40, 60)
 script = ExtResource("3_c2cdc")
 json_battle_database_path = "res://card/battle/battle_database.json"
 json_battle_collection_path = "res://card/battle/battle_collection.json"
+json_effect_database_path = "res://card/effect/effect_database.json"
+json_effect_collection_path = "res://card/effect/effect_collection.json"
 
 [node name="HandContainerP2" type="Control" parent="."]
 custom_minimum_size = Vector2(80, 120)
@@ -266,7 +276,6 @@ scale = Vector2(0.2, 0.2)
 
 [node name="CardOption" type="VBoxContainer" parent="CanvasLayer/UI"]
 visible = false
-custom_minimum_size = Vector2(140, 66)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -274,26 +283,26 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 486.0
-offset_top = 271.0
-offset_right = 626.0
-offset_bottom = 337.0
+offset_top = 253.5
+offset_right = 586.0
+offset_bottom = 284.5
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(70, 33)
+pivot_offset = Vector2(50, 33)
 size_flags_horizontal = 4
 script = ExtResource("22_6mj4c")
-offset = Vector3(-0.81, 0, -0.4)
+offset_2d = Vector2(-5, -20)
 
 [node name="Flip" type="Button" parent="CanvasLayer/UI/CardOption"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Flip"
 
-[node name="Return" type="Button" parent="CanvasLayer/UI/CardOption"]
-visible = false
+[node name="Effect" type="Button" parent="CanvasLayer/UI/CardOption"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Return"
+text = "Use Effect"
 
 [node name="End Turn" type="Button" parent="CanvasLayer/UI"]
 layout_mode = 1
@@ -384,7 +393,7 @@ label_settings = SubResource("LabelSettings_6s5ee")
 
 [connection signal="input_event" from="DrawPile" to="DrawPile" method="_on_input_event"]
 [connection signal="pressed" from="CanvasLayer/UI/CardOption/Flip" to="CanvasLayer/UI/CardOption" method="_on_flip_pressed"]
-[connection signal="pressed" from="CanvasLayer/UI/CardOption/Return" to="CanvasLayer/UI/CardOption" method="_on_return_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/CardOption/Effect" to="CanvasLayer/UI/CardOption" method="_on_activate_effect_pressed"]
 [connection signal="pressed" from="CanvasLayer/UI/End Turn" to="CanvasLayer/UI" method="_on_end_turn_pressed"]
 [connection signal="pressed" from="CanvasLayer/UI/Quit Game" to="CanvasLayer/UI" method="_on_quit_game_pressed"]
 [connection signal="pressed" from="CanvasLayer/UI/TestButton" to="CanvasLayer/UI" method="_on_test_button_pressed"]

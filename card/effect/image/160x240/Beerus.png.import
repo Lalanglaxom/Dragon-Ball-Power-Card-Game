@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1fwt7dla7nim"
-path="res://.godot/imported/09_Beerus.png-48bbd375c4db674d182b392fcefe6ac1.ctex"
+uid="uid://bw15ci72qysbo"
+path="res://.godot/imported/Beerus.png-5e97782ea34ae7294e45a83e24806e36.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://card/effect/image/742x1122/09_Beerus.png"
-dest_files=["res://.godot/imported/09_Beerus.png-48bbd375c4db674d182b392fcefe6ac1.ctex"]
+source_file="res://card/effect/image/160x240/Beerus.png"
+dest_files=["res://.godot/imported/Beerus.png-5e97782ea34ae7294e45a83e24806e36.ctex"]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

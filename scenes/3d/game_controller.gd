@@ -1,6 +1,6 @@
 extends Node
 
-signal end_turn_valid
+signal effect_anim_finished
 
 @onready var full_pile: Control = $"../FullPile"
 
@@ -13,15 +13,19 @@ signal end_turn_valid
 @onready var p2_hand: Control = $"../HandContainerP2"
 @onready var grave_2: Node3D = $"../CardPosition/Player 2/Grave 2"
 
+@onready var neutral_slot: Node3D = $"../CardPosition/Neutral"
+
 
 @onready var ui: Control = $"../CanvasLayer/UI"
 const CARD_3D = preload("res://scenes/3d/card_3d.tscn")
 
-var start_card_hand_amount: int = 5
+var start_battle_hand_amount: int = 5
+var start_effect_hand_amount: int = 2
 
 var p1_pile := []
 var p1_hand_pile := []
 var p1_battle_pile := []
+var p1_spell_pile := []
 var p1_grave_pile := []
 var p1_battle_power: int
 
@@ -29,8 +33,13 @@ var p1_battle_power: int
 var p2_pile := []
 var p2_hand_pile := []
 var p2_battle_pile := []
+var p2_spell_pile := []
 var p2_grave_pile := []
 var p2_battle_power: int
+
+# some card control
+
+var spell_index: int = 0
 
 # Turn control
 var game_round: int = 0
@@ -47,14 +56,18 @@ var game_ended: bool = false
 func _ready() -> void:
 	Global.draw_pile_updated.connect(draw_card_for_player.rpc)
 	Global.card_chosen.connect(place_card.rpc)
-	Global.card_3d_flip.connect(flip_card.rpc)
+	ui.get_node("CardOption").flip_button_pressed.connect(flip_card.rpc)
+	ui.get_node("CardOption").use_effect_pressed.connect(use_effect.rpc)
 	Global.return_chosen.connect(return_card.rpc)
 	Global.end_turn_pressed.connect(update_turn.rpc)
 	Global.end_turn_pressed.connect(update_end_turn_button.rpc)
 	Global.game_round_end.connect(reset_card_on_field.rpc)
 	
+	set_multiplayer_authority(multiplayer.get_unique_id())
+	
 	if multiplayer.is_server():
 		set_start_hand.rpc(Global.start_hand_amount)
+		set_randomizer_seed.rpc(randf_range(123456, 456789))
 	
 	set_faux_for_player.rpc(Global.faux_cards_chosen[0].card_data.nice_name, \
 							Global.faux_cards_chosen[1].card_data.nice_name, \
@@ -69,9 +82,16 @@ func _process(delta: float) -> void:
 	pass
 
 
+
+@rpc("any_peer","call_remote","reliable")
+func set_randomizer_seed(num: int):
+	seed(num)
+
+
 @rpc("any_peer","call_local","reliable")
 func set_start_hand(num: int):
-	start_card_hand_amount = num
+	start_battle_hand_amount = num
+
 
 func set_new_round_turn():
 	turn_new_round.shuffle()
@@ -91,28 +111,54 @@ func set_turn(turn: int):
 @rpc("any_peer", "call_local", "reliable")
 func draw_card_for_player():
 	if multiplayer.get_unique_id() == 1:
-		for i in range(0,start_card_hand_amount):
-			var card = full_pile.draw_pile[i]
+		for i in range(0,start_battle_hand_amount):
+			var card = full_pile.draw_pile_battle[i]
 			p1_pile.append(card)
 			p1_hand_pile.append(card)
 			card.reparent(p1_hand, true)
 
-		for i in range(start_card_hand_amount, start_card_hand_amount * 2):
-			var card = full_pile.draw_pile[i]
+		for i in range(start_battle_hand_amount, start_battle_hand_amount * 2):
+			var card = full_pile.draw_pile_battle[i]
+			p2_pile.append(card)
+			p2_hand_pile.append(card)
+			card.reparent(p2_hand, true)
+			card.set_multiplayer_authority(-1) # HACK: For some reason the default id is 1
+		
+		for i in range(0,start_effect_hand_amount):
+			var card = full_pile.draw_pile_effect[i]
+			p1_pile.append(card)
+			p1_hand_pile.append(card)
+			card.reparent(p1_hand, true)
+
+		for i in range(start_effect_hand_amount, start_effect_hand_amount * 2):
+			var card = full_pile.draw_pile_effect[i]
 			p2_pile.append(card)
 			p2_hand_pile.append(card)
 			card.reparent(p2_hand, true)
 			card.set_multiplayer_authority(-1) # HACK: For some reason the default id is 1
 
 	else:
-		for i in range(0,start_card_hand_amount):
-			var card = full_pile.draw_pile[i]
+		for i in range(0,start_battle_hand_amount):
+			var card = full_pile.draw_pile_battle[i]
 			p1_pile.append(card)
 			p1_hand_pile.append(card)
 			card.reparent(p2_hand, true)
 			
-		for i in range(start_card_hand_amount, start_card_hand_amount * 2):
-			var card = full_pile.draw_pile[i]
+		for i in range(start_battle_hand_amount, start_battle_hand_amount * 2):
+			var card = full_pile.draw_pile_battle[i]
+			p2_pile.append(card)
+			p2_hand_pile.append(card)
+			card.reparent(p1_hand, true)
+			card.set_multiplayer_authority(multiplayer.get_unique_id())
+		
+		for i in range(0,start_effect_hand_amount):
+			var card = full_pile.draw_pile_effect[i]
+			p1_pile.append(card)
+			p1_hand_pile.append(card)
+			card.reparent(p2_hand, true)
+			
+		for i in range(start_effect_hand_amount, start_effect_hand_amount * 2):
+			var card = full_pile.draw_pile_effect[i]
 			p2_pile.append(card)
 			p2_hand_pile.append(card)
 			card.reparent(p1_hand, true)
@@ -121,6 +167,11 @@ func draw_card_for_player():
 	p1_hand.arrange_hand_card()
 	p2_hand.arrange_hand_card()
 
+
+func set_card_2D(card: Card2D, player_id: int):
+	if player_id == multiplayer.get_unique_id():
+		p1_hand.add_card(card)
+		p1_hand_pile.append(card)
 
 @rpc("any_peer", "call_local", "reliable")
 func set_faux_for_player(faux_name_1: String, faux_name_2: String, player_id: int):
@@ -151,12 +202,11 @@ func place_card(card_2d, card_name):
 	
 	var card3d = Global.create_card_3d(card_name, multiplayer.get_remote_sender_id())
 
-
 	if multiplayer.get_unique_id() == multiplayer.get_remote_sender_id():
 		put_card_in_p1_slot(card3d, card_2d)
 		
 	else:
-		if !is_p2_slot_available():
+		if !is_p2_slot_available() and card3d.card_data is Battle:
 			return
 		
 		p2_hand.card_chosen(card3d.card_data.id)
@@ -167,20 +217,46 @@ func place_card(card_2d, card_name):
 
 
 func put_card_in_p1_slot(card3d: Card3D, card2d: Card2D):
+	if card3d.card_data is Effect:
+		for slot in player_1_pos.get_children():
+			if slot is SpellSLot:
+				card3d.rotation.y = deg_to_rad(randf_range(-45,45))
+				spell_index += 1
+				card3d.get_node("Front").render_priority = spell_index
+				p1_spell_pile.append(card3d)
+				slot.add_child(card3d)
+				p1_hand.card_chosen(card2d)
+				effect_anim_finished.emit()
+				return
+	
 	for slot in player_1_pos.get_children():
-		if slot.get_child_count() == 1 and slot != Grave:
+		if slot.get_child_count() == 1 and slot is BattleSlot:
+			card3d.rotation.y = deg_to_rad(randf_range(-3,3)) 
 			slot.add_child(card3d)
 			p1_battle_pile.append(card3d)
 			p1_hand.card_chosen(card2d)
 			return
-
+# TODO: Create new 2d when put on hand again
 
 func put_card_in_p2_slot(card3d: Card3D):
+	if card3d.card_data is Effect:
+		for slot in player_2_pos.get_children():
+			if slot is SpellSLot:
+				p2_spell_pile.append(card3d)
+				slot.add_child(card3d)
+				card3d.rotation.y = deg_to_rad(randf_range(-45,45))
+				spell_index += 1
+				card3d.get_node("Front").render_priority = spell_index
+				effect_anim_finished.emit()
+				return
+
 	for slot in player_2_pos.get_children():
-		if slot.get_child_count() == 1 and slot.name != "Grave":
+		if slot.get_child_count() == 1 and slot is BattleSlot:
 			slot.add_child(card3d)
+			card3d.rotation.y = deg_to_rad(randf_range(-3,3))
 			p2_battle_pile.append(card3d)
 			return
+
 
 # HACK: Not cool
 func is_p2_slot_available():
@@ -217,7 +293,31 @@ func flip_card(card_3d, card_id, player_id):
 						p2_battle_power -= card.properties.power
 						
 	update_end_turn_button.rpc()
+
+
+
+
+
+@rpc("any_peer","call_local","reliable")
+func use_effect(card, card_name, player_id):
+	place_card(card, card_name)
 	
+	await get_tree().create_timer(2).timeout
+
+	if get_multiplayer_authority() == player_id:
+		var eff_callable = Callable(card.card_data, "activate_effect")
+		eff_callable.call(self, card)
+
+	else:
+		for card3d in p2_spell_pile:
+			if card3d.card_data.nice_name == card_name:
+				var eff_callable = Callable(card3d.card_data, "activate_effect")
+				eff_callable.call(self, card3d)
+		
+		
+	Global.card2d_button_unneeded.emit()
+
+
 @rpc("any_peer","call_local","reliable")
 func return_card(card3d, card_id, player_id):
 	if multiplayer.get_unique_id() == player_id:
@@ -298,15 +398,17 @@ func update_turn():
 				
 			
 			switch_phase(phase)
-			
+
 			if can_switch_round:
+				damage_phase_behaviour()
+				
 				reset_card_on_field()
 				
-				if get_p2_card_hand() - 2 <= 0 and get_p2_num_card_up() == 0:
+				if get_p2_battle_hand() <= 0 and get_p2_num_card_up() == 0:
 					end_game()
 					return
 				
-				if get_p1_card_hand() - 2 <= 0 and get_p1_num_card_up() == 0:
+				if get_p1_battle_hand() <= 0 and get_p1_num_card_up() == 0:
 					end_game()
 					return
 				
@@ -327,8 +429,6 @@ func switch_phase(phase: Global.Phase):
 
 
 func damage_phase_behaviour():
-	# TODO: The avatar with stronger attack beat the one with lower attack
-	# Then switch_phase
 	pass
 
 
@@ -343,6 +443,9 @@ func end_game():
 
 @rpc("any_peer","call_local","reliable")
 func reset_card_on_field():
+	Global.card3d_button_unneeded.emit()
+	Global.card2d_button_unneeded.emit()
+	
 	if p1_battle_power > p2_battle_power:
 		for card in p2_battle_pile:
 			card.properties.health = 2
@@ -362,7 +465,6 @@ func reset_card_on_field():
 			if card.card_data is Battle and card.properties.health == 0:
 				send_to_grave(card)
 			elif card.card_data is Faux:
-				#return_card(card, card.card_data.id, card.get_multiplayer_authority())
 				return_faux_card(card, card.get_multiplayer_authority())
 		
 		for slot in player_2_pos.get_children():
@@ -387,7 +489,6 @@ func reset_card_on_field():
 			if card.card_data is Battle and card.properties.health == 0:
 				send_to_grave(card)
 			elif card.card_data is Faux:
-				#return_card(card, card.card_data.id, card.get_multiplayer_authority())
 				return_faux_card(card, card.get_multiplayer_authority())
 				
 		for card in p2_grave_pile:
@@ -402,7 +503,6 @@ func reset_card_on_field():
 			if card.card_data is not Faux:
 				send_to_grave(card)
 			else:
-				#return_card(card, card.card_data.id, card.get_multiplayer_authority())
 				return_faux_card(card, card.get_multiplayer_authority())
 		
 		p1_battle_power = 0
@@ -506,6 +606,27 @@ func update_end_turn_button():
 		ui.end_turn.disabled = true
 
 
+func find_card(card_name: String):
+	for card in p1_battle_pile:
+		if card.card_data.nice_name == card_name:
+			return card
+	for card in p2_battle_pile:
+		if card.card_data.nice_name == card_name:
+			return card
+	for card in p1_grave_pile:
+		if card.card_data.nice_name == card_name:
+			return card
+	for card in p2_grave_pile:
+		if card.card_data.nice_name == card_name:
+			return card
+	for card in p1_spell_pile:
+		if card.card_data.nice_name == card_name:
+			return card
+	for card in p2_spell_pile:
+		if card.card_data.nice_name == card_name:
+			return card
+
+
 func print_card_status():
 	print("p1 num card: ", str(get_p1_num_card()))
 	print("p1 num card up: ", str(get_p1_num_card_up()))
@@ -553,6 +674,13 @@ func get_p2_total_up_power():
 	
 	return total
 
+func get_p2_battle_hand():
+	var total = 0
+	for card in p2_hand.hand_pile_p2:
+		if card.card_data is Battle:
+			total += 1
+	return total
+
 func get_p1_num_card():
 	return p1_battle_pile.size()
 
@@ -598,4 +726,11 @@ func get_p1_card_down():
 		if card.direction == Vector2.DOWN:
 			total += 1
 	
+	return total
+
+func get_p1_battle_hand():
+	var total = 0
+	for card in p1_hand.hand_pile_p1:
+		if card.card_data is Battle:
+			total += 1
 	return total

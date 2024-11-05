@@ -14,8 +14,10 @@ var remove_hand: Array[Card2D]
 var player_turn: int
 
 func _ready() -> void:
-
 	Global.card_returned.connect(add_remove_card)
+	Global.end_turn_pressed.connect(normalize_hand_all)
+	Global.card_chosen.connect(normalize_hand)
+	Global.card2d_button_needed.connect(normalize_hand)
 
 
 
@@ -52,6 +54,22 @@ func arrange_hand_card():
 		
 		card_ui.target_position = target_pos
 		card_ui.target_rotation = target_rot
+
+
+func normalize_hand(card2d: Card2D, name: String):
+	for card in hand_pile_p1:
+		if card == card2d:
+			continue
+		
+		card.is_click = false
+		card.is_hover = false
+
+
+func normalize_hand_all():
+	for card in hand_pile_p1:
+		card.is_click = false
+		card.is_hover = false
+		
 
 
 func card_chosen(card2d: Card2D):

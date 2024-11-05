@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MrSatan" load_steps=2 format=3 uid="uid://cn7fo2nsyb575"]
+
+[ext_resource type="Script" path="res://card/effect/scripts/mr_satan.gd" id="1_4jo87"]
+
+[resource]
+script = ExtResource("1_4jo87")
+satan = false
+star = 0
+front_mini_path = "res://card/effect/image/160x240/Mr Satan.png"
+back_mini_path = "res://card/effect/image/160x240/back.png"
+front_image_path = "res://card/effect/image/742x1122/Mr Satan.png"
+back_image_path = "res://card/effect/image/742x1122/back.png"
+id = 1001
+nice_name = "Mr Satan"
+effect = "Hủy diệt 1 lá bất kỳ trên sân của mỗi người chơi. Lá này nếu bị Hakai thì sẽ hakai lại 1 lá ngẫu nhiên trên tay những người còn lại"

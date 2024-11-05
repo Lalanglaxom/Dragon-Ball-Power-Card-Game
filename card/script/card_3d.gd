@@ -13,7 +13,7 @@ var backface_texture: String
 const HOVER_MATERIAL = preload("res://card/properties/hover_material.tres")
 
 # Properties
-var properties: CardObject = CardObject.new()
+var properties: CardProperties = CardProperties.new()
 
 var base_y_pos: float
 var target_position: Vector3
@@ -25,24 +25,25 @@ var direction: Vector2
 func _ready() -> void:
 	if frontface_texture:
 		frontface.texture = load(frontface_texture)
-		backface.texture = load(backface_texture)
+		#backface.texture = load(backface_texture)
 	
+	if card_data is not Effect:
+		direction = Vector2.DOWN	
+		set_direction(direction)
+	else:
+		direction = Vector2.UP
+		set_direction(direction)
+		
 	if card_data is Battle:
 		properties.power = card_data.power
-	properties.health = 2
+		properties.health = 2
 	
 	base_y_pos = position.y
-	appear()
+	move_in()
 
 
 func _process(delta: float) -> void:
 	pass
-
-
-func appear():
-	direction = Vector2.DOWN
-	set_direction(direction)
-	move_in()
 
 
 func move_in():
@@ -70,7 +71,7 @@ func move_out():
 func move_to_grave(new_pos: Vector3, time: float):
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "position", new_pos, time) \
-	.set_trans(Tween.TRANS_EXPO)\
+	.set_trans(Tween.TRANS_QUART)\
 	.set_ease(Tween.EASE_OUT)
 	await tween.finished
 	
@@ -130,7 +131,7 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 			if Global.state != Global.State.YOUR_TURN: return
 			
 			if Global.current_phase == Global.Phase.BATTLE:
-				Global.card_3d_button.emit(self, card_data.id)
+				Global.card3d_button_needed.emit(self, card_data.id)
 			
 			elif Global.current_phase == Global.Phase.STANDOFF and direction == Vector2.DOWN:
 				Global.return_chosen.emit(self, card_data.id, multiplayer.get_unique_id())

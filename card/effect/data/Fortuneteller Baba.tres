@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="FortunetellerBaba" load_steps=2 format=3 uid="uid://c0p4n4xh0c1s6"]
+
+[ext_resource type="Script" path="res://card/effect/scripts/baba.gd" id="1_gvwpw"]
+
+[resource]
+script = ExtResource("1_gvwpw")
+baba = false
+star = 0
+front_mini_path = "res://card/effect/image/160x240/Fortuneteller Baba.png"
+back_mini_path = "res://card/effect/image/160x240/back.png"
+front_image_path = "res://card/effect/image/742x1122/Fortuneteller Baba.png"
+back_image_path = "res://card/effect/image/742x1122/back.png"
+id = 1004
+nice_name = "Fortuneteller Baba"
+effect = "Hạ một form của 1 lá chỉ định."

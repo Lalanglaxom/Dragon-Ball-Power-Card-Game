@@ -3,6 +3,5 @@ extends CardData
 
 @export var star: int
 
-
-func active_effect():
+func activate_effect(game_controller, this_card):
 	print("Use Effect")

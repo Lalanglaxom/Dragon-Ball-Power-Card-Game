@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bmhkjkc0jj00i"
-path="res://.godot/imported/15_Shinobu Kochou.png-1d4f0589c3fd63893fd515bad44e61e6.ctex"
+path="res://.godot/imported/Shinobu Kochou.png-b3ae0a99167f76b6463abca41e454494.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://card/effect/image/160x240/15_Shinobu Kochou.png"
-dest_files=["res://.godot/imported/15_Shinobu Kochou.png-1d4f0589c3fd63893fd515bad44e61e6.ctex"]
+source_file="res://card/effect/image/160x240/Shinobu Kochou.png"
+dest_files=["res://.godot/imported/Shinobu Kochou.png-b3ae0a99167f76b6463abca41e454494.ctex"]
 
 [params]
 

@@ -1,4 +1,4 @@
-class_name CardObject
+class_name CardProperties
 extends Node
 
 var power: int

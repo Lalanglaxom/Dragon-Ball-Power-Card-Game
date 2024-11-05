@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Belmod" load_steps=2 format=3 uid="uid://cefpnej2wtg86"]
+
+[ext_resource type="Script" path="res://card/effect/scripts/belmod.gd" id="1_08hhp"]
+
+[resource]
+script = ExtResource("1_08hhp")
+belmod = false
+star = 0
+front_mini_path = "res://card/effect/image/160x240/Belmod.png"
+back_mini_path = "res://card/effect/image/160x240/back.png"
+front_image_path = "res://card/effect/image/742x1122/Belmod.png"
+back_image_path = "res://card/effect/image/742x1122/back.png"
+id = 1003
+nice_name = "Belmod"
+effect = "Hoán đổi ngẫu nhiên tất cá lá úp trên sân"

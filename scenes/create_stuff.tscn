@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://csawnhiee0fb1"]
+
+[ext_resource type="Script" path="res://scenes/scripts/create_stuff.gd" id="1_mp8ma"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_mp8ma")
+json_battle_database_path = "res://card/battle/battle_database.json"
+json_battle_collection_path = "res://card/battle/battle_collection.json"
+json_effect_database_path = "res://card/effect/effect_database.json"
+json_effect_collection_path = "res://card/effect/effect_collection.json"
+json_faux_database_path = "res://card/faux/faux_database.json"
+json_faux_collection_path = "res://card/faux/faux_collection.json"

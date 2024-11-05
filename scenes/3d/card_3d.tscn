@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dwleps5an3bwi"]
 
 [ext_resource type="Script" path="res://card/script/card_3d.gd" id="1_jfsc6"]
-[ext_resource type="Texture2D" uid="uid://dxccoscf8am74" path="res://card/battle/image/742x1122/21_Xeno Baby Vegeta.png" id="2_xskrj"]
+[ext_resource type="Texture2D" uid="uid://ci7hlcca2jmhq" path="res://card/battle/image/742x1122/05_Caulifla Super Saiyan 2.png" id="2_it1o3"]
 [ext_resource type="Texture2D" uid="uid://dg4kpc5i7lnaw" path="res://card/battle/image/742x1122/back.png" id="3_et54n"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5tc7q"]
@@ -14,7 +14,7 @@ script = ExtResource("1_jfsc6")
 transform = Transform3D(0.135, 0, 0, 0, -5.90104e-09, 0.135, 0, -0.135, -5.90104e-09, 0, 0, 0)
 shaded = true
 double_sided = false
-texture = ExtResource("2_xskrj")
+texture = ExtResource("2_it1o3")
 region_rect = Rect2(521, 558, 89, 58)
 
 [node name="Back" type="Sprite3D" parent="."]

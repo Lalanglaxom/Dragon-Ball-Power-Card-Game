@@ -5,14 +5,18 @@ extends Node
 # The arguments is for separating, not functioning
 signal card_hover(Card2D)
 signal card_unhover(Card2D)
-signal card_chosen(Card2D)
+signal card_chosen()
 signal card_returned(Card2D)
 signal return_chosen(Card2D)
-signal faux_chosen()
+signal faux_chosen
+
+signal card2d_button_needed
+signal card2d_button_unneeded
+signal card3d_button_needed
+signal card3d_button_unneeded
 
 signal card_3d_hover(Card3D)
 signal card_3d_unhover(Card3D)
-signal card_3d_button(Card3D)
 signal card_3d_flip(Card3D)
 
 
@@ -26,16 +30,16 @@ signal card_drew(Card2D)
 signal finished_set_turn
 signal end_turn_pressed
 signal game_round_end
-signal damage_phase_enter
+
 
 var Players = {}
+
+const card_scene = preload("res://scenes/card_2d.tscn")
+const CARD_3D = preload("res://scenes/3d/card_3d.tscn")
 
 # Faux Card
 var faux_database := [] # an array of JSON `Card` data
 var faux_collection := [] # an array of JSON `Card` data
-
-const card_scene = preload("res://scenes/card_2d.tscn")
-const CARD_3D = preload("res://scenes/3d/card_3d.tscn")
 
 var faux_cards: Array[Card2D]
 var faux_cards_chosen: Array[Card2D]
@@ -62,6 +66,7 @@ var start_hand_amount : int = 15
 
 func print_multi(thing):
 	print(str(multiplayer.get_unique_id()) + ": " + str(thing))
+
 
 func get_card3d_data_by_id(id : int):
 	if id >= 2000:
@@ -134,6 +139,23 @@ func get_card_data_by_nice_name(nice_name : String):
 	return null
 
 
+func create_effect_resource(json_data : Dictionary):
+	var card_ui = Effect.new()
+	
+	card_ui.front_image_path = json_data.front_image_path
+	card_ui.back_image_path = json_data.back_image_path
+	card_ui.front_mini_path = json_data.front_mini_path
+	card_ui.back_mini_path = json_data.back_mini_path
+	card_ui.id = json_data.id
+	card_ui.nice_name = json_data.nice_name
+	card_ui.effect = json_data.effect
+	
+	var save_result = ResourceSaver.save(card_ui, 'res://card/effect/data/' + json_data.nice_name + '.tres')
+	
+	if save_result != OK:
+		print(save_result)
+
+
 func create_faux_resource(json_data : Dictionary):
 	var card_ui = Faux.new()
 	
@@ -151,20 +173,21 @@ func create_faux_resource(json_data : Dictionary):
 		print(save_result)
 
 
-func create_card_ui(json_data : Dictionary):
+func create_card_ui(card_name: String):
 	var card_ui = card_scene.instantiate()
-	card_ui.frontface_texture = json_data.front_mini_path
-	card_ui.backface_texture = json_data.back_mini_path
 	
-	card_ui.card_data = ResourceLoader.load(json_data.resource_script_path).new()
-	for key in json_data.keys():
-		if key != "front_mini_path" and key != "back_mini_path" and key != "resource_script_path":
-			card_ui.card_data[key] = json_data[key]
-
-	add_child(card_ui)
+	card_ui.card_data = ResourceLoader.load('res://card/battle/data/' + card_name + '.tres')
+	if card_ui.card_data == null:
+		card_ui.card_data = ResourceLoader.load('res://card/effect/data/' + card_name + '.tres')
+	if card_ui.card_data == null:
+		card_ui.card_data = ResourceLoader.load('res://card/effectfaux/data/' + card_name + '.tres')
+	
+	card_ui.frontface_texture = card_ui.card_data.front_mini_path
+	card_ui.backface_texture = card_ui.card_data.back_mini_path
+	
 	return card_ui
 
 
 func give_card(nice_name: String):
-	var card = create_card_ui(get_card_data_by_nice_name(nice_name))
+	var card = create_card_ui(nice_name)
 	return card

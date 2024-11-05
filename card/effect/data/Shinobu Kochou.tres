@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ShinobuKochou" load_steps=2 format=3 uid="uid://djejaydptapp0"]
+
+[ext_resource type="Script" path="res://card/effect/scripts/shinobu.gd" id="1_mynmt"]
+
+[resource]
+script = ExtResource("1_mynmt")
+shinobu = false
+star = 0
+front_mini_path = "res://card/effect/image/160x240/Shinobu Kochou.png"
+back_mini_path = "res://card/effect/image/160x240/back.png"
+front_image_path = "res://card/effect/image/742x1122/Shinobu Kochou.png"
+back_image_path = "res://card/effect/image/742x1122/back.png"
+id = 1002
+nice_name = "Shinobu Kochou"
+effect = "Khi số lá chiến binh ở trong mộ của đối phương đạt từ 5 trở lên, có thể sử dụng lá bài này để hồi sinh ngẫu nhiên 1 lá về trên tay mình"

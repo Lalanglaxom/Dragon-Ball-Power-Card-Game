@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8x8glskk4gj6"
-path="res://.godot/imported/15_Shinobu Kochou.png-a4526b2e40cac9ea6418b2aa2ff7d23b.ctex"
+uid="uid://w8ydvj0najbb"
+path="res://.godot/imported/Mr Satan.png-2a523944bc3d6fe16cc29b7dd0d4007a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://card/effect/image/742x1122/15_Shinobu Kochou.png"
-dest_files=["res://.godot/imported/15_Shinobu Kochou.png-a4526b2e40cac9ea6418b2aa2ff7d23b.ctex"]
+source_file="res://card/effect/image/742x1122/Mr Satan.png"
+dest_files=["res://.godot/imported/Mr Satan.png-2a523944bc3d6fe16cc29b7dd0d4007a.ctex"]
 
 [params]
 

@@ -1,472 +1,472 @@
 [
-  {
-	"id": "2001",
-	"nice_name": "AnyaKhoc",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/AnyaKhoc.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/AnyaKhoc.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2002",
-	"nice_name": "Breast",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/Breast.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/Breast.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2003",
-	"nice_name": "BrolyDitBu",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/BrolyDitBu.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/BrolyDitBu.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2004",
-	"nice_name": "Chaotzu",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/Chaotzu.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/Chaotzu.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2005",
-	"nice_name": "ChizuruDen",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/ChizuruDen.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/ChizuruDen.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2006",
-	"nice_name": "CoolerCuBu",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/CoolerCuBu.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/CoolerCuBu.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2007",
-	"nice_name": "DamCastle",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/DamCastle.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/DamCastle.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2008",
-	"nice_name": "Frieren 2",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/Frieren 2.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/Frieren 2.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2009",
-	"nice_name": "Frieren 3",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/Frieren 3.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/Frieren 3.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2010",
-	"nice_name": "Frieren",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/Frieren.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/Frieren.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2011",
-	"nice_name": "Gokubu",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/Gokubu.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/Gokubu.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2012",
-	"nice_name": "GokuCuBu",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/GokuCuBu.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/GokuCuBu.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2013",
-	"nice_name": "GokuDitBu 2",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/GokuDitBu 2.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/GokuDitBu 2.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2014",
-	"nice_name": "GokuDitBu",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/GokuDitBu.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/GokuDitBu.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2015",
-	"nice_name": "GokuPetrol",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/GokuPetrol.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/GokuPetrol.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2016",
-	"nice_name": "Homelander",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/Homelander.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/Homelander.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2017",
-	"nice_name": "Kaneki",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/Kaneki.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/Kaneki.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2018",
-	"nice_name": "Kotoha",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/Kotoha.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/Kotoha.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2019",
-	"nice_name": "L",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/L.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/L.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2020",
-	"nice_name": "Marcarita",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/Marcarita.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/Marcarita.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2021",
-	"nice_name": "Marin 2",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/Marin 2.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/Marin 2.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2022",
-	"nice_name": "Marin 3",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/Marin 3.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/Marin 3.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2023",
-	"nice_name": "Marin",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/Marin.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/Marin.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2024",
-	"nice_name": "MayCac",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/MayCac.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/MayCac.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2025",
-	"nice_name": "MGay",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/MGay.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/MGay.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2026",
-	"nice_name": "Miku",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/Miku.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/Miku.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2027",
-	"nice_name": "MotMinh",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/MotMinh.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/MotMinh.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2028",
-	"nice_name": "Muzan",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/Muzan.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/Muzan.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2029",
-	"nice_name": "Noem",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/Noem.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/Noem.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2030",
-	"nice_name": "QuaTe",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/QuaTe.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/QuaTe.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2031",
-	"nice_name": "RonaldoGaiCu",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/RonaldoGaiCu.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/RonaldoGaiCu.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2032",
-	"nice_name": "Serie",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/Serie.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/Serie.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2033",
-	"nice_name": "SeriouslyMan",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/SeriouslyMan.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/SeriouslyMan.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2034",
-	"nice_name": "Shinobu 2",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/Shinobu 2.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/Shinobu 2.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2035",
-	"nice_name": "Shinobu",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/Shinobu.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/Shinobu.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2036",
-	"nice_name": "Shizucon",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/Shizucon.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/Shizucon.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2037",
-	"nice_name": "Vados",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/Vados.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/Vados.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2038",
-	"nice_name": "VegeGokubu",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/VegeGokubu.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/VegeGokubu.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2039",
-	"nice_name": "VegetaDauTay",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/VegetaDauTay.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/VegetaDauTay.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2040",
-	"nice_name": "VegetaDauTroc",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/VegetaDauTroc.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/VegetaDauTroc.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2041",
-	"nice_name": "VegetaDitBu",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/VegetaDitBu.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/VegetaDitBu.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2042",
-	"nice_name": "VegetaGiay",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/VegetaGiay.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/VegetaGiay.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2043",
-	"nice_name": "VegitoCuBu",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/VegitoCuBu.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/VegitoCuBu.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2044",
-	"nice_name": "VegitoWin",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/VegitoWin.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/VegitoWin.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2045",
-	"nice_name": "Violet",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/Violet.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/Violet.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2046",
-	"nice_name": "Yamcha",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/Yamcha.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/Yamcha.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  },
-  {
-	"id": "2047",
-	"nice_name": "Yuki",
-	"effect": "",
-	"front_mini_path": "res://card/faux/image/160x240/Yuki.png",
-	"back_mini_path": "res://card/battle/image/160x240/back.png",
-	"front_image_path": "res://card/faux/image/742x1122/Yuki.png",
-	"back_image_path": "res://card/battle/image/742x1122/back.png",
-	"resource_script_path": "res://card/script/faux_data.gd"
-  }
+	{
+		"id": "2001",
+		"nice_name": "AnyaKhoc",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/AnyaKhoc.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/AnyaKhoc.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2002",
+		"nice_name": "Breast",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/Breast.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/Breast.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2003",
+		"nice_name": "BrolyDitBu",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/BrolyDitBu.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/BrolyDitBu.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2004",
+		"nice_name": "Chaotzu",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/Chaotzu.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/Chaotzu.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2005",
+		"nice_name": "ChizuruDen",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/ChizuruDen.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/ChizuruDen.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2006",
+		"nice_name": "CoolerCuBu",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/CoolerCuBu.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/CoolerCuBu.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2007",
+		"nice_name": "DamCastle",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/DamCastle.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/DamCastle.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2008",
+		"nice_name": "Frieren 2",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/Frieren 2.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/Frieren 2.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2009",
+		"nice_name": "Frieren 3",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/Frieren 3.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/Frieren 3.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2010",
+		"nice_name": "Frieren",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/Frieren.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/Frieren.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2011",
+		"nice_name": "Gokubu",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/Gokubu.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/Gokubu.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2012",
+		"nice_name": "GokuCuBu",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/GokuCuBu.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/GokuCuBu.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2013",
+		"nice_name": "GokuDitBu 2",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/GokuDitBu 2.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/GokuDitBu 2.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2014",
+		"nice_name": "GokuDitBu",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/GokuDitBu.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/GokuDitBu.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2015",
+		"nice_name": "GokuPetrol",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/GokuPetrol.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/GokuPetrol.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2016",
+		"nice_name": "Homelander",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/Homelander.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/Homelander.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2017",
+		"nice_name": "Kaneki",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/Kaneki.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/Kaneki.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2018",
+		"nice_name": "Kotoha",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/Kotoha.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/Kotoha.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2019",
+		"nice_name": "L",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/L.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/L.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2020",
+		"nice_name": "Marcarita",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/Marcarita.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/Marcarita.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2021",
+		"nice_name": "Marin 2",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/Marin 2.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/Marin 2.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2022",
+		"nice_name": "Marin 3",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/Marin 3.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/Marin 3.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2023",
+		"nice_name": "Marin",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/Marin.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/Marin.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2024",
+		"nice_name": "MayCac",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/MayCac.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/MayCac.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2025",
+		"nice_name": "MGay",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/MGay.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/MGay.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2026",
+		"nice_name": "Miku",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/Miku.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/Miku.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2027",
+		"nice_name": "MotMinh",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/MotMinh.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/MotMinh.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2028",
+		"nice_name": "Muzan",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/Muzan.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/Muzan.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2029",
+		"nice_name": "Noem",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/Noem.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/Noem.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2030",
+		"nice_name": "QuaTe",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/QuaTe.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/QuaTe.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2031",
+		"nice_name": "RonaldoGaiCu",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/RonaldoGaiCu.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/RonaldoGaiCu.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2032",
+		"nice_name": "Serie",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/Serie.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/Serie.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2033",
+		"nice_name": "SeriouslyMan",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/SeriouslyMan.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/SeriouslyMan.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2034",
+		"nice_name": "Shinobu 2",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/Shinobu 2.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/Shinobu 2.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2035",
+		"nice_name": "Shinobu",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/Shinobu.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/Shinobu.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2036",
+		"nice_name": "Shizucon",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/Shizucon.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/Shizucon.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2037",
+		"nice_name": "Vados",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/Vados.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/Vados.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2038",
+		"nice_name": "VegeGokubu",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/VegeGokubu.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/VegeGokubu.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2039",
+		"nice_name": "VegetaDauTay",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/VegetaDauTay.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/VegetaDauTay.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2040",
+		"nice_name": "VegetaDauTroc",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/VegetaDauTroc.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/VegetaDauTroc.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2041",
+		"nice_name": "VegetaDitBu",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/VegetaDitBu.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/VegetaDitBu.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2042",
+		"nice_name": "VegetaGiay",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/VegetaGiay.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/VegetaGiay.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2043",
+		"nice_name": "VegitoCuBu",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/VegitoCuBu.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/VegitoCuBu.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2044",
+		"nice_name": "VegitoWin",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/VegitoWin.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/VegitoWin.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2045",
+		"nice_name": "Violet",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/Violet.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/Violet.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2046",
+		"nice_name": "Yamcha",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/Yamcha.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/Yamcha.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	},
+	{
+		"id": "2047",
+		"nice_name": "Yuki",
+		"effect": "",
+		"front_mini_path": "res://card/faux/image/160x240/Yuki.png",
+		"back_mini_path": "res://card/battle/image/160x240/back.png",
+		"front_image_path": "res://card/faux/image/742x1122/Yuki.png",
+		"back_image_path": "res://card/battle/image/742x1122/back.png",
+		"resource_script_path": "res://card/script/faux_data.gd"
+	}
 ]

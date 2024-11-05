@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bw15ci72qysbo"
-path="res://.godot/imported/09_Beerus.png-68498379c798ce6cd2982bdb320e9614.ctex"
+uid="uid://b8x8glskk4gj6"
+path="res://.godot/imported/Shinobu Kochou.png-2d206feeb96c954fc6c2f83da41666a9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://card/effect/image/160x240/09_Beerus.png"
-dest_files=["res://.godot/imported/09_Beerus.png-68498379c798ce6cd2982bdb320e9614.ctex"]
+source_file="res://card/effect/image/742x1122/Shinobu Kochou.png"
+dest_files=["res://.godot/imported/Shinobu Kochou.png-2d206feeb96c954fc6c2f83da41666a9.ctex"]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

@@ -4,6 +4,8 @@ extends Node
 
 @export_file("*.json") var json_battle_database_path : String
 @export_file("*.json") var json_battle_collection_path : String
+@export_file("*.json") var json_effect_database_path : String
+@export_file("*.json") var json_effect_collection_path : String
 
 const card_scene = preload("res://scenes/card_2d.tscn")
 
@@ -19,23 +21,37 @@ enum Piles {
 var battle_database := [] # an array of JSON `Card` data
 var battle_collection := [] # an array of JSON `Card` data
 
-var draw_pile := [] # an array of `Card2D`s
-var name_pile := []
+var effect_database := [] # an array of JSON `Card` data
+var effect_collection := [] # an array of JSON `Card` data
+
+var draw_pile_battle := [] # an array of `Card2D`s
+var draw_pile_effect := [] # an array of `Card2D`s
+
+var name_pile_battle := []
+var name_pile_effect := []
 
 
 func _ready() -> void:
 	Global.battle_collection = _load_json_cards_from_path(json_battle_collection_path)
+	Global.effect_collection = _load_json_cards_from_path(json_effect_collection_path)
 	
 	if multiplayer.is_server():
 		reset_battle_collection()
 		for card in get_children():
-			draw_pile.append(card)
-		draw_pile.shuffle()
+			if card.card_data is Battle:
+				draw_pile_battle.append(card)
+			else:
+				draw_pile_effect.append(card)
+				
+		draw_pile_battle.shuffle()
+		draw_pile_effect.shuffle()
 			
-		for card in draw_pile:
-			name_pile.append(card.card_data.nice_name)
+		for card in draw_pile_battle:
+			name_pile_battle.append(card.card_data.nice_name)
+		for card in draw_pile_effect:
+			name_pile_effect.append(card.card_data.nice_name)
 		
-		sync_draw_pile.rpc(name_pile)
+		sync_draw_pile.rpc(name_pile_battle, name_pile_effect)
 
 
 func start():
@@ -43,13 +59,20 @@ func start():
 
 
 @rpc("any_peer", "call_remote", "reliable")
-func sync_draw_pile(pile):
-	name_pile = pile
-	for name in name_pile:
-		#var card_data = get_card_data_by_id(id)
-		var card = create_card_ui(name)
-		draw_pile.append(card)
+func sync_draw_pile(battle_pile, effect_pile):
+	name_pile_battle = battle_pile
+	name_pile_effect = effect_pile
+	
+	for card_name in name_pile_battle:
+		var card = Global.create_card_ui(card_name)
+		draw_pile_battle.append(card)
 		add_child(card)
+	
+	for card_name in name_pile_effect:
+		var card = Global.create_card_ui(card_name)
+		draw_pile_effect.append(card)
+		add_child(card)
+	
 	Global.emit_signal("draw_pile_updated")
 
 
@@ -74,7 +97,11 @@ func _load_json_cards_from_path(path : String):
 
 func reset_battle_collection():
 	for nice_name in Global.battle_collection:
-		var card_ui = create_card_ui(nice_name)
+		var card_ui = Global.create_card_ui(nice_name)
+		add_child(card_ui)
+	
+	for nice_name in Global.effect_collection:
+		var card_ui = Global.create_card_ui(nice_name)
 		add_child(card_ui)
 
 
@@ -117,7 +144,7 @@ func create_card_ui(card_name: String):
 	return card_ui
 
 
-func set_card_pile(card : Card2D, pile : Piles):
-	if pile == Piles.draw_pile:
-		draw_pile.push_back(card)
-		Global.draw_pile_updated.emit()
+#func set_card_pile(card : Card2D, pile : Piles):
+	#if pile == Piles.draw_pile:
+		##draw_pile.push_back(card)
+		#Global.draw_pile_updated.emit()
