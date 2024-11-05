@@ -134,7 +134,7 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 				Global.card3d_button_needed.emit(self, card_data.id)
 			
 			elif Global.current_phase == Global.Phase.STANDOFF and direction == Vector2.DOWN:
-				Global.return_chosen.emit(self, card_data.id, multiplayer.get_unique_id())
+				Global.return_chosen.emit(self, card_data.nice_name, get_multiplayer_authority())
 
 
 func _on_mouse_entered() -> void:

@@ -67,7 +67,6 @@ func _ready() -> void:
 	
 	if multiplayer.is_server():
 		set_start_hand.rpc(Global.start_hand_amount)
-		set_randomizer_seed.rpc(randf_range(123456, 456789))
 	
 	set_faux_for_player.rpc(Global.faux_cards_chosen[0].card_data.nice_name, \
 							Global.faux_cards_chosen[1].card_data.nice_name, \
@@ -116,51 +115,55 @@ func draw_card_for_player():
 			p1_pile.append(card)
 			p1_hand_pile.append(card)
 			card.reparent(p1_hand, true)
-
+			card.set_multiplayer_authority(1)
+			
 		for i in range(start_battle_hand_amount, start_battle_hand_amount * 2):
 			var card = full_pile.draw_pile_battle[i]
 			p2_pile.append(card)
 			p2_hand_pile.append(card)
 			card.reparent(p2_hand, true)
-			card.set_multiplayer_authority(-1) # HACK: For some reason the default id is 1
+			card.set_multiplayer_authority(-1) # HACK: For some reason the default id is 0
 		
 		for i in range(0,start_effect_hand_amount):
 			var card = full_pile.draw_pile_effect[i]
 			p1_pile.append(card)
 			p1_hand_pile.append(card)
 			card.reparent(p1_hand, true)
+			card.set_multiplayer_authority(1)
 
 		for i in range(start_effect_hand_amount, start_effect_hand_amount * 2):
 			var card = full_pile.draw_pile_effect[i]
 			p2_pile.append(card)
 			p2_hand_pile.append(card)
 			card.reparent(p2_hand, true)
-			card.set_multiplayer_authority(-1) # HACK: For some reason the default id is 1
+			card.set_multiplayer_authority(-1) # HACK: For some reason the default id is 0
 
 	else:
 		for i in range(0,start_battle_hand_amount):
 			var card = full_pile.draw_pile_battle[i]
-			p1_pile.append(card)
-			p1_hand_pile.append(card)
+			p2_pile.append(card)
+			p2_hand_pile.append(card)
 			card.reparent(p2_hand, true)
+			card.set_multiplayer_authority(1)
 			
 		for i in range(start_battle_hand_amount, start_battle_hand_amount * 2):
 			var card = full_pile.draw_pile_battle[i]
-			p2_pile.append(card)
-			p2_hand_pile.append(card)
+			p1_pile.append(card)
+			p1_hand_pile.append(card)
 			card.reparent(p1_hand, true)
 			card.set_multiplayer_authority(multiplayer.get_unique_id())
 		
 		for i in range(0,start_effect_hand_amount):
 			var card = full_pile.draw_pile_effect[i]
-			p1_pile.append(card)
-			p1_hand_pile.append(card)
+			p2_pile.append(card)
+			p2_hand_pile.append(card)
 			card.reparent(p2_hand, true)
+			card.set_multiplayer_authority(1)
 			
 		for i in range(start_effect_hand_amount, start_effect_hand_amount * 2):
 			var card = full_pile.draw_pile_effect[i]
-			p2_pile.append(card)
-			p2_hand_pile.append(card)
+			p1_pile.append(card)
+			p1_hand_pile.append(card)
 			card.reparent(p1_hand, true)
 			card.set_multiplayer_authority(multiplayer.get_unique_id())
 			
@@ -302,34 +305,42 @@ func flip_card(card_3d, card_id, player_id):
 func use_effect(card, card_name, player_id):
 	place_card(card, card_name)
 	
+	p1_hand.switch_state(99)
+	
+	Global.card2d_button_unneeded.emit()
+	
 	await get_tree().create_timer(2).timeout
 
 	if get_multiplayer_authority() == player_id:
 		var eff_callable = Callable(card.card_data, "activate_effect")
 		eff_callable.call(self, card)
+		await card.card_data.func_finished
+		
+		p1_hand.switch_state(current_player_turn)
 
 	else:
 		for card3d in p2_spell_pile:
 			if card3d.card_data.nice_name == card_name:
 				var eff_callable = Callable(card3d.card_data, "activate_effect")
 				eff_callable.call(self, card3d)
-		
-		
-	Global.card2d_button_unneeded.emit()
+				
+				await card3d.card_data.func_finished
+				p1_hand.switch_state(current_player_turn)
 
 
 @rpc("any_peer","call_local","reliable")
-func return_card(card3d, card_id, player_id):
-	if multiplayer.get_unique_id() == player_id:
+func return_card(card3d, card_name, player_id):
+	if get_multiplayer_authority() == player_id:
 		card3d.move_out()
 		p1_battle_pile.erase(card3d)
+		Global.card_returned.emit(card3d)
 	else:
 		for card in p2_battle_pile:
-			if card.card_data.id == card_id:
+			if card.card_data.nice_name == card_name:
 				card.move_out()
 				p2_battle_pile.erase(card)
+				Global.card_returned.emit(card)
 				
-	Global.card_returned.emit(card_id)
 	update_end_turn_button.rpc()
 
 

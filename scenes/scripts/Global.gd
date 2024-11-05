@@ -54,7 +54,7 @@ var effect_database := [] # an array of JSON `Card` data
 var effect_collection := [] # an array of JSON `Card` data
 
 # Game round
-enum State {OTHER_TURN, YOUR_TURN}
+enum State {OTHER_TURN, YOUR_TURN, WAIT_TURN}
 var state: State
 
 enum Phase {STANDOFF, BATTLE, DAMAGE} 
@@ -173,7 +173,7 @@ func create_faux_resource(json_data : Dictionary):
 		print(save_result)
 
 
-func create_card_ui(card_name: String):
+func create_card_ui(card_name: String, id: int):
 	var card_ui = card_scene.instantiate()
 	
 	card_ui.card_data = ResourceLoader.load('res://card/battle/data/' + card_name + '.tres')
@@ -185,9 +185,11 @@ func create_card_ui(card_name: String):
 	card_ui.frontface_texture = card_ui.card_data.front_mini_path
 	card_ui.backface_texture = card_ui.card_data.back_mini_path
 	
+	card_ui.set_multiplayer_authority(id)
+	
 	return card_ui
 
 
 func give_card(nice_name: String):
-	var card = create_card_ui(nice_name)
+	var card = create_card_ui(nice_name, 1)
 	return card

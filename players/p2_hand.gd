@@ -14,6 +14,7 @@ var remove_hand: Array[Card2D]
 func _ready() -> void:
 	#Global.card_chosen.connect(card_chosen)
 	Global.card_returned.connect(add_remove_card)
+	set_multiplayer_authority(multiplayer.get_unique_id())
 	pass
 
 
@@ -54,13 +55,20 @@ func add_card(card: Card2D):
 	add_child(card)
 	arrange_hand_card()
 
-func add_remove_card(card_id):
-	for card in remove_hand:
-		if card.card_data.id == card_id:
-			add_child(card)
-			hand_pile_p2.append(card)
-			remove_hand.erase(card)
-	arrange_hand_card()
+func add_remove_card(card3d):
+	if get_multiplayer_authority() != card3d.get_multiplayer_authority():
+		var card = Global.create_card_ui(card3d.card_data.nice_name, -1)
+		card.set_multiplayer_authority(multiplayer.get_unique_id())
+		hand_pile_p2.append(card)
+		add_child(card)
+		arrange_hand_card()
+	
+	#for card in remove_hand:
+		#if card.card_data.id == card_id:
+			#add_child(card)
+			#hand_pile_p2.append(card)
+			#remove_hand.erase(card)
+	#arrange_hand_card()
 
 
 func card_chosen(card2d_id: int):

@@ -64,12 +64,12 @@ func sync_draw_pile(battle_pile, effect_pile):
 	name_pile_effect = effect_pile
 	
 	for card_name in name_pile_battle:
-		var card = Global.create_card_ui(card_name)
+		var card = Global.create_card_ui(card_name, 0)
 		draw_pile_battle.append(card)
 		add_child(card)
 	
 	for card_name in name_pile_effect:
-		var card = Global.create_card_ui(card_name)
+		var card = Global.create_card_ui(card_name, 0)
 		draw_pile_effect.append(card)
 		add_child(card)
 	
@@ -97,11 +97,11 @@ func _load_json_cards_from_path(path : String):
 
 func reset_battle_collection():
 	for nice_name in Global.battle_collection:
-		var card_ui = Global.create_card_ui(nice_name)
+		var card_ui = Global.create_card_ui(nice_name, 0)
 		add_child(card_ui)
 	
 	for nice_name in Global.effect_collection:
-		var card_ui = Global.create_card_ui(nice_name)
+		var card_ui = Global.create_card_ui(nice_name, 0)
 		add_child(card_ui)
 
 

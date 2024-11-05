@@ -1,6 +1,8 @@
 extends Effect
 class_name MrSatan
 
+signal func_finished
+
 @export var satan: bool
 
 func activate_effect(game_controller, this_card):
@@ -25,7 +27,7 @@ func activate_effect(game_controller, this_card):
 		card.get_node("Back").render_priority = index_render
 		
 		var tween = game_controller.get_tree().create_tween()
-		tween.tween_property(card, "position", Vector3(0,0.01,0), 0.7) \
+		tween.tween_property(card, "position", Vector3(0,0.01,0), 0.5) \
 			.set_trans(Tween.TRANS_EXPO) \
 			.set_ease(Tween.EASE_OUT)
 		await tween.finished
@@ -43,7 +45,7 @@ func activate_effect(game_controller, this_card):
 		
 		card.get_node("Back").render_priority = index_render
 		var tween = game_controller.get_tree().create_tween()
-		tween.tween_property(card, "position", Vector3(0,0.01,0), 0.7) \
+		tween.tween_property(card, "position", Vector3(0,0.01,0), 0.5) \
 			.set_trans(Tween.TRANS_EXPO) \
 			.set_ease(Tween.EASE_OUT)
 		await tween.finished
@@ -76,7 +78,7 @@ func activate_effect(game_controller, this_card):
 				card.reparent(slot, true)
 				
 				var tween = game_controller.get_tree().create_tween()
-				tween.tween_property(card, "position", Vector3(0,0.01,0), 1) \
+				tween.tween_property(card, "position", Vector3(0,0.01,0), 0.3) \
 					.set_trans(Tween.TRANS_LINEAR) \
 					.set_ease(Tween.EASE_IN_OUT)
 				await tween.finished
@@ -94,7 +96,7 @@ func activate_effect(game_controller, this_card):
 				card.rotation.y = deg_to_rad(randf_range(-3,3)) 
 				
 				var tween = game_controller.get_tree().create_tween()
-				tween.tween_property(card, "position", Vector3(0,0.01,0), 1) \
+				tween.tween_property(card, "position", Vector3(0,0.01,0), 0.3) \
 					.set_trans(Tween.TRANS_LINEAR) \
 					.set_ease(Tween.EASE_IN_OUT)
 				await tween.finished
@@ -114,7 +116,7 @@ func activate_effect(game_controller, this_card):
 				card.rotation.y = deg_to_rad(randf_range(-3,3))
 				
 				var tween = game_controller.get_tree().create_tween()
-				tween.tween_property(card, "position", Vector3(0,0.01,0), 0.5) \
+				tween.tween_property(card, "position", Vector3(0,0.01,0), 0.3) \
 					.set_trans(Tween.TRANS_LINEAR) \
 					.set_ease(Tween.EASE_IN_OUT)
 				await tween.finished
@@ -132,7 +134,7 @@ func activate_effect(game_controller, this_card):
 				card.rotation.y = deg_to_rad(randf_range(-3,3)) 
 				
 				var tween = game_controller.get_tree().create_tween()
-				tween.tween_property(card, "position", Vector3(0,0.01,0), 0.5) \
+				tween.tween_property(card, "position", Vector3(0,0.01,0), 0.3) \
 					.set_trans(Tween.TRANS_LINEAR) \
 					.set_ease(Tween.EASE_IN_OUT)
 				await tween.finished
@@ -140,7 +142,8 @@ func activate_effect(game_controller, this_card):
 				game_controller.p2_battle_pile.append(card)
 				card.set_multiplayer_authority(-1)
 				i += 1
-
+	
+	func_finished.emit()
 
 func arrange_card_from_name(controller):
 	var array = []

@@ -10,7 +10,6 @@ var remove_hand: Array[Card2D]
 @export var hand_rotation_curve : Curve
 @export var hand_spread_curve : Curve
 
-
 var player_turn: int
 
 func _ready() -> void:
@@ -18,6 +17,8 @@ func _ready() -> void:
 	Global.end_turn_pressed.connect(normalize_hand_all)
 	Global.card_chosen.connect(normalize_hand)
 	Global.card2d_button_needed.connect(normalize_hand)
+	
+	set_multiplayer_authority(multiplayer.get_unique_id())
 
 
 
@@ -84,15 +85,13 @@ func add_card(card: Card2D):
 	arrange_hand_card()
 
 
-func add_remove_card(card_id):
-	#if multiplayer.get_unique_id() == player_id:
-	for card in remove_hand:
-		if card.card_data.id == card_id:
-			hand_pile_p1.append(card)
-			add_child(card)
-			remove_hand.erase(card)
-	arrange_hand_card()
-	
+func add_remove_card(card3d):
+	if multiplayer.get_unique_id() == card3d.get_multiplayer_authority():
+		var card = Global.create_card_ui(card3d.card_data.nice_name, get_multiplayer_authority())
+		hand_pile_p1.append(card)
+		add_child(card)
+		arrange_hand_card()
+
 
 
 func set_turn(turn_num: int):
