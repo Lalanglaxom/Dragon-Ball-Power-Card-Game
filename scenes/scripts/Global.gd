@@ -180,7 +180,7 @@ func create_card_ui(card_name: String, id: int):
 	if card_ui.card_data == null:
 		card_ui.card_data = ResourceLoader.load('res://card/effect/data/' + card_name + '.tres')
 	if card_ui.card_data == null:
-		card_ui.card_data = ResourceLoader.load('res://card/effectfaux/data/' + card_name + '.tres')
+		card_ui.card_data = ResourceLoader.load('res://card/faux/data/' + card_name + '.tres')
 	
 	card_ui.frontface_texture = card_ui.card_data.front_mini_path
 	card_ui.backface_texture = card_ui.card_data.back_mini_path

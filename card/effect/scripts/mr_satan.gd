@@ -7,6 +7,9 @@ signal func_finished
 
 func activate_effect(game_controller, this_card):
 	var temp_array = []
+	var faux_1_array = []
+	var faux_2_array = []
+	
 	var index_render = 100
 	
 	var total_card_p1 = 0
@@ -18,6 +21,7 @@ func activate_effect(game_controller, this_card):
 	for card in game_controller.p1_battle_pile:
 		if card.card_data is Faux:
 			card.flip()
+			faux_1_array.append(card)
 			continue
 			
 		temp_array.append(card)
@@ -37,6 +41,7 @@ func activate_effect(game_controller, this_card):
 	for card in game_controller.p2_battle_pile:
 		if card.card_data is Faux:
 			card.flip()
+			faux_2_array.append(card)
 			continue
 		
 		temp_array.append(card)
@@ -64,8 +69,8 @@ func activate_effect(game_controller, this_card):
 	
 	
 	
-	game_controller.p1_battle_pile.clear()
-	game_controller.p2_battle_pile.clear()
+	game_controller.p1_battle_pile = faux_1_array
+	game_controller.p2_battle_pile = faux_2_array
 	
 	Global.print_multi(game_controller.neutral_slot.name_array)
 	
@@ -106,12 +111,12 @@ func activate_effect(game_controller, this_card):
 				i += 1
 				
 	else:
-		arrange_card_from_name(game_controller)
+		var card_array = arrange_card_from_name(game_controller)
 		
 		var i = 0
 		for slot in game_controller.player_1_pos.get_children():
 			if slot.get_child_count() < 2 and slot is BattleSlot:
-				var card = game_controller.neutral_slot.card_array[i + total_card_p1]
+				var card = card_array[i + total_card_p1]
 				card.reparent(slot, true)
 				card.rotation.y = deg_to_rad(randf_range(-3,3))
 				
@@ -129,7 +134,7 @@ func activate_effect(game_controller, this_card):
 		
 		for slot in game_controller.player_2_pos.get_children():
 			if slot.get_child_count() < 2 and slot is BattleSlot:
-				var card = game_controller.neutral_slot.card_array[i]
+				var card = card_array[i]
 				card.reparent(slot, true)
 				card.rotation.y = deg_to_rad(randf_range(-3,3)) 
 				
@@ -153,9 +158,10 @@ func arrange_card_from_name(controller):
 			var card = controller.neutral_slot.card_array[i]
 			if card.card_data.nice_name == name:
 				array.append(card)
-				controller.neutral_slot.card_array.erase(card)
-	
-	controller.neutral_slot.card_array = array
+				controller.neutral_slot.card_array.remove_at(i)
+				continue
+				
+	return array
 
 
 func get_p1_battle(game_controller):

@@ -45,6 +45,7 @@ var spell_index: int = 0
 var game_round: int = 0
 var round_turn: int = 0
 
+var num_player_finish := 0
 var has_action: bool
 
 var turn_new_round := [1,2]
@@ -59,8 +60,8 @@ func _ready() -> void:
 	ui.get_node("CardOption").flip_button_pressed.connect(flip_card.rpc)
 	ui.get_node("CardOption").use_effect_pressed.connect(use_effect.rpc)
 	Global.return_chosen.connect(return_card.rpc)
-	Global.end_turn_pressed.connect(update_turn.rpc)
-	Global.end_turn_pressed.connect(update_end_turn_button.rpc)
+	#Global.end_turn_pressed.connect(update_turn.rpc)
+	Global.end_turn_pressed.connect(check_update_turn)
 	Global.game_round_end.connect(reset_card_on_field.rpc)
 	
 	set_multiplayer_authority(multiplayer.get_unique_id())
@@ -73,7 +74,6 @@ func _ready() -> void:
 							multiplayer.get_unique_id())
 	
 	set_new_round_turn()
-	update_end_turn_button.call_deferred()
 
 # FIXME: CREATE 2 card if click too fast
 
@@ -214,9 +214,6 @@ func place_card(card_2d, card_name):
 		
 		p2_hand.card_chosen(card3d.card_data.id)
 		put_card_in_p2_slot(card3d)
-		
-
-	update_end_turn_button.rpc()
 
 
 func put_card_in_p1_slot(card3d: Card3D, card2d: Card2D):
@@ -239,7 +236,7 @@ func put_card_in_p1_slot(card3d: Card3D, card2d: Card2D):
 			p1_battle_pile.append(card3d)
 			p1_hand.card_chosen(card2d)
 			return
-# TODO: Create new 2d when put on hand again
+
 
 func put_card_in_p2_slot(card3d: Card3D):
 	if card3d.card_data is Effect:
@@ -295,7 +292,6 @@ func flip_card(card_3d, card_id, player_id):
 					else:
 						p2_battle_power -= card.properties.power
 						
-	update_end_turn_button.rpc()
 
 
 
@@ -304,6 +300,10 @@ func flip_card(card_3d, card_id, player_id):
 @rpc("any_peer","call_local","reliable")
 func use_effect(card, card_name, player_id):
 	place_card(card, card_name)
+	
+	var card_on_field = get_card_in_spell_slot(card_name)
+	
+	var player_count = 0
 	
 	p1_hand.switch_state(99)
 	
@@ -315,18 +315,26 @@ func use_effect(card, card_name, player_id):
 		var eff_callable = Callable(card.card_data, "activate_effect")
 		eff_callable.call(self, card)
 		await card.card_data.func_finished
+		send_to_grave(card_on_field)
 		
-		p1_hand.switch_state(current_player_turn)
-
 	else:
 		for card3d in p2_spell_pile:
 			if card3d.card_data.nice_name == card_name:
 				var eff_callable = Callable(card3d.card_data, "activate_effect")
 				eff_callable.call(self, card3d)
-				
 				await card3d.card_data.func_finished
-				p1_hand.switch_state(current_player_turn)
+				send_to_grave(card_on_field)
+	
+	all_player_finish.rpc()
 
+
+# HACK: All player have to finish
+@rpc("any_peer","call_local","reliable")
+func all_player_finish():
+	num_player_finish += 1
+	if num_player_finish == 2:
+		p1_hand.switch_state(current_player_turn)
+	
 
 @rpc("any_peer","call_local","reliable")
 func return_card(card3d, card_name, player_id):
@@ -341,12 +349,13 @@ func return_card(card3d, card_name, player_id):
 				p2_battle_pile.erase(card)
 				Global.card_returned.emit(card)
 				
-	update_end_turn_button.rpc()
+
 
 
 func send_to_grave(card3d):
 	if card3d.get_multiplayer_authority() == multiplayer.get_unique_id():
 		card3d.set_direction(Vector2.UP)
+		card3d.rotation = Vector3.ZERO
 		card3d.reparent(grave_1, true)
 		p1_grave_pile.append(card3d)
 		p1_hand.hand_pile_p1.erase(card3d)
@@ -354,6 +363,7 @@ func send_to_grave(card3d):
 	else:
 		
 		card3d.set_direction(Vector2.UP)
+		card3d.rotation = Vector3.ZERO
 		card3d.reparent(grave_2, true)
 		p2_grave_pile.append(card3d)
 		p2_hand.hand_pile_p2.erase(card3d)
@@ -364,7 +374,7 @@ func send_to_grave(card3d):
 	grave_1.arrange_grave_card()
 	grave_2.arrange_grave_card()
 	
-	update_end_turn_button.rpc()
+
 
 
 func update_total_power_label():
@@ -372,6 +382,12 @@ func update_total_power_label():
 	for card in p1_battle_pile:
 		p1_battle_power += card.properties.power
 	power_p_1.text = str(p1_battle_power)
+
+
+#@rpc("any_peer","call_local","reliable")
+func check_update_turn():
+	if check_end_turn_criteria():
+		update_turn.rpc()
 
 
 @rpc("any_peer","call_local","reliable")
@@ -432,7 +448,7 @@ func update_turn():
 	
 	ui.show_player_turn()
 	
-	update_end_turn_button.rpc()
+
 
 @rpc("any_peer","call_local","reliable")
 func switch_phase(phase: Global.Phase):
@@ -543,13 +559,14 @@ func remove_faux_card():
 func return_faux_card(card3d, player_id):
 	if multiplayer.get_unique_id() == player_id:
 		card3d.move_out()
+		Global.card_returned.emit(card3d)
 
 	else:
 		for card in p2_battle_pile:
 			if card.card_data.id == card3d.card_data.id:
 				card3d.move_out()
+				Global.card_returned.emit(card)
 		
-	Global.card_returned.emit(card3d.card_data.id)
 
 
 func check_end_turn_criteria() -> bool:	
@@ -609,12 +626,6 @@ func check_end_turn_criteria() -> bool:
 	return valid
 
 
-@rpc("any_peer","call_local","reliable")
-func update_end_turn_button():
-	if check_end_turn_criteria():
-		ui.end_turn.disabled = false
-	else:
-		ui.end_turn.disabled = true
 
 
 func find_card(card_name: String):
@@ -651,6 +662,14 @@ func print_card_status():
 	print("p2 1hp card: ", str(get_p2_1hp_num_card_up()))
 	print("p2 total up power: ", str(get_p2_total_up_power()))
 
+func get_card_in_spell_slot(card_name):
+	for card in p1_spell_pile:
+		if card.card_data.nice_name == card_name:
+			return card
+			
+	for card in p2_spell_pile:
+		if card.card_data.nice_name == card_name:
+			return card
 
 func get_p2_num_card():
 	return p2_battle_pile.size()
