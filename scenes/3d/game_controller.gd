@@ -176,6 +176,7 @@ func set_card_2D(card: Card2D, player_id: int):
 		p1_hand.add_card(card)
 		p1_hand_pile.append(card)
 
+
 @rpc("any_peer", "call_local", "reliable")
 func set_faux_for_player(faux_name_1: String, faux_name_2: String, player_id: int):
 	if multiplayer.get_unique_id() == player_id:
@@ -291,10 +292,6 @@ func flip_card(card_3d, card_id, player_id):
 						p2_battle_power += card.properties.power
 					else:
 						p2_battle_power -= card.properties.power
-						
-
-
-
 
 
 @rpc("any_peer","call_local","reliable")
@@ -334,7 +331,7 @@ func all_player_finish():
 	num_player_finish += 1
 	if num_player_finish == 2:
 		p1_hand.switch_state(current_player_turn)
-	
+
 
 @rpc("any_peer","call_local","reliable")
 func return_card(card3d, card_name, player_id):
@@ -348,8 +345,6 @@ func return_card(card3d, card_name, player_id):
 				card.move_out()
 				p2_battle_pile.erase(card)
 				Global.card_returned.emit(card)
-				
-
 
 
 func send_to_grave(card3d):
@@ -627,7 +622,6 @@ func check_end_turn_criteria() -> bool:
 
 
 
-
 func find_card(card_name: String):
 	for card in p1_battle_pile:
 		if card.card_data.nice_name == card_name:
@@ -662,14 +656,37 @@ func print_card_status():
 	print("p2 1hp card: ", str(get_p2_1hp_num_card_up()))
 	print("p2 total up power: ", str(get_p2_total_up_power()))
 
+
 func get_card_in_spell_slot(card_name):
 	for card in p1_spell_pile:
 		if card.card_data.nice_name == card_name:
 			return card
-			
 	for card in p2_spell_pile:
 		if card.card_data.nice_name == card_name:
 			return card
+
+
+func get_card_in_p1_batte_pile(card_name):
+	for card in p1_battle_pile:
+		if card.card_data.nice_name == card_name:
+			return card
+
+func get_card_in_p2_batte_pile(card_name):
+	for card in p2_battle_pile:
+		if card.card_data.nice_name == card_name:
+			return card
+
+
+func get_card_in_p1_hand_pile(card_name):
+	for card in p1_hand.hand_pile_p1:
+		if card.card_data.nice_name == card_name:
+			return card
+
+func get_card_in_p2_hand_pile(card_name):
+	for card in p2_hand.hand_pile_p2:
+		if card.card_data.nice_name == card_name:
+			return card
+
 
 func get_p2_num_card():
 	return p2_battle_pile.size()

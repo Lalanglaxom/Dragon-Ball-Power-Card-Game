@@ -12,18 +12,19 @@ func activate_effect(game_controller, this_card):
 	
 	var index_render = 100
 	
-	var total_card_p1 = 0
-	var total_card_p2 = 0
-	
-	total_card_p1 = get_p1_battle(game_controller)
-	total_card_p2 = get_p2_battle(game_controller)
+	var total_card_p1 = get_p1_battle(game_controller)
+	var total_card_p2 = get_p2_battle(game_controller)
 	
 	for card in game_controller.p1_battle_pile:
 		if card.card_data is Faux:
 			card.flip()
 			faux_1_array.append(card)
 			continue
-			
+		
+		if card.card_data is Battle and card.direction == Vector2.UP:
+			faux_1_array.append(card)
+			continue
+		
 		temp_array.append(card)
 		card.reparent(game_controller.neutral_slot, true)
 		card.set_multiplayer_authority(-1)
@@ -43,7 +44,11 @@ func activate_effect(game_controller, this_card):
 			card.flip()
 			faux_2_array.append(card)
 			continue
-		
+			
+		if card.direction == Vector2.UP:
+			faux_2_array.append(card)
+			continue
+			
 		temp_array.append(card)
 		card.reparent(game_controller.neutral_slot, true)
 		card.set_multiplayer_authority(-1)
@@ -65,7 +70,7 @@ func activate_effect(game_controller, this_card):
 		game_controller.neutral_slot.make_name_array()
 		game_controller.neutral_slot.set_name_array.rpc(game_controller.neutral_slot.name_array)
 	else:
-		game_controller.get_tree().create_timer(0.1).timeout
+		await game_controller.get_tree().create_timer(0.1).timeout
 	
 	
 	
@@ -73,6 +78,8 @@ func activate_effect(game_controller, this_card):
 	game_controller.p2_battle_pile = faux_2_array
 	
 	Global.print_multi(game_controller.neutral_slot.name_array)
+	
+	game_controller.get_tree().create_timer(1).timeout
 	
 	if game_controller.get_multiplayer_authority() == this_card.get_multiplayer_authority():
 		var i = 0
@@ -91,7 +98,7 @@ func activate_effect(game_controller, this_card):
 				game_controller.p1_battle_pile.append(card)
 				card.set_multiplayer_authority(game_controller.get_multiplayer_authority())
 				i += 1
-				
+				continue
 		i = 0
 		
 		for slot in game_controller.player_2_pos.get_children():
@@ -109,6 +116,7 @@ func activate_effect(game_controller, this_card):
 				game_controller.p2_battle_pile.append(card)
 				card.set_multiplayer_authority(-1)
 				i += 1
+				continue
 				
 	else:
 		var card_array = arrange_card_from_name(game_controller)
@@ -116,7 +124,8 @@ func activate_effect(game_controller, this_card):
 		var i = 0
 		for slot in game_controller.player_1_pos.get_children():
 			if slot.get_child_count() < 2 and slot is BattleSlot:
-				var card = card_array[i + total_card_p1]
+				Global.print_multi(total_card_p1)
+				var card = card_array[i + total_card_p2]
 				card.reparent(slot, true)
 				card.rotation.y = deg_to_rad(randf_range(-3,3))
 				
@@ -129,7 +138,7 @@ func activate_effect(game_controller, this_card):
 				game_controller.p1_battle_pile.append(card)
 				card.set_multiplayer_authority(game_controller.get_multiplayer_authority())
 				i += 1
-				
+				continue
 		i = 0
 		
 		for slot in game_controller.player_2_pos.get_children():
@@ -147,6 +156,7 @@ func activate_effect(game_controller, this_card):
 				game_controller.p2_battle_pile.append(card)
 				card.set_multiplayer_authority(-1)
 				i += 1
+				continue
 	
 	func_finished.emit()
 
@@ -167,7 +177,7 @@ func arrange_card_from_name(controller):
 func get_p1_battle(game_controller):
 	var total = 0
 	for card in game_controller.p1_battle_pile:
-		if card.card_data is Battle:
+		if card.card_data is Battle and card.direction == Vector2.DOWN:
 			total += 1
 	
 	return total
@@ -175,11 +185,12 @@ func get_p1_battle(game_controller):
 func get_p2_battle(game_controller):
 	var total = 0
 	for card in game_controller.p1_battle_pile:
-		if card.card_data is Battle:
+		if card.card_data is Battle and card.direction == Vector2.DOWN:
 			total += 1
 	
 	return total
 
+# FIXME: Bug with mr satan
 
 func move_to_zero(controller, card):
 	var tween = controller.get_tree().create_tween()
