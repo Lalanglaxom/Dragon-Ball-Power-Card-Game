@@ -3,9 +3,15 @@
 - Need to install RadminVPN or Hamachi
 - Setup, create account, etc,...
 - Create Server and invite your friend to it.
-- Open game, if you are host, press "Host"
+- Open game, if you are host, type in number of cards ( < 30 ), then press "Host"
 - For others, copy IPV4 of the host in RadminVPN
 - Join
+
+# If You Play Alone
+
+- Open game in 2 windows
+- Type in number of cards ( < 30 )
+- Press "Host" on 1 window and "Join" on another
 
 # Card Types
 - Battle Card: Card that have power
